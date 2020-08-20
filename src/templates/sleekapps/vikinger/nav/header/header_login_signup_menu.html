@@ -1,0 +1,30 @@
+{% load static %}
+
+<!-- ACTION ITEM WRAP -->
+<div class="action-item-wrap">
+    <!-- ACTION ITEM -->
+    <div class="action-item dark header-settings-dropdown-trigger">
+        <!-- ACTION ITEM ICON -->
+        <svg class="action-item-icon icon-members">
+            <use xlink:href="#svg-members"></use>
+        </svg>
+        <!-- /ACTION ITEM ICON -->
+    </div>
+    <!-- /ACTION ITEM -->
+
+    <!-- DROPDOWN NAVIGATION -->
+    <div class="dropdown-navigation header-settings-dropdown">
+        <!-- DROPDOWN NAVIGATION HEADER -->
+        <div class="dropdown-navigation-header">
+            Hello guest, please
+        </div>
+        <!-- /DROPDOWN NAVIGATION HEADER -->
+
+        <!-- DROPDOWN NAVIGATION BUTTON -->
+        <a class="dropdown-navigation-button button small primary" href="{% url 'sleekforum:users:auth:login' %}">Login</a>
+        <a class="dropdown-navigation-button button small secondary" href="{% url 'sleekforum:users:auth:register' %}">Register</a>
+        <!-- /DROPDOWN NAVIGATION BUTTON -->
+    </div>
+    <!-- /DROPDOWN NAVIGATION -->
+</div>
+<!-- /ACTION ITEM WRAP -->

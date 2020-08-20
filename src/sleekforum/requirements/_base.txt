@@ -1,0 +1,7 @@
+django
+django-graphql-jwt
+django-mptt
+graphene-django
+martor
+pillow
+psycopg2

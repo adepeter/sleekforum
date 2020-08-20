@@ -1,0 +1,80 @@
+<!-- HEADER -->
+<header class="header">
+    <!-- HEADER ACTIONS -->
+    {% include 'vikinger/nav/header/logo.html' %}
+    <!-- /HEADER ACTIONS -->
+
+    <!-- HEADER ACTIONS -->
+    <div class="header-actions">
+        <!-- SIDEMENU TRIGGER -->
+        <div class="sidemenu-trigger navigation-widget-trigger">
+            <!-- ICON GRID -->
+            <svg class="icon-grid">
+                <use xlink:href="#svg-grid"></use>
+            </svg>
+            <!-- /ICON GRID -->
+        </div>
+        <!-- /SIDEMENU TRIGGER -->
+
+        <!-- MOBILEMENU TRIGGER -->
+        <div class="mobilemenu-trigger navigation-widget-mobile-trigger">
+            <!-- BURGER ICON -->
+            <div class="burger-icon inverted">
+                <!-- BURGER ICON BAR -->
+                <div class="burger-icon-bar"></div>
+                <!-- /BURGER ICON BAR -->
+
+                <!-- BURGER ICON BAR -->
+                <div class="burger-icon-bar"></div>
+                <!-- /BURGER ICON BAR -->
+
+                <!-- BURGER ICON BAR -->
+                <div class="burger-icon-bar"></div>
+                <!-- /BURGER ICON BAR -->
+            </div>
+            <!-- /BURGER ICON -->
+        </div>
+        <!-- /MOBILEMENU TRIGGER -->
+
+        <!-- NAVIGATION -->
+        {% include 'vikinger/nav/header/left_header_menu.html' %}
+        <!-- /NAVIGATION -->
+    </div>
+    <!-- /HEADER ACTIONS -->
+
+    <!-- HEADER ACTIONS SEARCH -->
+    {% include 'vikinger/nav/header/header_search_menu.html' %}
+    <!-- /HEADER ACTIONS SEARCH -->
+
+    <!-- HEADER ACTIONS -->
+    {% include 'vikinger/nav/header/right_header_menu.html' %}
+    <!-- /HEADER ACTIONS -->
+
+    <!-- HEADER ACTIONS -->
+    <div class="header-actions">
+        {% if request.user.is_authenticated %}
+            <!-- ACTION LIST -->
+            <div class="action-list dark">
+                <!-- ACTION LIST ITEM WRAP MESSAGES -->
+                {% include 'vikinger/nav/header/header_message_menu.html' %}
+                <!-- /ACTION LIST ITEM WRAP MESSAGES -->
+
+                <!-- ACTION LIST ITEM WRAP NOTIFICATION -->
+                {% include 'vikinger/nav/header/header_notification_menu.html' %}
+                <!-- /ACTION LIST ITEM WRAP NOTIFICATION -->
+            </div>
+            <!-- /ACTION LIST -->
+        {% endif %}
+        {% if request.user.is_authenticated %}
+            {% include 'vikinger/nav/header/header_profile_menu.html' %}
+        {% else %}
+            {% include 'vikinger/nav/header/header_login_signup_menu.html' %}
+        {% endif %}
+    </div>
+    <!-- /HEADER ACTIONS -->
+</header>
+<!-- /HEADER -->
+
+<!-- FLOATY BAR -->
+{% include 'vikinger/nav/mobile/floaty_bar.html' %}
+<!-- /FLOATY BAR -->

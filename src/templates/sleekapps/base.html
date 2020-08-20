@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    {% include 'vikinger/head_meta/metatags.html' %}
+    {% include 'vikinger/head_meta/stylesheets.html' %}
+    {% include 'vikinger/head_meta/favicons.html' %}
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+
+<!-- Controls page load -->
+{% include 'vikinger/loading_bar.html' %}
+
+<!-- Controls left nav bar -->
+{% include 'vikinger/nav/left.html' %}
+
+<!-- Controls left nav bar to show full menu -->
+{% include 'vikinger/nav/left_sidebar_full.html' %}
+
+<!-- Controls left nav bar menu on mobile view -->
+{% include 'vikinger/nav/mobile/left_menu.html' %}
+
+<!-- Controls right nav bar -->
+{% include 'vikinger/nav/right.html' %}
+
+<!-- Controls Header Nav -->
+{% include 'vikinger/nav/header.html' %}
+
+{% block content %}
+{# content goes in here #}
+{% endblock %}
+
+<!-- javascripts app -->
+{% include 'vikinger/javascripts.html' %}
+
+</body>
+</html>

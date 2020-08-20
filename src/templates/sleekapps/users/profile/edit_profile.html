@@ -1,0 +1,476 @@
+{% extends 'users/profile/profile_base.html' %}
+
+{% load static %}
+
+{% block title %}Profile edit | {{ request.user.get_display_name | title }}{% endblock %}
+
+{% block profile_edit_content %}
+
+<!-- GRID COLUMN -->
+<div class="account-hub-content">
+    <!-- SECTION HEADER -->
+    <div class="section-header">
+        <!-- SECTION HEADER INFO -->
+        <div class="section-header-info">
+            <!-- SECTION PRETITLE -->
+            <p class="section-pretitle">My Profile</p>
+            <!-- /SECTION PRETITLE -->
+
+            <!-- SECTION TITLE -->
+            <h2 class="section-title">Profile Info</h2>
+            <!-- /SECTION TITLE -->
+        </div>
+        <!-- /SECTION HEADER INFO -->
+    </div>
+    <!-- /SECTION HEADER -->
+
+    <!-- GRID COLUMN -->
+    <div class="grid-column">
+        <!-- GRID -->
+        <div class="grid grid centered">
+            <!-- USER PREVIEW -->
+            <div class="user-preview large fixed-height">
+                <!-- USER PREVIEW COVER -->
+                <figure class="user-preview-cover liquid">
+                    <img src="{% static 'img/cover/01.jpg' %}" alt="cover-01">
+                </figure>
+                <!-- /USER PREVIEW COVER -->
+
+                <!-- USER PREVIEW INFO -->
+                <div class="user-preview-info">
+                    <!-- USER SHORT DESCRIPTION -->
+                    <div class="user-short-description small">
+                        <!-- USER SHORT DESCRIPTION AVATAR -->
+                        <div class="user-short-description-avatar user-avatar">
+                            <!-- USER AVATAR BORDER -->
+                            <div class="user-avatar-border">
+                                <!-- HEXAGON -->
+                                <div class="hexagon-100-110"></div>
+                                <!-- /HEXAGON -->
+                            </div>
+                            <!-- /USER AVATAR BORDER -->
+
+                            <!-- USER AVATAR CONTENT -->
+                            <div class="user-avatar-content">
+                                <!-- HEXAGON -->
+                                <div class="hexagon-image-68-74" data-src="{% static 'img/avatar/01.jpg' %}"></div>
+                                <!-- /HEXAGON -->
+                            </div>
+                            <!-- /USER AVATAR CONTENT -->
+
+                            <!-- USER AVATAR PROGRESS -->
+                            <div class="user-avatar-progress">
+                                <!-- HEXAGON -->
+                                <div class="hexagon-progress-84-92"></div>
+                                <!-- /HEXAGON -->
+                            </div>
+                            <!-- /USER AVATAR PROGRESS -->
+
+                            <!-- USER AVATAR PROGRESS BORDER -->
+                            <div class="user-avatar-progress-border">
+                                <!-- HEXAGON -->
+                                <div class="hexagon-border-84-92"></div>
+                                <!-- /HEXAGON -->
+                            </div>
+                            <!-- /USER AVATAR PROGRESS BORDER -->
+
+                            <!-- USER AVATAR BADGE -->
+                            <div class="user-avatar-badge">
+                                <!-- USER AVATAR BADGE BORDER -->
+                                <div class="user-avatar-badge-border">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-28-32"></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR BADGE BORDER -->
+
+                                <!-- USER AVATAR BADGE CONTENT -->
+                                <div class="user-avatar-badge-content">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-dark-22-24"></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR BADGE CONTENT -->
+
+                                <!-- USER AVATAR BADGE TEXT -->
+                                <p class="user-avatar-badge-text">24</p>
+                                <!-- /USER AVATAR BADGE TEXT -->
+                            </div>
+                            <!-- /USER AVATAR BADGE -->
+                        </div>
+                        <!-- /USER SHORT DESCRIPTION AVATAR -->
+                    </div>
+                    <!-- /USER SHORT DESCRIPTION -->
+                </div>
+                <!-- /USER PREVIEW INFO -->
+            </div>
+            <!-- /USER PREVIEW -->
+        </div>
+        <!-- /GRID -->
+        <!-- WIDGET BOX -->
+        <div class="widget-box">
+            <form class="form" method="POST">
+                {% csrf_token %}
+                <!-- WIDGET BOX TITLE -->
+                <p class="widget-box-title">Basic profile info</p>
+                <!-- /WIDGET BOX TITLE -->
+
+                <!-- WIDGET BOX CONTENT -->
+                <div class="widget-box-content">
+                    <!-- FORM -->
+                    <div class="form">
+                        <!-- FORM ROW -->
+                        <div class="form-row split">
+                            <!-- FORM ITEM -->
+                            <div class="form-item">
+                                <!-- FORM INPUT -->
+                                <div class="form-input small active">
+                                    <label for="firstname">First Name</label>
+                                    {{ form.firstname }}
+                                    <small class="text-info">{{ form.firstname.help_text }}</small>
+                                    <small class="text-danger">{{ form.firstname.errors }}</small>
+                                </div>
+                                <!-- /FORM INPUT -->
+                            </div>
+                            <!-- /FORM ITEM -->
+
+                            <!-- FORM ITEM -->
+                            <div class="form-item">
+                                <!-- FORM INPUT -->
+                                <div class="form-input small active">
+                                    <label for="middlename">Middle Name</label>
+                                    {{ form.middlename }}
+                                    <small class="text-info">{{ form.middlename.help_text }}</small>
+                                    <small class="text-danger">{{ form.middlename.errors }}</small>
+                                </div>
+                                <!-- /FORM INPUT -->
+                            </div>
+                            <!-- /FORM ITEM -->
+
+                            <!-- FORM ITEM -->
+                            <div class="form-item">
+                                <!-- FORM INPUT -->
+                                <div class="form-input small active">
+                                    <label for="lastname">Last Name</label>
+                                    {{ form.lastname }}
+                                    <small class="text-info">{{ form.lastname.help_text }}</small>
+                                    <small class="text-danger">{{ form.lastname.errors }}</small>
+                                </div>
+                                <!-- /FORM INPUT -->
+                            </div>
+                            <!-- /FORM ITEM -->
+                        </div>
+                        <!-- /FORM ROW -->
+
+                        <!-- FORM ROW -->
+                        <div class="form-row split">
+                            <!-- FORM ITEM -->
+                            <div class="form-item">
+                                <!-- FORM SELECT -->
+                                <div class="form-select">
+                                    <label for="sex">Gender</label>
+                                    {{ form.sex }}
+                                    <small class="text-info">{{ form.sex.help_text }}</small>
+                                    <small class="text-danger">{{ form.sex.errors }}</small>
+                                    <!-- FORM SELECT ICON -->
+                                    <svg class="form-select-icon icon-small-arrow">
+                                        <use xlink:href="#svg-small-arrow"></use>
+                                    </svg>
+                                    <!-- /FORM SELECT ICON -->
+                                </div>
+                                <!-- /FORM SELECT -->
+                            </div>
+                            <!-- /FORM ITEM -->
+
+                            <!-- FORM ITEM -->
+                            <div class="form-item">
+                                <!-- FORM INPUT DECORATED -->
+                                <div class="form-input-decorated">
+                                    <!-- FORM INPUT -->
+                                    <div class="form-input small active">
+                                        <label for="dob">Birthday</label>
+                                        {{ form.dob }}
+                                        <small class="text-info">{{ form.dob.help_text }}</small>
+                                        <small class="text-danger">{{ form.dob.errors }}</small>
+                                    </div>
+                                    <!-- /FORM INPUT -->
+
+                                    <!-- FORM INPUT ICON -->
+                                    <svg class="form-input-icon icon-events">
+                                        <use xlink:href="#svg-events"></use>
+                                    </svg>
+                                    <!-- /FORM INPUT ICON -->
+                                </div>
+                                <!-- /FORM INPUT DECORATED -->
+                            </div>
+                            <!-- /FORM ITEM -->
+                        </div>
+                        <!-- /FORM ROW -->
+
+                        <!-- FORM ROW -->
+                        <div class="form-row split">
+                            <!-- FORM ITEM -->
+                            <div class="form-item">
+                                <!-- FORM INPUT -->
+                                <div class="form-input small mid-textarea active">
+                                    <label for="signature">Signature</label>
+                                    {{ form.signature }}
+                                    <small class="text-info">{{ form.signature.help_text }}</small>
+                                    <small class="text-danger">{{ form.signature.errors }}</small>
+                                </div>
+                                <!-- /FORM INPUT -->
+                            </div>
+                            <!-- /FORM ITEM -->
+
+                            <!-- FORM ITEM -->
+                            <div class="form-item">
+                                <!-- FORM INPUT -->
+                                <div class="form-input small mid-textarea active">
+                                    <label for="hobbies">Hobbies</label>
+                                    {{ form.hobbies }}
+                                    <small class="text-info">{{ form.hobbies.help_text }}</small>
+                                    <small class="text-danger">{{ form.hobbies.errors }}</small>
+                                </div>
+                                <!-- /FORM INPUT -->
+                            </div>
+                            <!-- /FORM ITEM -->
+                        </div>
+                        <!-- /FORM ROW -->
+                    </div>
+                    <!-- /FORM -->
+                </div>
+                <!-- WIDGET BOX CONTENT -->
+        </div>
+        <!-- /WIDGET BOX -->
+
+        <!-- WIDGET BOX -->
+        <div class="widget-box">
+            <!-- WIDGET BOX TITLE -->
+            <p class="widget-box-title">Description</p>
+            <!-- /WIDGET BOX TITLE -->
+
+            <!-- WIDGET BOX CONTENT -->
+            <div class="widget-box-content">
+                <!-- FORM -->
+                <div class="form">
+
+                    <!-- FORM ROW -->
+                    <div class="form-row">
+                        <!-- FORM ITEM -->
+                        <div class="form-item">
+                            <!-- FORM INPUT -->
+                            <div class="form-input small mid-textarea active">
+                                <label for="about">About me</label>
+                                {{ form.about }}
+                                <small class="text-info">{{ form.about.help_text }}</small>
+                                <small class="text-danger">{{ form.about.errors }}</small>
+                            </div>
+                            <!-- /FORM INPUT -->
+                        </div>
+                        <!-- /FORM ITEM -->
+                    </div>
+                    <!-- /FORM ROW -->
+                </div>
+                <!-- /FORM -->
+            </div>
+            <!-- WIDGET BOX CONTENT -->
+        </div>
+        <!-- /WIDGET BOX -->
+
+        <!-- WIDGET BOX -->
+        <div class="widget-box">
+            <!-- WIDGET BOX TITLE -->
+            <p class="widget-box-title">Contact Information</p>
+            <!-- /WIDGET BOX TITLE -->
+
+            <!-- WIDGET BOX CONTENT -->
+            <div class="widget-box-content">
+                <!-- FORM -->
+                <div class="form">
+
+                    <!-- FORM ROW -->
+                    <div class="form-row split">
+                        <!-- FORM ITEM -->
+                        <div class="form-item">
+                            <!-- FORM INPUT -->
+                            <div class="form-input small active">
+                                <label for="address">Address</label>
+                                {{ form.address }}
+                                <small class="text-info">{{ form.address.help_text }}</small>
+                                <small class="text-danger">{{ form.address.errors }}</small>
+                            </div>
+                            <!-- /FORM INPUT -->
+                        </div>
+                        <!-- /FORM ITEM -->
+
+                        <!-- FORM ROW -->
+                        <div class="form-row split">
+                            <!-- FORM ITEM -->
+                            <div class="form-item">
+                                <!-- FORM SELECT -->
+                                <div class="form-input small active">
+                                    <label for="state">State</label>
+                                    {{ form.state }}
+                                    <small class="text-info">{{ form.state.help_text }}</small>
+                                    <small class="text-danger">{{ form.state.errors }}</small>
+                                </div>
+                                <!-- /FORM SELECT -->
+                            </div>
+                            <!-- /FORM ITEM -->
+
+                            <!-- FORM ITEM -->
+                            <div class="form-item">
+                                <!-- FORM SELECT -->
+                                <div class="form-input small active">
+                                    <label for="country">Country</label>
+                                    {{ form.country }}
+                                    <small class="text-info">{{ form.country.help_text }}</small>
+                                    <small class="text-danger">{{ form.country.errors }}</small>
+                                </div>
+                                <!-- /FORM SELECT -->
+                            </div>
+                            <!-- /FORM ITEM -->
+                        </div>
+                        <!-- /FORM ROW -->
+                    </div>
+
+
+                    <!-- FORM ROW -->
+                    <div class="form-row split">
+                        <!-- FORM ITEM -->
+                        <div class="form-item">
+                            <!-- FORM INPUT -->
+                            <div class="form-input small active">
+                                <label for="phone_number">Phone Number</label>
+                                {{ form.phone_number }}
+                                <small class="text-info">{{ form.phone_number.help_text }}</small>
+                                <small class="text-danger">{{ form.phone_number.errors }}</small>
+                            </div>
+                            <!-- /FORM INPUT -->
+                        </div>
+                        <!-- /FORM ITEM -->
+
+                        <!-- FORM ITEM -->
+                        <div class="form-item">
+                            <!-- FORM INPUT -->
+                            <div class="form-input small active">
+                                <label for="whatsapp">Whatsapp</label>
+                                {{ form.whatsapp }}
+                                <small class="text-info">{{ form.whatsapp.help_text }}</small>
+                                <small class="text-danger">{{ form.whatsapp.errors }}</small>
+                            </div>
+                            <!-- /FORM INPUT -->
+                        </div>
+                        <!-- /FORM ITEM -->
+                    </div>
+                    <!-- /FORM ROW -->
+
+                </div>
+                <!-- /FORM -->
+            </div>
+            <!-- WIDGET BOX CONTENT -->
+        </div>
+        <!-- /WIDGET BOX -->
+
+        <!-- WIDGET BOX -->
+        <div class="widget-box">
+            <!-- WIDGET BOX TITLE -->
+            <p class="widget-box-title">Links</p>
+            <!-- /WIDGET BOX TITLE -->
+
+            <!-- WIDGET BOX CONTENT -->
+            <div class="widget-box-content">
+                <!-- FORM -->
+                <div class="form">
+                    <!-- FORM ROW -->
+                    <div class="form-row split">
+                        <!-- FORM ITEM -->
+                        <div class="form-item">
+                            <!-- FORM INPUT -->
+                            <div class="form-input small active">
+                                <label for="facebook">Facebook</label>
+                                <input type="text" name="{{ form.facebook.name }}" value="{{ form.facebook.value }}">
+                                <small class="text-info">{{ form.facebook.help_text }}</small>
+                                <small class="text-danger">{{ form.facebook.errors }}</small>
+                            </div>
+                            <!-- /FORM INPUT -->
+                        </div>
+                        <!-- /FORM ITEM -->
+
+                        <!-- FORM ITEM -->
+                        <div class="form-item">
+                            <!-- FORM INPUT -->
+                            <div class="form-input small active">
+                                <label for="twitter">Twitter</label>
+                                <input type="text" name="{{ form.twitter.name }}" value="{{ form.twitter.value }}">
+                                <small class="text-info">{{ form.twitter.help_text }}</small>
+                                <small class="text-danger">{{ form.twitter.errors }}</small>
+                            </div>
+                            <!-- /FORM INPUT -->
+                        </div>
+                        <!-- /FORM ITEM -->
+                    </div>
+                    <!-- /FORM ROW -->
+
+                    <!-- FORM ROW -->
+                    <div class="form-row split">
+                        <!-- FORM ITEM -->
+                        <div class="form-item">
+                            <!-- FORM INPUT -->
+                            <div class="form-input small active">
+                                <label for="url">URL</label>
+                                <input type="text" name="{{ form.website.name }}" value="{{ form.website.value }}">
+                                <small class="text-info">{{ form.website.help_text }}</small>
+                                <small class="text-danger">{{ form.website.errors }}</small>
+                            </div>
+                            <!-- /FORM INPUT -->
+                        </div>
+                        <!-- /FORM ITEM -->
+
+                        <!-- FORM ITEM -->
+                        <div class="form-item">
+                            <!-- FORM INPUT -->
+                            <div class="form-input small active">
+                                <label for="url">Repo</label>
+                                <input type="text" name="{{ form.repo.name }}" value="{{ form.repo.value }}">
+                                <small class="text-info">{{ form.repo.help_text }}</small>
+                                <small class="text-danger">{{ form.repo.errors }}</small>
+                            </div>
+                            <!-- /FORM INPUT -->
+                        </div>
+                        <!-- /FORM ITEM -->
+                    </div>
+                    <!-- /FORM ROW -->
+
+                    <!-- FORM ROW -->
+                    <div class="form-row split">
+
+                        <!-- FORM ITEM -->
+                        <div class="form-item">
+                            <!-- BUTTON -->
+                            <button type="submit" class="button full primary">Save changes!</button>
+                            <!-- /BUTTON -->
+                        </div>
+                        <!-- /FORM ITEM -->
+
+                        <!-- FORM ITEM -->
+                        <div class="form-item">
+                            <!-- BUTTON -->
+                            <a class="button full info small-space" href="">Discard</a>
+                            <!-- /BUTTON -->
+                        </div>
+                        <!-- /FORM ITEM -->
+                    </div>
+                    <!-- /FORM ROW -->
+
+                </div>
+                <!-- /FORM -->
+            </div>
+            <!-- WIDGET BOX CONTENT -->
+        </div>
+        <!-- /WIDGET BOX -->
+    </div>
+    <!-- /GRID COLUMN -->
+</div>
+<!-- /GRID COLUMN -->
+{% endblock %}

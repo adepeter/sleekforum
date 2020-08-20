@@ -1,0 +1,107 @@
+{% extends 'users/profile/profile_base.html' %}
+
+{% block title %}Change E-mail{% endblock %}
+
+{% block profile_edit_content %}
+<!-- GRID COLUMN -->
+<div class="account-hub-content">
+    <!-- SECTION HEADER -->
+    <div class="section-header">
+        <!-- SECTION HEADER INFO -->
+        <div class="section-header-info">
+            <!-- SECTION PRETITLE -->
+            <p class="section-pretitle">Account</p>
+            <!-- /SECTION PRETITLE -->
+
+            <!-- SECTION TITLE -->
+            <h2 class="section-title">Change e-mail</h2>
+            <!-- /SECTION TITLE -->
+        </div>
+        <!-- /SECTION HEADER INFO -->
+    </div>
+    <!-- /SECTION HEADER -->
+
+    <!-- GRID COLUMN -->
+    <div class="grid-column">
+        <!-- WIDGET BOX -->
+        <div class="widget-box">
+            <!-- WIDGET BOX CONTENT -->
+            <div class="widget-box-content">
+                <!-- FORM -->
+                <form class="form" method="POST">
+                    {% csrf_token %}
+                    <!-- FORM ROW -->
+                    <div class="form-row">
+                        <!-- FORM ITEM -->
+                        <div class="form-item">
+                            <!-- FORM INPUT -->
+                            <div class="form-input small active">
+                                <label for="old_password">Old E-mail</label>
+                                {{ form.email }}
+                            </div>
+                            <!-- /FORM INPUT -->
+                        </div>
+                        <!-- /FORM ITEM -->
+                    </div>
+                    <!-- /FORM ROW -->
+
+                    <!-- FORM ROW -->
+                    <div class="form-row split">
+                        <!-- FORM ITEM -->
+                        <div class="form-item">
+                            <!-- FORM INPUT -->
+                            <div class="form-input small active">
+                                <label for="new_email">Your new e-mail</label>
+                                {{ form.new_email }}
+                                <small class="text-info">{{ form.new_email.help_text }}</small>
+                                <small class="text-danger">{{ form.new_email.errors }}</small>
+                            </div>
+                            <!-- /FORM INPUT -->
+                        </div>
+                        <!-- /FORM ITEM -->
+
+                        <!-- FORM ITEM -->
+                        <div class="form-item">
+                            <!-- FORM INPUT -->
+                            <div class="form-input small active">
+                                <label for="password">Password</label>
+                                {{ form.password }}
+                                <small class="text-info">{{ form.password.help_text }}</small>
+                                <small class="text-danger">{{ form.password.errors }}</small>
+                            </div>
+                            <!-- /FORM INPUT -->
+                        </div>
+                        <!-- /FORM ITEM -->
+                    </div>
+                    <!-- /FORM ROW -->
+
+                    <!-- FORM ROW -->
+                    <div class="form-row split">
+                        <!-- FORM ITEM -->
+                        <div class="form-item">
+                            <!-- BUTTON -->
+                            <button type="submit" class="button full primary">Change e-mail!</button>
+                            <!-- /BUTTON -->
+                        </div>
+                        <!-- /FORM ITEM -->
+
+                        <!-- FORM ITEM -->
+                        <div class="form-item">
+                            <!-- BUTTON -->
+                            <a class="button full secondary" href="">Discard</a>
+                            <!-- /BUTTON -->
+                        </div>
+                        <!-- /FORM ITEM -->
+                    </div>
+                    <!-- /FORM ROW -->
+                </form>
+                <!-- /FORM -->
+            </div>
+            <!-- WIDGET BOX CONTENT -->
+        </div>
+        <!-- /WIDGET BOX -->
+    </div>
+    <!-- /GRID COLUMN -->
+</div>
+<!-- /GRID COLUMN -->
+{% endblock %}

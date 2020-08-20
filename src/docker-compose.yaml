@@ -1,0 +1,33 @@
+version: "3.8"
+
+service:
+  sleekforum:
+    build:
+      context: .
+      args:
+        sleekforum_user: sleekforum
+    networks:
+      - db
+    restart: unless-stopped
+    volumes:
+      - .:/srv/http/${sleekforum_user:-sleekforum}
+    port:
+      - "8000:4042"
+
+  postgres:
+    image: postgres
+    networks:
+      - db
+    restart: always
+    volumes:
+      - pg_data:/var/lib/postgres/data
+    environment:
+      - POSTGRES_DB=sleekforum_db
+      - POSTGRES_USER=sleekforum_user
+      - POSTGRES_PASSWORD=sleekforum_password
+
+networks:
+  db:
+
+volumes:
+  pd_data:
