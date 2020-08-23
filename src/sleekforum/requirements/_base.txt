@@ -5,3 +5,5 @@ graphene-django
 martor
 pillow
 psycopg2
+redis
+django-redis

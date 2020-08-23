@@ -2,9 +2,12 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
 
-from ..validators import validate_phone_number
+from ..services.location import fetch_country
+from ..validators import validate_phone_number, validate_unique_user
 
 User = get_user_model()
+
+countries = fetch_country()
 
 class UserEmailEditForm(forms.ModelForm):
     """User email change with password for confirmation"""
@@ -31,7 +34,13 @@ class UserEmailEditForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['email'].disabled = True
 
-
+    def clean_new_email(self):
+        cleaned_new_email = self.cleaned_data['new_email']
+        validate_unique_user(
+            error_message=_('E-mail is already taken'),
+            email=cleaned_new_email
+        )
+        return cleaned_new_email
 
     def clean_password(self):
         cleaned_password = self.cleaned_data['password']
@@ -58,6 +67,7 @@ class UserProfileEditForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        country_choices = [(country['alpha3Code'], _(country['name'])) for country in countries]
         self.fields['dob'] = forms.DateField(
             help_text=_('Birth date in yyyy-mm-dd format'),
             input_formats=['%Y-%m-%d'],
@@ -65,6 +75,7 @@ class UserProfileEditForm(forms.ModelForm):
                 'data-toggle': 'datepicker'
             })
         )
+        self.fields['country'] = forms.ChoiceField(choices=country_choices)
         self.fields['phone_number'].validators.append(validate_phone_number)
         self.fields['whatsapp'].validators.append(validate_phone_number)
 

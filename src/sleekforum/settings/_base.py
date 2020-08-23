@@ -17,7 +17,6 @@ from django.urls import reverse_lazy
 
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
@@ -28,7 +27,6 @@ SECRET_KEY = '(p%_ifcrc^we&x5!m_-)9#cmtd4ps#tpten*kdh5k8$+t$&b^+'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -49,12 +47,15 @@ INSTALLED_APPS = [
     'graphql_jwt.refresh_token.apps.RefreshTokenConfig',
     'martor',
     'mptt',
+    'violation',
 
     # sleekforum apps
     'sleekapps.categories.apps.CategoriesConfig',
+    'sleekapps.cores.apps.CoreConfig',
     'sleekapps.home.apps.HomeConfig',
-    # 'sleekapps.graphql.apps.GraphQLConfig',
+    'sleekapps.graphql.apps.GraphQLConfig',
     'sleekapps.settings.apps.SettingsConfig',
+    'sleekapps.threads.apps.ThreadsConfig',
     'sleekapps.users.apps.UsersConfig',
 ]
 
@@ -66,6 +67,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'sleekapps.users.middlewares.OnlineStatusMiddleware',
 ]
 
 ROOT_URLCONF = 'sleekforum.urls'
@@ -92,7 +95,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'sleekforum.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
@@ -102,7 +104,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -172,3 +173,5 @@ LOGIN_URL = reverse_lazy('sleekforum:users:auth:login')
 LOGIN_REDIRECT_URL = reverse_lazy('sleekforum:home:home')
 LOGOUT_URL = reverse_lazy('sleekforum:users:auth:logout')
 LOGOUT_REDIRECT_URL = reverse_lazy('sleekforum:home:home')
+
+USER_LASTSEEN_TIMEOUT = 60 * 1

@@ -1,9 +1,16 @@
+import datetime
+
+from django.conf import settings
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.contrib.postgres.fields import ArrayField
+from django.core.cache import cache
 from django.db import models
+from django.utils import timezone
+from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
 
 from ...cores.utils.choice import Choicify
+from ...cores.validators import validate_image_filesize
 
 from ..constants import user
 from ..utils import ImageHandler
@@ -27,7 +34,8 @@ class User(PermissionsMixin, AbstractBaseUser):
     avatar = models.ImageField(
         upload_to=avatar_handler.upload_to,
         blank=True,
-        null=True
+        null=True,
+        validators=[validate_image_filesize]
     )
     firstname = models.CharField(
         max_length=20,
@@ -182,6 +190,33 @@ class User(PermissionsMixin, AbstractBaseUser):
         if self.firstname or self.lastname:
             return self.get_full_name
         return self.get_short_name
+
+    def last_seen(self):
+        return cache.get('seen_%s' % self.username)
+
+    def is_online(self):
+        if self.last_seen():
+            now = timezone.now()
+            if now > self.last_seen() + \
+                    datetime.timedelta(seconds=settings.USER_LASTSEEN_TIMEOUT):
+                return False
+            else:
+                return True
+        else:
+            return False
+
+    @cached_property
+    def post_count(self):
+        return self.posts.all()
+
+    def get_avatar(self):
+        return self.avatar
+
+    def online(self):
+        check_online = self.is_online()
+        if check_online:
+            return 'online'
+        return 'offline'
 
     def __str__(self):
         return '%s - %s' % (self.username, self.email)

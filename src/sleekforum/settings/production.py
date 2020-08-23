@@ -15,4 +15,11 @@ DATABASES = {
     }
 }
 
+CACHES = {
+    'default': {
+        'BACKEND': 'redis_cache.RedisCache',
+        'LOCATION': 'localhost:6379',
+    },
+}
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')

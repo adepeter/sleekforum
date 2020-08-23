@@ -22,7 +22,7 @@
             <!-- USER AVATAR CONTENT -->
             <div class="user-avatar-content">
                 <!-- HEXAGON -->
-                <div class="hexagon-image-82-90" data-src="{% static 'img/avatar/01.jpg' %}"></div>
+                <div class="hexagon-image-82-90" data-src="{{ request.user.get_avatar }}"></div>
                 <!-- /HEXAGON -->
             </div>
             <!-- /USER AVATAR CONTENT -->
@@ -70,51 +70,16 @@
         <!-- /USER SHORT DESCRIPTION AVATAR -->
 
         <!-- USER SHORT DESCRIPTION TITLE -->
-        <p class="user-short-description-title"><a href="profile-timeline.html">Marina Valentine</a></p>
+        <p class="user-short-description-title"><a href="profile-timeline.html">{{ request.user.get_display_name }}</a></p>
         <!-- /USER SHORT DESCRIPTION TITLE -->
 
+        {% if request.user.website %}
         <!-- USER SHORT DESCRIPTION TEXT -->
-        <p class="user-short-description-text"><a href="#">www.gamehuntress.com</a></p>
+        <p class="user-short-description-text"><a href="{{ request.user.website }}">{{ request.user.website }}</a></p>
         <!-- /USER SHORT DESCRIPTION TEXT -->
+        {% endif %}
     </div>
     <!-- /USER SHORT DESCRIPTION -->
-
-    <!-- BADGE LIST -->
-    <div class="badge-list small">
-        <!-- BADGE ITEM -->
-        <div class="badge-item">
-            <img src="{% static 'img/badge/gold-s.png' %}" alt="badge-gold-s">
-        </div>
-        <!-- /BADGE ITEM -->
-
-        <!-- BADGE ITEM -->
-        <div class="badge-item">
-            <img src="{% static 'img/badge/age-s.png' %}" alt="badge-age-s">
-        </div>
-        <!-- /BADGE ITEM -->
-
-        <!-- BADGE ITEM -->
-        <div class="badge-item">
-            <img src="{% static 'img/badge/caffeinated-s.png' %}" alt="badge-caffeinated-s">
-        </div>
-        <!-- /BADGE ITEM -->
-
-        <!-- BADGE ITEM -->
-        <div class="badge-item">
-            <img src="{% static 'img/badge/warrior-s.png' %}" alt="badge-warrior-s">
-        </div>
-        <!-- /BADGE ITEM -->
-
-        <!-- BADGE ITEM -->
-        <a class="badge-item" href="profile-badges.html">
-            <img src="{% static 'img/badge/blank-s.png' %}" alt="badge-blank-s">
-            <!-- BADGE ITEM TEXT -->
-            <p class="badge-item-text">+9</p>
-            <!-- /BADGE ITEM TEXT -->
-        </a>
-        <!-- /BADGE ITEM -->
-    </div>
-    <!-- /BADGE LIST -->
 
     <!-- USER STATS -->
     <div class="user-stats">

@@ -24,4 +24,7 @@ def validate_username_chars(username):
 def validate_phone_number(phone_number):
     match_pattern = re.match(r'^\+?\d{9,15}$', phone_number)
     if not match_pattern:
-        raise ValidationError(_('Invalid phone number'))
+        raise ValidationError(
+            _('Invalid phone number'),
+            code='invalid_phone_number',
+        )

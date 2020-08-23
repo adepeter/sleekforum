@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.views import (
     LoginView as BaseLoginView,
     LogoutView as BaseLogoutView
@@ -15,7 +15,7 @@ class LoginView(BaseLoginView):
 
     def get(self, *args, **kwargs):
         if self.request.user.is_authenticated:
-            return render(self.request, f'{TEMPLATE_URL}/session_active.html')
+            return redirect('sleekforum:home:home')
         return super().get(*args, **kwargs)
 
 

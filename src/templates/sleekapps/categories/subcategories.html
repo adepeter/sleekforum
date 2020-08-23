@@ -1,0 +1,208 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load mptt_tags %}
+{% load cores_util_tags %}
+{% load post_tags %}
+{% load thread_tags %}
+
+{% block title %}{{ parent_node.get_name }}{% endblock %}
+
+{% block content %}
+<!-- CONTENT GRID -->
+<div class="content-grid">
+    <!-- SECTION BANNER -->
+    <div class="section-banner">
+        <!-- SECTION BANNER ICON -->
+        <img class="section-banner-icon" src="{% static 'img/banner/forums-icon.png' %}" alt="forums-icon">
+        <!-- /SECTION BANNER ICON -->
+
+        <!-- SECTION BANNER TITLE -->
+        <p class="section-banner-title">{{ parent_node.get_name }}</p>
+        <!-- /SECTION BANNER TITLE -->
+
+        <!-- SECTION BANNER TEXT -->
+        <p class="section-banner-text">Glance through our categories!</p>
+        <!-- /SECTION BANNER TEXT -->
+    </div>
+    <!-- /SECTION BANNER -->
+
+    {% if subcategories %}
+
+    <!-- SECTION FILTERS BAR -->
+    <div class="section-filters-bar v7">
+        <!-- SECTION FILTERS BAR ACTIONS -->
+        <div class="section-filters-bar-actions">
+            <!-- SECTION FILTERS BAR INFO -->
+            <div class="section-filters-bar-info">
+                <!-- SECTION FILTERS BAR TITLE -->
+                <p class="section-filters-bar-title">Categories</p>
+            </div>
+            <!-- /SECTION FILTERS BAR INFO -->
+        </div>
+        <!-- /SECTION FILTERS BAR ACTIONS -->
+
+        <!-- SECTION FILTERS BAR ACTIONS -->
+        <div class="section-filters-bar-actions">
+            <!-- FORM -->
+            <form class="form">
+                <!-- FORM ITEM -->
+                <div class="form-item split">
+                    <!-- FORM INPUT -->
+                    <div class="form-input small">
+                        <label for="forum-search">Search Forums</label>
+                        <input type="text" id="forum-search" name="forum_search">
+                    </div>
+                    <!-- /FORM INPUT -->
+
+                    <!-- BUTTON -->
+                    <button class="button primary">
+                        <!-- ICON MAGNIFYING GLASS -->
+                        <svg class="icon-magnifying-glass">
+                            <use xlink:href="#svg-magnifying-glass"></use>
+                        </svg>
+                        <!-- /ICON MAGNIFYING GLASS -->
+                    </button>
+                    <!-- /BUTTON -->
+                </div>
+                <!-- /FORM ITEM -->
+            </form>
+            <!-- /FORM -->
+        </div>
+        <!-- /SECTION FILTERS BAR ACTIONS -->
+    </div>
+    <!-- /SECTION FILTERS BAR -->
+
+    <!-- TABLE -->
+    <div class="table table-forum-category">
+        <!-- TABLE HEADER -->
+        <div class="table-header">
+            <!-- TABLE HEADER COLUMN -->
+            <div class="table-header-column">
+                <!-- TABLE HEADER TITLE -->
+                <p class="table-header-title">Category</p>
+                <!-- /TABLE HEADER TITLE -->
+            </div>
+            <!-- /TABLE HEADER COLUMN -->
+
+            <!-- TABLE HEADER COLUMN -->
+            <div class="table-header-column centered padded-medium">
+                <!-- TABLE HEADER TITLE -->
+                <p class="table-header-title">Topics</p>
+                <!-- /TABLE HEADER TITLE -->
+            </div>
+            <!-- /TABLE HEADER COLUMN -->
+
+            <!-- TABLE HEADER COLUMN -->
+            <div class="table-header-column centered padded-medium">
+                <!-- TABLE HEADER TITLE -->
+                <p class="table-header-title">Posts</p>
+                <!-- /TABLE HEADER TITLE -->
+            </div>
+            <!-- /TABLE HEADER COLUMN -->
+
+            <!-- TABLE HEADER COLUMN -->
+            <div class="table-header-column padded-big-left">
+                <!-- TABLE HEADER TITLE -->
+                <p class="table-header-title">Recent Topics</p>
+                <!-- /TABLE HEADER TITLE -->
+            </div>
+            <!-- /TABLE HEADER COLUMN -->
+        </div>
+        <!-- /TABLE HEADER -->
+
+        <!-- TABLE BODY -->
+        <div class="table-body">
+            {% recursetree subcategories %}
+            {% threads_in_category node as node_threads %}
+            {% posts_in_category node as node_posts %}
+            {% threads_in_category_count node_threads 3 as latest_three_threads %}
+            <!-- TABLE ROW -->
+            <div class="table-row big">
+                <!-- TABLE COLUMN -->
+                <div class="table-column">
+                    <!-- FORUM CATEGORY -->
+                    <div class="forum-category">
+                        <!-- FORUM CATEGORY IMAGE -->
+                        <a href="{% url 'sleekforum:categories:subcategories' node.id node.slug %}">
+                            <img class="forum-category-image" src="{{ node.image.url }}" alt="{{ category.name }}">
+                        </a>
+                        <!-- /FORUM CATEGORY IMAGE -->
+
+                        <!-- FORUM CATEGORY INFO -->
+                        <div class="forum-category-info">
+                            <!-- FORUM CATEGORY TITLE -->
+                            <p class="forum-category-title">
+                                <a href="{% url 'sleekforum:categories:subcategories' node.id node.slug %}">{{ node.name }}</a>
+                            </p>
+                            <!-- /FORUM CATEGORY TITLE -->
+
+                            <!-- FORUM CATEGORY TEXT -->
+                            <p class="forum-category-text">{{ node.get_description }}!</p>
+                            <!-- /FORUM CATEGORY TEXT -->
+                        </div>
+                        <!-- /FORUM CATEGORY INFO -->
+                    </div>
+                    <!-- /FORUM CATEGORY -->
+                </div>
+                <!-- /TABLE COLUMN -->
+
+                <!-- TABLE COLUMN -->
+                <div class="table-column centered padded-medium">
+                    <!-- TABLE TITLE -->
+                    <p class="table-title">{{ node_threads | length | pretty_count }}</p>
+                    <!-- /TABLE TITLE -->
+                </div>
+                <!-- /TABLE COLUMN -->
+
+                <!-- TABLE COLUMN -->
+                <div class="table-column centered padded-medium">
+                    <!-- TABLE TITLE -->
+                    <p class="table-title">{{ node_posts | length | pretty_count }}</p>
+                    <!-- /TABLE TITLE -->
+                </div>
+                <!-- /TABLE COLUMN -->
+
+                <!-- TABLE COLUMN -->
+                <div class="table-column padded-big-left">
+                    <!-- TABLE LINK -->
+                    {% for thread in latest_three_threads %}
+                    <a class="table-link" href="">{{ thread.title | truncatechars:50 }}</a>
+                    {% empty %}
+                    No threads available
+                    {% endfor %}
+                    <!-- /TABLE LINK -->
+
+                </div>
+                <!-- /TABLE COLUMN -->
+            </div>
+            <!-- /TABLE ROW -->
+            {% endrecursetree %}
+        </div>
+        <!-- /TABLE BODY -->
+    </div>
+    <!-- /TABLE -->
+
+    {% else %}
+    <!-- SECTION FILTERS BAR -->
+    <div class="section-filters-bar v7">
+        <!-- SECTION FILTERS BAR ACTIONS -->
+        <div class="section-filters-bar-actions">
+            <!-- SECTION FILTERS BAR INFO -->
+            <div class="section-filters-bar-info">
+                <!-- SECTION FILTERS BAR TITLE -->
+                <p class="section-filters-bar-title">Info: </p>
+                <!-- /SECTION FILTERS BAR TITLE -->
+
+                <!-- SECTION FILTERS BAR TEXT -->
+                <p class="section-filters-bar-text">There are no categories yets</p>
+                <!-- /SECTION FILTERS BAR TEXT -->
+            </div>
+            <!-- /SECTION FILTERS BAR INFO -->
+        </div>
+        <!-- /SECTION FILTERS BAR ACTIONS -->
+    </div>
+    <!-- /SECTION FILTERS BAR -->
+    {% endif %}
+</div>
+<!-- /CONTENT GRID -->
+{% endblock %}

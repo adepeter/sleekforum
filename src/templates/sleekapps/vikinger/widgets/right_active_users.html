@@ -2,9 +2,10 @@
 
 <!-- CHAT WIDGET -->
 <aside id="chat-widget-messages" class="chat-widget closed sidebar right">
-    <!-- CHAT WIDGET MESSAGES -->
     <div class="chat-widget-messages" data-simplebar>
         <!-- CHAT WIDGET MESSAGE -->
+        {% with users as users_with_highest_post %}
+        {% for user in users_with_highest_post %}
         <div class="chat-widget-message">
             <!-- USER STATUS -->
             <div class="user-status">
@@ -15,7 +16,7 @@
                         <!-- USER AVATAR CONTENT -->
                         <div class="user-avatar-content">
                             <!-- HEXAGON -->
-                            <div class="hexagon-image-30-32" data-src="{% static 'img/avatar/03.jpg' %}"></div>
+                            <div class="hexagon-image-30-32" data-src="{{ user.avatar }}"></div>
                             <!-- /HEXAGON -->
                         </div>
                         <!-- /USER AVATAR CONTENT -->
@@ -55,38 +56,39 @@
                             <!-- /USER AVATAR BADGE CONTENT -->
 
                             <!-- USER AVATAR BADGE TEXT -->
-                            <p class="user-avatar-badge-text">16</p>
+                            <p class="user-avatar-badge-text">{{ user.posts_count }}</p>
                             <!-- /USER AVATAR BADGE TEXT -->
                         </div>
                         <!-- /USER AVATAR BADGE -->
                     </div>
                     <!-- /USER AVATAR -->
                 </div>
-                <!-- /USER STATUS AVATAR -->
             </div>
             <!-- /USER STATUS -->
+
         </div>
         <!-- /CHAT WIDGET MESSAGE -->
+        {% endfor %}
+        {% endwith %}
     </div>
-    <!-- /CHAT WIDGET MESSAGES -->
-
     <!-- CHAT WIDGET BUTTON -->
 
-        <!-- BURGER ICON -->
-        <div class="burger-icon">
-            <!-- BURGER ICON BAR -->
-            <div class="burger-icon-bar"></div>
-            <!-- /BURGER ICON BAR -->
+    <!-- BURGER ICON -->
+    <div class="burger-icon">
+        <!-- BURGER ICON BAR -->
+        <div class="burger-icon-bar"></div>
+        <!-- /BURGER ICON BAR -->
 
-            <!-- BURGER ICON BAR -->
-            <div class="burger-icon-bar"></div>
-            <!-- /BURGER ICON BAR -->
+        <!-- BURGER ICON BAR -->
+        <div class="burger-icon-bar"></div>
+        <!-- /BURGER ICON BAR -->
 
-            <!-- BURGER ICON BAR -->
-            <div class="burger-icon-bar"></div>
-            <!-- /BURGER ICON BAR -->
-        </div>
-        <!-- /BURGER ICON -->
-        <!-- /CHAT WIDGET BUTTON -->
+        <!-- BURGER ICON BAR -->
+        <div class="burger-icon-bar"></div>
+        <!-- /BURGER ICON BAR -->
+    </div>
+    <!-- /BURGER ICON -->
+
+    <!-- /CHAT WIDGET BUTTON -->
 </aside>
 <!-- /CHAT WIDGET -->

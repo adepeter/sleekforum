@@ -22,7 +22,7 @@
                 <!-- USER AVATAR CONTENT -->
                 <div class="user-avatar-content">
                     <!-- HEXAGON -->
-                    <div class="hexagon-image-30-32" data-src="{% static 'img/avatar/01.jpg' %}"></div>
+                    <div class="hexagon-image-30-32" data-src="{{ request.user.get_avatar }}"></div>
                     <!-- /HEXAGON -->
                 </div>
                 <!-- /USER AVATAR CONTENT -->
@@ -70,7 +70,7 @@
             <!-- /USER AVATAR -->
 
             <!-- NAVIGATION WIDGET INFO TITLE -->
-            <p class="navigation-widget-info-title"><a href="profile-timeline.html">Marina Valentine</a></p>
+            <p class="navigation-widget-info-title"><a href="profile-timeline.html">{{ request.user.get_display_name }}</a></p>
             <!-- /NAVIGATION WIDGET INFO TITLE -->
 
             <!-- NAVIGATION WIDGET INFO TEXT -->
@@ -80,7 +80,7 @@
         <!-- /NAVIGATION WIDGET INFO -->
 
         <!-- NAVIGATION WIDGET BUTTON -->
-        <a class="navigation-widget-info-button button small secondary">Logout</a>
+        <a class="navigation-widget-info-button button small secondary" href="{% url 'sleekforum:users:auth:logout' %}">Logout</a>
         <!-- /NAVIGATION WIDGET BUTTON -->
     </div>
     <!-- /NAVIGATION WIDGET INFO WRAP -->
@@ -193,7 +193,11 @@
     <!-- /NAVIGATION WIDGET SECTION LINK -->
 
     <!-- NAVIGATION WIDGET SECTION LINK -->
-    <a class="navigation-widget-section-link" href="hub-account-password.html">Change Password</a>
+    <a class="navigation-widget-section-link" href="{% url 'sleekforum:users:profile:profile_email_change' %}">Change e-mail</a>
+    <!-- /NAVIGATION WIDGET SECTION LINK -->
+
+    <!-- NAVIGATION WIDGET SECTION LINK -->
+    <a class="navigation-widget-section-link" href="{% url 'sleekforum:users:profile:profile_password_change' %}">Change Password</a>
     <!-- /NAVIGATION WIDGET SECTION LINK -->
 
     <!-- NAVIGATION WIDGET SECTION LINK -->

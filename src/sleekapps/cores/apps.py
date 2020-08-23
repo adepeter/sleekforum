@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class CoresConfig(AppConfig):
-    name = 'cores'
+class CoreConfig(AppConfig):
+    name = 'sleekapps.cores'
     models_module = None

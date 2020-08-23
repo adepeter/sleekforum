@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth import get_user_model, logout, get_user
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -45,6 +46,10 @@ class UserPasswordChange(LoginRequiredMixin, SuccessMessageMixin, FormView):
         )
         return user
 
+    def form_invalid(self, form):
+        messages.error(self.request, _('An error has occurred'))
+        return super().form_invalid(form)
+
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         kwargs['user'] = get_user(self.request)
@@ -63,6 +68,10 @@ class UserProfileEdit(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     success_url = reverse_lazy('sleekforum:users:profile:profile_edit')
     success_message = _('Profile successfully updated')
 
+    def form_invalid(self, form):
+        messages.error(self.request, _('An error has occurred'))
+        return super().form_invalid(form)
+
     def get_object(self):
         user = self.get_queryset()
         return user.get(username__iexact=self.request.user.username)
@@ -78,6 +87,10 @@ class UserEmailChange(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     def get_object(self):
         user = self.get_queryset()
         return user.get(username__iexact=self.request.user.username)
+
+    def form_invalid(self, form):
+        messages.error(self.request, _('An error has occurred'))
+        return super().form_invalid(form)
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()

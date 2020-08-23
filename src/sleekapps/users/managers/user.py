@@ -18,8 +18,8 @@ class UserManager(BaseUserManager):
             password=self.make_random_password() if password is None else password,
             **extra_fields
         )
-        user.slug = slugify(username)
         user.set_password(password)
+        user.avatar = '/defaults/users/avatars/none.jpg'
         now = timezone.now()
         user.date_created = now
         user.last_login = now

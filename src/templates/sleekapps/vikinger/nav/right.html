@@ -1,6 +1,8 @@
+{% load user_tags %}
+
 {% if request.user.is_authenticated %}
 {% include 'vikinger/widgets/right_chat_active_messages.html' %}
 {% include 'vikinger/widgets/right_chat_message_overlay.html' %}
 {% else %}
-{% include 'vikinger/widgets/right_active_users.html' %}
+{% user_with_highest_posts %}
 {% endif %}

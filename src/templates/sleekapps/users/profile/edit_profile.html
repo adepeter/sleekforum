@@ -26,6 +26,7 @@
 
     <!-- GRID COLUMN -->
     <div class="grid-column">
+        {% include 'vikinger/messages_alert.html' %}
         <!-- GRID -->
         <div class="grid grid centered">
             <!-- USER PREVIEW -->
@@ -53,7 +54,7 @@
                             <!-- USER AVATAR CONTENT -->
                             <div class="user-avatar-content">
                                 <!-- HEXAGON -->
-                                <div class="hexagon-image-68-74" data-src="{% static 'img/avatar/01.jpg' %}"></div>
+                                <div class="hexagon-image-68-74" data-src="{{ request.user.get_avatar }}"></div>
                                 <!-- /HEXAGON -->
                             </div>
                             <!-- /USER AVATAR CONTENT -->
@@ -321,11 +322,15 @@
                             <!-- FORM ITEM -->
                             <div class="form-item">
                                 <!-- FORM SELECT -->
-                                <div class="form-input small active">
+                                <div class="form-select">
                                     <label for="country">Country</label>
                                     {{ form.country }}
+                                    <!-- FORM SELECT ICON -->
+                                    <svg class="form-select-icon icon-small-arrow">
+                                        <use xlink:href="#svg-small-arrow"></use>
+                                    </svg>
+                                    <!-- /FORM SELECT ICON -->
                                     <small class="text-info">{{ form.country.help_text }}</small>
-                                    <small class="text-danger">{{ form.country.errors }}</small>
                                 </div>
                                 <!-- /FORM SELECT -->
                             </div>

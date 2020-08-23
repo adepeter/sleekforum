@@ -1,7 +1,7 @@
 from django.db.models import Q
 from django.views.generic import ListView
 
-from ...threads.models.thread import Thread
+from ...threads.models import Thread
 
 TEMPLATE_URL = 'home'
 
@@ -17,4 +17,5 @@ class Homepage(ListView):
         qs = super().get_queryset()
         return qs.filter(
             Q(pin__gte=2) | ~Q(is_hidden=True)
-        )
+        ).select_related('starter')
+

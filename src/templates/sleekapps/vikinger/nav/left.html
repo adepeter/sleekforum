@@ -3,11 +3,11 @@
 <!-- NAVIGATION WIDGET -->
 <nav id="navigation-widget-small" class="navigation-widget navigation-widget-desktop closed sidebar left delayed">
     <!-- USER AVATAR -->
-    <a class="user-avatar small no-outline online" href="profile-timeline.html">
+    <a class="user-avatar small no-outline {% if user.is_online %}online{% else %}offline{% endif %}" href="profile-timeline.html">
         <!-- USER AVATAR CONTENT -->
         <div class="user-avatar-content">
             <!-- HEXAGON -->
-            <div class="hexagon-image-30-32" data-src="{% static 'img/avatar/01.jpg' %}"></div>
+            <div class="hexagon-image-30-32" data-src="{{ request.user.get_avatar }}"></div>
             <!-- /HEXAGON -->
         </div>
         <!-- /USER AVATAR CONTENT -->
