@@ -148,14 +148,3 @@ class ShareThread(SingleObjectMixin, FormView):
 #     def get_queryset(self):
 #         return self.object.participants.all()
 #
-#
-# class LikeThread(LikeDislikeThreadMixin):
-#     model = Thread
-#     activity_model = Action
-#     activity_action = 'LIK'
-#
-#
-# class DislikeThread(LikeDislikeThreadMixin):
-#     model = Thread
-#     activity_model = Action
-#     activity_action = 'DSL'

@@ -23,8 +23,6 @@ from ...forms.thread.thread import (
 
 from ...models import Thread
 
-from ...signals import thread_views_creator_and_updater
-
 TEMPLATE_URL = 'threads/thread'
 
 User = get_user_model()
@@ -102,8 +100,10 @@ class ReadThread(MultipleObjectMixin, SuccessMessageMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['thread'] = self.thread
-        # context['liked_by'] = [liked_by.user for liked_by in self.thread.actions.filter_action_by('LIK')]
-        # context['disliked_by'] = [disliked_by.user for disliked_by in self.thread.actions.filter_action_by('DSL')]
+        context['liked_by'] = [liked_by.user for liked_by in \
+                               self.thread.reactions.filter_reaction_by('LIKE')]
+        context['disliked_by'] = [disliked_by.user for disliked_by in \
+                                  self.thread.reactions.filter_reaction_by('DISLIKE')]
         return context
 
     def form_valid(self, form):
@@ -171,8 +171,10 @@ class ListNewestThread(ListView):
     def get(self, request, *args, **kwargs):
         messages.info(
             self.request,
-            _('Dear %(login)s, you are viewing newest threads that were created 7days ago') % {
-                'login': self.request.user.username if self.request.user.is_authenticated else 'guest'
+            _('Dear %(login)s, you are viewing newest \
+            threads that were created 7days ago') % {
+                'login': self.request.user.username if \
+                    self.request.user.is_authenticated else 'guest'
             }
         )
         return super().get(request, *args, **kwargs)

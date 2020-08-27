@@ -9,13 +9,16 @@ from ..views.thread.thread import (
 )
 from ..views.thread.hide_unhide import HideUnhideThread
 from ..views.thread.lock_unlock import LockUnlockThread
+from ..views.thread.reaction import (
+    DislikeThread,
+    LikeThread,
+    FunnyThread,
+    SadThread,
+    WowThread
+)
+from ..views.thread.report import ReportThread
 from ..views.thread.thread_misc import (
     ShareThread,
-    # ReportThread,
-    # LockUnlockThread,
-    # HideUnhideThread,
-    # LikeThread,
-    # DislikeThread,
 )
 
 urlpatterns = [
@@ -31,10 +34,13 @@ urlpatterns += [
         path('edit/', EditThread.as_view(), name='edit_thread'),
         path('delete/', DeleteThread.as_view(), name='delete_thread'),
         path('share/', ShareThread.as_view(), name='share_thread'),
-        # path('report/', ReportThread.as_view(), name='report_thread'),
+        path('report/', ReportThread.as_view(), name='report_thread'),
         path('hide-unhide/', HideUnhideThread.as_view(), name='toggle_hide_thread'),
         path('lock-unlock/', LockUnlockThread.as_view(), name='toggle_lock_thread'),
-        # path('like/', LikeThread.as_view(), name='like_thread'),
-        # path('dislike/', DislikeThread.as_view(), name='dislike_thread'),
+        path('like/', LikeThread.as_view(), name='like_thread'),
+        path('dislike/', DislikeThread.as_view(), name='dislike_thread'),
+        path('wow/', WowThread.as_view(), name='wow_thread'),
+        path('funny/', FunnyThread.as_view(), name='funny_thread'),
+        path('sad/', SadThread.as_view(), name='sad_thread'),
     ])),
 ]

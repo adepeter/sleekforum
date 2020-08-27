@@ -8,6 +8,8 @@ from django.utils.translation import gettext_lazy as _
 
 from violation.models import Violation
 
+from ....activity.models import Reaction
+
 from ...managers.thread import ThreadManager
 
 limit_choices_to = models.Q(is_lock=False)
@@ -91,25 +93,15 @@ class Thread(models.Model):
         verbose_name=_('hide thread'),
         default=False
     )
-    is_editable = models.BooleanField(
-        verbose_name=_('allow edit'),
-        default=True
-    )
-    likes = models.PositiveIntegerField(
-        verbose_name=_('total likes'),
-        default=0
-    )
-    dislikes = models.PositiveIntegerField(
-        verbose_name=_('total dislikes'),
-        default=0
-    )
-    shares = models.PositiveIntegerField(
-        verbose_name=_('total shares'),
-        default=0
-    )
+    likes = models.PositiveIntegerField(default=0)
+    dislikes = models.PositiveIntegerField(default=0)
+    sads = models.PositiveIntegerField(default=0)
+    happies = models.PositiveIntegerField(default=0)
+    wows = models.PositiveIntegerField(default=0)
+    angries = models.PositiveIntegerField(default=0)
+    shares = models.PositiveIntegerField(default=0)
     views = models.PositiveIntegerField(default=0)
-
-    # actions = GenericRelation(Action, related_query_name='threads')
+    reactions = GenericRelation(Reaction, related_query_name='threads')
     violations = GenericRelation(Violation, related_query_name='violations')
 
     objects = ThreadManager()
@@ -120,11 +112,8 @@ class Thread(models.Model):
         self.tags = [slugify(tag) for tag in self.tags]
         super().save(*args, **kwargs)
 
-    def get_likes_count(self):
-        return self.actions.filter_action_by('LIK').count()
-
-    def get_dislikes_count(self):
-        return self.actions.filter_action_by('DSL').count()
+    def get_reaction_count(self, reaction):
+        return self.reactions.filter_reaction_by(reaction).count()
 
     def __str__(self):
         return self.title
@@ -173,6 +162,24 @@ class Thread(models.Model):
     def get_like_url(self):
         return reverse(
             'sleekforum:threads:like_thread',
+            kwargs=self.get_kwargs()
+        )
+
+    def get_sad_url(self):
+        return reverse(
+            'sleekforum:threads:sad_thread',
+            kwargs=self.get_kwargs()
+        )
+
+    def get_wow_url(self):
+        return reverse(
+            'sleekforum:threads:wow_thread',
+            kwargs=self.get_kwargs()
+        )
+
+    def get_funny_url(self):
+        return reverse(
+            'sleekforum:threads:funny_thread',
             kwargs=self.get_kwargs()
         )
 

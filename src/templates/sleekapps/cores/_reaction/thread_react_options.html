@@ -1,0 +1,59 @@
+{% load static %}
+
+<!-- REACTION OPTIONS -->
+<div class="reaction-options reaction-options-dropdown">
+    <!-- REACTION OPTION -->
+    <div class="reaction-option text-tooltip-tft" data-title="Like">
+        <!-- REACTION OPTION IMAGE -->
+        <a href="{{ thread.get_like_url }}">
+            <img class="reaction-option-image" src="{% static 'img/reaction/like.png' %}"
+                 alt="reaction-like">
+        </a>
+        <!-- /REACTION OPTION IMAGE -->
+    </div>
+    <!-- /REACTION OPTION -->
+
+    <!-- REACTION OPTION -->
+    <div class="reaction-option text-tooltip-tft" data-title="Dislike">
+        <!-- REACTION OPTION IMAGE -->
+        <a href="{{ thread.get_dislike_url }}">
+            <img class="reaction-option-image" src="{% static 'img/reaction/dislike.png' %}"
+                 alt="reaction-dislike">
+        </a>
+        <!-- /REACTION OPTION IMAGE -->
+    </div>
+    <!-- /REACTION OPTION -->
+
+
+    <!-- REACTION OPTION -->
+    <div class="reaction-option text-tooltip-tft" data-title="Funny">
+        <!-- REACTION OPTION IMAGE -->
+        <a href="{{ thread.get_funny_url }}">
+            <img class="reaction-option-image" src="{% static 'img/reaction/funny.png' %}"
+                 alt="reaction-funny">
+        </a>
+        <!-- /REACTION OPTION IMAGE -->
+    </div>
+    <!-- /REACTION OPTION -->
+
+    <!-- REACTION OPTION -->
+    <div class="reaction-option text-tooltip-tft" data-title="Wow">
+        <!-- REACTION OPTION IMAGE -->
+        <a href="{{ thread.get_wow_url }}">
+            <img class="reaction-option-image" src="{% static 'img/reaction/wow.png' %}" alt="reaction-wow">
+        </a>
+        <!-- /REACTION OPTION IMAGE -->
+    </div>
+    <!-- /REACTION OPTION -->
+
+    <!-- REACTION OPTION -->
+    <div class="reaction-option text-tooltip-tft" data-title="Sad">
+        <!-- REACTION OPTION IMAGE -->
+        <a href="{{ thread.get_sad_url }}">
+            <img class="reaction-option-image" src="{% static 'img/reaction/sad.png' %}" alt="reaction-sad">
+        </a>
+        <!-- /REACTION OPTION IMAGE -->
+    </div>
+    <!-- /REACTION OPTION -->
+</div>
+<!-- /REACTION OPTIONS -->

@@ -1,11 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect
-from django.urls import reverse
-from django.views import View
 from django.core.exceptions import ImproperlyConfigured, FieldDoesNotExist
-from django.views.generic.detail import SingleObjectMixin
-
-# from ...miscs.viewmixins.activity import BaseActivityActionView
+from ...activity.viewmixins.reaction import ReactionView
 
 
 class BooleanObjectMixin:
@@ -26,7 +21,8 @@ class BooleanObjectMixin:
         """Validate boolean field to check if it exists on specified model"""
         fields = [field.name for field in self.model._meta.get_fields()]
         if boolean_field not in fields:
-            raise FieldDoesNotExist('%(field_name)s does not seem to be a valid field on the supplied %(model)s' % {
+            raise FieldDoesNotExist('%(field_name)s does not seem to be a \
+            valid field on the supplied %(model)s' % {
                 'model': self.model._meta.model_name,
                 'field_name': self.boolean_field})
         else:
@@ -52,7 +48,7 @@ class BooleanObjectMixin:
         return obj
 
 
-# class LikeDislikeThreadMixin(LoginRequiredMixin, BaseActivityActionView):
-#     """
-#     This view mixin is used in thread_misc module
-#     """
+class ThreadReactionMixin(LoginRequiredMixin, ReactionView):
+    """
+    This view mixin is used in thread_misc module
+    """

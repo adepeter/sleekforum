@@ -137,8 +137,7 @@
 
                                     {% if request.user.is_superuser %}
                                     <!-- SIMPLE DROPDOWN LINK -->
-                                    <a href="{{ thread.get_delete_url }}" class="dropdown-navigation-link">Delete
-                                        thread</a>
+                                    <a href="{{ thread.get_delete_url }}" class="dropdown-navigation-link">Delete thread</a>
                                     <!-- /SIMPLE DROPDOWN LINK -->
 
                                     <!-- SIMPLE DROPDOWN LINK -->
@@ -152,8 +151,7 @@
                                     <!-- /SIMPLE DROPDOWN LINK -->
 
                                     <!-- SIMPLE DROPDOWN LINK -->
-                                    <a href="{{ thread.get_toggle_hide_url }}" class="dropdown-navigation-link">Hide
-                                        thread</a>
+                                    <a href="{{ thread.get_toggle_hide_url }}" class="dropdown-navigation-link">Hide thread</a>
                                     <!-- /SIMPLE DROPDOWN LINK -->
 
                                     {% endif %}
@@ -165,7 +163,6 @@
                                     <!-- SIMPLE DROPDOWN LINK -->
                                     <a class="dropdown-navigation-link">Report Author</a>
                                     <!-- /SIMPLE DROPDOWN LINK -->
-                                    {% endif %}
 
                                 </div>
                                 <!-- /SIMPLE DROPDOWN -->
@@ -173,6 +170,7 @@
                             <!-- /POST SETTINGS WRAP -->
                         </div>
                         <!-- /WIDGET BOX SETTINGS -->
+                        {% endif %}
                     </div>
                     <!-- /FORUM POST META -->
 
@@ -303,6 +301,7 @@
                             <p class="forum-post-user-text">{{ thread.starter.signature }}</p>
                             <!-- /FORUM POST USER TITLE -->
 
+
                         </div>
                         <!-- /FORUM POST USER -->
 
@@ -340,6 +339,13 @@
 
                         <!-- FORUM POST ACTIONS -->
                         <div class="forum-post-actions">
+
+                            <!-- FORUM POST ACTION -->
+
+                            <p class="forum-post-action light reaction-options-dropdown-trigger">React!</p>
+                            {% include 'cores/_reaction/thread_react_options.html' %}
+                            <!-- /FORUM POST ACTION -->
+
                             <!-- FORUM POST ACTION -->
                             <p class="forum-post-action light">Report</p>
                             <!-- /FORUM POST ACTION -->

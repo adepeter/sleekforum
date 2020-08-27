@@ -2,6 +2,8 @@ from django.db.models import F
 from django.dispatch import receiver, Signal
 from django.db.models.signals import post_save
 
+from violation.signals import report_handler
+
 # from ..miscs.models.activity import Action
 # from ..miscs.signals.activity import activity_updater
 

@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'violation',
 
     # sleekforum apps
+    'sleekapps.activity.apps.ActivityConfig',
     'sleekapps.categories.apps.CategoriesConfig',
     'sleekapps.cores.apps.CoreConfig',
     'sleekapps.home.apps.HomeConfig',
