@@ -19,3 +19,7 @@ class Setting(Configuration):
         help_text=_('message after successful registration'),
         blank=True
     )
+    allow_registration = models.BooleanField(default=True)
+    captcha = models.BooleanField(default=False, help_text=_('Turn on/off captcha on pages'))
+    threads_per_page = models.PositiveSmallIntegerField(default=10)
+    posts_per_thread = models.PositiveSmallIntegerField(default=10)

@@ -21,7 +21,7 @@
                 <!-- USER STATUS AVATAR -->
                 <a class="user-status-avatar" href="profile-timeline.html">
                     <!-- USER AVATAR -->
-                    <div class="user-avatar small no-outline">
+                    <div class="user-avatar small no-outline {{ request.user.online }}">
                         <!-- USER AVATAR CONTENT -->
                         <div class="user-avatar-content">
                             <!-- HEXAGON -->
@@ -65,7 +65,7 @@
                             <!-- /USER AVATAR BADGE CONTENT -->
 
                             <!-- USER AVATAR BADGE TEXT -->
-                            <p class="user-avatar-badge-text">24</p>
+                            <p class="user-avatar-badge-text">{{ request.user.posts.count }}</p>
                             <!-- /USER AVATAR BADGE TEXT -->
                         </div>
                         <!-- /USER AVATAR BADGE -->

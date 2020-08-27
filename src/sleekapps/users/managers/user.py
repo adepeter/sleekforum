@@ -28,14 +28,14 @@ class UserManager(BaseUserManager):
         return user
 
     def create_user(self, email, username=None, password=None, **extra_fields):
-        extra_fields.setdefault('is_staff', False)
+        extra_fields.setdefault('is_admin', False)
         extra_fields.setdefault('is_superuser', False)
         return self._create_user(email, username, password, **extra_fields)
 
     def create_superuser(self, email, username, password=None, **extra_fields):
-        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_admin', True)
         extra_fields.setdefault('is_superuser', True)
-        if extra_fields.get('is_staff') is not True:
+        if extra_fields.get('is_admin') is not True:
             raise ValueError(_("Please set 'is_staff' as True"))
         if extra_fields.get('is_superuser') is not True:
             raise ValueError(_("Please set 'is_superuser' as True"))

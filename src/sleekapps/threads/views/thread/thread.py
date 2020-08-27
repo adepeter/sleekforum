@@ -2,8 +2,8 @@ import datetime
 
 from django.contrib import messages
 from django.contrib.auth import get_user_model
+from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Count
-from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -15,7 +15,11 @@ from django.utils import timezone
 from ....categories.models import Category
 
 from ...forms.post.post import PostForm
-from ...forms.thread.thread import ThreadCreationForm, AdminThreadEditForm
+from ...forms.thread.thread import (
+    ThreadCreationForm,
+    ThreadEditForm,
+    AdminThreadEditForm,
+)
 
 from ...models import Thread
 
@@ -61,12 +65,13 @@ class CreateThread(CreateView):
         return super().form_valid(form)
 
 
-class ReadThread(MultipleObjectMixin, CreateView):
+class ReadThread(MultipleObjectMixin, SuccessMessageMixin, CreateView):
     query_pk_and_slug = True
     form_class = PostForm
-    paginate_by = 5
+    paginate_by = 1
     template_name = f'{TEMPLATE_URL}/read_thread.html'
     context_object_name = 'posts'
+    success_message = _('Your post was successfully added')
 
     def get(self, request, *args, **kwargs):
         self.thread = self.get_object()
@@ -86,20 +91,30 @@ class ReadThread(MultipleObjectMixin, CreateView):
         self.object_list = self.get_queryset()
         return super().post(request, *args, **kwargs)
 
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
     def get_queryset(self):
         return self.thread.posts.all()
 
     def get_context_data(self, **kwargs):
-        context = super(ReadThread, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['thread'] = self.thread
-        context['liked_by'] = [liked_by.user for liked_by in self.thread.actions.filter_action_by('LIK')]
-        context['disliked_by'] = [disliked_by.user for disliked_by in self.thread.actions.filter_action_by('DSL')]
+        # context['liked_by'] = [liked_by.user for liked_by in self.thread.actions.filter_action_by('LIK')]
+        # context['disliked_by'] = [disliked_by.user for disliked_by in self.thread.actions.filter_action_by('DSL')]
         return context
 
     def form_valid(self, form):
         form.instance.thread = self.thread
         form.instance.user = self.request.user
         return super().form_valid(form)
+
+    def form_invalid(self, form):
+        msg = _('There seem to be an error with the reply your trying to submit')
+        messages.error(self.request, msg)
+        return super().form_invalid(form)
 
     def get_success_url(self):
         page_kwargs = self.request.GET.get(self.page_kwarg)
@@ -112,77 +127,72 @@ class ReadThread(MultipleObjectMixin, CreateView):
             context = self.get_context_data()
             paginator = context['paginator']
             num_pages = paginator.num_pages
-            return reverse('flyapps:threads:read_thread', kwargs=kwargs) + '?%(page_kwargs)s=%(last_page)d' % {
-                'page_kwargs': self.page_kwarg,
-                'last_page': num_pages
-            }
+            return reverse(
+                'sleekforum:threads:read_thread',
+                kwargs=kwargs
+            ) + '?%(page_kwargs)s=%(last_page)d' % {
+                       'page_kwargs': self.page_kwarg,
+                       'last_page': num_pages
+                   }
         return super().get_success_url()
-#
-#
-# class EditThread(UpdateView):
-#     model = Thread
-#     form_class = ThreadEditForm
-#     query_pk_and_slug = True
-#     template_name = f'{TEMPLATE_URL}/edit_thread.html'
-#
-#     def get_queryset(self):
-#         qs = super().get_queryset()
-#         return qs.filter(category__slug__iexact=self.kwargs['category_slug'])
-#
-#     def get_form_kwargs(self):
-#         kwargs = super().get_form_kwargs()
-#         kwargs['thread'] = self.object
-#         kwargs['request'] = self.request
-#         return kwargs
-#
-#     def dispatch(self, request, *args, **kwargs):
-#         thread = self.get_object()
-#         if thread.starter != self.request.user:
-#             return render(request, 'flyapps/threads/auth/unauthorised_edit.html')
-#         return super().dispatch(request, *args, **kwargs)
-#
-#
-# class DeleteThread(DeleteView):
-#     model = Thread
-#
-#     def get_success_url(self):
-#         kwargs = {
-#             'category': self.kwargs['category_slug']
-#         }
-#         return reverse('flyapps:threads:list_threads', kwargs=kwargs)
-#
-#
-# class ListNewestThread(ListView):
-#     model = Thread
-#     template_name = f'{TEMPLATE_URL}/newest_threads.html'
-#     paginate_by = 10
-#     context_object_name = 'threads'
-#
-#     def get(self, request, *args, **kwargs):
-#         messages.info(
-#             self.request,
-#             _('Dear %(login)s, you are viewing newest threads that were created 7days ago') % {
-#                 'login': self.request.user.username if self.request.user.is_authenticated else 'guest'
-#             }
-#         )
-#         return super().get(request, *args, **kwargs)
-#
-#     def get_queryset(self):
-#         return self.model._meta.default_manager.unhidden_threads(
-#             created__gte=timezone.now() - datetime.timedelta(days=7)
-#         )
-#
-#
-# class ListTrendingThread(ListView):
-#     model = Thread
-#     template_name = f'{TEMPLATE_URL}/trending_threads.html'
-#     paginate_by = 10
-#     context_object_name = 'threads'
-#
-#     def get_queryset(self):
-#         qs = super().get_queryset()
-#         return qs.annotate(
-#             num_of_hidden_posts=Count('posts__is_hidden')
-#         ).exclude(
-#             num_of_hidden_posts__gte=10
-#         ).order_by('-pin', '-num_of_hidden_posts')[:100]
+
+
+class EditThread(SuccessMessageMixin, UpdateView):
+    model = Thread
+    form_class = ThreadEditForm
+    query_pk_and_slug = True
+    template_name = f'{TEMPLATE_URL}/edit_thread.html'
+    success_message = _('%(title)s was successfully modified')
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.filter(
+            category__slug__iexact=self.kwargs['category_slug'],
+            starter=self.request.user
+        )
+
+
+class DeleteThread(DeleteView):
+    model = Thread
+
+    def get_success_url(self):
+        kwargs = {
+            'category': self.kwargs['category_slug']
+        }
+        return reverse('flyapps:threads:list_threads', kwargs=kwargs)
+
+
+class ListNewestThread(ListView):
+    model = Thread
+    template_name = f'{TEMPLATE_URL}/newest_threads.html'
+    paginate_by = 10
+    context_object_name = 'threads'
+
+    def get(self, request, *args, **kwargs):
+        messages.info(
+            self.request,
+            _('Dear %(login)s, you are viewing newest threads that were created 7days ago') % {
+                'login': self.request.user.username if self.request.user.is_authenticated else 'guest'
+            }
+        )
+        return super().get(request, *args, **kwargs)
+
+    def get_queryset(self):
+        return self.model._meta.default_manager.unhidden_threads(
+            created__gte=timezone.now() - datetime.timedelta(days=7)
+        )
+
+
+class ListTrendingThread(ListView):
+    model = Thread
+    template_name = f'{TEMPLATE_URL}/trending_threads.html'
+    paginate_by = 10
+    context_object_name = 'threads'
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.annotate(
+            num_of_hidden_posts=Count('posts__is_hidden')
+        ).exclude(
+            num_of_hidden_posts__gte=10
+        ).order_by('-pin', '-num_of_hidden_posts')[:100]

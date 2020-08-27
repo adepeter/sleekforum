@@ -10,6 +10,8 @@ from violation.models import Violation
 
 from ...managers.thread import ThreadManager
 
+limit_choices_to = models.Q(is_lock=False)
+
 
 class Thread(models.Model):
     PIN_DEFAULT = 0
@@ -45,7 +47,8 @@ class Thread(models.Model):
         'categories.Category',
         verbose_name=_('category'),
         on_delete=models.CASCADE,
-        related_name='threads'
+        related_name='threads',
+        limit_choices_to=limit_choices_to
     )
     title = models.CharField(
         verbose_name=_('title'),
@@ -53,9 +56,11 @@ class Thread(models.Model):
         unique=True
     )
     tags = ArrayField(
-        models.SlugField(),
+        models.CharField(max_length=30),
         blank=True,
-        null=True
+        null=True,
+        size=8,
+        help_text=_('Thread tags separated by comma')
     )
     pin = models.IntegerField(
         verbose_name=_('pin thread'),
@@ -112,6 +117,7 @@ class Thread(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
+        self.tags = [slugify(tag) for tag in self.tags]
         super().save(*args, **kwargs)
 
     def get_likes_count(self):
@@ -124,12 +130,6 @@ class Thread(models.Model):
         return self.title
 
     class Meta:
-        constraints = [
-            models.UniqueConstraint(
-                fields=['title'],
-                name='unique_title_on_thread'
-            )
-        ]
         indexes = [
             models.Index(
                 fields=['id', 'slug'],
@@ -188,13 +188,13 @@ class Thread(models.Model):
             kwargs=self.get_kwargs()
         )
 
-    def toggle_hide(self):
+    def get_toggle_hide_url(self):
         return reverse(
             'sleekforum:threads:toggle_hide_thread',
             kwargs=self.get_kwargs()
         )
 
-    def toggle_lock(self):
+    def get_toggle_lock_url(self):
         return reverse(
             'sleekforum:threads:toggle_lock_thread',
             kwargs=self.get_kwargs()

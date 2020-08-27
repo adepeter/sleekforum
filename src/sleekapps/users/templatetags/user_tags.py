@@ -13,7 +13,7 @@ register = template.Library()
 def get_users_with_highest_post(number_of_users=10):
     query = User.objects.annotate(
             posts_count=Count('posts')
-        ).values('avatar', 'posts_count').exclude(
+        ).exclude(
         posts_count__lt=1
     ).order_by('-posts_count')
     try:

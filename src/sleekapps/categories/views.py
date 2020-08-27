@@ -41,35 +41,20 @@ class ChildrenCategoryListView(CategoryQuerysetMixin, ListView):
         return super().dispatch(request, *args, **kwargs)
 
 
-class ListDescendantCategoryThread(CategoryQuerysetMixin):
+class ListDescendantCategoryThread(CategoryQuerysetMixin, ListView):
+    """
+    Returns all threads within a parent category
+    """
     model = Thread
     template_name = f'{TEMPLATE_URL}/thread_list.html'
     context_object_name = 'threads'
+    paginate_by = 10
 
     def get_queryset(self):
+        qs = super().get_queryset()
         parent_node_obj = self.get_parent_node_obj()
-        qs = self.model.objects.filter(
+        qs = qs.filter(
             category__in=parent_node_obj.get_descendants(include_self=True),
             is_hidden=False,
         )
         return qs
-
-
-class SearchCategory(ListView):
-    model = Category
-    template_name = f'{TEMPLATE_URL}/search_category.html'
-    context_object_name = 'categories'
-
-    def get(self, request, *args, **kwargs):
-        self.keyword = self.request.GET.get('keyword')
-        return super().get(request, *args, **kwargs)
-
-    def get_queryset(self):
-        qs = super().get_queryset()
-        if self.request.GET:
-            return qs.filter(
-                Q(name__iexact=self.request.GET.get('keyword')) |
-                Q(description__icontains=self.request.GET.get('keyword')) |
-                Q(slug__iexact=self.request.GET.get('keyword'))
-            )
-        return qs.none()

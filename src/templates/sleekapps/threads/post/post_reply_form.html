@@ -1,0 +1,78 @@
+<!-- QUICK POST -->
+<div class="quick-post medium">
+    <!-- QUICK POST HEADER -->
+    <div class="quick-post-header">
+        <!-- QUICK POST HEADER TITLE -->
+        <p class="quick-post-header-title">Leave a Reply</p>
+        <!-- /QUICK POST HEADER TITLE -->
+    </div>
+    <!-- /QUICK POST HEADER -->
+
+    <form method="POST" action="{% url 'sleekforum:threads:read_thread' thread.category.slug thread.id thread.slug %}">
+        <!-- QUICK POST BODY -->
+        <div class="quick-post-body">
+            <!-- FORM -->
+            <div class="form">
+                <!-- FORM ROW -->
+                {% csrf_token %}
+                <div class="form-row">
+                    <!-- FORM ITEM -->
+                    <div class="form-item">
+                        <!-- FORM TEXTAREA -->
+                        <div class="form-textarea">{{ form.content }}</div>
+                        <!-- /FORM TEXTAREA -->
+                    </div>
+                    <!-- /FORM ITEM -->
+                </div>
+                <!-- /FORM ROW -->
+            </div>
+            <!-- /FORM -->
+        </div>
+        <!-- /QUICK POST BODY -->
+
+        {% if request.user.is_authenticated %}
+        <!-- QUICK POST FOOTER -->
+        <div class="quick-post-footer">
+            <!-- QUICK POST FOOTER ACTIONS -->
+            <div class="quick-post-footer-actions">
+                <!-- QUICK POST FOOTER ACTION -->
+                <div class="quick-post-footer-action text-tooltip-tft-medium" data-title="Insert Photo">
+                    <!-- QUICK POST FOOTER ACTION ICON -->
+                    <svg class="quick-post-footer-action-icon icon-camera">
+                        <use xlink:href="#svg-camera"></use>
+                    </svg>
+                    <!-- /QUICK POST FOOTER ACTION ICON -->
+                </div>
+                <!-- /QUICK POST FOOTER ACTION -->
+
+
+                <!-- QUICK POST FOOTER ACTION -->
+                <div class="quick-post-footer-action text-tooltip-tft-medium" data-title="Insert GIF">
+                    <!-- QUICK POST FOOTER ACTION ICON -->
+                    <svg class="quick-post-footer-action-icon icon-gif">
+                        <use xlink:href="#svg-gif"></use>
+                    </svg>
+                    <!-- /QUICK POST FOOTER ACTION ICON -->
+                </div>
+                <!-- /QUICK POST FOOTER ACTION -->
+                <small class="text-danger">{{ form.content.errors }}</small>
+            </div>
+            <!-- /QUICK POST FOOTER ACTIONS -->
+
+            <!-- QUICK POST FOOTER ACTIONS -->
+            <div class="quick-post-footer-actions">
+                <!-- BUTTON -->
+                <p class="button void">Discard</p>
+                <!-- /BUTTON -->
+
+                <!-- BUTTON -->
+                <button type="submit" class="button secondary">Post Reply</button>
+                <!-- /BUTTON -->
+            </div>
+            <!-- /QUICK POST FOOTER ACTIONS -->
+        </div>
+        <!-- /QUICK POST FOOTER -->
+        {% endif %}
+    </form>
+</div>
+<!-- /QUICK POST -->

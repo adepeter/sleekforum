@@ -1,0 +1,220 @@
+{% load cores_util_tags %}
+
+{% for post in posts %}
+{% with post.children.all as replies %}
+<div class="section-pager-bar-wrap">
+    <!-- WIDGET BOX -->
+    <div class="widget-box no-padding">
+        <!-- WIDGET BOX SETTINGS -->
+        <div class="widget-box-settings">
+            <!-- POST SETTINGS WRAP -->
+            <div class="post-settings-wrap">
+                <!-- POST SETTINGS -->
+                <div class="post-settings widget-box-post-settings-dropdown-trigger">
+                    <!-- POST SETTINGS ICON -->
+                    <svg class="post-settings-icon icon-more-dots">
+                        <use xlink:href="#svg-more-dots"></use>
+                    </svg>
+                    <!-- /POST SETTINGS ICON -->
+                </div>
+                <!-- /POST SETTINGS -->
+
+                <!-- SIMPLE DROPDOWN -->
+                <div class="simple-dropdown widget-box-post-settings-dropdown">
+                    <!-- SIMPLE DROPDOWN LINK -->
+                    <p class="simple-dropdown-link">Edit Post</p>
+                    <!-- /SIMPLE DROPDOWN LINK -->
+
+                    <!-- SIMPLE DROPDOWN LINK -->
+                    <p class="simple-dropdown-link">Delete Post</p>
+                    <!-- /SIMPLE DROPDOWN LINK -->
+
+                    <!-- SIMPLE DROPDOWN LINK -->
+                    <p class="simple-dropdown-link">Hide post</p>
+                    <!-- /SIMPLE DROPDOWN LINK -->
+
+                    <!-- SIMPLE DROPDOWN LINK -->
+                    <p class="simple-dropdown-link">Report user</p>
+                    <!-- /SIMPLE DROPDOWN LINK -->
+
+                    <!-- SIMPLE DROPDOWN LINK -->
+                    <p class="simple-dropdown-link">Report Post</p>
+                    <!-- /SIMPLE DROPDOWN LINK -->
+                </div>
+                <!-- /SIMPLE DROPDOWN -->
+            </div>
+            <!-- /POST SETTINGS WRAP -->
+        </div>
+        <!-- /WIDGET BOX SETTINGS -->
+
+        <!-- WIDGET BOX STATUS -->
+        <div class="widget-box-status">
+            <!-- WIDGET BOX STATUS CONTENT -->
+            <div class="widget-box-status-content">
+                <!-- USER STATUS -->
+                <div class="user-status">
+                    <!-- USER STATUS AVATAR -->
+                    <a class="user-status-avatar" href="profile-timeline.html">
+                        <!-- USER AVATAR -->
+                        <div class="user-avatar small no-outline {{ post.user.online }}">
+                            <!-- USER AVATAR CONTENT -->
+                            <div class="user-avatar-content">
+                                <!-- HEXAGON -->
+                                <div class="hexagon-image-30-32" data-src="{{ post.user.get_avatar }}"></div>
+                                <!-- /HEXAGON -->
+                            </div>
+                            <!-- /USER AVATAR CONTENT -->
+
+                            <!-- USER AVATAR PROGRESS -->
+                            <div class="user-avatar-progress">
+                                <!-- HEXAGON -->
+                                <div class="hexagon-progress-40-44"></div>
+                                <!-- /HEXAGON -->
+                            </div>
+                            <!-- /USER AVATAR PROGRESS -->
+
+                            <!-- USER AVATAR PROGRESS BORDER -->
+                            <div class="user-avatar-progress-border">
+                                <!-- HEXAGON -->
+                                <div class="hexagon-border-40-44"></div>
+                                <!-- /HEXAGON -->
+                            </div>
+                            <!-- /USER AVATAR PROGRESS BORDER -->
+
+                            <!-- USER AVATAR BADGE -->
+                            <div class="user-avatar-badge">
+                                <!-- USER AVATAR BADGE BORDER -->
+                                <div class="user-avatar-badge-border">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-22-24"></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR BADGE BORDER -->
+
+                                <!-- USER AVATAR BADGE CONTENT -->
+                                <div class="user-avatar-badge-content">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-dark-16-18"></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR BADGE CONTENT -->
+
+                                <!-- USER AVATAR BADGE TEXT -->
+                                <p class="user-avatar-badge-text">{{ post.user.post_count | length }}</p>
+                                <!-- /USER AVATAR BADGE TEXT -->
+                            </div>
+                            <!-- /USER AVATAR BADGE -->
+                        </div>
+                        <!-- /USER AVATAR -->
+                    </a>
+                    <!-- /USER STATUS AVATAR -->
+
+                    <!-- USER STATUS TITLE -->
+                    <p class="user-status-title medium">
+                        <a class="bold" href="profile-timeline.html">{{ post.user.get_display_name }}</a>
+                    </p>
+                    <!-- /USER STATUS TITLE -->
+
+                    <!-- USER STATUS TEXT -->
+                    <p class="user-status-text small">{{ post.created | time_ago }}</p>
+                    <!-- /USER STATUS TEXT -->
+                </div>
+                <!-- /USER STATUS -->
+
+                <!-- WIDGET BOX STATUS TEXT -->
+                <p class="widget-box-status-text">{{ post.content | linebreaksbr }}</p>
+                <!-- /WIDGET BOX STATUS TEXT -->
+
+                <!-- CONTENT ACTIONS -->
+                <div class="content-actions">
+                    <!-- CONTENT ACTION -->
+                    <div class="content-action">
+                        {% include 'cores/_reaction/reacted_users.html' %}
+                    </div>
+                    <!-- /CONTENT ACTION -->
+
+                    <!-- CONTENT ACTION -->
+                    <div class="content-action">
+                        <!-- META LINE -->
+                        <div class="meta-line">
+                            <!-- META LINE LINK -->
+                            <p class="meta-line-link">{{ replies.all | length }} Replies</p>
+                            <!-- /META LINE LINK -->
+                        </div>
+                        <!-- /META LINE -->
+
+                        <!-- META LINE -->
+                        <div class="meta-line">
+                            <!-- META LINE TEXT -->
+                            <p class="meta-line-text">0 Violates</p>
+                            <!-- /META LINE TEXT -->
+                        </div>
+                        <!-- /META LINE -->
+                    </div>
+                    <!-- /CONTENT ACTION -->
+                </div>
+                <!-- /CONTENT ACTIONS -->
+            </div>
+            <!-- /WIDGET BOX STATUS CONTENT -->
+        </div>
+        <!-- /WIDGET BOX STATUS -->
+
+        <!-- POST OPTIONS -->
+        <div class="post-options">
+            <!-- POST OPTION WRAP -->
+            <div class="post-option-wrap">
+                <!-- POST OPTION -->
+                <div class="post-option reaction-options-dropdown-trigger">
+                    <!-- POST OPTION ICON -->
+                    <svg class="post-option-icon icon-thumbs-up">
+                        <use xlink:href="#svg-thumbs-up"></use>
+                    </svg>
+                    <!-- /POST OPTION ICON -->
+
+                    <!-- POST OPTION TEXT -->
+                    <p class="post-option-text">React!</p>
+                    <!-- /POST OPTION TEXT -->
+                </div>
+                <!-- /POST OPTION -->
+
+                {% include 'cores/_reaction/react_options.html' %}
+
+
+            </div>
+            <!-- /POST OPTION WRAP -->
+
+            <!-- POST OPTION -->
+            <div class="post-option">
+                <!-- POST OPTION ICON -->
+                <svg class="post-option-icon icon-comment">
+                    <use xlink:href="#svg-comment"></use>
+                </svg>
+                <!-- /POST OPTION ICON -->
+
+                <!-- POST OPTION TEXT -->
+                <p class="post-option-text">Reply</p>
+                <!-- /POST OPTION TEXT -->
+            </div>
+            <!-- /POST OPTION -->
+
+            <!-- POST OPTION -->
+            <div class="post-option">
+                <!-- POST OPTION ICON -->
+                <svg class="post-option-icon icon-share">
+                    <use xlink:href="#svg-share"></use>
+                </svg>
+                <!-- /POST OPTION ICON -->
+
+                <!-- POST OPTION TEXT -->
+                <p class="post-option-text">Share</p>
+                <!-- /POST OPTION TEXT -->
+            </div>
+            <!-- /POST OPTION -->
+        </div>
+        <!-- /POST OPTIONS -->
+    </div>
+    <!-- /WIDGET BOX -->
+
+</div>
+{% endwith %}
+{% endfor %}

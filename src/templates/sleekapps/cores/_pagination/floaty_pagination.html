@@ -1,33 +1,31 @@
 {% if forloop.counter == 1 %}
 <!-- PAGE ITEMS -->
 <div class="page-items">
-    <!-- PAGE ITEM -->
-    <a class="page-item" href="forums-discussion.html">01</a>
-    <!-- /PAGE ITEM -->
 
+    {% if page_obj.number|add:'-4' > 1 %}
     <!-- PAGE ITEM -->
-    <a class="page-item" href="forums-discussion.html">02</a>
+    <a class="page-item" href="?page={{ page_obj.number|add:'-5' }}">&hellip;</a>
     <!-- /PAGE ITEM -->
+    {% endif %}
 
+    {% for i in page_obj.paginator.page_range %}
+    {% if page_obj.number == i %}
     <!-- PAGE ITEM -->
-    <a class="page-item" href="forums-discussion.html">03</a>
+    <p class="page-item void">{{ i }}</p>
     <!-- /PAGE ITEM -->
+    {% elif i > page_obj.number|add:'-5' and i < page_obj.number|add:'5' %}
+    <!-- PAGE ITEM -->
+    <a class="page-item" href="?page={{ i }}">{{ i }}</a>
+    <!-- /PAGE ITEM -->
+    {% endif %}
+    {% endfor %}
 
+    {% if page_obj.paginator.num_pages > page_obj.number|add:'4' %}
     <!-- PAGE ITEM -->
-    <p class="page-item void">...</p>
+    <a class="page-item" href="?page={{ page_obj.number|add:'5' }}">&hellip;</a>
     <!-- /PAGE ITEM -->
+    {% endif %}
 
-    <!-- PAGE ITEM -->
-    <a class="page-item" href="forums-discussion.html">44</a>
-    <!-- /PAGE ITEM -->
-
-    <!-- PAGE ITEM -->
-    <a class="page-item" href="forums-discussion.html">45</a>
-    <!-- /PAGE ITEM -->
-
-    <!-- PAGE ITEM -->
-    <a class="page-item" href="forums-discussion.html">46</a>
-    <!-- /PAGE ITEM -->
 </div>
 <!-- /PAGE ITEMS -->
 {% endif %}

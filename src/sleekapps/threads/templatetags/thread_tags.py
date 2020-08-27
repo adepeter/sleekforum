@@ -9,7 +9,7 @@ def threads_in_category(category, include_self=True):
     return get_category_threads_queryset(category, include_self)
 
 @register.simple_tag(name='threads_in_category_count')
-def get_threads_in_category_by_count(threads, count, include_self=True):
+def threads_in_category_by_count(threads, count, include_self=True):
     try:
         return threads[count]
     except IndexError:

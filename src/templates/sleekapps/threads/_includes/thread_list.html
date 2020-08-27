@@ -53,42 +53,10 @@
                 <!-- DISCUSSION PREVIEW -->
                 <div class="discussion-preview {% if thread.pin %}pinned{% endif %}">
                     <!-- DISCUSSION PREVIEW TITLE -->
-                    <a class="discussion-preview-title" href="forums-discussion.html">{{ thread.title }}</a>
+                    <a class="discussion-preview-title" href="{{ thread.get_absolute_url }}">{{ thread.title }}</a>
                     <!-- /DISCUSSION PREVIEW TITLE -->
 
-                    {% if forloop.counter == 1 %}
-                    <!-- PAGE ITEMS -->
-                    <div class="page-items">
-                        <!-- PAGE ITEM -->
-                        <a class="page-item" href="forums-discussion.html">01</a>
-                        <!-- /PAGE ITEM -->
-
-                        <!-- PAGE ITEM -->
-                        <a class="page-item" href="forums-discussion.html">02</a>
-                        <!-- /PAGE ITEM -->
-
-                        <!-- PAGE ITEM -->
-                        <a class="page-item" href="forums-discussion.html">03</a>
-                        <!-- /PAGE ITEM -->
-
-                        <!-- PAGE ITEM -->
-                        <p class="page-item void">...</p>
-                        <!-- /PAGE ITEM -->
-
-                        <!-- PAGE ITEM -->
-                        <a class="page-item" href="forums-discussion.html">44</a>
-                        <!-- /PAGE ITEM -->
-
-                        <!-- PAGE ITEM -->
-                        <a class="page-item" href="forums-discussion.html">45</a>
-                        <!-- /PAGE ITEM -->
-
-                        <!-- PAGE ITEM -->
-                        <a class="page-item" href="forums-discussion.html">46</a>
-                        <!-- /PAGE ITEM -->
-                    </div>
-                    <!-- /PAGE ITEMS -->
-                    {% endif %}
+                    {% include 'cores/_pagination/floaty_pagination.html' with page_obj=page_obj %}
 
                     <!-- DISCUSSION PREVIEW META -->
                     <div class="discussion-preview-meta">
@@ -137,7 +105,7 @@
             <!-- TABLE COLUMN -->
             <div class="table-column padded-big-left">
                 <!-- USER STATUS -->
-                {% if post is not None %}
+                {% if post %}
                 <div class="user-status">
                     <!-- USER STATUS AVATAR -->
                     <a class="user-status-avatar" href="profile-timeline.html">

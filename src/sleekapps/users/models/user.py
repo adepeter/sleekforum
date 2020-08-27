@@ -55,6 +55,7 @@ class User(PermissionsMixin, AbstractBaseUser):
         blank=True
     )
     dob = models.DateField(
+        verbose_name=_('Date of Birth'),
         blank=True,
         null=True,
         help_text=_('Birth date in yyyy-mm-dd format')
@@ -96,8 +97,8 @@ class User(PermissionsMixin, AbstractBaseUser):
         blank=True,
         help_text=_('A short brief of you that will show in forum')
     )
-    is_staff = models.BooleanField(
-        verbose_name=_('Is staff'),
+    is_admin = models.BooleanField(
+        verbose_name=_('Is admin'),
         default=False
     )
     is_superuser = models.BooleanField(
@@ -175,6 +176,22 @@ class User(PermissionsMixin, AbstractBaseUser):
             )
         ]
         ordering = ['email', 'username']
+
+    def has_perm(self, perm, obj=None):
+        "Does the user have a specific permission?"
+        # Simplest possible answer: Yes, always
+        return True
+
+    def has_module_perms(self, app_label):
+        "Does the user have permissions to view the app `app_label`?"
+        # Simplest possible answer: Yes, always
+        return True
+
+    @property
+    def is_staff(self):
+        "Is the user a member of staff?"
+        # Simplest possible answer: All admins are staff
+        return self.is_admin
 
     @property
     def get_short_name(self):

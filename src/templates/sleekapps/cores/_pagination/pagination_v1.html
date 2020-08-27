@@ -1,61 +1,38 @@
+{% load cores_util_tags %}
+
 {% if is_paginated %}
 
 <!-- SECTION PAGER BAR -->
 <div class="section-pager-bar">
     <!-- SECTION PAGER -->
     <div class="section-pager">
+
+        {% for page_number in page_obj.paginator.page_range %}
+        {% if page_number == page_obj.number %}
         <!-- SECTION PAGER ITEM -->
         <div class="section-pager-item active">
             <!-- SECTION PAGER ITEM TEXT -->
-            <p class="section-pager-item-text">01</p>
+            <p class="section-pager-item-text">{{ page_number | unit_to_tens }}</p>
             <!-- /SECTION PAGER ITEM TEXT -->
         </div>
         <!-- /SECTION PAGER ITEM -->
-
+        {% elif page_number > page_obj.number|add:'0' and page_number < page_obj.number|add:'6' %}
         <!-- SECTION PAGER ITEM -->
         <div class="section-pager-item">
             <!-- SECTION PAGER ITEM TEXT -->
-            <p class="section-pager-item-text">02</p>
+            <a href="?page={{ page_number }}" class="section-pager-item-text">{{ page_number | unit_to_tens }}</a>
             <!-- /SECTION PAGER ITEM TEXT -->
         </div>
         <!-- /SECTION PAGER ITEM -->
+        {% endif %}
+        {% endfor %}
 
-        <!-- SECTION PAGER ITEM -->
-        <div class="section-pager-item">
-            <!-- SECTION PAGER ITEM TEXT -->
-            <p class="section-pager-item-text">03</p>
-            <!-- /SECTION PAGER ITEM TEXT -->
-        </div>
-        <!-- /SECTION PAGER ITEM -->
-
-        <!-- SECTION PAGER ITEM -->
-        <div class="section-pager-item">
-            <!-- SECTION PAGER ITEM TEXT -->
-            <p class="section-pager-item-text">04</p>
-            <!-- /SECTION PAGER ITEM TEXT -->
-        </div>
-        <!-- /SECTION PAGER ITEM -->
-
-        <!-- SECTION PAGER ITEM -->
-        <div class="section-pager-item">
-            <!-- SECTION PAGER ITEM TEXT -->
-            <p class="section-pager-item-text">05</p>
-            <!-- /SECTION PAGER ITEM TEXT -->
-        </div>
-        <!-- /SECTION PAGER ITEM -->
-
-        <!-- SECTION PAGER ITEM -->
-        <div class="section-pager-item">
-            <!-- SECTION PAGER ITEM TEXT -->
-            <p class="section-pager-item-text">06</p>
-            <!-- /SECTION PAGER ITEM TEXT -->
-        </div>
-        <!-- /SECTION PAGER ITEM -->
     </div>
     <!-- /SECTION PAGER -->
 
     <!-- SECTION PAGER CONTROLS -->
     <div class="section-pager-controls">
+        {% if page_obj.number == 1 %}
         <!-- SLIDER CONTROL -->
         <div class="slider-control left disabled">
             <!-- SLIDER CONTROL ICON -->
@@ -65,9 +42,21 @@
             <!-- /SLIDER CONTROL ICON -->
         </div>
         <!-- /SLIDER CONTROL -->
-
+        {% else %}
         <!-- SLIDER CONTROL -->
-        <div class="slider-control right">
+        <a href="?page=1" class="slider-control left">
+            <!-- SLIDER CONTROL ICON -->
+            <svg class="slider-control-icon icon-small-arrow">
+                <use xlink:href="#svg-small-arrow"></use>
+            </svg>
+            <!-- /SLIDER CONTROL ICON -->
+        </a>
+        <!-- /SLIDER CONTROL -->
+        {% endif %}
+
+        {% if page_obj.number == page_obj.paginator.num_pages %}
+        <!-- SLIDER CONTROL -->
+        <div class="slider-control right disabled">
             <!-- SLIDER CONTROL ICON -->
             <svg class="slider-control-icon icon-small-arrow">
                 <use xlink:href="#svg-small-arrow"></use>
@@ -75,9 +64,26 @@
             <!-- /SLIDER CONTROL ICON -->
         </div>
         <!-- /SLIDER CONTROL -->
+        {% else %}
+        <!-- SLIDER CONTROL -->
+        <a href="?page={{ page_obj.paginator.num_pages }}" class="slider-control right">
+            <!-- SLIDER CONTROL ICON -->
+            <svg class="slider-control-icon icon-small-arrow">
+                <use xlink:href="#svg-small-arrow"></use>
+            </svg>
+            <!-- /SLIDER CONTROL ICON -->
+        </a>
+        <!-- /SLIDER CONTROL -->
+        {% endif %}
+
     </div>
     <!-- /SECTION PAGER CONTROLS -->
 </div>
 <!-- /SECTION PAGER BAR -->
+<!-- SECTION RESULTS TEXT -->
+<p class="section-results-text">
+    Showing {{ page_obj.start_index }} - {{ page_obj.end_index }} of {{ page_obj.paginator.count }} {{ items }}
+</p>
+<!-- /SECTION RESULTS TEXT -->
 
 {% endif %}

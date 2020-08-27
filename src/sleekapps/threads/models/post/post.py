@@ -32,7 +32,7 @@ class Post(models.Model):
     parent = models.ForeignKey(
         'self',
         on_delete=models.DO_NOTHING,
-        related_name='+',
+        related_name='children',
         null=True,
         blank=True
     )
@@ -46,7 +46,7 @@ class Post(models.Model):
             'pk': self.thread.id
         }
         return reverse(
-            'flyapps:threads:read_thread',
+            'sleekforum:threads:read_thread',
             kwargs=kwargs
         ) + '?page=last'
 

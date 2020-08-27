@@ -1,0 +1,385 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load cores_util_tags %}
+{% load post_tags %}
+
+{% block title %}{{ thread.title }}{% endblock %}
+
+{% block content %}
+
+<!-- CONTENT GRID -->
+<div class="content-grid">
+    {% last_post thread as lastpost %}
+    <!-- SECTION BANNER -->
+    <div class="section-banner">
+        <!-- SECTION BANNER ICON -->
+        <img class="section-banner-icon" src="{% static 'img/banner/forums-icon.png' %}" alt="forums-icon">
+        <!-- /SECTION BANNER ICON -->
+
+        <!-- SECTION BANNER TITLE -->
+        <p class="section-banner-title">Forums</p>
+        <!-- /SECTION BANNER TITLE -->
+
+        <!-- SECTION BANNER TEXT -->
+        <p class="section-banner-text">Talk about anything! Gaming, music, comics and more!</p>
+        <!-- /SECTION BANNER TEXT -->
+    </div>
+    <!-- /SECTION BANNER -->
+
+    <!-- SECTION HEADER -->
+    <div class="section-header">
+        <!-- SECTION HEADER INFO -->
+        <div class="section-header-info">
+            <!-- SECTION PRETITLE -->
+            <p class="section-pretitle">Forum Discussion</p>
+            <!-- /SECTION PRETITLE -->
+
+            <!-- SECTION TITLE -->
+            <h2 class="section-title {% if thread.pin %}pinned{% endif %}">{{ thread.title }}</h2>
+            <!-- /SECTION TITLE -->
+        </div>
+        <!-- /SECTION HEADER INFO -->
+    </div>
+    <!-- /SECTION HEADER -->
+
+    <!-- SECTION FILTERS BAR -->
+    <div class="section-filters-bar v7">
+        <!-- SECTION FILTERS BAR ACTIONS -->
+        <div class="section-filters-bar-actions">
+            <!-- SECTION FILTERS BAR INFO -->
+            <div class="section-filters-bar-info">
+                <!-- SECTION FILTERS BAR TITLE -->
+                <p class="section-filters-bar-title">
+                    <a href="{% url 'sleekforum:categories:index' %}">Categories</a><span class="separator"></span>
+                    {% if thread.category.parent %}
+                    <a href="{% url 'sleekforum:categories:list_threads' thread.category.parent.id thread.category.parent.slug %}">{{ thread.category.parent.get_name }}</a><span class="separator"></span>
+                    {% endif %}
+                    <a href="{% url 'sleekforum:threads:list_threads' thread.category.slug thread.category.id %}">{{ thread.category.get_name }}</a>
+                </p>
+                <!-- /SECTION FILTERS BAR TITLE -->
+
+                {% if lastpost %}
+                <!-- SECTION FILTERS BAR TEXT -->
+                <div class="section-filters-bar-text small-space">
+                    Last post by
+                    <!-- USER AVATAR -->
+                    <a class="user-avatar micro no-stats" href="profile-timeline.html">
+                        <!-- USER AVATAR BORDER -->
+                        <div class="user-avatar-border">
+                            <!-- HEXAGON -->
+                            <div class="hexagon-22-24"></div>
+                            <!-- /HEXAGON -->
+                        </div>
+                        <!-- /USER AVATAR BORDER -->
+
+                        <!-- USER AVATAR CONTENT -->
+                        <div class="user-avatar-content">
+                            <!-- HEXAGON -->
+                            <div class="hexagon-image-18-20" data-src="{{ lastpost.user.avatar }}"></div>
+                            <!-- /HEXAGON -->
+                        </div>
+                        <!-- /USER AVATAR CONTENT -->
+                    </a>
+                    <!-- /USER AVATAR -->
+                    <a class="bold" href="profile-timeline.html">{{ lastpost.user.get_display_name }}</a>
+                    {{ lastpost.created | time_ago }}
+                </div>
+                <!-- /SECTION FILTERS BAR TEXT -->
+                {% endif %}
+            </div>
+            <!-- /SECTION FILTERS BAR INFO -->
+        </div>
+        <!-- /SECTION FILTERS BAR ACTIONS -->
+    </div>
+    <!-- /SECTION FILTERS BAR -->
+
+    <!-- GRID -->
+    <div class="grid grid-9-3">
+        <!-- FORUM CONTENT -->
+        <div class="forum-content">
+            {% include 'vikinger/messages_alert.html' %}
+
+            {% if page_obj.number == 1 %}
+
+            <!-- FORUM POST LIST -->
+            <div class="forum-post-list">
+                <!-- FORUM POST -->
+                <div class="forum-post">
+                    <!-- FORUM POST META -->
+                    <div class="forum-post-meta">
+                        <!-- FORUM POST TIMESTAMP -->
+                        <p class="forum-post-timestamp">{{ thread.created }}</p>
+                        <!-- /FORUM POST TIMESTAMP -->
+
+                        {% if request.user.is_authenticated %}
+                        <!-- WIDGET BOX SETTINGS -->
+                        <div class="widget-box-settings">
+                            <!-- POST SETTINGS WRAP -->
+                            <div class="post-settings-wrap">
+                                <!-- POST SETTINGS -->
+                                <div class="post-settings widget-box-post-settings-dropdown-trigger">
+                                    <!-- POST SETTINGS ICON -->
+                                    <svg class="post-settings-icon icon-more-dots">
+                                        <use xlink:href="#svg-more-dots"></use>
+                                    </svg>
+                                    <!-- /POST SETTINGS ICON -->
+                                </div>
+                                <!-- /POST SETTINGS -->
+
+                                <!-- SIMPLE DROPDOWN -->
+                                <div class="dropdown-navigation widget-box-post-settings-dropdown">
+                                    {% if request.user == thread.starter %}
+                                    <!-- SIMPLE DROPDOWN LINK -->
+                                    <a href="{{ thread.get_edit_url }}" class="dropdown-navigation-link">Edit thread</a>
+                                    <!-- /SIMPLE DROPDOWN LINK -->
+                                    {% endif %}
+
+                                    {% if request.user.is_superuser %}
+                                    <!-- SIMPLE DROPDOWN LINK -->
+                                    <a href="{{ thread.get_delete_url }}" class="dropdown-navigation-link">Delete
+                                        thread</a>
+                                    <!-- /SIMPLE DROPDOWN LINK -->
+
+                                    <!-- SIMPLE DROPDOWN LINK -->
+                                    <a class="dropdown-navigation-link">Pin thread</a>
+                                    <!-- /SIMPLE DROPDOWN LINK -->
+
+                                    <!-- SIMPLE DROPDOWN LINK -->
+                                    <a href="{{ thread.get_toggle_lock_url }}" class="dropdown-navigation-link">
+                                        {% if thread.is_locked %}Un{% endif %}Lock thread
+                                    </a>
+                                    <!-- /SIMPLE DROPDOWN LINK -->
+
+                                    <!-- SIMPLE DROPDOWN LINK -->
+                                    <a href="{{ thread.get_toggle_hide_url }}" class="dropdown-navigation-link">Hide
+                                        thread</a>
+                                    <!-- /SIMPLE DROPDOWN LINK -->
+
+                                    {% endif %}
+
+                                    <!-- SIMPLE DROPDOWN LINK -->
+                                    <a class="dropdown-navigation-link">Report thread</a>
+                                    <!-- /SIMPLE DROPDOWN LINK -->
+
+                                    <!-- SIMPLE DROPDOWN LINK -->
+                                    <a class="dropdown-navigation-link">Report Author</a>
+                                    <!-- /SIMPLE DROPDOWN LINK -->
+                                    {% endif %}
+
+                                </div>
+                                <!-- /SIMPLE DROPDOWN -->
+                            </div>
+                            <!-- /POST SETTINGS WRAP -->
+                        </div>
+                        <!-- /WIDGET BOX SETTINGS -->
+                    </div>
+                    <!-- /FORUM POST META -->
+
+                    <!-- FORUM POST CONTENT -->
+                    <div class="forum-post-content">
+                        <!-- FORUM POST USER -->
+                        <div class="forum-post-user">
+                            <!-- USER AVATAR -->
+                            <a class="user-avatar no-outline {{ thread.starter.online }}" href="profile-timeline.html">
+                                <!-- USER AVATAR CONTENT -->
+                                <div class="user-avatar-content">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-image-68-74" data-src="{{ thread.starter.get_avatar }}"></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR CONTENT -->
+
+                                <!-- USER AVATAR PROGRESS -->
+                                <div class="user-avatar-progress">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-progress-84-92"></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR PROGRESS -->
+
+                                <!-- USER AVATAR PROGRESS BORDER -->
+                                <div class="user-avatar-progress-border">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-border-84-92"></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR PROGRESS BORDER -->
+
+                                <!-- USER AVATAR BADGE -->
+                                <div class="user-avatar-badge">
+                                    <!-- USER AVATAR BADGE BORDER -->
+                                    <div class="user-avatar-badge-border">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-28-32"></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR BADGE BORDER -->
+
+                                    <!-- USER AVATAR BADGE CONTENT -->
+                                    <div class="user-avatar-badge-content">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-dark-22-24"></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR BADGE CONTENT -->
+
+                                    <!-- USER AVATAR BADGE TEXT -->
+                                    <p class="user-avatar-badge-text">{{ thread.starter.posts.count }}</p>
+                                    <!-- /USER AVATAR BADGE TEXT -->
+                                </div>
+                                <!-- /USER AVATAR BADGE -->
+                            </a>
+                            <!-- /USER AVATAR -->
+
+                            <!-- USER AVATAR -->
+                            <a class="user-avatar small no-outline {{ thread.starter.online }}"
+                               href="profile-timeline.html">
+                                <!-- USER AVATAR CONTENT -->
+                                <div class="user-avatar-content">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-image-30-32" data-src="{{ thread.starter.online }}"></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR CONTENT -->
+
+                                <!-- USER AVATAR PROGRESS -->
+                                <div class="user-avatar-progress">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-progress-40-44"></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR PROGRESS -->
+
+                                <!-- USER AVATAR PROGRESS BORDER -->
+                                <div class="user-avatar-progress-border">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-border-40-44"></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR PROGRESS BORDER -->
+
+                                <!-- USER AVATAR BADGE -->
+                                <div class="user-avatar-badge">
+                                    <!-- USER AVATAR BADGE BORDER -->
+                                    <div class="user-avatar-badge-border">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-22-24"></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR BADGE BORDER -->
+
+                                    <!-- USER AVATAR BADGE CONTENT -->
+                                    <div class="user-avatar-badge-content">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-dark-16-18"></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR BADGE CONTENT -->
+
+                                    <!-- USER AVATAR BADGE TEXT -->
+                                    <p class="user-avatar-badge-text">{{ thread.starter.posts.count }}</p>
+                                    <!-- /USER AVATAR BADGE TEXT -->
+                                </div>
+                                <!-- /USER AVATAR BADGE -->
+                            </a>
+                            <!-- /USER AVATAR -->
+
+                            <!-- FORUM POST USER TITLE -->
+                            <p class="forum-post-user-title">
+                                <a href="profile-timeline.html">{{ thread.starter.get_display_name }}</a>
+                            </p>
+                            <!-- /FORUM POST USER TITLE -->
+
+                            <!-- FORUM POST USER TITLE -->
+                            <p class="forum-post-user-text">@{{ thread.starter.username }}</p>
+                            <!-- /FORUM POST USER TITLE -->
+
+                            <!-- FORUM POST USER TAG -->
+                            <p class="forum-post-user-tag organizer">Thread Starter</p>
+                            <!-- /FORUM POST USER TAG -->
+
+                            <!-- FORUM POST USER SIGNATURE -->
+                            <p class="forum-post-user-text">{{ thread.starter.signature }}</p>
+                            <!-- /FORUM POST USER TITLE -->
+
+                        </div>
+                        <!-- /FORUM POST USER -->
+
+                        <!-- FORUM POST INFO -->
+                        <div class="forum-post-info">
+                            <!-- FORUM POST PARAGRAPH -->
+                            <p class="forum-post-paragraph">
+                                {{ thread.content | linebreaksbr }}
+                            </p>
+                            <!-- /FORUM POST PARAGRAPH -->
+
+                            {% if thread.tags %}
+                            <div class="tag-list">
+                                {% for tag in thread.tags %}
+                                <!-- TAG ITEM -->
+                                <a class="tag-item secondary" href="newsfeed.html">{{ tag }}</a>
+                                <!-- /TAG ITEM -->
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+
+                        </div>
+                        <!-- /FORUM POST INFO -->
+                    </div>
+                    <!-- /FORUM POST CONTENT -->
+                </div>
+                <!-- /FORUM POST -->
+
+                <div class="forum-post">
+                    <!-- FORUM POST META -->
+                    <div class="forum-post-meta">
+                        <!-- FORUM POST TIMESTAMP -->
+                        <p class="forum-post-timestamp">{{ thread.posts.count }} comments | 0 Violates</p>
+                        <!-- /FORUM POST TIMESTAMP -->
+
+                        <!-- FORUM POST ACTIONS -->
+                        <div class="forum-post-actions">
+                            <!-- FORUM POST ACTION -->
+                            <p class="forum-post-action light">Report</p>
+                            <!-- /FORUM POST ACTION -->
+
+                            <!-- FORUM POST ACTION -->
+                            <p class="forum-post-action">Reply</p>
+                            <!-- /FORUM POST ACTION -->
+
+                            <!-- FORUM POST ACTION -->
+                            <p class="forum-post-action">Share</p>
+                            <!-- /FORUM POST ACTION -->
+                        </div>
+                        <!-- /FORUM POST ACTIONS -->
+                    </div>
+                    <!-- /FORUM POST META -->
+                </div>
+
+            </div>
+            <!-- /FORUM POST LIST -->
+
+            {% endif %}
+
+
+            <!-- Posts -->
+            {% include 'threads/post/list_posts.html' with posts=page_obj %}
+            <!-- /Posts -->
+
+            {% include 'cores/_pagination/pagination_v1.html' with page_obj=page_obj items='comments' %}
+
+            {% include 'threads/post/post_reply_form.html' %}
+
+        </div>
+        <!-- /FORUM CONTENT -->
+
+        {% include 'threads/_includes/right_sidebar.html' %}
+
+    </div>
+    <!-- /GRID -->
+</div>
+<!-- /CONTENT GRID -->
+
+
+{% endblock %}

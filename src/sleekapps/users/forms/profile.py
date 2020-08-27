@@ -67,7 +67,9 @@ class UserProfileEditForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        country_choices = [(country['alpha3Code'], _(country['name'])) for country in countries]
+        country_choices = [
+            (country['alpha3Code'], _(country['name'])) for country in countries
+        ]
         self.fields['dob'] = forms.DateField(
             help_text=_('Birth date in yyyy-mm-dd format'),
             input_formats=['%Y-%m-%d'],

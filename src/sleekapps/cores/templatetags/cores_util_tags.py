@@ -77,3 +77,11 @@ def pretty_count(value, decimal_place=1):
         else:
             result = views
         return result
+
+@register.filter
+def unit_to_tens(value):
+    "Convert pagination in unit digit to tens."
+    value = str(value)
+    if len(value) < 2:
+        value = '0' + value
+    return value

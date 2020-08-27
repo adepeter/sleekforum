@@ -24,6 +24,51 @@
     </div>
     <!-- /SECTION BANNER -->
 
+    <div class="section">
+        {% include 'vikinger/messages_alert.html' %}
+    </div>
+
+    <!-- SECTION FILTERS BAR -->
+    <div class="section-filters-bar v6">
+        <!-- SECTION FILTERS BAR ACTIONS -->
+        <div class="section-filters-bar-actions">
+            <!-- FORM -->
+            <form class="form" method="GET" action="">
+                <!-- FORM ITEM -->
+                <div class="form-item split">
+                    <!-- FORM INPUT -->
+                    <div class="form-input small">
+                        <label for="events-search">Search threads</label>
+                        <input type="text" name="threads_search">
+                    </div>
+                    <!-- /FORM INPUT -->
+
+                    <!-- BUTTON -->
+                    <button type="submit" class="button primary">
+                        <!-- ICON MAGNIFYING GLASS -->
+                        <svg class="icon-magnifying-glass">
+                            <use xlink:href="#svg-magnifying-glass"></use>
+                        </svg>
+                        <!-- /ICON MAGNIFYING GLASS -->
+                    </button>
+                    <!-- /BUTTON -->
+                </div>
+                <!-- /FORM ITEM -->
+            </form>
+            <!-- /FORM -->
+        </div>
+        <!-- /SECTION FILTERS BAR ACTIONS -->
+
+        <!-- SECTION FILTERS BAR ACTIONS -->
+        <div class="section-filters-bar-actions">
+            <!-- BUTTON -->
+            <p class="button secondary popup-event-creation-trigger">+ Start thread</p>
+            <!-- /BUTTON -->
+        </div>
+        <!-- /SECTION FILTERS BAR ACTIONS -->
+    </div>
+    <!-- /SECTION FILTERS BAR -->
+
     <!-- TABLE -->
     <div class="table table-forum-discussion">
         <!-- TABLE HEADER -->
@@ -73,8 +118,10 @@
                     <!-- DISCUSSION PREVIEW -->
                     <div class="discussion-preview {% if thread.pin %}pinned{% endif %}">
                         <!-- DISCUSSION PREVIEW TITLE -->
-                        <a class="discussion-preview-title" href="forums-discussion.html">{{ thread.title }}</a>
+                        <a class="discussion-preview-title" href="{{ thread.get_absolute_url }}">{{ thread.title }}</a>
                         <!-- /DISCUSSION PREVIEW TITLE -->
+
+                        {% include 'cores/_pagination/floaty_pagination.html' with page_obj=page_obj %}
 
                         <!-- DISCUSSION PREVIEW META -->
                         <div class="discussion-preview-meta">
@@ -95,7 +142,9 @@
                             <!-- /USER AVATAR -->
 
                             <!-- DISCUSSION PREVIEW META TEXT -->
-                            <p class="discussion-preview-meta-text"><a href="profile-timeline.html">{{ thread.starter.get_display_name }}</a> {{ thread.created | time_ago }}</p>
+                            <p class="discussion-preview-meta-text">
+                                <a href="profile-timeline.html">{{ thread.starter.get_display_name }}</a> {{ thread.created | time_ago }}
+                            </p>
                             <!-- /DISCUSSION PREVIEW META TEXT -->
                         </div>
                         <!-- /DISCUSSION PREVIEW META -->
@@ -182,7 +231,9 @@
                         <!-- /USER STATUS AVATAR -->
 
                         <!-- USER STATUS TITLE -->
-                        <p class="user-status-title"><a class="bold" href="profile-timeline.html">{{ post.user.get_display_name }}</a></p>
+                        <p class="user-status-title">
+                            <a class="bold" href="profile-timeline.html">{{ post.user.get_display_name }}</a>
+                        </p>
                         <!-- /USER STATUS TITLE -->
 
                         <!-- USER STATUS TEXT -->
@@ -204,8 +255,125 @@
     </div>
     <!-- /TABLE -->
 
-    {% include 'cores/_pagination/pagination_v1.html' with page=page_obj %}
+    {% include 'cores/_pagination/pagination_v1.html' with page=page_obj items='threads' %}
 
 </div>
 <!-- /CONTENT GRID -->
+
+<!-- POPUP BOX -->
+<div class="popup-box small popup-event-creation">
+    <!-- POPUP CLOSE BUTTON -->
+    <div class="popup-close-button popup-event-creation-trigger">
+        <!-- POPUP CLOSE BUTTON ICON -->
+        <svg class="popup-close-button-icon icon-cross">
+            <use xlink:href="#svg-cross"></use>
+        </svg>
+        <!-- /POPUP CLOSE BUTTON ICON -->
+    </div>
+    <!-- /POPUP CLOSE BUTTON -->
+
+    <!-- POPUP BOX TITLE -->
+    <p class="popup-box-title">+ Add New topic</p>
+    <!-- /POPUP BOX TITLE -->
+
+    <!-- FORM -->
+    <form class="form" method="POST" action="{% url 'sleekforum:home:home' %}">
+        {% csrf_token %}
+        <!-- FORM ROW -->
+        <div class="form-row">
+            <!-- FORM ITEM -->
+            <div class="form-item">
+                <!-- FORM SELECT -->
+                <div class="form-select">
+                    <label for="category">Category</label>
+                    {{ form.category }}
+                    <!-- FORM SELECT ICON -->
+                    <svg class="form-select-icon icon-small-arrow">
+                        <use xlink:href="#svg-small-arrow"></use>
+                    </svg>
+                    <!-- /FORM SELECT ICON -->
+                </div>
+                <small class="text-info">{{ form.category.help_text }}</small>
+                <small class="text-danger">{{ form.category.errors }}</small>
+                <!-- /FORM SELECT -->
+            </div>
+            <!-- /FORM ITEM -->
+        </div>
+        <!-- /FORM ROW -->
+
+        <!-- FORM ROW -->
+        <div class="form-row">
+            <!-- FORM ITEM -->
+            <div class="form-item">
+                <!-- FORM INPUT -->
+                <div class="form-input small active">
+                    <label for="title">Thread Title</label>
+                    {{ form.title }}
+                </div>
+                <small class="text-info">{{ form.title.help_text }}</small>
+                <small class="text-danger">{{ form.title.errors }}</small>
+                <!-- /FORM INPUT -->
+            </div>
+            <!-- /FORM ITEM -->
+        </div>
+        <!-- /FORM ROW -->
+
+        <!-- FORM ROW -->
+        <div class="form-row">
+            <!-- FORM ITEM -->
+            <div class="form-item">
+                <!-- FORM INPUT -->
+                <div class="form-input small">
+                    <label for="event-description">Contents</label>
+                    <textarea id="event-description" name="{{ form.content.name }}">{{ form.content.value }}</textarea>
+                </div>
+                <small class="text-danger">{{ form.content.errors }}</small>
+                <!-- /FORM INPUT -->
+            </div>
+            <!-- /FORM ITEM -->
+        </div>
+        <!-- /FORM ROW -->
+
+        <!-- FORM ROW -->
+        <div class="form-row">
+            <!-- FORM ITEM -->
+            <div class="form-item split join-on-mobile medium">
+                <!-- FORM SELECT -->
+                <div class="form-select">
+                    <label for="prefix">Prefix</label>
+                    {{ form.prefix }}
+                    <!-- FORM SELECT ICON -->
+                    <svg class="form-select-icon icon-small-arrow">
+                        <use xlink:href="#svg-small-arrow"></use>
+                    </svg>
+                    <!-- /FORM SELECT ICON -->
+                </div>
+                <!-- /FORM SELECT -->
+
+                <!-- FORM SELECT -->
+                <div class="form-select">
+                    <label for="Tags">Tags</label>
+                    {{ form.tags }}
+                    <small class="text-info">{{ form.tags.help_text }}</small>
+                    <small class="text-danger">{{ form.tags.errors }}</small>
+                </div>
+                <!-- /FORM SELECT -->
+            </div>
+            <!-- /FORM ITEM -->
+        </div>
+        <!-- /FORM ROW -->
+
+        <!-- POPUP BOX ACTIONS -->
+        <div class="popup-box-actions medium void">
+            <!-- POPUP BOX ACTION -->
+            <button type="submit" class="popup-box-action full button secondary">Create thread!</button>
+            <!-- /POPUP BOX ACTION -->
+        </div>
+        <!-- /POPUP BOX ACTIONS -->
+    </form>
+    <!-- /FORM -->
+</div>
+<!-- /POPUP BOX -->
+
+
 {% endblock %}

@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load cores_util_tags %}
+{% load post_tags %}
+
+{% block title %}{{ parent_node.get_name }}{% endblock %}
+
+{% block content %}
+<!-- CONTENT GRID -->
+<div class="content-grid">
+    {% last_post_in_category parent_node as last_post %}
+    <!-- SECTION BANNER -->
+    <div class="section-banner">
+        <!-- SECTION BANNER ICON -->
+        <img class="section-banner-icon" src="{% static '/img/banner/forums-icon.png' %}" alt="forum-icon">
+        <!-- /SECTION BANNER ICON -->
+
+        <!-- SECTION BANNER TITLE -->
+        <p class="section-banner-title">{{ parent_node.get_name }}</p>
+        <!-- /SECTION BANNER TITLE -->
+
+        <!-- SECTION BANNER TEXT -->
+        <p class="section-banner-text">{{ parent_node.get_description }}!</p>
+        <!-- /SECTION BANNER TEXT -->
+    </div>
+    <!-- /SECTION BANNER -->
+
+    <div class="section">
+        {% include 'vikinger/messages_alert.html' %}
+    </div>
+
+    <!-- SECTION FILTERS BAR -->
+    <div class="section-filters-bar v7">
+        <!-- SECTION FILTERS BAR ACTIONS -->
+        <div class="section-filters-bar-actions">
+            <!-- SECTION FILTERS BAR INFO -->
+            <div class="section-filters-bar-info">
+                <!-- SECTION FILTERS BAR TITLE -->
+                <p class="section-filters-bar-title">
+                    <a href="{% url 'sleekforum:home:home' %}">Home</a><span class="separator"></span>
+                    <a href="{% url 'sleekforum:categories:index' %}">Categories</a><span class="separator"></span>
+                    <span>{{ parent_node.get_name }}</span>
+                </p>
+                <!-- /SECTION FILTERS BAR TITLE -->
+
+                {% if last_post %}
+                <!-- SECTION FILTERS BAR TEXT -->
+                <div class="section-filters-bar-text small-space">
+                    Last post by
+                    <!-- USER AVATAR -->
+                    <a class="user-avatar micro no-stats" href="profile-timeline.html">
+                        <!-- USER AVATAR BORDER -->
+                        <div class="user-avatar-border">
+                            <!-- HEXAGON -->
+                            <div class="hexagon-22-24"></div>
+                            <!-- /HEXAGON -->
+                        </div>
+                        <!-- /USER AVATAR BORDER -->
+
+                        <!-- USER AVATAR CONTENT -->
+                        <div class="user-avatar-content">
+                            <!-- HEXAGON -->
+                            <div class="hexagon-image-18-20" data-src="{{ last_post.user.get_avatar }}"></div>
+                            <!-- /HEXAGON -->
+                        </div>
+                        <!-- /USER AVATAR CONTENT -->
+                    </a>
+                    <!-- /USER AVATAR -->
+                    <a class="bold" href="profile-timeline.html">{{ last_post.user.get_display_name }}</a>
+                    {{ last_post.created | time_ago }}
+                </div>
+                <!-- /SECTION FILTERS BAR TEXT -->
+                {% endif %}
+            </div>
+            <!-- /SECTION FILTERS BAR INFO -->
+        </div>
+        <!-- /SECTION FILTERS BAR ACTIONS -->
+
+        <!-- SECTION FILTERS BAR ACTIONS -->
+        <div class="section-filters-bar-actions">
+            <!-- FORM -->
+            <form class="form">
+                <!-- FORM ITEM -->
+                <div class="form-item split">
+                    <!-- FORM INPUT -->
+                    <div class="form-input small">
+                        <label for="forum-search">Search Forums</label>
+                        <input type="text" id="forum-search" name="forum_search">
+                    </div>
+                    <!-- /FORM INPUT -->
+
+                    <!-- BUTTON -->
+                    <button class="button primary">
+                        <!-- ICON MAGNIFYING GLASS -->
+                        <svg class="icon-magnifying-glass">
+                            <use xlink:href="#svg-magnifying-glass"></use>
+                        </svg>
+                        <!-- /ICON MAGNIFYING GLASS -->
+                    </button>
+                    <!-- /BUTTON -->
+                </div>
+                <!-- /FORM ITEM -->
+            </form>
+            <!-- /FORM -->
+
+            {% if request.user.is_authenticated %}
+            <!-- BUTTON -->
+            <p class="button secondary">+ Create Discussion</p>
+            <!-- /BUTTON -->
+            {% endif %}
+        </div>
+        <!-- /SECTION FILTERS BAR ACTIONS -->
+    </div>
+    <!-- /SECTION FILTERS BAR -->
+
+    {% include 'threads/_includes/thread_list.html' with threads=page_obj %}
+
+</div>
+<!-- /CONTENT GRID -->
+{% endblock %}

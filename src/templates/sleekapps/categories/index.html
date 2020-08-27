@@ -166,7 +166,7 @@
                 <div class="table-column padded-big-left">
                     <!-- TABLE LINK -->
                     {% for thread in latest_three_threads %}
-                    <a class="table-link" href="">{{ thread.title | truncatechars:50 }}</a>
+                    <a class="table-link" href="{{ thread.get_absolute_url }}">{{ thread.title | truncatechars:50 }}</a>
                     {% empty %}
                     No threads available
                     {% endfor %}

@@ -10,6 +10,7 @@
 {% block content %}
 <!-- CONTENT GRID -->
 <div class="content-grid">
+    {% last_post_in_category category as last_post %}
     <!-- SECTION BANNER -->
     <div class="section-banner">
         <!-- SECTION BANNER ICON -->
@@ -28,77 +29,86 @@
 
     <!-- SECTION FILTERS BAR -->
     <div class="section-filters-bar v7">
-      <!-- SECTION FILTERS BAR ACTIONS -->
-      <div class="section-filters-bar-actions">
-        <!-- SECTION FILTERS BAR INFO -->
-        <div class="section-filters-bar-info">
-          <!-- SECTION FILTERS BAR TITLE -->
-          <p class="section-filters-bar-title"><a href="forums.html">Forums</a><span class="separator"></span><a href="forums-category.html">Animation Watchtower</a></p>
-          <!-- /SECTION FILTERS BAR TITLE -->
+        <!-- SECTION FILTERS BAR ACTIONS -->
+        <div class="section-filters-bar-actions">
+            <!-- SECTION FILTERS BAR INFO -->
+            <div class="section-filters-bar-info">
+                <!-- SECTION FILTERS BAR TITLE -->
+                <p class="section-filters-bar-title">
+                    <a href="{% url 'sleekforum:home:home' %}">Home</a><span class="separator"></span>
+                    <a href="{% url 'sleekforum:categories:index' %}">Categories</a><span class="separator"></span>
+                    {% if category.parent %}
+                    <a href="{% url 'sleekforum:categories:subcategories' category.parent.id category.parent.slug %}">{{ category.parent.get_name }}</a><span class="separator"></span>
+                    {% endif %}
+                    <span>{{ category.get_name }}</span>
+                </p>
+                <!-- /SECTION FILTERS BAR TITLE -->
 
-          <!-- SECTION FILTERS BAR TEXT -->
-          <div class="section-filters-bar-text small-space">
-            Last post by
-            <!-- USER AVATAR -->
-            <a class="user-avatar micro no-stats" href="profile-timeline.html">
-              <!-- USER AVATAR BORDER -->
-              <div class="user-avatar-border">
-                <!-- HEXAGON -->
-                <div class="hexagon-22-24"></div>
-                <!-- /HEXAGON -->
-              </div>
-              <!-- /USER AVATAR BORDER -->
+                {% if last_post is not None %}
+                <!-- SECTION FILTERS BAR TEXT -->
+                <div class="section-filters-bar-text small-space">
+                    Last post by
+                    <!-- USER AVATAR -->
+                    <a class="user-avatar micro no-stats" href="profile-timeline.html">
+                        <!-- USER AVATAR BORDER -->
+                        <div class="user-avatar-border">
+                            <!-- HEXAGON -->
+                            <div class="hexagon-22-24"></div>
+                            <!-- /HEXAGON -->
+                        </div>
+                        <!-- /USER AVATAR BORDER -->
 
-              <!-- USER AVATAR CONTENT -->
-              <div class="user-avatar-content">
-                <!-- HEXAGON -->
-                <div class="hexagon-image-18-20" data-src="img/avatar/03.jpg"></div>
-                <!-- /HEXAGON -->
-              </div>
-              <!-- /USER AVATAR CONTENT -->
-            </a>
-            <!-- /USER AVATAR -->
-            <a class="bold" href="profile-timeline.html">Nick Grissom</a>
-            2 minutes ago
-          </div>
-          <!-- /SECTION FILTERS BAR TEXT -->
-        </div>
-        <!-- /SECTION FILTERS BAR INFO -->
-      </div>
-      <!-- /SECTION FILTERS BAR ACTIONS -->
-
-      <!-- SECTION FILTERS BAR ACTIONS -->
-      <div class="section-filters-bar-actions">
-        <!-- FORM -->
-        <form class="form">
-          <!-- FORM ITEM -->
-          <div class="form-item split">
-            <!-- FORM INPUT -->
-            <div class="form-input small">
-              <label for="forum-search">Search Forums</label>
-              <input type="text" id="forum-search" name="forum_search">
+                        <!-- USER AVATAR CONTENT -->
+                        <div class="user-avatar-content">
+                            <!-- HEXAGON -->
+                            <div class="hexagon-image-18-20" data-src="{{ last_post.user.get_avatar }}"></div>
+                            <!-- /HEXAGON -->
+                        </div>
+                        <!-- /USER AVATAR CONTENT -->
+                    </a>
+                    <!-- /USER AVATAR -->
+                    <a class="bold" href="profile-timeline.html">{{ last_post.user.get_display_name }}</a>
+                    {{ last_post.created | time_ago }}
+                </div>
+                <!-- /SECTION FILTERS BAR TEXT -->
+                {% endif %}
             </div>
-            <!-- /FORM INPUT -->
+            <!-- /SECTION FILTERS BAR INFO -->
+        </div>
+        <!-- /SECTION FILTERS BAR ACTIONS -->
+
+        <!-- SECTION FILTERS BAR ACTIONS -->
+        <div class="section-filters-bar-actions">
+            <!-- FORM -->
+            <form class="form">
+                <!-- FORM ITEM -->
+                <div class="form-item split">
+                    <!-- FORM INPUT -->
+                    <div class="form-input small">
+                        <label for="forum-search">Search Forums</label>
+                        <input type="text" id="forum-search" name="forum_search">
+                    </div>
+                    <!-- /FORM INPUT -->
+
+                    <!-- BUTTON -->
+                    <button class="button primary">
+                        <!-- ICON MAGNIFYING GLASS -->
+                        <svg class="icon-magnifying-glass">
+                            <use xlink:href="#svg-magnifying-glass"></use>
+                        </svg>
+                        <!-- /ICON MAGNIFYING GLASS -->
+                    </button>
+                    <!-- /BUTTON -->
+                </div>
+                <!-- /FORM ITEM -->
+            </form>
+            <!-- /FORM -->
 
             <!-- BUTTON -->
-            <button class="button primary">
-              <!-- ICON MAGNIFYING GLASS -->
-              <svg class="icon-magnifying-glass">
-                <use xlink:href="#svg-magnifying-glass"></use>
-              </svg>
-              <!-- /ICON MAGNIFYING GLASS -->
-            </button>
+            <p class="button secondary">+ Create Discussion</p>
             <!-- /BUTTON -->
-          </div>
-          <!-- /FORM ITEM -->
-        </form>
-        <!-- /FORM -->
-
-        <!-- BUTTON -->
-        <p class="button secondary">+ Create Discussion</p>
-        <!-- /BUTTON -->
-      </div>
-      <!-- /SECTION FILTERS BAR ACTIONS -->
+        </div>
+        <!-- /SECTION FILTERS BAR ACTIONS -->
     </div>
     <!-- /SECTION FILTERS BAR -->
 
@@ -165,7 +175,8 @@
                         <div class="forum-category-info">
                             <!-- FORUM CATEGORY TITLE -->
                             <p class="forum-category-title">
-                                <a href="{% url 'sleekforum:categories:subcategories' node.id node.slug %}">{{ node.get_name }}</a>
+                                <a href="{% url 'sleekforum:categories:subcategories' node.id node.slug %}">{{
+                                    node.get_name }}</a>
                             </p>
                             <!-- /FORUM CATEGORY TITLE -->
 
