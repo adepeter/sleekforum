@@ -14,7 +14,10 @@ from ..views.thread.reaction import (
     LikeThread,
     FunnyThread,
     SadThread,
-    WowThread
+    WowThread,
+    HappyThread,
+    LoveThread,
+    AngryThread
 )
 from ..views.thread.report import ReportThread
 from ..views.thread.thread_misc import (
@@ -42,5 +45,8 @@ urlpatterns += [
         path('wow/', WowThread.as_view(), name='wow_thread'),
         path('funny/', FunnyThread.as_view(), name='funny_thread'),
         path('sad/', SadThread.as_view(), name='sad_thread'),
+        path('angry/', AngryThread.as_view(), name='angry_thread'),
+        path('love/', LoveThread.as_view(), name='love_thread'),
+        path('happy/', HappyThread.as_view(), name='happy_thread'),
     ])),
 ]

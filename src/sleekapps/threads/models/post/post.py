@@ -1,12 +1,14 @@
 from django.conf import settings
+from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
-from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
+from ....activity.models import Reaction
 from ...managers.post import PostManager
+from ...modelurls.post import PostModelURL
 
 
-class Post(models.Model):
+class Post(models.Model, PostModelURL):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         verbose_name=_('post'),
@@ -19,6 +21,10 @@ class Post(models.Model):
         verbose_name=_('thread'),
         on_delete=models.CASCADE,
         related_name='posts'
+    )
+    reactions = GenericRelation(
+        'activity.Reaction',
+        related_query_name='posts'
     )
     content = models.TextField(verbose_name=_('Post content'))
     is_hidden = models.BooleanField(default=False)
@@ -38,47 +44,6 @@ class Post(models.Model):
     )
 
     objects = PostManager()
-
-    def get_absolute_url(self):
-        kwargs = {
-            'category_slug': self.thread.category.slug,
-            'slug': self.thread.slug,
-            'pk': self.thread.id
-        }
-        return reverse(
-            'sleekforum:threads:read_thread',
-            kwargs=kwargs
-        ) + '?page=last'
-
-    def get_edit_url(self):
-        kwargs = {
-            'thread_slug': self.thread.slug,
-            'pk': self.id,
-        }
-        return reverse(
-            'flyapps:threads:post:edit_post',
-            kwargs=kwargs
-        )
-
-    def get_delete_url(self):
-        kwargs = {
-            'thread_slug': self.thread.slug,
-            'pk': self.id,
-        }
-        return reverse(
-            'flyapps:threads:post:delete_post',
-            kwargs=kwargs
-        )
-
-    def get_reply_to_url(self):
-        kwargs = {
-            'thread_slug': self.thread.slug,
-            'pk': self.id,
-        }
-        return reverse(
-            'flyapps:threads:post:reply_post',
-            kwargs=kwargs
-        )
 
     def __str__(self):
         return f'{self.content[:10]} by {self.user.username} to {self.thread.title}'

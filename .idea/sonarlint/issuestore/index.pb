@@ -177,8 +177,6 @@ X
 .src/sleekapps/threads/models/thread/notepad.py,2\6\262a4d1f06488c054cd76e417dd185fa151c09f4
 `
 0src/sleekapps/threads/models/thread/subscribe.py,2\f\2f4d82f8e0b8d47e36c58bbe9adda91d550bd35e
-X
-(src/sleekapps/threads/models/activity.py,6\4\64cf64f0ffd07e814e3effe4461377d0da11e761
 b
 2src/sleekapps/threads/models/thread/participant.py,a\d\ad344c4a095169bbd5a44b594d2ecd9b273c897a
 \
@@ -361,3 +359,25 @@ G
 src/Dockerfile,b\1\b1ac484b20625f94ee8fee74dce04369ea1760f1
 =
 src/manage.py,a\b\abe873c46a4997ebc5d998d9df98915d7c96c051
+d
+4src/sleekapps/activity/templatetags/reaction_tags.py,7\8\78b30e2e5f377644438ccc782f50bbb3be95a18f
+Y
+)src/sleekapps/threads/modelurls/thread.py,3\7\37ce3d9d69da330e77840a228df3b959fe3cd9a5
+=
+src/uwsgi.ini,4\1\41f51940967536d1025f138dee42fdf8c43c5a25
+M
+src/sleekapps/cores/fields.py,e\d\edc04dce9c240e62fbe9b5a600276d49899ecb00
+\
+,src/sleekapps/threads/views/post/reaction.py,3\2\32b8ef46b2e0691b2a7e08811efb908cf54c08f3
+X
+(src/sleekapps/threads/viewmixins/base.py,2\4\24c3e273700b64bcbaf57a246adf20c835ef6a44
+X
+(src/sleekapps/threads/viewmixins/post.py,e\c\ec7d07555bd995037402690aedcec0a22fc95dd0
+c
+3src/templates/sleekapps/threads/post/edit_post.html,7\8\78328e2de66c204fff5ddd39e7fffb114bde5aa2
+f
+6src/templates/sleekapps/threads/post/quick_delete.html,2\f\2fff4836e61ab606c31b6f58733d9aa91de43806
+X
+(src/sleekapps/threads/views/post/post.py,d\7\d71920f95801509c143f4eacad295f0ac6091fa3
+W
+'src/sleekapps/threads/modelurls/post.py,c\6\c604631703e867397f6bc75650d77783ef3c060f

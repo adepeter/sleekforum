@@ -3,7 +3,7 @@ from django.utils.translation import gettext_lazy as _
 
 from ...models import Thread
 
-from .thread_misc import ThreadSingleActionMiscView
+from ...viewmixins.thread import ThreadSingleActionMiscView
 
 
 class LockUnlockThread(ThreadSingleActionMiscView):

@@ -1,54 +1,44 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.exceptions import ImproperlyConfigured, FieldDoesNotExist
+from django.core.exceptions import ImproperlyConfigured
+from django.shortcuts import redirect
+from django.urls import reverse
+from django.views import View
+from django.views.generic.detail import SingleObjectMixin
+
+from ...activity.models import Reaction
 from ...activity.viewmixins.reaction import ReactionView
-
-
-class BooleanObjectMixin:
-    """This mixin cannot be implemented on its own.
-    Must be called with a view
-    """
-    boolean_field = ''
-
-    def get_boolean_field(self):
-        """Return validated boolean field to be used for action on/off"""
-        if not self.boolean_field:
-            raise ImproperlyConfigured(
-                'You must set boolean_field attribute on this view'
-            )
-        return self.validate_boolean_field(self.boolean_field)
-
-    def validate_boolean_field(self, boolean_field):
-        """Validate boolean field to check if it exists on specified model"""
-        fields = [field.name for field in self.model._meta.get_fields()]
-        if boolean_field not in fields:
-            raise FieldDoesNotExist('%(field_name)s does not seem to be a \
-            valid field on the supplied %(model)s' % {
-                'model': self.model._meta.model_name,
-                'field_name': self.boolean_field})
-        else:
-            return boolean_field
-
-    def get_boolean_value(self, obj=None):
-        """Return existing boolean field value for the obj"""
-        if obj is None:
-            obj = self.get_object()
-        boolean_field = self.get_boolean_field()
-        boolean_value = getattr(obj, boolean_field)
-        if not isinstance(boolean_value, bool):
-            raise TypeError('The returned boolean field value isn\'t a bool')
-        return boolean_value
-
-    def toggle_boolean_and_save(self, obj, value=None, value_reverse=True):
-        if value is None:
-            value = self.get_boolean_value(obj)
-        field = self.get_boolean_field()
-        new_value = not value if value_reverse else value
-        setattr(obj, field, new_value)
-        obj.save()
-        return obj
+from ..models import Thread
+from .base import BooleanObjectMixin
 
 
 class ThreadReactionMixin(LoginRequiredMixin, ReactionView):
-    """
-    This view mixin is used in thread_misc module
-    """
+    model = Thread
+    reaction_model = Reaction
+
+
+class ThreadSingleActionMiscView(
+    BooleanObjectMixin,
+    SingleObjectMixin, View
+):
+    redirect_to_threads = None
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.misc_action = self.toggle_boolean_and_save(self.object)
+        return self.get_success_url()
+
+    def get_success_url(self):
+        if self.redirect_to_threads is None:
+            raise ImproperlyConfigured(
+                '\'redirect_to_threads\' class attr cannot be set to None. '
+                'Attribute must be set to a boolean'
+            )
+        else:
+            if self.redirect_to_threads is True:
+                return redirect(self.get_redirect_url())
+            return redirect(self.object.get_absolute_url())
+
+    def get_redirect_url(self):
+        return reverse('sleekforum:threads:list_threads', args=[
+            str(self.kwargs['category_slug'])
+        ])

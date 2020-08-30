@@ -1,10 +1,16 @@
 {% load static %}
+{% load cache %}
+{% load reaction_tags %}
 
+{% cache 2 reacted_users_cache %}
 <!-- META LINE -->
 <div class="meta-line">
     <!-- META LINE LIST -->
     <div class="meta-line-list reaction-item-list">
         <!-- REACTION ITEM -->
+
+        {% reacted_users 'LIKE' post request.user.username 6 as like_reacting_users %}
+        {% if like_reacting_users %}
         <div class="reaction-item">
             <!-- REACTION IMAGE -->
             <img class="reaction-image reaction-item-dropdown-trigger"
@@ -19,23 +25,19 @@
                                                      alt="reaction-like"> <span
                         class="bold">Like</span></p>
                 <!-- /SIMPLE DROPDOWN TEXT -->
-
+                {% for react_user in like_reacting_users %}
                 <!-- SIMPLE DROPDOWN TEXT -->
-                <p class="simple-dropdown-text">Neko Bebop</p>
+                <p class="simple-dropdown-text">{{ react_user }}</p>
                 <!-- /SIMPLE DROPDOWN TEXT -->
-
-                <!-- SIMPLE DROPDOWN TEXT -->
-                <p class="simple-dropdown-text">Nick Grissom</p>
-                <!-- /SIMPLE DROPDOWN TEXT -->
-
-                <!-- SIMPLE DROPDOWN TEXT -->
-                <p class="simple-dropdown-text">Sarah Diamond</p>
-                <!-- /SIMPLE DROPDOWN TEXT -->
+                {% endfor %}
             </div>
             <!-- /SIMPLE DROPDOWN -->
         </div>
         <!-- /REACTION ITEM -->
+        {% endif %}
 
+        {% reacted_users 'LOVE' post request.user.username 5 as love_reacting_users %}
+        {% if love_reacting_users %}
         <!-- REACTION ITEM -->
         <div class="reaction-item">
             <!-- REACTION IMAGE -->
@@ -51,19 +53,192 @@
                                                      alt="reaction-love"> <span
                         class="bold">Love</span></p>
                 <!-- /SIMPLE DROPDOWN TEXT -->
-
+                {% for react_user in love_reacting_users %}
                 <!-- SIMPLE DROPDOWN TEXT -->
-                <p class="simple-dropdown-text">Jett Spiegel</p>
+                <p class="simple-dropdown-text">{{ react_user }}</p>
                 <!-- /SIMPLE DROPDOWN TEXT -->
+                {% endfor %}
             </div>
             <!-- /SIMPLE DROPDOWN -->
         </div>
         <!-- /REACTION ITEM -->
+        {% endif %}
+
+        {% reacted_users 'DISLIKE' post request.user.username 5 as dislike_reacting_users %}
+        {% if dislike_reacting_users %}
+        <div class="reaction-item">
+            <!-- REACTION IMAGE -->
+            <img class="reaction-image reaction-item-dropdown-trigger"
+                 src="{% static 'img/reaction/dislike.png' %}" alt="reaction-dislike">
+            <!-- /REACTION IMAGE -->
+
+            <!-- SIMPLE DROPDOWN -->
+            <div class="simple-dropdown padded reaction-item-dropdown">
+                <!-- SIMPLE DROPDOWN TEXT -->
+                <p class="simple-dropdown-text">
+                    <img class="reaction" src="{% static 'img/reaction/dislike.png' %}" alt="reaction-dislike"> <span
+                        class="bold">Dislike</span></p>
+                <!-- /SIMPLE DROPDOWN TEXT -->
+
+                {% for react_user in dislike_reacting_users %}
+                <!-- SIMPLE DROPDOWN TEXT -->
+                <p class="simple-dropdown-text">{{ react_user }}</p>
+                <!-- /SIMPLE DROPDOWN TEXT -->
+                {% endfor %}
+            </div>
+            <!-- /SIMPLE DROPDOWN -->
+        </div>
+        <!-- /REACTION ITEM -->
+        {% endif %}
+
+        {% reacted_users 'HAPPY' post request.user.username as happy_reacting_users %}
+        {% if happy_reacting_users %}
+        <div class="reaction-item">
+            <!-- REACTION IMAGE -->
+            <img class="reaction-image reaction-item-dropdown-trigger"
+                 src="{% static 'img/reaction/happy.png' %}" alt="reaction-happy">
+            <!-- /REACTION IMAGE -->
+
+            <!-- SIMPLE DROPDOWN -->
+            <div class="simple-dropdown padded reaction-item-dropdown">
+                <!-- SIMPLE DROPDOWN TEXT -->
+                <p class="simple-dropdown-text"><img class="reaction"
+                                                     src="{% static 'img/reaction/happy.png' %}"
+                                                     alt="reaction-happy"> <span
+                        class="bold">Happy</span></p>
+                <!-- /SIMPLE DROPDOWN TEXT -->
+
+                {% for react_user in happy_reacting_users %}
+                <!-- SIMPLE DROPDOWN TEXT -->
+                <p class="simple-dropdown-text">{{ react_user }}</p>
+                <!-- /SIMPLE DROPDOWN TEXT -->
+                {% endfor %}
+            </div>
+            <!-- /SIMPLE DROPDOWN -->
+        </div>
+        <!-- /REACTION ITEM -->
+        {% endif %}
+
+        {% reacted_users 'WOW' post request.user.username 5 as wow_reacting_users %}
+        {% if wow_reacting_users %}
+        <!-- REACTION ITEM -->
+        <div class="reaction-item">
+            <!-- REACTION IMAGE -->
+            <img class="reaction-image reaction-item-dropdown-trigger"
+                 src="{% static 'img/reaction/wow.png' %}" alt="reaction-wow">
+            <!-- /REACTION IMAGE -->
+
+            <!-- SIMPLE DROPDOWN -->
+            <div class="simple-dropdown padded reaction-item-dropdown">
+                <!-- SIMPLE DROPDOWN TEXT -->
+                <p class="simple-dropdown-text"><img class="reaction"
+                                                     src="{% static 'img/reaction/wow.png' %}"
+                                                     alt="reaction-wow"> <span
+                        class="bold">Wow</span></p>
+                <!-- /SIMPLE DROPDOWN TEXT -->
+                {% for react_user in wow_reacting_users %}
+                <!-- SIMPLE DROPDOWN TEXT -->
+                <p class="simple-dropdown-text">{{ react_user }}</p>
+                <!-- /SIMPLE DROPDOWN TEXT -->
+                {% endfor %}
+            </div>
+            <!-- /SIMPLE DROPDOWN -->
+        </div>
+        <!-- /REACTION ITEM -->
+        {% endif %}
+
+        {% reacted_users 'FUNNY' post request.user.username as funny_reacting_users %}
+        {% if funny_reacting_users %}
+        <div class="reaction-item">
+            <!-- REACTION IMAGE -->
+            <img class="reaction-image reaction-item-dropdown-trigger"
+                 src="{% static 'img/reaction/funny.png' %}" alt="reaction-funny">
+            <!-- /REACTION IMAGE -->
+
+            <!-- SIMPLE DROPDOWN -->
+            <div class="simple-dropdown padded reaction-item-dropdown">
+                <!-- SIMPLE DROPDOWN TEXT -->
+                <p class="simple-dropdown-text"><img class="reaction"
+                                                     src="{% static 'img/reaction/funny.png' %}"
+                                                     alt="reaction-funny"> <span
+                        class="bold">Funny</span></p>
+                <!-- /SIMPLE DROPDOWN TEXT -->
+
+                {% for react_user in funny_reacting_users %}
+                <!-- SIMPLE DROPDOWN TEXT -->
+                <p class="simple-dropdown-text">{{ react_user }}</p>
+                <!-- /SIMPLE DROPDOWN TEXT -->
+                {% endfor %}
+            </div>
+            <!-- /SIMPLE DROPDOWN -->
+        </div>
+        <!-- /REACTION ITEM -->
+        {% endif %}
+
+        {% reacted_users 'SAD' post request.user.username as sad_reacting_users %}
+        {% if sad_reacting_users %}
+        <div class="reaction-item">
+            <!-- REACTION IMAGE -->
+            <img class="reaction-image reaction-item-dropdown-trigger"
+                 src="{% static 'img/reaction/sad.png' %}" alt="reaction-like">
+            <!-- /REACTION IMAGE -->
+
+            <!-- SIMPLE DROPDOWN -->
+            <div class="simple-dropdown padded reaction-item-dropdown">
+                <!-- SIMPLE DROPDOWN TEXT -->
+                <p class="simple-dropdown-text"><img class="reaction"
+                                                     src="{% static 'img/reaction/sad.png' %}"
+                                                     alt="reaction-sad"> <span
+                        class="bold">Sad</span></p>
+                <!-- /SIMPLE DROPDOWN TEXT -->
+
+                {% for react_user in sad_reacting_users %}
+                <!-- SIMPLE DROPDOWN TEXT -->
+                <p class="simple-dropdown-text">{{ react_user }}</p>
+                <!-- /SIMPLE DROPDOWN TEXT -->
+                {% endfor %}
+            </div>
+            <!-- /SIMPLE DROPDOWN -->
+        </div>
+        <!-- /REACTION ITEM -->
+        {% endif %}
+
+        {% reacted_users 'ANGRY' post request.user.username 6 as angry_reacting_users %}
+        {% if angry_reacting_users %}
+        <div class="reaction-item">
+            <!-- REACTION IMAGE -->
+            <img class="reaction-image reaction-item-dropdown-trigger"
+                 src="{% static 'img/reaction/angry.png' %}" alt="reaction-angry">
+            <!-- /REACTION IMAGE -->
+
+            <!-- SIMPLE DROPDOWN -->
+            <div class="simple-dropdown padded reaction-item-dropdown">
+                <!-- SIMPLE DROPDOWN TEXT -->
+                <p class="simple-dropdown-text"><img class="reaction"
+                                                     src="{% static 'img/reaction/angry.png' %}"
+                                                     alt="reaction-angry"> <span
+                        class="bold">Angry</span></p>
+                <!-- /SIMPLE DROPDOWN TEXT -->
+
+                {% for react_user in angry_reacting_users %}
+                <!-- SIMPLE DROPDOWN TEXT -->
+                <p class="simple-dropdown-text">{{ react_user }}</p>
+                <!-- /SIMPLE DROPDOWN TEXT -->
+                {% endfor %}
+            </div>
+            <!-- /SIMPLE DROPDOWN -->
+        </div>
+        <!-- /REACTION ITEM -->
+        {% endif %}
+
     </div>
     <!-- /META LINE LIST -->
 
+    {% if post.reactions.all %}
     <!-- META LINE TEXT -->
-    <p class="meta-line-text">4</p>
+    <p class="meta-line-text">{{ post.reactions.count }}</p>
     <!-- /META LINE TEXT -->
+    {% endif %}
 </div>
 <!-- /META LINE -->
+{% endcache %}

@@ -1,33 +1,37 @@
-from ....activity.models import Reaction
 from ...viewmixins.thread import ThreadReactionMixin
-from ...models import Thread
 
 
-class LikeThread(ThreadReactionMixin):
-    model = Thread
-    reaction_model = Reaction
+class ThreadBaseReaction(ThreadReactionMixin):
+    pass
+
+
+class LikeThread(ThreadBaseReaction):
     reaction = 'LIKE'
 
 
-class DislikeThread(ThreadReactionMixin):
-    model = Thread
-    reaction_model = Reaction
+class DislikeThread(ThreadBaseReaction):
     reaction = 'DISLIKE'
 
 
-class SadThread(ThreadReactionMixin):
-    model = Thread
-    reaction_model = Reaction
+class SadThread(ThreadBaseReaction):
     reaction = 'SAD'
 
 
-class FunnyThread(ThreadReactionMixin):
-    model = Thread
-    reaction_model = Reaction
+class FunnyThread(ThreadBaseReaction):
     reaction = 'FUNNY'
 
 
-class WowThread(ThreadReactionMixin):
-    model = Thread
-    reaction_model = Reaction
+class WowThread(ThreadBaseReaction):
     reaction = 'WOW'
+
+
+class HappyThread(ThreadBaseReaction):
+    reaction = 'HAPPY'
+
+
+class AngryThread(ThreadBaseReaction):
+    reaction = 'ANGRY'
+
+
+class LoveThread(ThreadBaseReaction):
+    reaction = 'LOVE'

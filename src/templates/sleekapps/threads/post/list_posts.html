@@ -5,6 +5,7 @@
 <div class="section-pager-bar-wrap">
     <!-- WIDGET BOX -->
     <div class="widget-box no-padding">
+        {% if request.user.is_authenticated %}
         <!-- WIDGET BOX SETTINGS -->
         <div class="widget-box-settings">
             <!-- POST SETTINGS WRAP -->
@@ -22,17 +23,20 @@
                 <!-- SIMPLE DROPDOWN -->
                 <div class="simple-dropdown widget-box-post-settings-dropdown">
                     <!-- SIMPLE DROPDOWN LINK -->
-                    <p class="simple-dropdown-link">Edit Post</p>
+                    <a href="{{ post.get_edit_url }}" class="simple-dropdown-link">Edit Post</a>
                     <!-- /SIMPLE DROPDOWN LINK -->
 
+                    {% if request.user.is_superuser %}
                     <!-- SIMPLE DROPDOWN LINK -->
-                    <p class="simple-dropdown-link">Delete Post</p>
+                    <a class="simple-dropdown-link">Delete</a>
                     <!-- /SIMPLE DROPDOWN LINK -->
 
                     <!-- SIMPLE DROPDOWN LINK -->
                     <p class="simple-dropdown-link">Hide post</p>
                     <!-- /SIMPLE DROPDOWN LINK -->
+                    {% endif %}
 
+                    {% if not request.user == post.user %}
                     <!-- SIMPLE DROPDOWN LINK -->
                     <p class="simple-dropdown-link">Report user</p>
                     <!-- /SIMPLE DROPDOWN LINK -->
@@ -40,12 +44,14 @@
                     <!-- SIMPLE DROPDOWN LINK -->
                     <p class="simple-dropdown-link">Report Post</p>
                     <!-- /SIMPLE DROPDOWN LINK -->
+                    {% endif %}
                 </div>
                 <!-- /SIMPLE DROPDOWN -->
             </div>
             <!-- /POST SETTINGS WRAP -->
         </div>
         <!-- /WIDGET BOX SETTINGS -->
+        {% endif %}
 
         <!-- WIDGET BOX STATUS -->
         <div class="widget-box-status">
@@ -129,7 +135,7 @@
                 <div class="content-actions">
                     <!-- CONTENT ACTION -->
                     <div class="content-action">
-                        {% include 'cores/_reaction/reacted_users.html' %}
+                        {% include 'cores/_reaction/reacted_users.html' with post=post %}
                     </div>
                     <!-- /CONTENT ACTION -->
 
@@ -176,8 +182,7 @@
                     <!-- /POST OPTION TEXT -->
                 </div>
                 <!-- /POST OPTION -->
-
-                {% include 'cores/_reaction/react_options.html' %}
+                {% include 'cores/_reaction/react_options.html' with post=post %}
 
 
             </div>

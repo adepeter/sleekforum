@@ -1,7 +1,7 @@
 {% load static %}
 
 <!-- REACTION OPTIONS -->
-<div class="reaction-options reaction-options-dropdown">
+<div class="reaction-options small reaction-options-dropdown">
     <!-- REACTION OPTION -->
     <div class="reaction-option text-tooltip-tft" data-title="Like">
         <!-- REACTION OPTION IMAGE -->
@@ -14,11 +14,34 @@
     <!-- /REACTION OPTION -->
 
     <!-- REACTION OPTION -->
+    <div class="reaction-option text-tooltip-tft" data-title="Love">
+        <!-- REACTION OPTION IMAGE -->
+        <a href="{{ thread.get_love_url }}">
+            <img class="reaction-option-image" src="{% static 'img/reaction/love.png' %}"
+                 alt="reaction-love">
+        </a>
+        <!-- /REACTION OPTION IMAGE -->
+    </div>
+    <!-- /REACTION OPTION -->
+
+    <!-- REACTION OPTION -->
     <div class="reaction-option text-tooltip-tft" data-title="Dislike">
         <!-- REACTION OPTION IMAGE -->
         <a href="{{ thread.get_dislike_url }}">
             <img class="reaction-option-image" src="{% static 'img/reaction/dislike.png' %}"
                  alt="reaction-dislike">
+        </a>
+        <!-- /REACTION OPTION IMAGE -->
+    </div>
+    <!-- /REACTION OPTION -->
+
+
+    <!-- REACTION OPTION -->
+    <div class="reaction-option text-tooltip-tft" data-title="Happy">
+        <!-- REACTION OPTION IMAGE -->
+        <a href="{{ thread.get_happy_url }}">
+            <img class="reaction-option-image" src="{% static 'img/reaction/happy.png' %}"
+                 alt="reaction-happy">
         </a>
         <!-- /REACTION OPTION IMAGE -->
     </div>
@@ -41,6 +64,17 @@
         <!-- REACTION OPTION IMAGE -->
         <a href="{{ thread.get_wow_url }}">
             <img class="reaction-option-image" src="{% static 'img/reaction/wow.png' %}" alt="reaction-wow">
+        </a>
+        <!-- /REACTION OPTION IMAGE -->
+    </div>
+    <!-- /REACTION OPTION -->
+
+    <!-- REACTION OPTION -->
+    <div class="reaction-option text-tooltip-tft" data-title="Angry">
+        <!-- REACTION OPTION IMAGE -->
+        <a href="{{ thread.get_angry_url }}">
+            <img class="reaction-option-image" src="{% static 'img/reaction/angry.png' %}"
+                 alt="reaction-angry">
         </a>
         <!-- /REACTION OPTION IMAGE -->
     </div>

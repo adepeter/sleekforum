@@ -2,7 +2,6 @@ from django.conf import settings
 from django.contrib.contenttypes.fields import GenericRelation
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
-from django.urls import reverse
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
@@ -11,11 +10,12 @@ from violation.models import Violation
 from ....activity.models import Reaction
 
 from ...managers.thread import ThreadManager
+from ...modelurls.thread import ThreadModelURL
 
 limit_choices_to = models.Q(is_lock=False)
 
 
-class Thread(models.Model):
+class Thread(models.Model, ThreadModelURL):
     PIN_DEFAULT = 0
     PIN_LOCALLY = 1
     PIN_GLOBALLY = 2
@@ -99,6 +99,8 @@ class Thread(models.Model):
     happies = models.PositiveIntegerField(default=0)
     wows = models.PositiveIntegerField(default=0)
     angries = models.PositiveIntegerField(default=0)
+    funnies = models.PositiveIntegerField(default=0)
+    loves = models.PositiveIntegerField(default=0)
     shares = models.PositiveIntegerField(default=0)
     views = models.PositiveIntegerField(default=0)
     reactions = GenericRelation(Reaction, related_query_name='threads')
@@ -126,83 +128,3 @@ class Thread(models.Model):
             )
         ]
         ordering = ['-modified']
-
-    def get_kwargs(self):
-        kwargs = {
-            'category_slug': self.category.slug,
-            'pk': self.id,
-            'slug': self.slug,
-        }
-        return kwargs
-
-    def get_absolute_url(self):
-        return reverse(
-            'sleekforum:threads:read_thread',
-            kwargs=self.get_kwargs()
-        )
-
-    def get_edit_url(self):
-        return reverse(
-            'sleekforum:threads:edit_thread',
-            kwargs=self.get_kwargs()
-        )
-
-    def get_delete_url(self):
-        return reverse(
-            'sleekforum:threads:delete_thread',
-            kwargs=self.get_kwargs()
-        )
-
-    def get_dislike_url(self):
-        return reverse(
-            'sleekforum:threads:dislike_thread',
-            kwargs=self.get_kwargs()
-        )
-
-    def get_like_url(self):
-        return reverse(
-            'sleekforum:threads:like_thread',
-            kwargs=self.get_kwargs()
-        )
-
-    def get_sad_url(self):
-        return reverse(
-            'sleekforum:threads:sad_thread',
-            kwargs=self.get_kwargs()
-        )
-
-    def get_wow_url(self):
-        return reverse(
-            'sleekforum:threads:wow_thread',
-            kwargs=self.get_kwargs()
-        )
-
-    def get_funny_url(self):
-        return reverse(
-            'sleekforum:threads:funny_thread',
-            kwargs=self.get_kwargs()
-        )
-
-    def get_report_url(self):
-        return reverse(
-            'sleekforum:threads:report_thread',
-            kwargs=self.get_kwargs()
-        )
-
-    def get_share_url(self):
-        return reverse(
-            'sleekforum:threads:share_thread',
-            kwargs=self.get_kwargs()
-        )
-
-    def get_toggle_hide_url(self):
-        return reverse(
-            'sleekforum:threads:toggle_hide_thread',
-            kwargs=self.get_kwargs()
-        )
-
-    def get_toggle_lock_url(self):
-        return reverse(
-            'sleekforum:threads:toggle_lock_thread',
-            kwargs=self.get_kwargs()
-        )

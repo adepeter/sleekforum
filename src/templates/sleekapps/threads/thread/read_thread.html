@@ -156,6 +156,7 @@
 
                                     {% endif %}
 
+                                    {% if not thread.starter == request.user %}
                                     <!-- SIMPLE DROPDOWN LINK -->
                                     <a class="dropdown-navigation-link">Report thread</a>
                                     <!-- /SIMPLE DROPDOWN LINK -->
@@ -163,6 +164,7 @@
                                     <!-- SIMPLE DROPDOWN LINK -->
                                     <a class="dropdown-navigation-link">Report Author</a>
                                     <!-- /SIMPLE DROPDOWN LINK -->
+                                    {% endif %}
 
                                 </div>
                                 <!-- /SIMPLE DROPDOWN -->
@@ -386,6 +388,5 @@
     <!-- /GRID -->
 </div>
 <!-- /CONTENT GRID -->
-
 
 {% endblock %}

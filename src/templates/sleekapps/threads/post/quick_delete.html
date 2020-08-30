@@ -1,0 +1,33 @@
+
+<!-- POPUP BOX -->
+<div class="popup-box small popup-event-creation">
+    <!-- POPUP CLOSE BUTTON -->
+    <div class="popup-close-button popup-event-creation-trigger">
+        <!-- POPUP CLOSE BUTTON ICON -->
+        <svg class="popup-close-button-icon icon-cross">
+            <use xlink:href="#svg-cross"></use>
+        </svg>
+        <!-- /POPUP CLOSE BUTTON ICON -->
+    </div>
+    <!-- /POPUP CLOSE BUTTON -->
+
+    <!-- POPUP BOX TITLE -->
+    <p class="popup-box-title">Delete Post</p>
+    <!-- /POPUP BOX TITLE -->
+
+    <!-- FORM -->
+    <form class="form" method="POST" action="">
+        {% csrf_token %}
+
+        DELETE MESSAGE
+        <!-- POPUP BOX ACTIONS -->
+        <div class="popup-box-actions medium void">
+            <!-- POPUP BOX ACTION -->
+            <button type="submit" class="popup-box-action full button secondary">Delete!</button>
+            <!-- /POPUP BOX ACTION -->
+        </div>
+        <!-- /POPUP BOX ACTIONS -->
+    </form>
+    <!-- /FORM -->
+</div>
+<!-- /POPUP BOX -->

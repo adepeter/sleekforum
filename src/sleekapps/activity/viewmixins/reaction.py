@@ -6,7 +6,7 @@ from django.views.generic.detail import SingleObjectMixin
 
 
 class ReactionMixin(SingleObjectMixin):
-    activity_model = None
+    reaction_model = None
     reaction_field = 'reaction'
     reaction_exclusion = False
     exclude_reactions = ['LIKE', 'DISLIKE']

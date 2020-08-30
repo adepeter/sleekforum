@@ -11,5 +11,5 @@ urlpatterns = [
 
 urlpatterns += [
     path('<slug:category_slug>/', include('sleekapps.threads.urls.thread')),
-    # path('posts/', include('sleekapps.threads.urls.post', namespace='post')),
+    path('posts/', include('sleekapps.threads.urls.post')),
 ]

@@ -1,6 +1,5 @@
 from ...models import Thread
-
-from .thread_misc import ThreadSingleActionMiscView
+from ...viewmixins.thread import ThreadSingleActionMiscView
 
 
 class HideUnhideThread(ThreadSingleActionMiscView):

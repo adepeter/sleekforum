@@ -4,71 +4,89 @@
 <div class="reaction-options reaction-options-dropdown">
     <!-- REACTION OPTION -->
     <div class="reaction-option text-tooltip-tft" data-title="Like">
-        <!-- REACTION OPTION IMAGE -->
-        <img class="reaction-option-image" src="{% static 'img/reaction/like.png' %}"
-             alt="reaction-like">
-        <!-- /REACTION OPTION IMAGE -->
+        <a href="{{ post.get_like_url }}">
+            <!-- REACTION OPTION IMAGE -->
+            <img class="reaction-option-image" src="{% static 'img/reaction/like.png' %}"
+                 alt="reaction-like">
+            <!-- /REACTION OPTION IMAGE -->
+        </a>
     </div>
     <!-- /REACTION OPTION -->
 
     <!-- REACTION OPTION -->
     <div class="reaction-option text-tooltip-tft" data-title="Love">
-        <!-- REACTION OPTION IMAGE -->
-        <img class="reaction-option-image" src="{% static 'img/reaction/love.png' %}"
-             alt="reaction-love">
-        <!-- /REACTION OPTION IMAGE -->
+        <a href="{{ post.get_love_url }}">
+            <!-- REACTION OPTION IMAGE -->
+            <img class="reaction-option-image" src="{% static 'img/reaction/love.png' %}"
+                 alt="reaction-love">
+            <!-- /REACTION OPTION IMAGE -->
+        </a>
     </div>
     <!-- /REACTION OPTION -->
 
     <!-- REACTION OPTION -->
     <div class="reaction-option text-tooltip-tft" data-title="Dislike">
-        <!-- REACTION OPTION IMAGE -->
-        <img class="reaction-option-image" src="{% static 'img/reaction/dislike.png' %}"
-             alt="reaction-dislike">
-        <!-- /REACTION OPTION IMAGE -->
+        <a href="{{ post.get_dislike_url }}">
+            <!-- REACTION OPTION IMAGE -->
+            <img class="reaction-option-image" src="{% static 'img/reaction/dislike.png' %}"
+                 alt="reaction-dislike">
+            <!-- /REACTION OPTION IMAGE -->
+        </a>
     </div>
     <!-- /REACTION OPTION -->
 
     <!-- REACTION OPTION -->
     <div class="reaction-option text-tooltip-tft" data-title="Happy">
-        <!-- REACTION OPTION IMAGE -->
-        <img class="reaction-option-image" src="{% static 'img/reaction/happy.png' %}"
-             alt="reaction-happy">
-        <!-- /REACTION OPTION IMAGE -->
+        <a href="{{ post.get_happy_url }}">
+            <!-- REACTION OPTION IMAGE -->
+            <img class="reaction-option-image" src="{% static 'img/reaction/happy.png' %}"
+                 alt="reaction-happy">
+            <!-- /REACTION OPTION IMAGE -->
+        </a>
     </div>
     <!-- /REACTION OPTION -->
 
     <!-- REACTION OPTION -->
     <div class="reaction-option text-tooltip-tft" data-title="Funny">
-        <!-- REACTION OPTION IMAGE -->
-        <img class="reaction-option-image" src="{% static 'img/reaction/funny.png' %}"
-             alt="reaction-funny">
-        <!-- /REACTION OPTION IMAGE -->
+        <a href="{{ post.get_funny_url }}">
+            <!-- REACTION OPTION IMAGE -->
+            <img class="reaction-option-image" src="{% static 'img/reaction/funny.png' %}"
+                 alt="reaction-funny">
+            <!-- /REACTION OPTION IMAGE -->
+        </a>
     </div>
     <!-- /REACTION OPTION -->
 
     <!-- REACTION OPTION -->
     <div class="reaction-option text-tooltip-tft" data-title="Wow">
-        <!-- REACTION OPTION IMAGE -->
-        <img class="reaction-option-image" src="{% static 'img/reaction/wow.png' %}" alt="reaction-wow">
-        <!-- /REACTION OPTION IMAGE -->
+        <a href="{{ post.get_wow_url }}">
+            <!-- REACTION OPTION IMAGE -->
+            <img class="reaction-option-image" src="{% static 'img/reaction/wow.png' %}"
+                 alt="reaction-wow">
+            <!-- /REACTION OPTION IMAGE -->
+        </a>
     </div>
     <!-- /REACTION OPTION -->
 
     <!-- REACTION OPTION -->
     <div class="reaction-option text-tooltip-tft" data-title="Angry">
-        <!-- REACTION OPTION IMAGE -->
-        <img class="reaction-option-image" src="{% static 'img/reaction/angry.png' %}"
-             alt="reaction-angry">
-        <!-- /REACTION OPTION IMAGE -->
+        <a href="{{ post.get_angry_url }}">
+            <!-- REACTION OPTION IMAGE -->
+            <img class="reaction-option-image" src="{% static 'img/reaction/angry.png' %}"
+                 alt="reaction-angry">
+            <!-- /REACTION OPTION IMAGE -->
+        </a>
     </div>
     <!-- /REACTION OPTION -->
 
     <!-- REACTION OPTION -->
     <div class="reaction-option text-tooltip-tft" data-title="Sad">
-        <!-- REACTION OPTION IMAGE -->
-        <img class="reaction-option-image" src="{% static 'img/reaction/sad.png' %}" alt="reaction-sad">
-        <!-- /REACTION OPTION IMAGE -->
+        <a href="{{ post.get_sad_url }}">
+            <!-- REACTION OPTION IMAGE -->
+            <img class="reaction-option-image" src="{% static 'img/reaction/sad.png' %}"
+                 alt="reaction-sad">
+            <!-- /REACTION OPTION IMAGE -->
+        </a>
     </div>
     <!-- /REACTION OPTION -->
 </div>

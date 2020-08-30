@@ -17,45 +17,8 @@ from ...forms.thread.thread_share import ThreadShareForm
 # from ...forms.thread.thread_search import ThreadSearchForm
 from ...models import Thread
 
-from ...viewmixins.thread import (
-    BooleanObjectMixin,
-    # LikeDislikeThreadMixin,
-)
-
 TEMPLATE_URL = 'threads/thread'
 
-class ThreadSingleActionMiscView(
-    BooleanObjectMixin,
-    SingleObjectMixin, View
-):
-    redirect_to_threads = None
-
-    def get(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        self.misc_action = self.toggle_boolean_and_save(self.object)
-        return self.get_success_url()
-
-    def get_success_url(self):
-        if self.redirect_to_threads is None:
-            raise ImproperlyConfigured(
-                '\'redirect_to_threads\' class attr cannot be set to None. '
-                'Attribute must be set to a boolean'
-            )
-        else:
-            if self.redirect_to_threads is True:
-                return redirect(self.get_redirect_url())
-            return redirect(self.object.get_absolute_url())
-
-    def get_redirect_url(self):
-        return reverse('sleekforum:threads:list_threads', args=[
-            str(self.kwargs['category_slug'])
-        ])
-
-
-
-
-#
-#
 # class SearchThread(SingleObjectMixin, FormMixin, ListView):
 #     model = Thread
 #     template_name = f'{TEMPLATE_URL}/search_thread.html'

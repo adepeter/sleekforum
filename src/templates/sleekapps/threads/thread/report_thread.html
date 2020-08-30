@@ -1,7 +1,139 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}{{ thread.title }} | Report{% endblock %}
 
 {% block content %}
+<!-- CONTENT GRID -->
+<div class="content-grid">
+    <!-- SECTION BANNER -->
+    <div class="section-banner">
+        <!-- SECTION BANNER ICON -->
+        <img class="section-banner-icon" src="{% static '/img/banner/forums-icon.png' %}" alt="{{ category.get_name }}">
+        <!-- /SECTION BANNER ICON -->
 
+        <!-- SECTION BANNER TITLE -->
+        <p class="section-banner-title">Report thread</p>
+        <!-- /SECTION BANNER TITLE -->
+
+        <!-- SECTION BANNER TEXT -->
+        <p class="section-banner-text">Maintaining sanity is a virtue of this forum!</p>
+        <!-- /SECTION BANNER TEXT -->
+    </div>
+    <!-- /SECTION BANNER -->
+    <!-- GRID COLUMN -->
+    <div class="account-hub-content">
+        <!-- SECTION HEADER -->
+        <div class="section-header">
+            <!-- SECTION HEADER INFO -->
+            <div class="section-header-info">
+                <!-- SECTION PRETITLE -->
+                <p class="section-pretitle">My Profile</p>
+                <!-- /SECTION PRETITLE -->
+
+                <!-- SECTION TITLE -->
+                <h2 class="section-title">Notifications</h2>
+                <!-- /SECTION TITLE -->
+            </div>
+            <!-- /SECTION HEADER INFO -->
+
+            <!-- SECTION HEADER ACTIONS -->
+            <div class="section-header-actions">
+                <!-- SECTION HEADER ACTION -->
+                <p class="section-header-action">Mark all as Read</p>
+                <!-- /SECTION HEADER ACTION -->
+
+                <!-- SECTION HEADER ACTION -->
+                <p class="section-header-action">Settings</p>
+                <!-- /SECTION HEADER ACTION -->
+            </div>
+            <!-- /SECTION HEADER ACTIONS -->
+        </div>
+        <!-- /SECTION HEADER -->
+
+        <!-- NOTIFICATION BOX LIST -->
+        <div class="notification-box-list">
+            <!-- NOTIFICATION BOX -->
+            <div class="notification-box">
+                <!-- USER STATUS -->
+                <div class="user-status notification">
+                    <!-- USER STATUS TITLE -->
+                    <p class="user-status-title">
+                        Rule
+                    </p>
+                    <!-- /USER STATUS TITLE -->
+
+                    <!-- USER STATUS TIMESTAMP -->
+                    <p class="user-status-timestamp small-space">Rule description</p>
+                    <!-- /USER STATUS TIMESTAMP -->
+
+                    <!-- USER STATUS ICON -->
+                    <div class="user-status-icon">
+                        <!-- CHECKBOX WRAP -->
+                        <div class="checkbox-wrap">
+                            <input type="checkbox" id="login-remember" name="login_remember" value="{{ id }}" checked>
+                            <!-- CHECKBOX BOX -->
+                            <div class="checkbox-box">
+                                <!-- ICON CROSS -->
+                                <svg class="icon-cross">
+                                    <use xlink:href="#svg-cross"></use>
+                                </svg>
+                                <!-- /ICON CROSS -->
+                            </div>
+                            <!-- /CHECKBOX BOX -->
+                            <label for="login-remember">Rule</label>
+                        </div>
+                        <!-- /CHECKBOX WRAP -->
+                    </div>
+                    <!-- /USER STATUS ICON -->
+                </div>
+                <!-- /USER STATUS -->
+            </div>
+            <!-- /NOTIFICATION BOX -->
+
+            <!-- NOTIFICATION BOX -->
+            <div class="notification-box">
+                <!-- USER STATUS -->
+                <div class="user-status notification">
+                    <!-- USER STATUS TITLE -->
+                    <p class="user-status-title">
+                        Rule
+                    </p>
+                    <!-- /USER STATUS TITLE -->
+
+                    <!-- USER STATUS TIMESTAMP -->
+                    <p class="user-status-timestamp small-space">Rule description</p>
+                    <!-- /USER STATUS TIMESTAMP -->
+
+                    <!-- USER STATUS ICON -->
+                    <div class="user-status-icon">
+                        <!-- CHECKBOX WRAP -->
+                        <div class="checkbox-wrap">
+                            <input type="checkbox" id="login-remember" name="login_remember" value="{{ id }}" checked>
+                            <!-- CHECKBOX BOX -->
+                            <div class="checkbox-box">
+                                <!-- ICON CROSS -->
+                                <svg class="icon-cross">
+                                    <use xlink:href="#svg-cross"></use>
+                                </svg>
+                                <!-- /ICON CROSS -->
+                            </div>
+                            <!-- /CHECKBOX BOX -->
+                            <label for="login-rememberd">Rules</label>
+                        </div>
+                        <!-- /CHECKBOX WRAP -->
+                    </div>
+                    <!-- /USER STATUS ICON -->
+                </div>
+                <!-- /USER STATUS -->
+            </div>
+            <!-- /NOTIFICATION BOX -->
+
+
+        </div>
+        <!-- /NOTIFICATION BOX LIST -->
+    </div>
+    <!-- /GRID COLUMN -->
+
+</div>
 {% endblock %}
