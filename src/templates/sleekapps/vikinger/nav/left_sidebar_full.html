@@ -86,23 +86,11 @@
         <!-- USER STAT -->
         <div class="user-stat">
             <!-- USER STAT TITLE -->
-            <p class="user-stat-title">930</p>
+            <p class="user-stat-title">{{ request.user.posts.count }}</p>
             <!-- /USER STAT TITLE -->
 
             <!-- USER STAT TEXT -->
             <p class="user-stat-text">posts</p>
-            <!-- /USER STAT TEXT -->
-        </div>
-        <!-- /USER STAT -->
-
-        <!-- USER STAT -->
-        <div class="user-stat">
-            <!-- USER STAT TITLE -->
-            <p class="user-stat-title">82</p>
-            <!-- /USER STAT TITLE -->
-
-            <!-- USER STAT TEXT -->
-            <p class="user-stat-text">friends</p>
             <!-- /USER STAT TEXT -->
         </div>
         <!-- /USER STAT -->
@@ -123,6 +111,24 @@
 
     <!-- MENU -->
     <ul class="menu">
+
+        {% if request.user.is_staff %}
+        <!-- MENU ITEM -->
+        <li class="menu-item">
+            <!-- MENU ITEM LINK -->
+            <a class="menu-item-link" href="{% url 'admin:index' %}">
+                <!-- MENU ITEM LINK ICON -->
+                <svg class="menu-item-link-icon icon-settings">
+                    <use xlink:href="#svg-settings"></use>
+                </svg>
+                <!-- /MENU ITEM LINK ICON -->
+                Admin menu
+            </a>
+            <!-- /MENU ITEM LINK -->
+        </li>
+        <!-- /MENU ITEM -->
+        {% endif %}
+
         <!-- MENU ITEM -->
         <li class="menu-item">
             <!-- MENU ITEM LINK -->
@@ -156,21 +162,6 @@
         <!-- MENU ITEM -->
         <li class="menu-item">
             <!-- MENU ITEM LINK -->
-            <a class="menu-item-link" href="groups.html">
-                <!-- MENU ITEM LINK ICON -->
-                <svg class="menu-item-link-icon icon-group">
-                    <use xlink:href="#svg-group"></use>
-                </svg>
-                <!-- /MENU ITEM LINK ICON -->
-                Groups
-            </a>
-            <!-- /MENU ITEM LINK -->
-        </li>
-        <!-- /MENU ITEM -->
-
-        <!-- MENU ITEM -->
-        <li class="menu-item">
-            <!-- MENU ITEM LINK -->
             <a class="menu-item-link" href="members.html">
                 <!-- MENU ITEM LINK ICON -->
                 <svg class="menu-item-link-icon icon-members">
@@ -178,21 +169,6 @@
                 </svg>
                 <!-- /MENU ITEM LINK ICON -->
                 Members
-            </a>
-            <!-- /MENU ITEM LINK -->
-        </li>
-        <!-- /MENU ITEM -->
-
-        <!-- MENU ITEM -->
-        <li class="menu-item">
-            <!-- MENU ITEM LINK -->
-            <a class="menu-item-link" href="quests.html">
-                <!-- MENU ITEM LINK ICON -->
-                <svg class="menu-item-link-icon icon-quests">
-                    <use xlink:href="#svg-quests"></use>
-                </svg>
-                <!-- /MENU ITEM LINK ICON -->
-                Quests
             </a>
             <!-- /MENU ITEM LINK -->
         </li>

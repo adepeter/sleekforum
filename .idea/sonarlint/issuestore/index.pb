@@ -381,3 +381,7 @@ X
 (src/sleekapps/threads/views/post/post.py,d\7\d71920f95801509c143f4eacad295f0ac6091fa3
 W
 'src/sleekapps/threads/modelurls/post.py,c\6\c604631703e867397f6bc75650d77783ef3c060f
+a
+1src/templates/sleekapps/vikinger/loading_bar.html,a\3\a37bc3107f185d20f8f8a0b12a24b8e51ac60ebb
+h
+8src/sleekapps/cores/templatetags/cores_violation_tags.py,b\7\b78477ebce57ee79b6c0233f311ebc8f493f45d6

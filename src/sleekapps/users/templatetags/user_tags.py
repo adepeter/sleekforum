@@ -1,6 +1,6 @@
 from django import template
 from django.contrib.auth import get_user_model
-from django.db.models import Count
+from django.db.models import Count, Max
 
 User = get_user_model()
 
@@ -12,8 +12,8 @@ register = template.Library()
     name='user_with_highest_posts')
 def get_users_with_highest_post(number_of_users=10):
     query = User.objects.annotate(
-            posts_count=Count('posts')
-        ).exclude(
+        posts_count=Count('posts')
+    ).exclude(
         posts_count__lt=1
     ).order_by('-posts_count')
     try:
@@ -21,3 +21,10 @@ def get_users_with_highest_post(number_of_users=10):
     except KeyError:
         users = query
     return {'users': users}
+
+
+@register.simple_tag
+def user_with_highest_posts():
+    return User.objects.annotate(
+        max_post=Max('posts')
+    ).first()

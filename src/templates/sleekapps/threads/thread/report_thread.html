@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load cores_violation_tags %}
 
 {% block title %}{{ thread.title }} | Report{% endblock %}
 
@@ -23,115 +24,102 @@
     <!-- /SECTION BANNER -->
     <!-- GRID COLUMN -->
     <div class="account-hub-content">
+
         <!-- SECTION HEADER -->
         <div class="section-header">
             <!-- SECTION HEADER INFO -->
             <div class="section-header-info">
                 <!-- SECTION PRETITLE -->
-                <p class="section-pretitle">My Profile</p>
+                <p class="section-pretitle">OFFENSIVE THREAD</p>
                 <!-- /SECTION PRETITLE -->
 
                 <!-- SECTION TITLE -->
-                <h2 class="section-title">Notifications</h2>
+                <h2 class="section-title">Reporting - {{ thread.title }}</h2>
                 <!-- /SECTION TITLE -->
             </div>
             <!-- /SECTION HEADER INFO -->
-
-            <!-- SECTION HEADER ACTIONS -->
-            <div class="section-header-actions">
-                <!-- SECTION HEADER ACTION -->
-                <p class="section-header-action">Mark all as Read</p>
-                <!-- /SECTION HEADER ACTION -->
-
-                <!-- SECTION HEADER ACTION -->
-                <p class="section-header-action">Settings</p>
-                <!-- /SECTION HEADER ACTION -->
-            </div>
-            <!-- /SECTION HEADER ACTIONS -->
         </div>
         <!-- /SECTION HEADER -->
 
         <!-- NOTIFICATION BOX LIST -->
-        <div class="notification-box-list">
-            <!-- NOTIFICATION BOX -->
-            <div class="notification-box">
-                <!-- USER STATUS -->
-                <div class="user-status notification">
-                    <!-- USER STATUS TITLE -->
-                    <p class="user-status-title">
-                        Rule
-                    </p>
-                    <!-- /USER STATUS TITLE -->
 
-                    <!-- USER STATUS TIMESTAMP -->
-                    <p class="user-status-timestamp small-space">Rule description</p>
-                    <!-- /USER STATUS TIMESTAMP -->
+        <div class="widget-box">
+            <div class="notification-box-list">
+                <div class="section-header-info">
+                    <!-- SECTION PRETITLE -->
+                    <p class="section-pretitle">Violated</p>
+                    <!-- /SECTION PRETITLE -->
 
-                    <!-- USER STATUS ICON -->
-                    <div class="user-status-icon">
-                        <!-- CHECKBOX WRAP -->
-                        <div class="checkbox-wrap">
-                            <input type="checkbox" id="login-remember" name="login_remember" value="{{ id }}" checked>
-                            <!-- CHECKBOX BOX -->
-                            <div class="checkbox-box">
-                                <!-- ICON CROSS -->
-                                <svg class="icon-cross">
-                                    <use xlink:href="#svg-cross"></use>
-                                </svg>
-                                <!-- /ICON CROSS -->
-                            </div>
-                            <!-- /CHECKBOX BOX -->
-                            <label for="login-remember">Rule</label>
-                        </div>
-                        <!-- /CHECKBOX WRAP -->
-                    </div>
-                    <!-- /USER STATUS ICON -->
+                    <!-- SECTION TITLE -->
+                    <h2 class="section-title">Rules</h2>
+                    <!-- /SECTION TITLE -->
                 </div>
-                <!-- /USER STATUS -->
-            </div>
-            <!-- /NOTIFICATION BOX -->
+                <form method="POST" action="" class="form">
+                    {% csrf_token %}
+                    <small class="text-danger">{{ form.rules.errors }}</small>
+                    {% for field, text in form.rules.field.choices %}
+                    <!-- NOTIFICATION BOX -->
+                    <div class="notification-box">
+                        <!-- USER STATUS -->
+                        <div class="user-status notification">
+                            <!-- USER STATUS TITLE -->
+                            <p class="user-status-title">
+                                {{ text }}
+                            </p>
+                            <!-- /USER STATUS TITLE -->
 
-            <!-- NOTIFICATION BOX -->
-            <div class="notification-box">
-                <!-- USER STATUS -->
-                <div class="user-status notification">
-                    <!-- USER STATUS TITLE -->
-                    <p class="user-status-title">
-                        Rule
-                    </p>
-                    <!-- /USER STATUS TITLE -->
+                            <!-- USER STATUS TIMESTAMP -->
+                            <p class="user-status-timestamp small-space">{{ field | rules_description }}</p>
+                            <!-- /USER STATUS TIMESTAMP -->
 
-                    <!-- USER STATUS TIMESTAMP -->
-                    <p class="user-status-timestamp small-space">Rule description</p>
-                    <!-- /USER STATUS TIMESTAMP -->
-
-                    <!-- USER STATUS ICON -->
-                    <div class="user-status-icon">
-                        <!-- CHECKBOX WRAP -->
-                        <div class="checkbox-wrap">
-                            <input type="checkbox" id="login-remember" name="login_remember" value="{{ id }}" checked>
-                            <!-- CHECKBOX BOX -->
-                            <div class="checkbox-box">
-                                <!-- ICON CROSS -->
-                                <svg class="icon-cross">
-                                    <use xlink:href="#svg-cross"></use>
-                                </svg>
-                                <!-- /ICON CROSS -->
+                            <!-- USER STATUS ICON -->
+                            <div class="user-status-icon">
+                                <!-- CHECKBOX WRAP -->
+                                <div class="checkbox-wrap">
+                                    <input type="checkbox" id="report_{{ field }}" name="{{ form.rules.name }}"
+                                           value="{{ field.value }}">
+                                    <!-- CHECKBOX BOX -->
+                                    <div class="checkbox-box">
+                                        <!-- ICON CROSS -->
+                                        <svg class="icon-cross">
+                                            <use xlink:href="#svg-cross"></use>
+                                        </svg>
+                                        <!-- /ICON CROSS -->
+                                    </div>
+                                    <!-- /CHECKBOX BOX -->
+                                    <label for="report_{{ field }}">{{ forloop.counter }}</label>
+                                </div>
+                                <!-- /CHECKBOX WRAP -->
                             </div>
-                            <!-- /CHECKBOX BOX -->
-                            <label for="login-rememberd">Rules</label>
+                            <!-- /USER STATUS ICON -->
                         </div>
-                        <!-- /CHECKBOX WRAP -->
+                        <!-- /USER STATUS -->
                     </div>
-                    <!-- /USER STATUS ICON -->
-                </div>
-                <!-- /USER STATUS -->
+                    <!-- /NOTIFICATION BOX -->
+                    {% endfor %}
+
+                    <div class="form-row split">
+                        <!-- FORM ITEM -->
+                        <div class="form-item">
+                            <!-- BUTTON -->
+                            <a href="{{ thread.get_absolute_url }}" class="button full secondary">Return back</a>
+                            <!-- /BUTTON -->
+                        </div>
+                        <!-- /FORM ITEM -->
+
+                        <!-- FORM ITEM -->
+                        <div class="form-item">
+                            <!-- BUTTON -->
+                            <button type="submit" class="button full primary">Report thread!</button>
+                            <!-- /BUTTON -->
+                        </div>
+                        <!-- /FORM ITEM -->
+                    </div>
+
+                </form>
             </div>
-            <!-- /NOTIFICATION BOX -->
-
-
+            <!-- /NOTIFICATION BOX LIST -->
         </div>
-        <!-- /NOTIFICATION BOX LIST -->
     </div>
     <!-- /GRID COLUMN -->
 

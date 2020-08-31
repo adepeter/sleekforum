@@ -6,7 +6,10 @@ from ....cores.fields import RuleField
 
 class ThreadReportForm(ViolationForm):
     categories = ['forum']
-    
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['rules'] = RuleField(queryset=self.get_queryset(), required=False, widget=forms.RadioSelect)
+
+    def save(self, commit=True):
+        report = super().save(commit=False)
+        report.violator = self.object.starter
+        if commit:
+            report.save()
+        return report

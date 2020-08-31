@@ -59,6 +59,7 @@
         </div>
         <!-- /SECTION FILTERS BAR ACTIONS -->
 
+        {% if request.user.is_authenticated %}
         <!-- SECTION FILTERS BAR ACTIONS -->
         <div class="section-filters-bar-actions">
             <!-- BUTTON -->
@@ -66,6 +67,7 @@
             <!-- /BUTTON -->
         </div>
         <!-- /SECTION FILTERS BAR ACTIONS -->
+        {% endif %}
     </div>
     <!-- /SECTION FILTERS BAR -->
 

@@ -1,3 +1,4 @@
+{% if request.user.is_authenticated %}
 <aside class="floaty-bar">
     <!-- BAR ACTIONS -->
     <div class="bar-actions">
@@ -64,7 +65,7 @@
         <!-- /ACTION LIST -->
 
         <!-- ACTION ITEM WRAP -->
-        <a class="action-item-wrap" href="hub-profile-info.html">
+        <a class="action-item-wrap" href="{% url 'sleekforum:users:profile:profile_edit' %}">
             <!-- ACTION ITEM -->
             <div class="action-item dark">
                 <!-- ACTION ITEM ICON -->
@@ -79,3 +80,13 @@
     </div>
     <!-- /BAR ACTIONS -->
 </aside>
+
+{% else %}
+<!-- FLOATY BAR -->
+<aside class="floaty-bar logged-out">
+    <!-- LOGIN BUTTON -->
+    <a class="login-button button small primary" href="{% url 'sleekforum:users:auth:login' %}">Login &amp; Register</a>
+    <!-- /LOGIN BUTTON -->
+</aside>
+<!-- /FLOATY BAR -->
+{% endif %}
