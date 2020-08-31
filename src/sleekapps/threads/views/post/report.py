@@ -2,22 +2,24 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.utils.translation import gettext_lazy as _
 from violation.views.violation import BaseViolationView
 
-from ...forms.thread.report import ThreadReportForm
-from ...models import Thread
+from ...forms.post.report import PostReportForm
+from ...viewmixins.post import BasePostMixin
 
-TEMPLATE_URL = 'threads/thread'
+from ...models import Post
+
+TEMPLATE_URL = 'threads/post'
 
 
-class ReportThread(SuccessMessageMixin, BaseViolationView):
-    model = Thread
-    form_class = ThreadReportForm
+class ReportPost(SuccessMessageMixin, BasePostMixin, BaseViolationView):
+    model = Post
+    form_class = PostReportForm
     success_message = _('Your report was successfully submitted for reviewal by an admin')
     query_pk_and_slug = True
-    template_name = f'{TEMPLATE_URL}/report_thread.html'
+    template_name = f'{TEMPLATE_URL}/report_post.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['thread'] = self.get_object()
+        context['post'] = self.get_object()
         return context
 
     def get_form_kwargs(self):
@@ -32,9 +34,5 @@ class ReportThread(SuccessMessageMixin, BaseViolationView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        thread = self.get_object()
-        return thread.get_absolute_url()
-
-    def get_queryset(self):
-        qs = super().get_queryset()
-        return qs.filter(category__slug__iexact=self.kwargs['category_slug'])
+        post = self.get_object()
+        return post.get_absolute_url()

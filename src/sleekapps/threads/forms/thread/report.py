@@ -1,7 +1,4 @@
 from violation.forms.violation import ViolationForm
-from django import forms
-
-from ....cores.fields import RuleField
 
 
 class ThreadReportForm(ViolationForm):

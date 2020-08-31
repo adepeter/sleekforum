@@ -4,6 +4,7 @@ from ..views.post.post import (
     DeletePost,
     ReplyPost
 )
+from ..views.post.report import ReportPost
 from ..views.post.reaction import (
     AngryPost,
     LovePost,
@@ -31,6 +32,7 @@ urlpatterns = [
         path('edit/', EditPost.as_view(), name='edit_post'),
         path('delete_post/', DeletePost.as_view(), name='delete_post'),
         path('reply/', ReplyPost.as_view(), name='reply_post'),
+        path('report/', ReportPost.as_view(), name='report_post'),
         path('', include(reactions_urlpatterns)),
     ])),
 ]
