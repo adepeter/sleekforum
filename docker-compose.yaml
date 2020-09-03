@@ -3,14 +3,15 @@ version: "3.8"
 service:
   sleekforum:
     build:
-      context: .
+      context: src
       args:
         sleekforum_user: sleekforum
     networks:
       - db
+      - webserver
     restart: unless-stopped
     volumes:
-      - .:/srv/http/${sleekforum_user:-sleekforum}
+      - ./src:/srv/http/${sleekforum_user:-sleekforum}
     port:
       - "8000:4042"
 
@@ -25,6 +26,21 @@ service:
       - POSTGRES_DB=sleekforum_db
       - POSTGRES_USER=sleekforum_user
       - POSTGRES_PASSWORD=sleekforum_password
+
+  nginx:
+    build:
+      context: nginx
+    volumes:
+      - ./configs/nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./src/static:/srv/ftp/sleekforum/static:z
+      - ./src/media:/srv/ftp/sleekforum/media:z
+    networks:
+      - webserver
+    port:
+      - "8080:80"
+    restart: on-failure
+    depends-on:
+      - sleekforum
 
 networks:
   db:

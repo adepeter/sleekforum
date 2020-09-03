@@ -13,7 +13,6 @@ Currently, **Sleekforum v2** ships with the following features at the moment
 - Custom theme developed over bootstrap.
 
 
-
 Development features:
 
 Even more features will follow in future releases:
