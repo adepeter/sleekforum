@@ -1,3 +1,4 @@
+import os
 from ._base import *
 
 INSTALLED_APPS += [
@@ -15,10 +16,10 @@ MIDDLEWARE += [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'sleekforumdb',
-        'USER': 'sleekforum_user',
-        'PASSWORD': 'sleekforum',
-        'HOST': 'localhost',
+        'NAME': os.getenv('POSTGRES_DB', 'sleekforumdb'),
+        'USER': os.getenv('POSTGRES_USER', 'sleekforum_user'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'sleekforum'),
+        'HOST': os.getenv('POSTGRES_HOST', 'localhost'),
         'PORT': '5432',
     }
 }

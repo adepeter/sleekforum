@@ -10,8 +10,14 @@ service:
       - db
       - webserver
     restart: unless-stopped
+    env_file:
+      - ./configs/env/postgres.env
+    environment:
+      - POSTGRES_HOST=postgres
     volumes:
-      - ./src:/srv/http/${sleekforum_user:-sleekforum}
+      - ./src:/srv/http/${sleekforum_user:-sleekforum}:z
+    depends_on:
+      - postgres
     port:
       - "8000:4042"
 
@@ -38,12 +44,13 @@ service:
       - webserver
     port:
       - "8080:80"
-    restart: on-failure
-    depends-on:
+    restart: always
+    depends_on:
       - sleekforum
 
 networks:
   db:
+  webserver:
 
 volumes:
-  pd_data:
+  pg_data:
