@@ -49,7 +49,7 @@
                 <div class="section-filters-bar-text small-space">
                     Last post by
                     <!-- USER AVATAR -->
-                    <a class="user-avatar micro no-stats" href="profile-timeline.html">
+                    <a class="user-avatar micro no-stats" href="{{ last_post.user.get_absolute_url }}">
                         <!-- USER AVATAR BORDER -->
                         <div class="user-avatar-border">
                             <!-- HEXAGON -->
@@ -175,8 +175,7 @@
                         <div class="forum-category-info">
                             <!-- FORUM CATEGORY TITLE -->
                             <p class="forum-category-title">
-                                <a href="{% url 'sleekforum:categories:subcategories' node.id node.slug %}">{{
-                                    node.get_name }}</a>
+                                <a href="{% url 'sleekforum:categories:subcategories' node.id node.slug %}">{{ node.get_name }}</a>
                             </p>
                             <!-- /FORUM CATEGORY TITLE -->
 

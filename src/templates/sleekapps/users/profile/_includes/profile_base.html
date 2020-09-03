@@ -140,11 +140,15 @@
                 <!-- /USER SHORT DESCRIPTION AVATAR -->
 
                 <!-- USER SHORT DESCRIPTION TITLE -->
-                <p class="user-short-description-title"><a href="{{ user.get_absolute_url }}">{{ user.get_display_name }}</a></p>
+                <p class="user-short-description-title">
+                    <a href="{{ user.get_absolute_url }}">{{ user.get_display_name }}</a>
+                </p>
                 <!-- /USER SHORT DESCRIPTION TITLE -->
 
                 <!-- USER SHORT DESCRIPTION TEXT -->
-                <p class="user-short-description-text"><a href="{{ user.website }}">{{ user.website | urlize }}</a></p>
+                <p class="user-short-description-text">
+                    <a href="{{ user.website }}">{{ user.website | urlize }}</a>
+                </p>
                 <!-- /USER SHORT DESCRIPTION TEXT -->
             </div>
             <!-- /USER SHORT DESCRIPTION -->
@@ -179,60 +183,12 @@
 
                     <div class="profile-header-social-link">
                         <!-- SOCIAL LINK -->
-                        <a class="social-link instagram" href="{{ user.instagram }}">
-                            <!-- ICON INSTAGRAM -->
-                            <svg class="icon-instagram">
-                                <use xlink:href="#svg-instagram"></use>
-                            </svg>
-                            <!-- /ICON INSTAGRAM -->
-                        </a>
-                        <!-- /SOCIAL LINK -->
-                    </div>
-
-                    <div class="profile-header-social-link">
-                        <!-- SOCIAL LINK -->
-                        <a class="social-link twitch" href="{{ user.twitch }}">
+                        <a class="social-link twitch" href="{{ user.repo }}">
                             <!-- ICON TWITCH -->
                             <svg class="icon-twitch">
                                 <use xlink:href="#svg-twitch"></use>
                             </svg>
                             <!-- /ICON TWITCH -->
-                        </a>
-                        <!-- /SOCIAL LINK -->
-                    </div>
-
-                    <div class="profile-header-social-link">
-                        <!-- SOCIAL LINK -->
-                        <a class="social-link youtube" href="{{ user.youtube }}">
-                            <!-- ICON YOUTUBE -->
-                            <svg class="icon-youtube">
-                                <use xlink:href="#svg-youtube"></use>
-                            </svg>
-                            <!-- /ICON YOUTUBE -->
-                        </a>
-                        <!-- /SOCIAL LINK -->
-                    </div>
-
-                    <div class="profile-header-social-link">
-                        <!-- SOCIAL LINK -->
-                        <a class="social-link patreon" href="{{ user.patreon }}">
-                            <!-- ICON PATREON -->
-                            <svg class="icon-patreon">
-                                <use xlink:href="#svg-patreon"></use>
-                            </svg>
-                            <!-- /ICON PATREON -->
-                        </a>
-                        <!-- /SOCIAL LINK -->
-                    </div>
-
-                    <div class="profile-header-social-link">
-                        <!-- SOCIAL LINK -->
-                        <a class="social-link discord" href="{{ user.discord }}">
-                            <!-- ICON DISCORD -->
-                            <svg class="icon-discord">
-                                <use xlink:href="#svg-discord"></use>
-                            </svg>
-                            <!-- /ICON DISCORD -->
                         </a>
                         <!-- /SOCIAL LINK -->
                     </div>
@@ -294,7 +250,8 @@
                 <!-- USER STAT -->
                 <div class="user-stat big">
                     <!-- USER STAT IMAGE -->
-                    <img class="user-stat-image" src="{{ user.country | country_flag_icon }}" alt="flag-{{ user.country }}">
+                    <img class="user-stat-image" src="{{ user.country | country_flag_icon }}"
+                         alt="flag-{{ user.country }}">
                     <!-- /USER STAT IMAGE -->
 
                     <!-- USER STAT TEXT -->
@@ -304,8 +261,8 @@
                 <!-- /USER STAT -->
             </div>
             <!-- /USER STATS -->
-
-            {% if user != request.user %}
+            {% if request.user.is_authenticated %}
+            {% if request.user != user %}
             <!-- PROFILE HEADER INFO ACTIONS -->
             <div class="profile-header-info-actions">
                 <!-- PROFILE HEADER INFO ACTION -->
@@ -319,6 +276,7 @@
                 <!-- /PROFILE HEADER INFO ACTION -->
             </div>
             <!-- /PROFILE HEADER INFO ACTIONS -->
+            {% endif %}
             {% endif %}
         </div>
         <!-- /PROFILE HEADER INFO -->

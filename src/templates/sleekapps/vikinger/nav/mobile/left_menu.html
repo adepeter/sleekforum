@@ -19,7 +19,7 @@
         <!-- NAVIGATION WIDGET INFO -->
         <div class="navigation-widget-info">
             <!-- USER AVATAR -->
-            <a class="user-avatar small no-outline" href="profile-timeline.html">
+            <a class="user-avatar small no-outline" href="{{ request.user.get_absolute_url }}">
                 <!-- USER AVATAR CONTENT -->
                 <div class="user-avatar-content">
                     <!-- HEXAGON -->
@@ -63,7 +63,7 @@
                     <!-- /USER AVATAR BADGE CONTENT -->
 
                     <!-- USER AVATAR BADGE TEXT -->
-                    <p class="user-avatar-badge-text">{{ request.user.posts.count }}</p>
+                    <p class="user-avatar-badge-text">{{ request.user.post_count | length }}</p>
                     <!-- /USER AVATAR BADGE TEXT -->
                 </div>
                 <!-- /USER AVATAR BADGE -->
@@ -71,7 +71,7 @@
             <!-- /USER AVATAR -->
 
             <!-- NAVIGATION WIDGET INFO TITLE -->
-            <p class="navigation-widget-info-title"><a href="profile-timeline.html">{{ request.user.get_display_name }}</a></p>
+            <p class="navigation-widget-info-title"><a href="{% url 'sleekforum:users:profile:home_profile' %}">{{ request.user.get_display_name }}</a></p>
             <!-- /NAVIGATION WIDGET INFO TITLE -->
 
             <!-- NAVIGATION WIDGET INFO TEXT -->
@@ -175,7 +175,7 @@
     <!-- /NAVIGATION WIDGET SECTION TITLE -->
 
     <!-- NAVIGATION WIDGET SECTION LINK -->
-    <a class="navigation-widget-section-link" href="hub-profile-info.html">Profile Info</a>
+    <a class="navigation-widget-section-link" href="{{ request.user.get_absolute_url }}">Profile Info</a>
     <!-- /NAVIGATION WIDGET SECTION LINK -->
 
     <!-- NAVIGATION WIDGET SECTION LINK -->
@@ -191,15 +191,15 @@
     <!-- /NAVIGATION WIDGET SECTION TITLE -->
 
     <!-- NAVIGATION WIDGET SECTION LINK -->
-    <a class="navigation-widget-section-link" href="hub-account-info.html">Account Info</a>
+    <a class="navigation-widget-section-link" href="{{ request.user.get_profile_edit_url }}">Profile edit</a>
     <!-- /NAVIGATION WIDGET SECTION LINK -->
 
     <!-- NAVIGATION WIDGET SECTION LINK -->
-    <a class="navigation-widget-section-link" href="{% url 'sleekforum:users:profile:profile_email_change' %}">Change e-mail</a>
+    <a class="navigation-widget-section-link" href="{{ request.user.get_change_email_url }}">Change e-mail</a>
     <!-- /NAVIGATION WIDGET SECTION LINK -->
 
     <!-- NAVIGATION WIDGET SECTION LINK -->
-    <a class="navigation-widget-section-link" href="{% url 'sleekforum:users:profile:profile_password_change' %}">Change Password</a>
+    <a class="navigation-widget-section-link" href="{{ request.user.get_change_password_url }}">Change Password</a>
     <!-- /NAVIGATION WIDGET SECTION LINK -->
 
     <!-- NAVIGATION WIDGET SECTION LINK -->

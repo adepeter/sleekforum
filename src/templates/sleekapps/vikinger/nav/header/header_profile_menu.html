@@ -19,7 +19,7 @@
             <!-- USER STATUS -->
             <div class="user-status">
                 <!-- USER STATUS AVATAR -->
-                <a class="user-status-avatar" href="profile-timeline.html">
+                <a class="user-status-avatar" href="{% url 'sleekforum:users:profile:home_profile' %}">
                     <!-- USER AVATAR -->
                     <div class="user-avatar small no-outline {{ request.user.online }}">
                         <!-- USER AVATAR CONTENT -->
@@ -79,7 +79,7 @@
                 <!-- /USER STATUS TITLE -->
 
                 <!-- USER STATUS TEXT -->
-                <p class="user-status-text small"><a href="profile-timeline.html">@{{ request.user.username }}</a></p>
+                <p class="user-status-text small"><a href="{% url 'sleekforum:users:profile:home_profile' %}">@{{ request.user.username }}</a></p>
                 <!-- /USER STATUS TEXT -->
             </div>
             <!-- /USER STATUS -->
@@ -91,7 +91,7 @@
         <!-- /DROPDOWN NAVIGATION CATEGORY -->
 
         <!-- DROPDOWN NAVIGATION LINK -->
-        <a class="dropdown-navigation-link" href="hub-profile-info.html">Profile Info</a>
+        <a class="dropdown-navigation-link" href="{% url 'sleekforum:users:profile:home_profile' %}">Profile Info</a>
         <!-- /DROPDOWN NAVIGATION LINK -->
 
         <!-- DROPDOWN NAVIGATION LINK -->
@@ -107,15 +107,15 @@
         <!-- /DROPDOWN NAVIGATION CATEGORY -->
 
         <!-- DROPDOWN NAVIGATION LINK -->
-        <a class="dropdown-navigation-link" href="hub-account-info.html">Account Info</a>
+        <a class="dropdown-navigation-link" href="{{ request.user.get_profile_edit_url }}">Profile edit</a>
         <!-- /DROPDOWN NAVIGATION LINK -->
 
         <!-- DROPDOWN NAVIGATION LINK -->
-        <a class="dropdown-navigation-link" href="{% url 'sleekforum:users:profile:profile_email_change' %}">Change e-mail</a>
+        <a class="dropdown-navigation-link" href="{{ request.user.get_change_email_url }}">Change e-mail</a>
         <!-- /DROPDOWN NAVIGATION LINK -->
 
         <!-- DROPDOWN NAVIGATION LINK -->
-        <a class="dropdown-navigation-link" href="{% url 'sleekforum:users:profile:profile_password_change' %}">Change
+        <a class="dropdown-navigation-link" href="{{ request.user.get_password_change_url }}">Change
             Password</a>
         <!-- /DROPDOWN NAVIGATION LINK -->
 

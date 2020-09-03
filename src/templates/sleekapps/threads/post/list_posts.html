@@ -60,7 +60,7 @@
                 <!-- USER STATUS -->
                 <div class="user-status">
                     <!-- USER STATUS AVATAR -->
-                    <a class="user-status-avatar" href="profile-timeline.html">
+                    <a class="user-status-avatar" href="{{ post.user.get_absolute_url }}">
                         <!-- USER AVATAR -->
                         <div class="user-avatar small no-outline {{ post.user.online }}">
                             <!-- USER AVATAR CONTENT -->
@@ -117,7 +117,7 @@
 
                     <!-- USER STATUS TITLE -->
                     <p class="user-status-title medium">
-                        <a class="bold" href="profile-timeline.html">{{ post.user.get_display_name }}</a>
+                        <a class="bold" href="{{ post.user.get_absolute_url }}">{{ post.user.get_display_name }}</a>
                     </p>
                     <!-- /USER STATUS TITLE -->
 

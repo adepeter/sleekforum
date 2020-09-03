@@ -64,7 +64,7 @@
                 <div class="section-filters-bar-text small-space">
                     Last post by
                     <!-- USER AVATAR -->
-                    <a class="user-avatar micro no-stats" href="profile-timeline.html">
+                    <a class="user-avatar micro no-stats" href="{{ lastpost.user.get_absolute_url }}">
                         <!-- USER AVATAR BORDER -->
                         <div class="user-avatar-border">
                             <!-- HEXAGON -->
@@ -82,7 +82,7 @@
                         <!-- /USER AVATAR CONTENT -->
                     </a>
                     <!-- /USER AVATAR -->
-                    <a class="bold" href="profile-timeline.html">{{ lastpost.user.get_display_name }}</a>
+                    <a class="bold" href="{{ lastpost.user.get_absolute_url }}">{{ lastpost.user.get_display_name }}</a>
                     {{ lastpost.created | time_ago }}
                 </div>
                 <!-- /SECTION FILTERS BAR TEXT -->
@@ -181,7 +181,7 @@
                         <!-- FORUM POST USER -->
                         <div class="forum-post-user">
                             <!-- USER AVATAR -->
-                            <a class="user-avatar no-outline {{ thread.starter.online }}" href="profile-timeline.html">
+                            <a class="user-avatar no-outline {{ thread.starter.online }}" href="{{ thread.starter.get_absolute_url }}">
                                 <!-- USER AVATAR CONTENT -->
                                 <div class="user-avatar-content">
                                     <!-- HEXAGON -->
@@ -225,7 +225,7 @@
                                     <!-- /USER AVATAR BADGE CONTENT -->
 
                                     <!-- USER AVATAR BADGE TEXT -->
-                                    <p class="user-avatar-badge-text">{{ thread.starter.posts.count }}</p>
+                                    <p class="user-avatar-badge-text">{{ thread.starter.post_count | length }}</p>
                                     <!-- /USER AVATAR BADGE TEXT -->
                                 </div>
                                 <!-- /USER AVATAR BADGE -->
@@ -234,7 +234,7 @@
 
                             <!-- USER AVATAR -->
                             <a class="user-avatar small no-outline {{ thread.starter.online }}"
-                               href="profile-timeline.html">
+                               href="{{ thread.starter.get_absolute_url }}">
                                 <!-- USER AVATAR CONTENT -->
                                 <div class="user-avatar-content">
                                     <!-- HEXAGON -->
@@ -287,7 +287,7 @@
 
                             <!-- FORUM POST USER TITLE -->
                             <p class="forum-post-user-title">
-                                <a href="profile-timeline.html">{{ thread.starter.get_display_name }}</a>
+                                <a href="{{ thread.starter.get_absolute_url }}">{{ thread.starter.get_display_name }}</a>
                             </p>
                             <!-- /FORUM POST USER TITLE -->
 

@@ -3,6 +3,8 @@ from django.utils import timezone
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
+from ...cores.helper import get_static
+
 
 class UserManager(BaseUserManager):
     use_in_migrations = True
@@ -19,7 +21,7 @@ class UserManager(BaseUserManager):
             **extra_fields
         )
         user.set_password(password)
-        user.avatar = '/defaults/users/avatars/none.jpg'
+        user.avatar = str(get_static('/defaults/users/avatars/none.jpg'))
         now = timezone.now()
         user.date_created = now
         user.last_login = now

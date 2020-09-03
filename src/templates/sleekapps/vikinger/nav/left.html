@@ -3,10 +3,10 @@
 
 <!-- NAVIGATION WIDGET -->
 <nav id="navigation-widget-small" class="navigation-widget navigation-widget-desktop closed sidebar left delayed">
-    {% if user.is_authenticated %}
+    {% if request.user.is_authenticated %}
     <!-- USER AVATAR -->
     <a class="user-avatar small no-outline {% if user.is_online %}online{% else %}offline{% endif %}"
-       href="profile-timeline.html">
+       href="{% url 'sleekforum:users:profile:home_profile' %}">
         <!-- USER AVATAR CONTENT -->
         <div class="user-avatar-content">
             <!-- HEXAGON -->
@@ -50,7 +50,7 @@
             <!-- /USER AVATAR BADGE CONTENT -->
 
             <!-- USER AVATAR BADGE TEXT -->
-            <p class="user-avatar-badge-text">{{ request.user.posts.count }}</p>
+            <p class="user-avatar-badge-text">{{ request.user.post_count | length }}</p>
             <!-- /USER AVATAR BADGE TEXT -->
         </div>
         <!-- /USER AVATAR BADGE -->
@@ -59,7 +59,7 @@
     {% else %}
     {% user_with_highest_posts as rated_user %}
     <!-- USER AVATAR -->
-    <a class="user-avatar small no-outline {{ rated_user.online }}" href="profile-timeline.html">
+    <a class="user-avatar small no-outline {{ rated_user.online }}" href="{{ rated_user.get_absolute_url }}">
         <!-- USER AVATAR CONTENT -->
         <div class="user-avatar-content">
             <!-- HEXAGON -->

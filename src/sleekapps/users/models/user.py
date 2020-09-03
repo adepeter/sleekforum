@@ -249,5 +249,14 @@ class User(PermissionsMixin, AbstractBaseUser):
         }
         return reverse('sleekforum:users:kwarg_home_profile', kwargs=kwargs)
 
+    def get_profile_edit_url(self):
+        return reverse('sleekforum:users:profile:profile_edit')
+
+    def get_password_change_url(self):
+        return reverse('sleekforum:users:profile:profile_password_change')
+
+    def get_change_email_url(self):
+        return reverse('sleekforum:users:profile:profile_email_change')
+
     def __str__(self):
         return '%s - %s' % (self.username, self.email)

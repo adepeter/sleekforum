@@ -132,7 +132,7 @@
                             <!-- /DISCUSSION PREVIEW META TEXT -->
 
                             <!-- USER AVATAR -->
-                            <a class="user-avatar micro no-border" href="profile-timeline.html">
+                            <a class="user-avatar micro no-border" href="{{ thread.starter.get_absolute_url }}">
                                 <!-- USER AVATAR CONTENT -->
                                 <div class="user-avatar-content">
                                     <!-- HEXAGON -->
@@ -145,7 +145,7 @@
 
                             <!-- DISCUSSION PREVIEW META TEXT -->
                             <p class="discussion-preview-meta-text">
-                                <a href="profile-timeline.html">{{ thread.starter.get_display_name }}</a> {{ thread.created | time_ago }}
+                                <a href="{{ thread.starter.get_absolute_url }}">{{ thread.starter.get_display_name }}</a> {{ thread.created | time_ago }}
                             </p>
                             <!-- /DISCUSSION PREVIEW META TEXT -->
                         </div>
@@ -177,7 +177,7 @@
                     {% if post is not None %}
                     <div class="user-status">
                         <!-- USER STATUS AVATAR -->
-                        <a class="user-status-avatar" href="profile-timeline.html">
+                        <a class="user-status-avatar" href="post.user.get_absolute_url">
                             <!-- USER AVATAR -->
                             <div class="user-avatar small no-outline {{ post.user.online }}">
                                 <!-- USER AVATAR CONTENT -->
@@ -234,7 +234,7 @@
 
                         <!-- USER STATUS TITLE -->
                         <p class="user-status-title">
-                            <a class="bold" href="profile-timeline.html">{{ post.user.get_display_name }}</a>
+                            <a class="bold" href="{{ post.user.get_absolute_url }}">{{ post.user.get_display_name }}</a>
                         </p>
                         <!-- /USER STATUS TITLE -->
 
@@ -245,7 +245,78 @@
                     </div>
                     <!-- /USER STATUS -->
                     {% else %}
+                    <div class="user-status">
+                        <!-- USER STATUS AVATAR -->
+                        <a class="user-status-avatar" href="thread.starter.get_absolute_url">
+                            <!-- USER AVATAR -->
+                            <div class="user-avatar small no-outline {{ thread.starter.online }}">
+                                <!-- USER AVATAR CONTENT -->
+                                <div class="user-avatar-content">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-image-30-32" data-src="{{ thread.starter.avatar }}"></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR CONTENT -->
+
+                                <!-- USER AVATAR PROGRESS -->
+                                <div class="user-avatar-progress">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-progress-40-44"></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR PROGRESS -->
+
+                                <!-- USER AVATAR PROGRESS BORDER -->
+                                <div class="user-avatar-progress-border">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-border-40-44"></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR PROGRESS BORDER -->
+
+                                <!-- USER AVATAR BADGE -->
+                                <div class="user-avatar-badge">
+                                    <!-- USER AVATAR BADGE BORDER -->
+                                    <div class="user-avatar-badge-border">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-22-24"></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR BADGE BORDER -->
+
+                                    <!-- USER AVATAR BADGE CONTENT -->
+                                    <div class="user-avatar-badge-content">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-dark-16-18"></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR BADGE CONTENT -->
+
+                                    <!-- USER AVATAR BADGE TEXT -->
+                                    <p class="user-avatar-badge-text">{{ thread.starter.post_count | length }}</p>
+                                    <!-- /USER AVATAR BADGE TEXT -->
+                                </div>
+                                <!-- /USER AVATAR BADGE -->
+                            </div>
+                            <!-- /USER AVATAR -->
+                        </a>
+                        <!-- /USER STATUS AVATAR -->
+
+                        <!-- USER STATUS TITLE -->
+                        <p class="user-status-title">
+                            <a class="bold" href="{{ thread.starter.get_absolute_url }}">{{ thread.starter.get_display_name }}</a>
+                        </p>
+                        <!-- /USER STATUS TITLE -->
+
+                        <!-- USER STATUS TEXT -->
+                        <p class="user-status-text small">{{ thread.created | time_ago }}</p>
+                        <!-- /USER STATUS TEXT -->
+
+                    </div>
+                    <!-- /USER STATUS -->
+                    {% comment %}
                     <p class="user-status-text small">No posts yet</p>
+                    {% endcomment %}
                     {% endif %}
                 </div>
                 <!-- /TABLE COLUMN -->

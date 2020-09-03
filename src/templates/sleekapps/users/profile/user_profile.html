@@ -73,7 +73,8 @@
                         <!-- /INFORMATION LINE TITLE -->
 
                         <!-- INFORMATION LINE TEXT -->
-                        <p class="information-line-text"><a href="{{ user.website }}">{{ user.website | urlize }}</a></p>
+                        <p class="information-line-text"><a href="{{ user.website }}">{{ user.website | urlize }}</a>
+                        </p>
                         <!-- /INFORMATION LINE TEXT -->
                     </div>
                     <!-- /INFORMATION LINE -->
@@ -98,18 +99,6 @@
                     <!-- INFORMATION LINE -->
                     <div class="information-line">
                         <!-- INFORMATION LINE TITLE -->
-                        <p class="information-line-title">Email</p>
-                        <!-- /INFORMATION LINE TITLE -->
-
-                        <!-- INFORMATION LINE TEXT -->
-                        <p class="information-line-text">{{ user.email }}</p>
-                        <!-- /INFORMATION LINE TEXT -->
-                    </div>
-                    <!-- /INFORMATION LINE -->
-
-                    <!-- INFORMATION LINE -->
-                    <div class="information-line">
-                        <!-- INFORMATION LINE TITLE -->
                         <p class="information-line-title">Profile name</p>
                         <!-- /INFORMATION LINE TITLE -->
 
@@ -122,11 +111,35 @@
                     <!-- INFORMATION LINE -->
                     <div class="information-line">
                         <!-- INFORMATION LINE TITLE -->
+                        <p class="information-line-title">Email</p>
+                        <!-- /INFORMATION LINE TITLE -->
+
+                        <!-- INFORMATION LINE TEXT -->
+                        <p class="information-line-text">{{ user.email }}</p>
+                        <!-- /INFORMATION LINE TEXT -->
+                    </div>
+                    <!-- /INFORMATION LINE -->
+
+                    <!-- INFORMATION LINE -->
+                    <div class="information-line">
+                        <!-- INFORMATION LINE TITLE -->
                         <p class="information-line-title">Username</p>
                         <!-- /INFORMATION LINE TITLE -->
 
                         <!-- INFORMATION LINE TEXT -->
                         <p class="information-line-text">{{ user.username }}</p>
+                        <!-- /INFORMATION LINE TEXT -->
+                    </div>
+                    <!-- /INFORMATION LINE -->
+
+                    <!-- INFORMATION LINE -->
+                    <div class="information-line">
+                        <!-- INFORMATION LINE TITLE -->
+                        <p class="information-line-title">Sex</p>
+                        <!-- /INFORMATION LINE TITLE -->
+
+                        <!-- INFORMATION LINE TEXT -->
+                        <p class="information-line-text">{{ user.get_sex_display }}</p>
                         <!-- /INFORMATION LINE TEXT -->
                     </div>
                     <!-- /INFORMATION LINE -->
@@ -156,34 +169,9 @@
     <div class="grid-column">
         <!-- WIDGET BOX -->
         <div class="widget-box">
-            <!-- WIDGET BOX SETTINGS -->
-            <div class="widget-box-settings">
-                <!-- POST SETTINGS WRAP -->
-                <div class="post-settings-wrap">
-                    <!-- POST SETTINGS -->
-                    <div class="post-settings widget-box-post-settings-dropdown-trigger">
-                        <!-- POST SETTINGS ICON -->
-                        <svg class="post-settings-icon icon-more-dots">
-                            <use xlink:href="#svg-more-dots"></use>
-                        </svg>
-                        <!-- /POST SETTINGS ICON -->
-                    </div>
-                    <!-- /POST SETTINGS -->
-
-                    <!-- SIMPLE DROPDOWN -->
-                    <div class="simple-dropdown widget-box-post-settings-dropdown">
-                        <!-- SIMPLE DROPDOWN LINK -->
-                        <p class="simple-dropdown-link">Widget Settings</p>
-                        <!-- /SIMPLE DROPDOWN LINK -->
-                    </div>
-                    <!-- /SIMPLE DROPDOWN -->
-                </div>
-                <!-- /POST SETTINGS WRAP -->
-            </div>
-            <!-- /WIDGET BOX SETTINGS -->
 
             <!-- WIDGET BOX TITLE -->
-            <p class="widget-box-title">Interests</p>
+            <p class="widget-box-title">Others</p>
             <!-- /WIDGET BOX TITLE -->
 
             <!-- WIDGET BOX CONTENT -->
@@ -193,12 +181,13 @@
                     <!-- INFORMATION BLOCK -->
                     <div class="information-block">
                         <!-- INFORMATION BLOCK TITLE -->
-                        <p class="information-block-title">Favourite TV Shows</p>
+                        <p class="information-block-title">About
+                            {% if user == request.user %}Me{% else %}{{ user.get_display_name }}{% endif %}
+                        </p>
                         <!-- /INFORMATION BLOCK TITLE -->
 
                         <!-- INFORMATION BLOCK TEXT -->
-                        <p class="information-block-text">Breaking Good, RedDevil, People of Interest, The Running
-                            Dead, Found, American Guy, The Last Windbender, Game of Wars.</p>
+                        <p class="information-block-text">{{ user.about }}</p>
                         <!-- /INFORMATION BLOCK TEXT -->
                     </div>
                     <!-- /INFORMATION BLOCK -->
@@ -206,12 +195,11 @@
                     <!-- INFORMATION BLOCK -->
                     <div class="information-block">
                         <!-- INFORMATION BLOCK TITLE -->
-                        <p class="information-block-title">Favourite Music Bands / Artists</p>
+                        <p class="information-block-title">Address</p>
                         <!-- /INFORMATION BLOCK TITLE -->
 
                         <!-- INFORMATION BLOCK TEXT -->
-                        <p class="information-block-text">Iron Maid, DC/AC, Megablow, Kung Fighters, System of a
-                            Revenge, Rammstown.</p>
+                        <p class="information-block-text">{{ user.address }}</p>
                         <!-- /INFORMATION BLOCK TEXT -->
                     </div>
                     <!-- /INFORMATION BLOCK -->
@@ -219,12 +207,11 @@
                     <!-- INFORMATION BLOCK -->
                     <div class="information-block">
                         <!-- INFORMATION BLOCK TITLE -->
-                        <p class="information-block-title">Favourite Movies</p>
+                        <p class="information-block-title">Favourites or hobbies</p>
                         <!-- /INFORMATION BLOCK TITLE -->
 
                         <!-- INFORMATION BLOCK TEXT -->
-                        <p class="information-block-text">The Revengers Saga, The Scarred Wizard and the Fire Crown,
-                            Crime Squad, Metal Man, The Dark Rider, Watchers, The Impossible Heist.</p>
+                        <p class="information-block-text">{{ user.hobbies | join:', ' }}</p>
                         <!-- /INFORMATION BLOCK TEXT -->
                     </div>
                     <!-- /INFORMATION BLOCK -->
@@ -232,26 +219,11 @@
                     <!-- INFORMATION BLOCK -->
                     <div class="information-block">
                         <!-- INFORMATION BLOCK TITLE -->
-                        <p class="information-block-title">Favourite Books</p>
+                        <p class="information-block-title">Phone Number</p>
                         <!-- /INFORMATION BLOCK TITLE -->
 
                         <!-- INFORMATION BLOCK TEXT -->
-                        <p class="information-block-text">The Crime of the Century, Egiptian Mythology 101, The
-                            Scarred Wizard, Lord of the Wings, Amongst Gods, The Oracle, A Tale of Air and
-                            Water.</p>
-                        <!-- /INFORMATION BLOCK TEXT -->
-                    </div>
-                    <!-- /INFORMATION BLOCK -->
-
-                    <!-- INFORMATION BLOCK -->
-                    <div class="information-block">
-                        <!-- INFORMATION BLOCK TITLE -->
-                        <p class="information-block-title">Favourite Games</p>
-                        <!-- /INFORMATION BLOCK TITLE -->
-
-                        <!-- INFORMATION BLOCK TEXT -->
-                        <p class="information-block-text">The First of Us, Assassin’s Squad, Dark Assylum, NMAK16,
-                            Last Cause 4, Grand Snatch Auto.</p>
+                        <p class="information-block-text">{{ user.phone_number }}</p>
                         <!-- /INFORMATION BLOCK TEXT -->
                     </div>
                     <!-- /INFORMATION BLOCK -->
@@ -264,34 +236,8 @@
 
         <!-- WIDGET BOX -->
         <div class="widget-box">
-            <!-- WIDGET BOX SETTINGS -->
-            <div class="widget-box-settings">
-                <!-- POST SETTINGS WRAP -->
-                <div class="post-settings-wrap">
-                    <!-- POST SETTINGS -->
-                    <div class="post-settings widget-box-post-settings-dropdown-trigger">
-                        <!-- POST SETTINGS ICON -->
-                        <svg class="post-settings-icon icon-more-dots">
-                            <use xlink:href="#svg-more-dots"></use>
-                        </svg>
-                        <!-- /POST SETTINGS ICON -->
-                    </div>
-                    <!-- /POST SETTINGS -->
-
-                    <!-- SIMPLE DROPDOWN -->
-                    <div class="simple-dropdown widget-box-post-settings-dropdown">
-                        <!-- SIMPLE DROPDOWN LINK -->
-                        <p class="simple-dropdown-link">Widget Settings</p>
-                        <!-- /SIMPLE DROPDOWN LINK -->
-                    </div>
-                    <!-- /SIMPLE DROPDOWN -->
-                </div>
-                <!-- /POST SETTINGS WRAP -->
-            </div>
-            <!-- /WIDGET BOX SETTINGS -->
-
             <!-- WIDGET BOX TITLE -->
-            <p class="widget-box-title">Jobs &amp; Education</p>
+            <p class="widget-box-title">Social links</p>
             <!-- /WIDGET BOX TITLE -->
 
             <!-- WIDGET BOX CONTENT -->
@@ -301,17 +247,15 @@
                     <!-- TIMELINE INFORMATION -->
                     <div class="timeline-information">
                         <!-- TIMELINE INFORMATION TITLE -->
-                        <p class="timeline-information-title">Lead Costume Designer</p>
+                        <p class="timeline-information-title">Facebook</p>
                         <!-- /TIMELINE INFORMATION TITLE -->
 
                         <!-- TIMELINE INFORMATION DATE -->
-                        <p class="timeline-information-date">2015 - NOW</p>
+                        <p class="timeline-information-date">@username</p>
                         <!-- /TIMELINE INFORMATION DATE -->
 
                         <!-- TIMELINE INFORMATION TEXT -->
-                        <p class="timeline-information-text">Lead Costume Designer for the "Amazzo Costumes" agency.
-                            I'm in charge of a ten person group, overseeing all the proyects and talking to
-                            potential clients. I also handle some face to face interviews for new candidates.</p>
+                        <p class="timeline-information-text">{{ user.facebook | urlize }}</p>
                         <!-- /TIMELINE INFORMATION TEXT -->
                     </div>
                     <!-- /TIMELINE INFORMATION -->
@@ -319,17 +263,15 @@
                     <!-- TIMELINE INFORMATION -->
                     <div class="timeline-information">
                         <!-- TIMELINE INFORMATION TITLE -->
-                        <p class="timeline-information-title">Costume Designer</p>
+                        <p class="timeline-information-title">Twitter</p>
                         <!-- /TIMELINE INFORMATION TITLE -->
 
                         <!-- TIMELINE INFORMATION DATE -->
-                        <p class="timeline-information-date">2013 - 2015</p>
+                        <p class="timeline-information-date">@handle</p>
                         <!-- /TIMELINE INFORMATION DATE -->
 
                         <!-- TIMELINE INFORMATION TEXT -->
-                        <p class="timeline-information-text">Costume Designer for the "Jenny Taylors" agency. Was in
-                            charge of working side by side with the best designers in order to complete and perfect
-                            orders.</p>
+                        <p class="timeline-information-text">{{ user.twitter | urlize }}</p>
                         <!-- /TIMELINE INFORMATION TEXT -->
                     </div>
                     <!-- /TIMELINE INFORMATION -->
@@ -337,16 +279,15 @@
                     <!-- TIMELINE INFORMATION -->
                     <div class="timeline-information">
                         <!-- TIMELINE INFORMATION TITLE -->
-                        <p class="timeline-information-title">Designer Intern</p>
+                        <p class="timeline-information-title">Github</p>
                         <!-- /TIMELINE INFORMATION TITLE -->
 
                         <!-- TIMELINE INFORMATION DATE -->
-                        <p class="timeline-information-date">2012 - 2013</p>
+                        <p class="timeline-information-date">@repo</p>
                         <!-- /TIMELINE INFORMATION DATE -->
 
                         <!-- TIMELINE INFORMATION TEXT -->
-                        <p class="timeline-information-text">Intern for the "Jenny Taylors" agency. Was in charge of
-                            the communication with the clients and day-to-day chores.</p>
+                        <p class="timeline-information-text">{{ user.repo | urlize }}</p>
                         <!-- /TIMELINE INFORMATION TEXT -->
                     </div>
                     <!-- /TIMELINE INFORMATION -->
@@ -354,16 +295,15 @@
                     <!-- TIMELINE INFORMATION -->
                     <div class="timeline-information">
                         <!-- TIMELINE INFORMATION TITLE -->
-                        <p class="timeline-information-title">The Antique College of Design</p>
+                        <p class="timeline-information-title">Whatsapp</p>
                         <!-- /TIMELINE INFORMATION TITLE -->
 
                         <!-- TIMELINE INFORMATION DATE -->
-                        <p class="timeline-information-date">2007 - 2012</p>
+                        <p class="timeline-information-date">@number</p>
                         <!-- /TIMELINE INFORMATION DATE -->
 
                         <!-- TIMELINE INFORMATION TEXT -->
-                        <p class="timeline-information-text">Bachelor of Costume Design in the Antique College. It
-                            was a five years intensive career, plus a course about Cosplays. Average: A+</p>
+                        <p class="timeline-information-text">{{ user.whatsapp }}</p>
                         <!-- /TIMELINE INFORMATION TEXT -->
                     </div>
                     <!-- /TIMELINE INFORMATION -->

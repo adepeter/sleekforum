@@ -65,7 +65,7 @@
         <!-- /ACTION LIST -->
 
         <!-- ACTION ITEM WRAP -->
-        <a class="action-item-wrap" href="{% url 'sleekforum:users:profile:profile_edit' %}">
+        <a class="action-item-wrap" href="{{ request.user.get_profile_edit_url }}">
             <!-- ACTION ITEM -->
             <div class="action-item dark">
                 <!-- ACTION ITEM ICON -->

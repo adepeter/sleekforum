@@ -10,7 +10,7 @@
     <!-- USER SHORT DESCRIPTION -->
     <div class="user-short-description">
         <!-- USER SHORT DESCRIPTION AVATAR -->
-        <a class="user-short-description-avatar user-avatar medium" href="profile-timeline.html">
+        <a class="user-short-description-avatar user-avatar medium" href="{% url 'sleekforum:users:profile:home_profile' %}">
             <!-- USER AVATAR BORDER -->
             <div class="user-avatar-border">
                 <!-- HEXAGON -->
@@ -70,7 +70,7 @@
         <!-- /USER SHORT DESCRIPTION AVATAR -->
 
         <!-- USER SHORT DESCRIPTION TITLE -->
-        <p class="user-short-description-title"><a href="profile-timeline.html">{{ request.user.get_display_name }}</a></p>
+        <p class="user-short-description-title"><a href="{% url 'sleekforum:users:profile:home_profile' %}">{{ request.user.get_display_name }}</a></p>
         <!-- /USER SHORT DESCRIPTION TITLE -->
 
         {% if request.user.website %}
