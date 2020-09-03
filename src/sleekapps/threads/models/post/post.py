@@ -3,7 +3,6 @@ from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from ....activity.models import Reaction
 from ...managers.post import PostManager
 from ...modelurls.post import PostModelURL
 
@@ -24,6 +23,10 @@ class Post(models.Model, PostModelURL):
     )
     reactions = GenericRelation(
         'activity.Reaction',
+        related_query_name='posts'
+    )
+    violations = GenericRelation(
+        'violation.Violation',
         related_query_name='posts'
     )
     content = models.TextField(verbose_name=_('Post content'))

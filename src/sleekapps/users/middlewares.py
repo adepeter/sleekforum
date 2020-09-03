@@ -15,11 +15,21 @@ class OnlineStatusMiddleware:
 
     def __call__(self, request):
         current_user = request.user
+        now = timezone.now()
         if request.user.is_authenticated:
-            now = timezone.now()
             cache.set(f'seen_{current_user.username}', now,
                       settings.USER_LASTSEEN_TIMEOUT)
         response = self.get_response(request)
+        get_last_seen = cache.get(f'seen_{current_user.username}', now)
+        diff = now - get_last_seen
+        if diff.seconds < 5:
+            try:
+                user = User.objects.get(username=current_user.username)
+                user.last_seen = now
+                user.save(update_fields=['last_seen'])
+            except User.DoesNotExist:
+                pass
+
         return response
 
 

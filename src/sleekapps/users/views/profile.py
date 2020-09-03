@@ -28,6 +28,10 @@ class UserProfile(DetailView):
         return get_object_or_404(self.model, username__iexact=username)
 
 
+class UserProfileStatistics(UserProfile):
+    pass
+
+
 class UserPasswordChange(LoginRequiredMixin, SuccessMessageMixin, FormView):
     model = User
     form_class = PasswordChangeForm

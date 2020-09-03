@@ -12,8 +12,8 @@ def get_post_in_category_queryset(category, include_self=True):
     """
     try:
         return Post.objects.filter(
-        thread__category__in=category.get_descendants(include_self=include_self)
-    )
+            thread__category__in=category.get_descendants(include_self=include_self)
+        )
     except Post.DoesNotExist:
         return None
 
@@ -22,9 +22,9 @@ def get_post_in_category_queryset(category, include_self=True):
 def get_last_post_in_category(category, include_self=True):
     try:
         return Post.objects.filter(
-        thread__category__in=category.get_descendants(include_self=include_self),
-        is_hidden=False
-    ).latest()
+            thread__category__in=category.get_descendants(include_self=include_self),
+            is_hidden=False
+        ).latest()
     except Post.DoesNotExist:
         return None
 
@@ -48,3 +48,9 @@ def get_last_post():
 @register.filter(name='post_count')
 def count_post(user):
     return Post.objects.filter(user=user)
+
+
+@register.filter
+def user_last_post(user):
+    earliest_post = Post.objects.filter(user=user).earliest()
+    return earliest_post.created

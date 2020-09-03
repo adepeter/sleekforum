@@ -16,52 +16,48 @@ def first_char(chars):
 
 @register.filter(expects_localtime=True)
 def time_ago(param):
-    if isinstance(param, object):
-        now = timezone.now()
-        diff = now - param
-        if diff.days == 0 and 0 < diff.seconds < 60:
-            seconds = diff.seconds
-            result = ngettext(_('%(seconds)d second ago'),
-                              _('%(seconds)d seconds ago'), seconds) % {
-                         'seconds': seconds
-                     }
-        elif diff.days == 0 and 60 <= diff.seconds < 3600:
-            minutes = math.floor(diff.seconds / 60)
-            result = ngettext(_('%(minutes)d minute ago'),
-                              _('%(minutes)d minutes ago'), minutes) % {
-                         'minutes': minutes
-                     }
-        elif diff.days == 0 and 3600 <= diff.seconds < 86400:
-            hours = math.floor(diff.seconds / 3600)
-            result = ngettext(_('%(hours)d hour ago'),
-                              _('%(hours)d hours ago'), hours) % {
-                         'hours': hours
-                     }
-        elif 1 <= diff.days <= 7:
-            days = diff.days
-            result = ngettext(_('%(days)d day ago'),
-                              _('%(days)d days ago'), days) % {
-                         'days': days
-                     }
-        elif 7 <= diff.days <= 30:
-            weeks = math.floor(diff.days / 7)
-            result = ngettext(_('%(weeks)d week ago'),
-                              _('%(weeks)d weeks ago'), weeks) % {
-                         'weeks': weeks
-                     }
-        elif 30 <= diff.days <= 365:
-            months = math.floor(diff.days / 30)
-            result = ngettext(_('%(months)d month ago'),
-                              _('%(months)d months ago'), months) % {
-                         'months': months
-                     }
-        else:
-            years = math.floor(diff.days / 365)
-            result = ngettext(_('%(years)d year ago'),
-                              _('%(years)d years ago'), years) % {
-                         'years': years
-                     }
-        return result
+    now = timezone.now()
+    diff = now - param
+    currently = _('just now')
+    if diff.days == 0 and 30 < diff.seconds < 60:
+        currently = _('%s seconds ago') % diff.seconds
+    elif diff.days == 0 and 60 <= diff.seconds < 3600:
+        minutes = math.floor(diff.seconds / 60)
+        currently = ngettext(_('%(minutes)d minute ago'),
+                          _('%(minutes)d minutes ago'), minutes) % {
+                     'minutes': minutes
+                 }
+    elif diff.days == 0 and 3600 <= diff.seconds < 86400:
+        hours = math.floor(diff.seconds / 3600)
+        currently = ngettext(_('%(hours)d hour ago'),
+                          _('%(hours)d hours ago'), hours) % {
+                     'hours': hours
+                 }
+    elif 1 <= diff.days <= 7:
+        days = diff.days
+        currently = ngettext(_('%(days)d day ago'),
+                          _('%(days)d days ago'), days) % {
+                     'days': days
+                 }
+    elif 7 <= diff.days <= 30:
+        weeks = math.floor(diff.days / 7)
+        currently = ngettext(_('%(weeks)d week ago'),
+                          _('%(weeks)d weeks ago'), weeks) % {
+                     'weeks': weeks
+                 }
+    elif 30 <= diff.days <= 365:
+        months = math.floor(diff.days / 30)
+        currently = ngettext(_('%(months)d month ago'),
+                          _('%(months)d months ago'), months) % {
+                     'months': months
+                 }
+    elif diff.days >= 365:
+        years = math.floor(diff.days / 365)
+        currently = ngettext(_('%(years)d year ago'),
+                          _('%(years)d years ago'), years) % {
+                     'years': years
+                 }
+    return currently
 
 
 @register.filter
@@ -78,6 +74,7 @@ def pretty_count(value, decimal_place=1):
             result = views
         return result
 
+
 @register.filter
 def unit_to_tens(value):
     "Convert pagination in unit digit to tens."
@@ -85,3 +82,11 @@ def unit_to_tens(value):
     if len(value) < 2:
         value = '0' + value
     return value
+
+
+@register.filter
+def get_dictionary_value(result, key):
+    try:
+        return result[key]
+    except KeyError:
+        return None

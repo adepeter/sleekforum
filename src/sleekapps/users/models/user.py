@@ -5,8 +5,10 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.contrib.postgres.fields import ArrayField
 from django.core.cache import cache
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 from django.utils.functional import cached_property
+from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
 from ...cores.utils.choice import Choicify
@@ -119,6 +121,11 @@ class User(PermissionsMixin, AbstractBaseUser):
         auto_now=True,
         help_text=_('Date and time of profile last modification')
     )
+    last_seen = models.DateTimeField(
+        verbose_name=_('Last time seen'),
+        default=timezone.now,
+        help_text=_('Date and time user was last active'),
+    )
     whatsapp = models.CharField(
         verbose_name=_('Whatsapp ID'),
         max_length=20,
@@ -155,6 +162,7 @@ class User(PermissionsMixin, AbstractBaseUser):
         null=True,
         help_text=_('IP Address')
     )
+
 
     objects = UserManager()
 
@@ -208,13 +216,13 @@ class User(PermissionsMixin, AbstractBaseUser):
             return self.get_full_name
         return self.get_short_name
 
-    def last_seen(self):
+    def last_seen_cache(self):
         return cache.get('seen_%s' % self.username)
 
     def is_online(self):
-        if self.last_seen():
+        if self.last_seen_cache():
             now = timezone.now()
-            if now > self.last_seen() + \
+            if now > self.last_seen_cache() + \
                     datetime.timedelta(seconds=settings.USER_LASTSEEN_TIMEOUT):
                 return False
             else:
@@ -234,6 +242,12 @@ class User(PermissionsMixin, AbstractBaseUser):
         if check_online:
             return 'online'
         return 'offline'
+
+    def get_absolute_url(self):
+        kwargs = {
+            'username': slugify(self.username)
+        }
+        return reverse('sleekforum:users:kwarg_home_profile', kwargs=kwargs)
 
     def __str__(self):
         return '%s - %s' % (self.username, self.email)

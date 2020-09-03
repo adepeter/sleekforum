@@ -58,6 +58,10 @@ INSTALLED_APPS = [
     'sleekapps.settings.apps.SettingsConfig',
     'sleekapps.threads.apps.ThreadsConfig',
     'sleekapps.users.apps.UsersConfig',
+
+    # this app extends 3rd party django-violation
+    # to provide more features
+    'sleekapps.violations.apps.ViolationsConfig',
 ]
 
 MIDDLEWARE = [

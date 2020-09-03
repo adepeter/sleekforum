@@ -29,3 +29,7 @@ def reacted_users(reaction, obj, current_user, users_to_show=6):
         users[users_to_show] = f' and {diff} other users'
         users = users[:users_to_show]
     return users
+
+@register.filter
+def reactions_by_user(user, reaction):
+    return Reaction.objects.filter(reaction=reaction, posts__user=user, user=user)

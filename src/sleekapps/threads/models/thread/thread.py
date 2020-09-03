@@ -5,9 +5,6 @@ from django.db import models
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
-from violation.models import Violation
-
-from ....activity.models import Reaction
 
 from ...managers.thread import ThreadManager
 from ...modelurls.thread import ThreadModelURL
@@ -103,8 +100,14 @@ class Thread(models.Model, ThreadModelURL):
     loves = models.PositiveIntegerField(default=0)
     shares = models.PositiveIntegerField(default=0)
     views = models.PositiveIntegerField(default=0)
-    reactions = GenericRelation(Reaction, related_query_name='threads')
-    violations = GenericRelation(Violation, related_query_name='violations')
+    reactions = GenericRelation(
+        'activity.Reaction',
+        related_query_name='threads'
+    )
+    violations = GenericRelation(
+        'violation.Violation',
+        related_query_name='threads'
+    )
 
     objects = ThreadManager()
 
