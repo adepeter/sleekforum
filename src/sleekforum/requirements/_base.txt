@@ -1,10 +1,11 @@
 django
+django-violation
 django-graphql-jwt
 django-mptt
+django-redis
 graphene-django
 martor
 pillow
 psycopg2
 redis
-django-redis
 requests

@@ -1,3 +1,4 @@
 FROM nginx
-RUN rm -rf /etc/nginx/conf.d /etc/nginx/nginx.conf
-COPY ./conf /etc/nginx
+ENV NGINX_DIR /etc/nginx
+RUN rm -rf $NGINX_DIR/nginx.conf $NGINX_DIR/conf.d
+COPY ./conf $NGINX_DIR

@@ -1,11 +1,12 @@
 version: "3.8"
 
-service:
+services:
   sleekforum:
     build:
       context: src
       args:
         sleekforum_user: sleekforum
+        sleekforum_environment: staging
     networks:
       - db
       - webserver
@@ -18,7 +19,7 @@ service:
       - ./src:/srv/http/${sleekforum_user:-sleekforum}:z
     depends_on:
       - postgres
-    port:
+    ports:
       - "8000:4042"
 
   postgres:
@@ -42,7 +43,7 @@ service:
       - ./src/media:/srv/ftp/sleekforum/media:z
     networks:
       - webserver
-    port:
+    ports:
       - "8080:80"
     restart: always
     depends_on:
