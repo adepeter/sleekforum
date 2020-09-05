@@ -1,5 +1,5 @@
 from django import template
-from django.db.models import Avg, Sum, Count
+from django.db.models import Count
 from violation.models import Violation
 
 register = template.Library()

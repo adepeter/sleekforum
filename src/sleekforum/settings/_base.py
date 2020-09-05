@@ -181,3 +181,23 @@ LOGOUT_URL = reverse_lazy('sleekforum:users:auth:logout')
 LOGOUT_REDIRECT_URL = reverse_lazy('sleekforum:home:home')
 
 USER_LASTSEEN_TIMEOUT = 60 * 1
+
+# Martor
+MARTOR_ENABLE_CONFIGS = {
+    'emoji': 'true',  # to enable/disable emoji icons.
+    'imgur': 'true',  # to enable/disable imgur/custom uploader.
+    'mention': 'true',  # to enable/disable mention
+    'jquery': 'true',  # to include/revoke jquery (require for admin default django)
+    'living': 'false',  # to enable/disable live updates in preview
+    'spellcheck': 'false',  # to enable/disable spellcheck in form textareas
+    'hljs': 'true',  # to enable/disable hljs highlighting in preview
+}
+
+MARTOR_TOOLBAR_BUTTONS = [
+    'bold', 'italic', 'horizontal', 'heading', 'pre-code',
+    'blockquote', 'unordered-list', 'ordered-list',
+    'link', 'image-link', 'image-upload', 'emoji',
+    'direct-mention', 'toggle-maximize', 'help'
+]
+
+

@@ -427,3 +427,7 @@ C
 docker-compose.yaml,e\f\ef8def03dc8f162799089e9b5f4321201c8810d5
 9
 	readme.md,2\7\275d783e298228506068436512433d343feb52aa
+[
++src/sleekforum/settings/_devstage_bridge.py,f\d\fdb93b5b7252b70d62b362cd9e5fa18ea3b1b7e0
+R
+"src/sleekforum/settings/staging.py,d\c\dca426395d32fe8a2aaf5ab54cd88847d9ea05dc

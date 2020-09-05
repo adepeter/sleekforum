@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 
 {% load static %}
+{% load martortags %}
+
 {% load cores_util_tags %}
 {% load post_tags %}
 
@@ -311,7 +313,7 @@
                         <div class="forum-post-info">
                             <!-- FORUM POST PARAGRAPH -->
                             <p class="forum-post-paragraph">
-                                {{ thread.content | linebreaksbr }}
+                                {{ thread.content | safe_markdown | linebreaksbr }}
                             </p>
                             <!-- /FORUM POST PARAGRAPH -->
 

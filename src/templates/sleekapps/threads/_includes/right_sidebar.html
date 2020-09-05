@@ -255,6 +255,7 @@
     </div>
     <!-- /WIDGET BOX -->
 
+    {% if thread.violations.all %}
     <!-- STATS BOX -->
     <div class="stats-box small stat-reactions-received">
         {% violations_in_thread thread as violation_result %}
@@ -293,6 +294,7 @@
         <!-- /STATS BOX TEXT -->
     </div>
     <!-- /STATS BOX -->
+    {% endif %}
 
 
 </div>
