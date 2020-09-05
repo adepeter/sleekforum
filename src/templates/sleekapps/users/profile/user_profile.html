@@ -54,6 +54,7 @@
                     </div>
                     <!-- /INFORMATION LINE -->
 
+                    {% if user.dob is not None %}
                     <!-- INFORMATION LINE -->
                     <div class="information-line">
                         <!-- INFORMATION LINE TITLE -->
@@ -65,6 +66,7 @@
                         <!-- /INFORMATION LINE TEXT -->
                     </div>
                     <!-- /INFORMATION LINE -->
+                    {% endif %}
 
                     <!-- INFORMATION LINE -->
                     <div class="information-line">
@@ -393,6 +395,7 @@
                 <!-- STAT BLOCK LIST -->
                 <div class="stat-block-list">
 
+                    {% if user.posts.all %}
                     <!-- STAT BLOCK -->
                     <div class="stat-block">
                         <!-- STAT BLOCK DECORATION -->
@@ -418,6 +421,7 @@
                         <!-- /STAT BLOCK INFO -->
                     </div>
                     <!-- /STAT BLOCK -->
+                    {% endif %}
 
                     <!-- STAT BLOCK -->
                     <div class="stat-block">
@@ -476,6 +480,8 @@
             <!-- /WIDGET BOX CONTENT -->
         </div>
         <!-- /WIDGET BOX -->
+
+
     </div>
     <!-- /GRID COLUMN -->
 </div>
