@@ -11,6 +11,7 @@ Currently, **Sleekforum v2** ships with the following features at the moment
 - Ability to pin a thread globally, or pin it within a category.
 - Presence features let site members know when other users are online, or offline.
 - Custom theme developed over bootstrap.
+- Ability to style thread and post contents using markdown
 
 
 Development features:
