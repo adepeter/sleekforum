@@ -7,5 +7,6 @@ urlpatterns = [
     path('categories/', include('sleekapps.categories.urls', namespace='categories')),
     path('threads/', include('sleekapps.threads.urls', namespace='threads')),
     path('search/', include('sleekapps.search.urls', namespace='search')),
+    path('rules/', include('sleekapps.violations.urls', namespace='violations')),
     path('users/', include('sleekapps.users.urls', namespace='users')),
 ]

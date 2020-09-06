@@ -17,6 +17,10 @@ class Choicify:
             count[k] = len(k)
         return count.values()
 
+    def to_dict(self):
+        """Return key: value mapping"""
+        return dict(self.__choices)
+
 
     @property
     def get_choices(self) -> List:
