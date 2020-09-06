@@ -1,0 +1,110 @@
+version: "3.8"
+services:
+  sleekforum:
+    build:
+      context: .
+      args:
+        sleekforum_environment: production
+    restart: unless-stopped
+    volumes:
+      - "./src:/srv/http/sleekforum:z"
+    environment:
+      - SSL_POLICY=Mozilla-Modern
+      - SLEEKFORUM_DB_HOST=postgres
+    env_file:
+      - ./configs/env/nginx-proxy.env
+      - ./configs/env/sleekforum.env
+    networks:
+      - db
+      - webserver
+      - cache
+    depends_on:
+      - postgres
+      - nginx-lets-encrypt
+
+  postgres:
+    image: postgres
+    networks:
+      - db
+    env_file:
+      - ./configs/env/postgres.env
+    volumes:
+      - "pg_data:/var/lib/postgresql/data"
+    ports:
+      - "5432:5432"
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    env_file:
+      - ./configs/env/pgadmin.env
+    environment:
+      - VIRTUAL_HOST=pgadmin.sleekforum.com
+      - LETSENCRYPT_HOST=pgadmin.sleekforum.com
+    volumes:
+      - "pgadmin4:/var/lib/pgadmin"
+      - "pgadmin:/root/.pgadmin"
+    networks:
+      - db
+      - webserver
+    depends_on:
+      - postgres
+    ports:
+    - "5050:5050"
+
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    labels:
+      com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy: "true"
+    networks:
+      - webserver
+    restart: always
+    environment:
+      - ENABLE_IPV6=true
+    volumes:
+      - "nginx-certs:/etc/nginx/certs"
+      - "nginx-html:/usr/share/nginx/html"
+      - "/var/run/docker.sock:/tmp/docker.sock:ro"
+      - "./nginx_proxy/conf.d:/etc/nginx/conf.d"
+      - "./nginx_proxy/vhost.d:/etc/nginx/vhost.d"
+      - "./src/static:/srv/ftp/sleekforum/static:z"
+      - "./src/media:/srv/ftp/sleekforum/media:z"
+    ports:
+      - "80:80"
+      - "443:443"
+
+  nginx-lets-encrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    networks:
+      - webserver
+    env_file:
+      - ./configs/env/lets-encrypt.env
+    depends_on:
+      - nginx-proxy
+    volumes:
+      - "nginx-certs:/etc/nginx/certs"
+      - "nginx-html:/usr/share/nginx/html"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./nginx_proxy/vhost.d:/etc/nginx/vhost.d"
+
+  redis:
+    image: redis
+    restart: unless-stopped
+    networks:
+      - cache
+    volumes:
+      - cached_data:/data
+
+
+networks:
+  db:
+  webserver:
+  cache:
+
+volumes:
+  cached_data:
+  nginx-certs:
+  nginx-html:
+  pg_data:
+  pgadmin4:
+  pgadmin:
