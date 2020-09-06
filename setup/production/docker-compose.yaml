@@ -17,6 +17,7 @@ services:
     networks:
       - db
       - webserver
+      - cache
     depends_on:
       - postgres
       - nginx-lets-encrypt
@@ -86,12 +87,22 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
       - "./nginx_proxy/vhost.d:/etc/nginx/vhost.d"
 
+  redis:
+    image: redis
+    restart: unless-stopped
+    networks:
+      - cache
+    volumes:
+      - cached_data:/data
+
 
 networks:
   db:
   webserver:
+  cache:
 
 volumes:
+  cached_data:
   nginx-certs:
   nginx-html:
   pg_data:
