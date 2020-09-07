@@ -1,6 +1,10 @@
+{% load flatpages %}
+{% get_flatpages as flatpages %}
+
 <nav class="navigation">
     <!-- MENU MAIN -->
     <ul class="menu-main">
+
         <!-- MENU MAIN ITEM -->
         <li class="menu-main-item">
             <!-- MENU MAIN ITEM LINK -->
@@ -8,6 +12,7 @@
             <!-- /MENU MAIN ITEM LINK -->
         </li>
         <!-- /MENU MAIN ITEM -->
+
 
         <!-- MENU MAIN ITEM -->
         <li class="menu-main-item">
@@ -39,34 +44,20 @@
 
             <!-- MENU MAIN -->
             <ul class="menu-main">
+                {% for flatpage in flatpages %}
                 <!-- MENU MAIN ITEM -->
                 <li class="menu-main-item">
                     <!-- MENU MAIN ITEM LINK -->
-                    <a class="menu-main-item-link" href="#">About Us</a>
+                    <a class="menu-main-item-link" href="pages{{ flatpage.url }}">{{ flatpage.title }}</a>
                     <!-- /MENU MAIN ITEM LINK -->
                 </li>
                 <!-- /MENU MAIN ITEM -->
-
-                <!-- MENU MAIN ITEM -->
-                <li class="menu-main-item">
-                    <!-- MENU MAIN ITEM LINK -->
-                    <a class="menu-main-item-link" href="#">Faq</a>
-                    <!-- /MENU MAIN ITEM LINK -->
-                </li>
-                <!-- /MENU MAIN ITEM -->
+                {% endfor %}
 
                 <!-- MENU MAIN ITEM -->
                 <li class="menu-main-item">
                     <!-- MENU MAIN ITEM LINK -->
                     <a class="menu-main-item-link" href="#">Contact Us</a>
-                    <!-- /MENU MAIN ITEM LINK -->
-                </li>
-                <!-- /MENU MAIN ITEM -->
-
-                <!-- MENU MAIN ITEM -->
-                <li class="menu-main-item">
-                    <!-- MENU MAIN ITEM LINK -->
-                    <a class="menu-main-item-link" href="#">Privacy Policy</a>
                     <!-- /MENU MAIN ITEM LINK -->
                 </li>
                 <!-- /MENU MAIN ITEM -->
