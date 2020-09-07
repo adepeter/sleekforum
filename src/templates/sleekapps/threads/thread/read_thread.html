@@ -55,9 +55,13 @@
                 <p class="section-filters-bar-title">
                     <a href="{% url 'sleekforum:categories:index' %}">Categories</a><span class="separator"></span>
                     {% if thread.category.parent %}
-                    <a href="{% url 'sleekforum:categories:list_threads' thread.category.parent.id thread.category.parent.slug %}">{{ thread.category.parent.get_name }}</a><span class="separator"></span>
+                    <a href="{% url 'sleekforum:categories:list_threads' thread.category.parent.id thread.category.parent.slug %}">
+                        {{ thread.category.parent.get_name }}
+                    </a><span class="separator"></span>
                     {% endif %}
-                    <a href="{% url 'sleekforum:threads:list_threads' thread.category.slug thread.category.id %}">{{ thread.category.get_name }}</a>
+                    <a href="{% url 'sleekforum:threads:list_threads' thread.category.slug thread.category.id %}">
+                        {{ thread.category.get_name }}
+                    </a>
                 </p>
                 <!-- /SECTION FILTERS BAR TITLE -->
 
@@ -110,8 +114,15 @@
                 <div class="forum-post">
                     <!-- FORUM POST META -->
                     <div class="forum-post-meta">
+                        {% days_past_interval thread.created as days_past %}
                         <!-- FORUM POST TIMESTAMP -->
-                        <p class="forum-post-timestamp">{{ thread.created }}</p>
+                        <p class="forum-post-timestamp">
+                            {% if days_past < 7 %}
+                            Created: {{ thread.created | time_ago }}
+                            {% else %}
+                            {{ thread.created }}
+                            {% endif %}
+                        </p>
                         <!-- /FORUM POST TIMESTAMP -->
 
                         {% if request.user.is_authenticated %}
@@ -139,7 +150,8 @@
 
                                     {% if request.user.is_superuser %}
                                     <!-- SIMPLE DROPDOWN LINK -->
-                                    <a href="{{ thread.get_delete_url }}" class="dropdown-navigation-link">Delete thread</a>
+                                    <a href="{{ thread.get_delete_url }}" class="dropdown-navigation-link">Delete
+                                        thread</a>
                                     <!-- /SIMPLE DROPDOWN LINK -->
 
                                     <!-- SIMPLE DROPDOWN LINK -->
@@ -153,14 +165,16 @@
                                     <!-- /SIMPLE DROPDOWN LINK -->
 
                                     <!-- SIMPLE DROPDOWN LINK -->
-                                    <a href="{{ thread.get_toggle_hide_url }}" class="dropdown-navigation-link">Hide thread</a>
+                                    <a href="{{ thread.get_toggle_hide_url }}" class="dropdown-navigation-link">Hide
+                                        thread</a>
                                     <!-- /SIMPLE DROPDOWN LINK -->
 
                                     {% endif %}
 
                                     {% if not thread.starter == request.user %}
                                     <!-- SIMPLE DROPDOWN LINK -->
-                                    <a href="{{ thread.get_report_url }}" class="dropdown-navigation-link">Report thread</a>
+                                    <a href="{{ thread.get_report_url }}" class="dropdown-navigation-link">Report
+                                        thread</a>
                                     <!-- /SIMPLE DROPDOWN LINK -->
 
                                     <!-- SIMPLE DROPDOWN LINK -->
@@ -183,7 +197,8 @@
                         <!-- FORUM POST USER -->
                         <div class="forum-post-user">
                             <!-- USER AVATAR -->
-                            <a class="user-avatar no-outline {{ thread.starter.online }}" href="{{ thread.starter.get_absolute_url }}">
+                            <a class="user-avatar no-outline {{ thread.starter.online }}"
+                               href="{{ thread.starter.get_absolute_url }}">
                                 <!-- USER AVATAR CONTENT -->
                                 <div class="user-avatar-content">
                                     <!-- HEXAGON -->
@@ -289,7 +304,9 @@
 
                             <!-- FORUM POST USER TITLE -->
                             <p class="forum-post-user-title">
-                                <a href="{{ thread.starter.get_absolute_url }}">{{ thread.starter.get_display_name }}</a>
+                                <a href="{{ thread.starter.get_absolute_url }}">
+                                    {{ thread.starter.get_display_name }}
+                                </a>
                             </p>
                             <!-- /FORUM POST USER TITLE -->
 
@@ -338,7 +355,9 @@
                     <!-- FORUM POST META -->
                     <div class="forum-post-meta">
                         <!-- FORUM POST TIMESTAMP -->
-                        <p class="forum-post-timestamp">{{ thread.posts.count }} comments | {{ thread.violations.count }} Violates</p>
+                        <p class="forum-post-timestamp">
+                            {{ thread.posts.count }} comments | {{ thread.violations.count }} Violates
+                        </p>
                         <!-- /FORUM POST TIMESTAMP -->
 
                         <!-- FORUM POST ACTIONS -->
