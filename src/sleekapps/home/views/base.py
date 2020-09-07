@@ -1,7 +1,6 @@
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Q
-from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 from django.views.generic.list import MultipleObjectMixin
 from django.utils.translation import gettext_lazy as _

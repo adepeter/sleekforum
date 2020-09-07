@@ -1,0 +1,114 @@
+<!-- POPUP BOX -->
+<div class="popup-box small popup-event-creation">
+    <!-- POPUP CLOSE BUTTON -->
+    <div class="popup-close-button popup-event-creation-trigger">
+        <!-- POPUP CLOSE BUTTON ICON -->
+        <svg class="popup-close-button-icon icon-cross">
+            <use xlink:href="#svg-cross"></use>
+        </svg>
+        <!-- /POPUP CLOSE BUTTON ICON -->
+    </div>
+    <!-- /POPUP CLOSE BUTTON -->
+
+    <!-- POPUP BOX TITLE -->
+    <p class="popup-box-title">+ Add New topic</p>
+    <!-- /POPUP BOX TITLE -->
+
+    <!-- FORM -->
+    <form class="form" method="POST" action="{% url 'sleekforum:home:home' %}">
+        {% csrf_token %}
+        <!-- FORM ROW -->
+        <div class="form-row">
+            <!-- FORM ITEM -->
+            <div class="form-item">
+                <!-- FORM SELECT -->
+                <div class="form-select">
+                    <label for="category">Category</label>
+                    {{ form.category }}
+                    <!-- FORM SELECT ICON -->
+                    <svg class="form-select-icon icon-small-arrow">
+                        <use xlink:href="#svg-small-arrow"></use>
+                    </svg>
+                    <!-- /FORM SELECT ICON -->
+                </div>
+                <small class="text-info">{{ form.category.help_text }}</small>
+                <small class="text-danger">{{ form.category.errors }}</small>
+                <!-- /FORM SELECT -->
+            </div>
+            <!-- /FORM ITEM -->
+        </div>
+        <!-- /FORM ROW -->
+
+        <!-- FORM ROW -->
+        <div class="form-row">
+            <!-- FORM ITEM -->
+            <div class="form-item">
+                <!-- FORM INPUT -->
+                <div class="form-input small active">
+                    <label for="title">Thread Title</label>
+                    {{ form.title }}
+                </div>
+                <small class="text-info">{{ form.title.help_text }}</small>
+                <small class="text-danger">{{ form.title.errors }}</small>
+                <!-- /FORM INPUT -->
+            </div>
+            <!-- /FORM ITEM -->
+        </div>
+        <!-- /FORM ROW -->
+
+        <!-- FORM ROW -->
+        <div class="form-row">
+            <!-- FORM ITEM -->
+            <div class="form-item">
+                <!-- FORM INPUT -->
+                <div class="form-input small">
+                    <label for="event-description">Contents</label>
+                    <textarea id="event-description" name="{{ form.content.name }}">{{ form.content.value }}</textarea>
+                </div>
+                <small class="text-danger">{{ form.content.errors }}</small>
+                <!-- /FORM INPUT -->
+            </div>
+            <!-- /FORM ITEM -->
+        </div>
+        <!-- /FORM ROW -->
+
+        <!-- FORM ROW -->
+        <div class="form-row">
+            <!-- FORM ITEM -->
+            <div class="form-item split join-on-mobile medium">
+                <!-- FORM SELECT -->
+                <div class="form-select">
+                    <label for="prefix">Prefix</label>
+                    {{ form.prefix }}
+                    <!-- FORM SELECT ICON -->
+                    <svg class="form-select-icon icon-small-arrow">
+                        <use xlink:href="#svg-small-arrow"></use>
+                    </svg>
+                    <!-- /FORM SELECT ICON -->
+                </div>
+                <!-- /FORM SELECT -->
+
+                <!-- FORM SELECT -->
+                <div class="form-select">
+                    <label for="Tags">Tags</label>
+                    {{ form.tags }}
+                    <small class="text-info">{{ form.tags.help_text }}</small>
+                    <small class="text-danger">{{ form.tags.errors }}</small>
+                </div>
+                <!-- /FORM SELECT -->
+            </div>
+            <!-- /FORM ITEM -->
+        </div>
+        <!-- /FORM ROW -->
+
+        <!-- POPUP BOX ACTIONS -->
+        <div class="popup-box-actions medium void">
+            <!-- POPUP BOX ACTION -->
+            <button type="submit" class="popup-box-action full button secondary">Create thread!</button>
+            <!-- /POPUP BOX ACTION -->
+        </div>
+        <!-- /POPUP BOX ACTIONS -->
+    </form>
+    <!-- /FORM -->
+</div>
+<!-- /POPUP BOX -->

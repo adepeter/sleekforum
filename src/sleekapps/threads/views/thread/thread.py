@@ -4,7 +4,9 @@ from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Count
+from django.shortcuts import redirect
 from django.urls import reverse
+from django.views.decorators.http import require_http_methods
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import SingleObjectMixin
@@ -18,7 +20,7 @@ from ...forms.post.post import PostForm
 from ...forms.thread.thread import (
     ThreadCreationForm,
     ThreadEditForm,
-    AdminThreadEditForm,
+    QuickThreadCreationForm,
 )
 
 from ...models import Thread
@@ -179,6 +181,11 @@ class ListNewestThread(ListView):
         )
         return super().get(request, *args, **kwargs)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = QuickThreadCreationForm(user=self.request.user)
+        return context
+
     def get_queryset(self):
         return self.model._meta.default_manager.unhidden_threads(
             created__gte=timezone.now() - datetime.timedelta(days=7)
@@ -198,3 +205,16 @@ class ListTrendingThread(ListView):
         ).exclude(
             num_of_hidden_posts__gte=10
         ).order_by('-pin', '-num_of_hidden_posts')[:100]
+
+
+@require_http_methods(['GET', 'POST'])
+def create_quick_thread(request):
+    if request.method == 'POST':
+        form = QuickThreadCreationForm(data=request.POST, user=request.user)
+        if form.is_valid():
+            instance = form.save()
+            messages.success(request, _('%s was successfully created' % \
+                                    form.cleaned_data['title']))
+            return redirect(instance.get_absolute_url())
+    else:
+        form = QuickThreadCreationForm(user=request.user)
