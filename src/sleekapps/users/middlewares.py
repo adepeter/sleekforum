@@ -38,10 +38,11 @@ class FetchCountryFromAPIMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
-        api_url = 'https://restcountries.eu/rest/v2/all'
-        api_response = requests.get(api_url)
-        if api_response.status_code == 200:
-            result = api_response.json()
-            cache.set('remote_countries', result, timeout=None)
+        if cache.get('remote_countries') is None:
+            api_url = 'https://restcountries.eu/rest/v2/all'
+            api_response = requests.get(api_url)
+            if api_response.status_code == 200:
+                result = api_response.json()
+                cache.set('remote_countries', result, timeout=None)
         response = self.get_response(request)
         return response
