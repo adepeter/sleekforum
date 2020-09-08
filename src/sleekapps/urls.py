@@ -8,6 +8,6 @@ urlpatterns = [
     path('threads/', include('sleekapps.threads.urls', namespace='threads')),
     path('search/', include('sleekapps.search.urls', namespace='search')),
     path('rules/', include('sleekapps.violations.urls', namespace='violations')),
-    path('pages/', include('django.contrib.flatpages.urls')),
+    path('pages/', include('sleekapps.pages.urls', namespace='pages')),
     path('users/', include('sleekapps.users.urls', namespace='users')),
 ]

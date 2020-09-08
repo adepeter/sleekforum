@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'graphql_jwt.refresh_token.apps.RefreshTokenConfig',
     'martor',
     'mptt',
+    'precise_bbcode',
     'violation',
 
     # sleekforum apps
@@ -57,6 +58,7 @@ INSTALLED_APPS = [
     'sleekapps.cores.apps.CoreConfig',
     'sleekapps.home.apps.HomeConfig',
     'sleekapps.graphql.apps.GraphQLConfig',
+    'sleekapps.pages.apps.PagesConfig',
     'sleekapps.settings.apps.SettingsConfig',
     'sleekapps.threads.apps.ThreadsConfig',
     'sleekapps.users.apps.UsersConfig',

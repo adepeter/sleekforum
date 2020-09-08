@@ -441,8 +441,6 @@ Q
 !src/sleekapps/violations/views.py,1\2\12d61afce84ec9eb8fef673f00d10cb9cfdb9aa2
 Y
 )setup/production/configs/env/postgres.env,b\e\bebfbd06bf0fa7578ab52341033d21fcf5f9f37b
-U
-%setup/production/docker-compose.yamls,2\c\2c13dd47e5a2d6a15c29b3243a57fdb0f879645a
 T
 $setup/production/docker-compose.yaml,5\d\5d9e1162477c94956fd82394c384d2de25e6ab86
 [
@@ -458,3 +456,9 @@ K
 :
 
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
+r
+Bsrc/templates/sleekapps/threads/_includes/quick_thread_create.html,2\1\21ab5c8fdc6fe5c4dfb91453438198898717fbbc
+v
+Fsrc/templates/sleekapps/threads/_includes/_create_quick_thread_v2.html,9\3\935251b1d3f108468c603882722afbf64e0d6166
+e
+5src/templates/sleekapps/flatpages/privacy_policy.html,d\3\d38043a257d5ff9d205459dcaa54c6e6b3483aa9
