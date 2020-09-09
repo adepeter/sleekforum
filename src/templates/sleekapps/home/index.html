@@ -33,13 +33,13 @@
         <!-- SECTION FILTERS BAR ACTIONS -->
         <div class="section-filters-bar-actions">
             <!-- FORM -->
-            <form class="form" method="GET" action="">
+            <form class="form" method="GET" action="{% url 'sleekforum:search:global_thread_search' %}">
                 <!-- FORM ITEM -->
                 <div class="form-item split">
                     <!-- FORM INPUT -->
                     <div class="form-input small">
                         <label for="events-search">Search threads</label>
-                        <input type="text" name="threads_search">
+                        <input type="text" name="search">
                     </div>
                     <!-- /FORM INPUT -->
 
