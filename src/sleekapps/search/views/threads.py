@@ -7,8 +7,13 @@ from ...threads.models import Thread
 TEMPLATE_URL = 'search/threads'
 
 
-class CategoryThreadSearch:
-    pass
+class CategoryThreadSearch(ListView):
+    model = Thread
+    paginate_by = 10
+    template_name = f'{TEMPLATE_URL}/search.html'
+
+    def get_queryset(self):
+        category = self.request.GET.get('category')
 
 
 class GlobalThreadSearch(ListView):
