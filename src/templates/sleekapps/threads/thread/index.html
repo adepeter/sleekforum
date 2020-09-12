@@ -80,13 +80,14 @@
         <!-- SECTION FILTERS BAR ACTIONS -->
         <div class="section-filters-bar-actions">
             <!-- FORM -->
-            <form class="form">
+            <form class="form" action="{% url 'sleekforum:search:category_thread_search' %}">
                 <!-- FORM ITEM -->
-                <div class="form-item split">
+                <div class="form-item split active">
                     <!-- FORM INPUT -->
                     <div class="form-input small">
-                        <label for="forum-search">Search Forums</label>
-                        <input type="text" id="forum-search" name="forum_search">
+                        <label for="forum-search">Search in {{ category.get_name }}</label>
+                        <input type="text" id="forum-search" name="search">
+                        <input type="hidden" value="{{ category.slug }}" name="category" />
                     </div>
                     <!-- /FORM INPUT -->
 
