@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'graphql_jwt.refresh_token.apps.RefreshTokenConfig',
     'martor',
     'mptt',
-    'precise_bbcode',
+    # 'precise_bbcode',
     'violation',
 
     # sleekforum apps

@@ -1,5 +1,5 @@
 from django.urls import resolve, reverse
-from .models import Setting as Configuration
+# from .models import Setting as Configuration
 
 
 

@@ -3,6 +3,8 @@ from django.utils.translation import gettext_lazy as _
 
 from .models import Setting
 
+MAX_OBJECTS = 1
+
 
 @admin.register(Setting)
 class SettingsAdmin(admin.ModelAdmin):
@@ -13,3 +15,11 @@ class SettingsAdmin(admin.ModelAdmin):
         (_('Registration'), {'fields': ['send_welcome_mail', 'allow_registration', 'welcome_mail']}),
         (_('Security'), {'fields': ['captcha']})
     ]
+
+    def has_add_permission(self, request):
+        if self.model.objects.count() >= MAX_OBJECTS:
+            return False
+        return super().has_add_permission(request)
+
+    def has_delete_permission(self, request, obj=None):
+        return False

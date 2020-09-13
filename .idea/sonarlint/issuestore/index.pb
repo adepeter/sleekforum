@@ -480,3 +480,7 @@ L
 src/sleekapps/pages/forms.py,c\0\c06db7330c3d87564c750b9ec3649dbed4cedcbb
 b
 2src/templates/sleekapps/search/threads/search.html,9\1\9190680a3e78babf2afa2fdecf4980264404c1ee
+n
+>src/templates/sleekapps/search/threads/search_in_category.html,6\e\6e469b55d0ab4e80064571dd6c695bd064f8a870
+O
+src/sleekapps/settings/admin.py,4\5\45e424cc2ee5c8311ba7e778f9c778f485cfb523
