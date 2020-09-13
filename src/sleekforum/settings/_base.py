@@ -77,7 +77,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    'sleekapps.settings.middlewares.UnderMaintainanceMiddleware',
+    'sleekapps.settings.middlewares.UnderMaintenanceMiddleware',
     'sleekapps.users.middlewares.FetchCountryFromAPIMiddleware',
     'sleekapps.users.middlewares.OnlineStatusMiddleware',
 ]
