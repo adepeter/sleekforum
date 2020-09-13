@@ -8,11 +8,12 @@ class Setting(Configuration):
     title = models.CharField(
         verbose_name=_('site title'),
         max_length=20,
-        help_text=_('website title')
+        help_text=_('Website title')
     )
     description = models.TextField(
         verbose_name=_('site description'),
-        blank=True
+        blank=True,
+        help_text=_('Website metatag description contents')
     )
     email = models.EmailField(
         verbose_name=_('e-mail'),
@@ -23,7 +24,7 @@ class Setting(Configuration):
         help_text=_('message after successful registration'),
         blank=True
     )
-    under_maintenance = models.BooleanField(
+    is_under_maintenance = models.BooleanField(
         verbose_name=_('maintenance status'),
         default=False,
         help_text=_('Determine if site is under maintenance')
