@@ -1,9 +1,0 @@
-location /static/ {
-  alias /srv/ftp/sleekforum/static/;
-  add_header Access-Control-Allow-Origin *;
-}
-
-location /media/ {
-  alias /srv/ftp/sleekforum/media/;
-  add_header Access-Control-Allow-Origin *;
-}
