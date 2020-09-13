@@ -71,6 +71,33 @@
     </div>
     <!-- /SECTION FILTERS BAR -->
 
+    {% if not page_obj %}
+    <!-- GRID -->
+    <div class="grid centered">
+        <!-- ACCOUNT STAT BOX -->
+        <div class="account-stat-box account-stat-active-users">
+            <!-- ACCOUNT STAT BOX ICON WRAP -->
+            <div class="account-stat-box-icon-wrap">
+                <!-- ACCOUNT STAT BOX ICON -->
+                <svg class="account-stat-box-icon icon-return">
+                    <use xlink:href="#svg-return"></use>
+                </svg>
+                <!-- /ACCOUNT STAT BOX ICON -->
+            </div>
+            <!-- /ACCOUNT STAT BOX ICON WRAP -->
+
+            <!-- ACCOUNT STAT BOX TITLE -->
+            <p class="account-stat-box-title">OOOPs</p>
+            <!-- /ACCOUNT STAT BOX TITLE -->
+
+            <!-- ACCOUNT STAT BOX TEXT -->
+            <p class="account-stat-box-text">There are no threads/categories at the moment</p>
+            <!-- /ACCOUNT STAT BOX TEXT -->
+        </div>
+        <!-- /ACCOUNT STAT BOX -->
+    </div>
+    <!-- /GRID -->
+    {% else %}
     <!-- TABLE -->
     <div class="table table-forum-discussion">
         <!-- TABLE HEADER -->
@@ -145,7 +172,8 @@
 
                             <!-- DISCUSSION PREVIEW META TEXT -->
                             <p class="discussion-preview-meta-text">
-                                <a href="{{ thread.starter.get_absolute_url }}">{{ thread.starter.get_display_name }}</a> {{ thread.created | time_ago }}
+                                <a href="{{ thread.starter.get_absolute_url }}">{{ thread.starter.get_display_name
+                                    }}</a> {{ thread.created | time_ago }}
                             </p>
                             <!-- /DISCUSSION PREVIEW META TEXT -->
                         </div>
@@ -304,7 +332,8 @@
 
                         <!-- USER STATUS TITLE -->
                         <p class="user-status-title">
-                            <a class="bold" href="{{ thread.starter.get_absolute_url }}">{{ thread.starter.get_display_name }}</a>
+                            <a class="bold" href="{{ thread.starter.get_absolute_url }}">{{
+                                thread.starter.get_display_name }}</a>
                         </p>
                         <!-- /USER STATUS TITLE -->
 
@@ -329,6 +358,8 @@
     <!-- /TABLE -->
 
     {% include 'cores/_pagination/pagination_v1.html' with page=page_obj items='threads' %}
+
+    {% endif %}
 
 </div>
 <!-- /CONTENT GRID -->
