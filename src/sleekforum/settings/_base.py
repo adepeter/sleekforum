@@ -54,6 +54,7 @@ INSTALLED_APPS = [
 
     # sleekforum apps
     'sleekapps.activity.apps.ActivityConfig',
+    'sleekapps.blogs.apps.BlogsConfig',
     'sleekapps.categories.apps.CategoriesConfig',
     'sleekapps.cores.apps.CoreConfig',
     'sleekapps.home.apps.HomeConfig',

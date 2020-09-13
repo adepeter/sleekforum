@@ -37,7 +37,7 @@
                         <!-- /INFORMATION LINE TITLE -->
 
                         <!-- INFORMATION LINE TEXT -->
-                        <p class="information-line-text">{{ user.state }}</p>
+                        <p class="information-line-text">{{ user.state | default:"Not set" }}</p>
                         <!-- /INFORMATION LINE TEXT -->
                     </div>
                     <!-- /INFORMATION LINE -->
@@ -49,7 +49,7 @@
                         <!-- /INFORMATION LINE TITLE -->
 
                         <!-- INFORMATION LINE TEXT -->
-                        <p class="information-line-text">{{ user.country }}</p>
+                        <p class="information-line-text">{{ user.country | default:"Not set" }}</p>
                         <!-- /INFORMATION LINE TEXT -->
                     </div>
                     <!-- /INFORMATION LINE -->
@@ -141,7 +141,7 @@
                         <!-- /INFORMATION LINE TITLE -->
 
                         <!-- INFORMATION LINE TEXT -->
-                        <p class="information-line-text">{{ user.get_sex_display }}</p>
+                        <p class="information-line-text">{{ user.get_sex_display | default:"Not set" }}</p>
                         <!-- /INFORMATION LINE TEXT -->
                     </div>
                     <!-- /INFORMATION LINE -->
@@ -153,7 +153,7 @@
                         <!-- /INFORMATION LINE TITLE -->
 
                         <!-- INFORMATION LINE TEXT -->
-                        <p class="information-line-text">{{ user.dob | date:'jS, F' }}</p>
+                        <p class="information-line-text">{{ user.dob | date:'jS, F' | default:"Not set" }}</p>
                         <!-- /INFORMATION LINE TEXT -->
                     </div>
                     <!-- /INFORMATION LINE -->
@@ -189,7 +189,7 @@
                         <!-- /INFORMATION BLOCK TITLE -->
 
                         <!-- INFORMATION BLOCK TEXT -->
-                        <p class="information-block-text">{{ user.about }}</p>
+                        <p class="information-block-text">{{ user.about | default:"Description about self not set" }}</p>
                         <!-- /INFORMATION BLOCK TEXT -->
                     </div>
                     <!-- /INFORMATION BLOCK -->
@@ -201,7 +201,7 @@
                         <!-- /INFORMATION BLOCK TITLE -->
 
                         <!-- INFORMATION BLOCK TEXT -->
-                        <p class="information-block-text">{{ user.address }}</p>
+                        <p class="information-block-text">{{ user.address | default:"No address available" }}</p>
                         <!-- /INFORMATION BLOCK TEXT -->
                     </div>
                     <!-- /INFORMATION BLOCK -->
@@ -213,7 +213,7 @@
                         <!-- /INFORMATION BLOCK TITLE -->
 
                         <!-- INFORMATION BLOCK TEXT -->
-                        <p class="information-block-text">{{ user.hobbies | join:', ' }}</p>
+                        <p class="information-block-text">{{ user.hobbies | join:', ' | default:"Not hobbies set" }}</p>
                         <!-- /INFORMATION BLOCK TEXT -->
                     </div>
                     <!-- /INFORMATION BLOCK -->
@@ -225,7 +225,7 @@
                         <!-- /INFORMATION BLOCK TITLE -->
 
                         <!-- INFORMATION BLOCK TEXT -->
-                        <p class="information-block-text">{{ user.phone_number }}</p>
+                        <p class="information-block-text">{{ user.phone_number | default:"Phone number currently unavailable" }}</p>
                         <!-- /INFORMATION BLOCK TEXT -->
                     </div>
                     <!-- /INFORMATION BLOCK -->
