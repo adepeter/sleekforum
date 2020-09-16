@@ -6,7 +6,7 @@
     {% include 'vikinger/head_meta/metatags.html' %}
     {% include 'vikinger/head_meta/stylesheets.html' %}
     {% include 'vikinger/head_meta/favicons.html' %}
-    <title>{% block title %}{% endblock %}</title>
+    <title>{% block title %}{{ settings.title }}{% endblock %}</title>
 </head>
 <body>
 
