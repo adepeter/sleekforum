@@ -1,6 +1,6 @@
 import math
 
-# from precise_bbcode.bbcode import get_parser
+from precise_bbcode.bbcode import get_parser
 from django import template
 from django.template.defaultfilters import stringfilter
 from django.utils import timezone
@@ -10,7 +10,7 @@ from django.utils.translation import ngettext, gettext_lazy as _
 from ..helper import calculate_days_interval
 
 register = template.Library()
-# parser = get_parser()
+parser = get_parser()
 
 
 @register.filter
@@ -104,5 +104,4 @@ def interval_calculator(date_obj):
 @register.filter(need_autoescape=False, is_safe=True)
 @stringfilter
 def dont_escape(text):
-    return mark_safe(text)
-    # return mark_safe(parser.render(text))
+    return mark_safe(parser.render(text))
