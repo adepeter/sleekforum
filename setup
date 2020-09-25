@@ -1,0 +1,11 @@
+#!/bin/bash
+
+########################################################################
+# Author: Aderibigbe Peter Oluwaseun
+# Version: 1.0.0
+# Description: A one click install script for sleekforum on staging
+# Usage: ./setup
+# Created: 25th September 2020
+########################################################################
+
+echo "Welcome to one click install script for sleekforum"

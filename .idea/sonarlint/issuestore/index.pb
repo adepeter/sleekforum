@@ -474,3 +474,5 @@ F
 src/sleekforum/asgi.py,1\c\1c06dd03f7c19b692f897116b2f40c82155b8093
 F
 src/sleekforum/wsgi.py,a\4\a422fa0359602db9832ff16a3b3330ae1c0ae0a6
+o
+?src/templates/sleekapps/admin/settings/add_change_settings.html,6\7\675a956f26c7f02cb0efebcf76d13a43d09ff282

@@ -5,7 +5,7 @@
 {% load post_tags %}
 {% load thread_tags %}
 
-{% block title %}{{ category.get_name }}{% endblock %}
+{% block title %}{{ category.get_name }} | {{ block.super }}{% endblock %}
 
 {% block content %}
 <!-- CONTENT GRID -->
@@ -227,8 +227,35 @@
     <!-- /TABLE -->
 
     {% endif %}
-
+    {% if page_obj %}
     {% include 'threads/_includes/thread_list.html' with threads=page_obj %}
+    {% else %}
+    <!-- GRID -->
+    <div class="grid centered">
+        <!-- ACCOUNT STAT BOX -->
+        <div class="account-stat-box account-stat-active-users">
+            <!-- ACCOUNT STAT BOX ICON WRAP -->
+            <div class="account-stat-box-icon-wrap">
+                <!-- ACCOUNT STAT BOX ICON -->
+                <svg class="account-stat-box-icon icon-return">
+                    <use xlink:href="#svg-return"></use>
+                </svg>
+                <!-- /ACCOUNT STAT BOX ICON -->
+            </div>
+            <!-- /ACCOUNT STAT BOX ICON WRAP -->
+
+            <!-- ACCOUNT STAT BOX TITLE -->
+            <p class="account-stat-box-title">Empty section</p>
+            <!-- /ACCOUNT STAT BOX TITLE -->
+
+            <!-- ACCOUNT STAT BOX TEXT -->
+            <p class="account-stat-box-text">There are no threads yet in {{ category.get_name }}</p>
+            <!-- /ACCOUNT STAT BOX TEXT -->
+        </div>
+        <!-- /ACCOUNT STAT BOX -->
+    </div>
+    <!-- /GRID -->
+    {% endif %}
 
 </div>
 <!-- /CONTENT GRID -->

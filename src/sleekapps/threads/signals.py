@@ -1,3 +1,4 @@
+from django.core.cache import cache
 from django.db.models import F
 from django.dispatch import receiver, Signal
 from django.db.models.signals import post_save
@@ -11,6 +12,8 @@ from .models import Thread
 
 thread_views_creator_and_updater = Signal(providing_args=['request', 'thread'])
 
+def cache_thread_viewer(sender, thread, user):
+    cache.get('thread_%d_%s', False)
 
 # @receiver(post_save, sender=Thread)
 # def handle_thread_view_creation(sender, instance, created, **kwargs):
