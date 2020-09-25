@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ category | capfirst }} Rules | {{ settings.title }}{% endblock %}
+
+{% block content %}
+<!-- CONTENT GRID -->
+<div class="content-grid">
+    <!-- SECTION BANNER -->
+    <div class="section-banner">
+        <!-- SECTION BANNER ICON -->
+        <img class="section-banner-icon" src="{% static '/img/banner/forums-icon.png' %}" alt="{{ category.get_name }}">
+        <!-- /SECTION BANNER ICON -->
+
+        <!-- SECTION BANNER TITLE -->
+        <p class="section-banner-title">{{ category | capfirst }} Rules ({{ rules.count }})</p>
+        <!-- /SECTION BANNER TITLE -->
+
+        <!-- SECTION BANNER TEXT -->
+        <p class="section-banner-text">Maintaining sanity is a virtue of this forum!</p>
+        <!-- /SECTION BANNER TEXT -->
+    </div>
+    <!-- /SECTION BANNER -->
+    <!-- GRID COLUMN -->
+    <div class="account-hub-content">
+        <!-- SECTION HEADER -->
+        <div class="section-header">
+            <!-- SECTION HEADER INFO -->
+            <div class="section-header-info">
+
+                <!-- SECTION TITLE -->
+                <h2 class="section-title">Rules <span class="highlighted">{{ category | capfirst }}</span></h2>
+                <!-- /SECTION TITLE -->
+            </div>
+            <!-- /SECTION HEADER INFO -->
+
+            <!-- SECTION HEADER ACTIONS -->
+            <div class="section-header-actions">
+                <!-- SECTION HEADER ACTION -->
+                <a href="{% url 'sleekforum:violations:list_category' %}" class="section-header-action">Go back</a>
+                <!-- /SECTION HEADER ACTION -->
+            </div>
+            <!-- /SECTION HEADER ACTIONS -->
+        </div>
+        <!-- /SECTION HEADER -->
+
+        <!-- NOTIFICATION BOX LIST -->
+
+
+        <div class="grid change-on-desktop">
+            {% for rule in rules %}
+            <!-- ACHIEVEMENT BOX -->
+            <div class="achievement-box {% cycle 'secondary' 'primary' %}">
+                <!-- ACHIEVEMENT BOX INFO WRAP -->
+                <div class="achievement-box-info-wrap">
+                    <!-- ACHIEVEMENT BOX IMAGE -->
+                    <img class="achievement-box-image" src="{% static 'img/badge/caffeinated-b.png' %}"
+                         alt="badge-caffeinated-b">
+                    <!-- /ACHIEVEMENT BOX IMAGE -->
+
+                    {% comment %}
+                    <!-- Use this if you dont like the above style -->
+                    <!-- LEVEL PROGRESS BADGE -->
+                    <div class="level-progress-badge">
+                        <!-- LEVEL PROGRESS BADGE TITLE -->
+                        <p class="level-progress-badge-title">Rule</p>
+                        <!-- /LEVEL PROGRESS BADGE TITLE -->
+
+                        <!-- LEVEL PROGRESS BADGE TEXT -->
+                        <p class="level-progress-badge-text">{{ forloop.counter }}</p>
+                        <!-- /LEVEL PROGRESS BADGE TEXT -->
+                    </div>
+                    <!-- /LEVEL PROGRESS BADGE -->
+                    {% endcomment %}
+
+                    <!-- ACHIEVEMENT BOX INFO -->
+                    <div class="achievement-box-info">
+                        <!-- ACHIEVEMENT BOX TITLE -->
+                        <p class="achievement-box-title">{{ rule.name }}</p>
+                        <!-- /ACHIEVEMENT BOX TITLE -->
+
+                        <!-- ACHIEVEMENT BOX TEXT -->
+                        <p class="achievement-box-text"><span class="bold">Desc:</span> {{ rule.description }}</p>
+                        <!-- /ACHIEVEMENT BOX TEXT -->
+                    </div>
+                    <!-- /ACHIEVEMENT BOX INFO -->
+                </div>
+                <!-- /ACHIEVEMENT BOX INFO WRAP -->
+                {% empty %}
+                <!-- LEVEL PROGRESS BOX -->
+                <div class="level-progress-box">
+                    <!-- LEVEL PROGRESS BADGE -->
+                    <div class="level-progress-badge">
+                        <!-- LEVEL PROGRESS BADGE TITLE -->
+                        <p class="level-progress-badge-title">OoOps</p>
+                        <!-- /LEVEL PROGRESS BADGE TITLE -->
+
+                        <!-- LEVEL PROGRESS BADGE TEXT -->
+                        <p class="level-progress-badge-text">0</p>
+                        <!-- /LEVEL PROGRESS BADGE TEXT -->
+                    </div>
+                    <!-- /LEVEL PROGRESS BADGE -->
+
+                    <!-- PROGRESS STAT -->
+                    <div class="progress-stat">
+                        <!-- BAR PROGRESS WRAP -->
+                        <div class="bar-progress-wrap big">
+                            <!-- BAR PROGRESS INFO -->
+                            <p class="bar-progress-info start negative progress-with-text">+<span
+                                    class="bar-progress-text"></span>
+                                <span class="light">Currently there are no rules added. Kindly use the Go Back button to return</span>
+                            </p>
+                            <!-- /BAR PROGRESS INFO -->
+
+                            <!-- PROGRESS STAT INFO -->
+                            <p class="progress-stat-info">Temp Error</p>
+                            <!-- /PROGRESS STAT INFO -->
+                        </div>
+                        <!-- /BAR PROGRESS WRAP -->
+                    </div>
+                    <!-- /PROGRESS STAT -->
+                </div>
+
+            </div>
+            {% endfor %}
+            <!-- /ACHIEVEMENT BOX -->
+        </div>
+
+
+        <!-- /NOTIFICATION BOX LIST -->
+
+    </div>
+    <!-- /GRID COLUMN -->
+
+</div>
+{% endblock %}

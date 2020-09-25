@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load cores_util_tags %}
+
+{% block title %}Privacy Policy | {{ block.super }}{% endblock %}
+
+{% block content %}
+<!-- CONTENT GRID -->
+<div class="content-grid">
+    <!-- SECTION BANNER -->
+    <div class="section-banner">
+        <!-- SECTION BANNER ICON -->
+        <img class="section-banner-icon" src="{% static 'img/banner/events-icon.png' %}" alt="events-icon">
+        <!-- /SECTION BANNER ICON -->
+
+        <!-- SECTION BANNER TITLE -->
+        <p class="section-banner-title">{{ flatpage.title }}</p>
+        <!-- /SECTION BANNER TITLE -->
+
+        <!-- SECTION BANNER TEXT -->
+        <p class="section-banner-text">Welcome to our privacy and policy page</p>
+        <!-- /SECTION BANNER TEXT -->
+    </div>
+    <!-- /SECTION BANNER -->
+
+    <!-- SECTION HEADER -->
+    <div class="section-header">
+        <!-- SECTION HEADER INFO -->
+        <div class="section-header-info">
+            <!-- SECTION PRETITLE -->
+            <p class="section-pretitle">Get a quick look!</p>
+            <!-- /SECTION PRETITLE -->
+
+            <!-- SECTION TITLE -->
+            <h2 class="section-title">Privacy Policy</h2>
+            <!-- /SECTION TITLE -->
+        </div>
+        <!-- /SECTION HEADER INFO -->
+    </div>
+    <!-- /SECTION HEADER -->
+
+    <!-- GRID COLUMN -->
+    <!-- WIDGET BOX -->
+    <div class="widget-box no-padding">
+        <!-- WIDGET BOX STATUS -->
+        <div class="widget-box-status">
+            <!-- WIDGET BOX STATUS CONTENT -->
+            <div class="widget-box-status-content">
+                <!-- WIDGET BOX STATUS TEXT -->
+                <p class="widget-box-status-text">
+                    {{ flatpage.content | dont_escape | linebreaksbr }}
+                </p>
+                <!-- /WIDGET BOX STATUS TEXT -->
+            </div>
+            <!-- /WIDGET BOX STATUS CONTENT -->
+        </div>
+        <!-- /WIDGET BOX STATUS -->
+    </div>
+    <!-- /WIDGET BOX -->
+    <!-- /GRID COLUMN -->
+
+</div>
+{% endblock %}

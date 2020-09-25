@@ -31,87 +31,115 @@
 
     <!-- SECTION FILTERS BAR -->
     <div class="section-filters-bar v7">
-      <!-- SECTION FILTERS BAR ACTIONS -->
-      <div class="section-filters-bar-actions">
-        <!-- SECTION FILTERS BAR INFO -->
-        <div class="section-filters-bar-info">
-          <!-- SECTION FILTERS BAR TITLE -->
-          <p class="section-filters-bar-title">
-              <a href="{% url 'sleekforum:home:home' %}">Home</a><span class="separator"></span>
-              <a href="{% url 'sleekforum:categories:index' %}">Categories</a><span class="separator"></span>Hottest topics
-          </p>
-          <!-- /SECTION FILTERS BAR TITLE -->
+        <!-- SECTION FILTERS BAR ACTIONS -->
+        <div class="section-filters-bar-actions">
+            <!-- SECTION FILTERS BAR INFO -->
+            <div class="section-filters-bar-info">
+                <!-- SECTION FILTERS BAR TITLE -->
+                <p class="section-filters-bar-title">
+                    <a href="{% url 'sleekforum:home:home' %}">Home</a><span class="separator"></span>
+                    <a href="{% url 'sleekforum:categories:index' %}">Categories</a><span class="separator"></span>Hottest
+                    topics
+                </p>
+                <!-- /SECTION FILTERS BAR TITLE -->
+                {% if lastpost %}
+                <!-- SECTION FILTERS BAR TEXT -->
+                <div class="section-filters-bar-text small-space">
+                    Last post by
+                    <!-- USER AVATAR -->
+                    <a class="user-avatar micro no-stats" href="{{ lastpost.user.get_absolute_url }}">
+                        <!-- USER AVATAR BORDER -->
+                        <div class="user-avatar-border">
+                            <!-- HEXAGON -->
+                            <div class="hexagon-22-24"></div>
+                            <!-- /HEXAGON -->
+                        </div>
+                        <!-- /USER AVATAR BORDER -->
 
-          <!-- SECTION FILTERS BAR TEXT -->
-          <div class="section-filters-bar-text small-space">
-            Last post by
-            <!-- USER AVATAR -->
-            <a class="user-avatar micro no-stats" href="{{ lastpost.user.get_absolute_url }}">
-              <!-- USER AVATAR BORDER -->
-              <div class="user-avatar-border">
-                <!-- HEXAGON -->
-                <div class="hexagon-22-24"></div>
-                <!-- /HEXAGON -->
-              </div>
-              <!-- /USER AVATAR BORDER -->
-
-              <!-- USER AVATAR CONTENT -->
-              <div class="user-avatar-content">
-                <!-- HEXAGON -->
-                <div class="hexagon-image-18-20" data-src="{{ lastpost.user.get_avatar }}"></div>
-                <!-- /HEXAGON -->
-              </div>
-              <!-- /USER AVATAR CONTENT -->
-            </a>
-            <!-- /USER AVATAR -->
-            <a class="bold" href="profile-timeline.html">{{ lastpost.user.get_display_name }}</a>
-              {{ lastpost.created | time_ago }}
-          </div>
-          <!-- /SECTION FILTERS BAR TEXT -->
-        </div>
-        <!-- /SECTION FILTERS BAR INFO -->
-      </div>
-      <!-- /SECTION FILTERS BAR ACTIONS -->
-
-      <!-- SECTION FILTERS BAR ACTIONS -->
-      <div class="section-filters-bar-actions">
-        <!-- FORM -->
-        <form class="form">
-          <!-- FORM ITEM -->
-          <div class="form-item split">
-            <!-- FORM INPUT -->
-            <div class="form-input small">
-              <label for="forum-search">Search Forums</label>
-              <input type="text" id="forum-search" name="forum_search">
+                        <!-- USER AVATAR CONTENT -->
+                        <div class="user-avatar-content">
+                            <!-- HEXAGON -->
+                            <div class="hexagon-image-18-20" data-src="{{ lastpost.user.get_avatar }}"></div>
+                            <!-- /HEXAGON -->
+                        </div>
+                        <!-- /USER AVATAR CONTENT -->
+                    </a>
+                    <!-- /USER AVATAR -->
+                    <a class="bold" href="{{ lastpost.user.get_absolute_url }}">
+                        {{ lastpost.user.get_display_name }}
+                    </a>
+                    {{ lastpost.created | time_ago }}
+                </div>
+                <!-- /SECTION FILTERS BAR TEXT -->
+                {% endif %}
             </div>
-            <!-- /FORM INPUT -->
+            <!-- /SECTION FILTERS BAR INFO -->
+        </div>
+        <!-- /SECTION FILTERS BAR ACTIONS -->
 
-            <!-- BUTTON -->
-            <button class="button primary">
-              <!-- ICON MAGNIFYING GLASS -->
-              <svg class="icon-magnifying-glass">
-                <use xlink:href="#svg-magnifying-glass"></use>
-              </svg>
-              <!-- /ICON MAGNIFYING GLASS -->
-            </button>
-            <!-- /BUTTON -->
-          </div>
-          <!-- /FORM ITEM -->
-        </form>
-        <!-- /FORM -->
+        <!-- SECTION FILTERS BAR ACTIONS -->
+        <div class="section-filters-bar-actions">
+            <!-- FORM -->
+            <form class="form" action="{% url 'sleekforum:search:global_thread_search' %}">
+                <!-- FORM ITEM -->
+                <div class="form-item split">
+                    <!-- FORM INPUT -->
+                    <div class="form-input small">
+                        <label for="forum-search">Search Forums</label>
+                        <input type="text" id="forum-search" name="search">
+                    </div>
+                    <!-- /FORM INPUT -->
 
-          {% if request.user.is_authenticated %}
-        <!-- BUTTON -->
-        <p class="button secondary">+ Create Discussion</p>
-        <!-- /BUTTON -->
-          {% endif %}
-      </div>
-      <!-- /SECTION FILTERS BAR ACTIONS -->
+                    <!-- BUTTON -->
+                    <button class="button primary">
+                        <!-- ICON MAGNIFYING GLASS -->
+                        <svg class="icon-magnifying-glass">
+                            <use xlink:href="#svg-magnifying-glass"></use>
+                        </svg>
+                        <!-- /ICON MAGNIFYING GLASS -->
+                    </button>
+                    <!-- /BUTTON -->
+                </div>
+                <!-- /FORM ITEM -->
+            </form>
+            <!-- /FORM -->
+
+        </div>
+        <!-- /SECTION FILTERS BAR ACTIONS -->
     </div>
     <!-- /SECTION FILTERS BAR -->
 
+    {% if page_obj %}
     {% include 'threads/_includes/thread_list.html' with threads=page_obj %}
+    {% else %}
+    <!-- GRID -->
+    <div class="grid centered">
+        <!-- ACCOUNT STAT BOX -->
+        <div class="account-stat-box account-stat-active-users">
+            <!-- ACCOUNT STAT BOX ICON WRAP -->
+            <div class="account-stat-box-icon-wrap">
+                <!-- ACCOUNT STAT BOX ICON -->
+                <svg class="account-stat-box-icon icon-return">
+                    <use xlink:href="#svg-return"></use>
+                </svg>
+                <!-- /ACCOUNT STAT BOX ICON -->
+            </div>
+            <!-- /ACCOUNT STAT BOX ICON WRAP -->
+
+            <!-- ACCOUNT STAT BOX TITLE -->
+            <p class="account-stat-box-title">OOOPs</p>
+            <!-- /ACCOUNT STAT BOX TITLE -->
+
+            <!-- ACCOUNT STAT BOX TEXT -->
+            <p class="account-stat-box-text">There are no trending threads at the moment</p>
+            <!-- /ACCOUNT STAT BOX TEXT -->
+        </div>
+        <!-- /ACCOUNT STAT BOX -->
+    </div>
+    <!-- /GRID -->
+    {% endif %}
 
 </div>
 <!-- /CONTENT GRID -->
+
 {% endblock %}

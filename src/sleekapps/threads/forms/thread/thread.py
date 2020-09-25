@@ -1,7 +1,6 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
 
-
 from ...models import Thread
 
 
@@ -36,13 +35,29 @@ class ThreadCreationForm(BaseThreadForm):
         }
 
 
+class QuickThreadCreationForm(ThreadCreationForm):
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user')
+        super().__init__(*args, **kwargs)
+
+    class Meta(ThreadCreationForm.Meta):
+        fields = ThreadCreationForm.Meta.fields + ['category', 'tags']
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        instance.starter = self.user
+        if commit:
+            instance.save()
+        return instance
+
+
 class AdminThreadCreationForm(ThreadCreationForm):
     class Meta(ThreadCreationForm.Meta):
         fields = ThreadCreationForm.Meta.fields + ['category']
 
 
 class ThreadEditForm(BaseThreadForm):
-
     class Meta(BaseThreadForm.Meta):
         fields = BaseThreadForm.Meta.fields + ['tags']
 

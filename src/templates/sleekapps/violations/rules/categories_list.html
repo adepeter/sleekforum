@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load cache %}
+{% load violations_rule_tags %}
+
+{% block title %}Rules | {{ settings.title }}{% endblock %}
+
+{% block content %}
+{% cache 5184000 cached_category_rules %}
+<!-- CONTENT GRID -->
+<div class="content-grid">
+    <!-- SECTION BANNER -->
+    <div class="section-banner">
+        <!-- SECTION BANNER ICON -->
+        <img class="section-banner-icon" src="{% static '/img/banner/forums-icon.png' %}" alt="{{ category.get_name }}">
+        <!-- /SECTION BANNER ICON -->
+
+        <!-- SECTION BANNER TITLE -->
+        <p class="section-banner-title">Browse Rules</p>
+        <!-- /SECTION BANNER TITLE -->
+
+        <!-- SECTION BANNER TEXT -->
+        <p class="section-banner-text">Maintaining sanity is a virtue of this forum!</p>
+        <!-- /SECTION BANNER TEXT -->
+    </div>
+    <!-- /SECTION BANNER -->
+    <!-- GRID COLUMN -->
+    <div class="account-hub-content">
+        <!-- SECTION HEADER -->
+        <div class="section-header">
+            <!-- SECTION HEADER INFO -->
+            <div class="section-header-info">
+                <!-- SECTION PRETITLE -->
+                <p class="section-pretitle">Sections</p>
+                <!-- /SECTION PRETITLE -->
+
+                <!-- SECTION TITLE -->
+                <h2 class="section-title">Rules <span class="highlighted">{{ categories | length }}</span></h2>
+                <!-- /SECTION TITLE -->
+            </div>
+            <!-- /SECTION HEADER INFO -->
+
+            <!-- SECTION HEADER ACTIONS -->
+            <div class="section-header-actions">
+                <!-- SECTION HEADER ACTION -->
+                <a href="{% url 'sleekforum:home:home' %}" class="section-header-action">Home</a>
+                <!-- /SECTION HEADER ACTION -->
+            </div>
+            <!-- /SECTION HEADER ACTIONS -->
+        </div>
+        <!-- /SECTION HEADER -->
+
+        <!-- NOTIFICATION BOX LIST -->
+        <div class="notification-box-list">
+            {% for category in categories %}
+            <!-- NOTIFICATION BOX -->
+            <div class="notification-box">
+                <!-- USER STATUS -->
+                <div class="user-status request">
+                    <!-- USER STATUS AVATAR -->
+                    <div class="user-status-avatar" href="profile-timeline.html">
+                        <!-- USER AVATAR -->
+                        <div class="user-avatar small no-outline">
+                            <!-- USER AVATAR CONTENT -->
+                            <div class="user-avatar-content">
+                                <!-- HEXAGON -->
+                                <div class="hexagon-image-30-32"
+                                     data-src="{% static 'img/quest/openq-b.png' %}"></div>
+                                <!-- /HEXAGON -->
+                            </div>
+                            <!-- /USER AVATAR CONTENT -->
+                        </div>
+                    </div>
+                    <!-- USER STATUS TITLE -->
+                    <p class="user-status-title">
+                        <a class="bold" href="{% url 'sleekforum:violations:list_rules' category %}">{{ category | capfirst }}</a>
+                    </p>
+                    <!-- /USER STATUS TITLE -->
+
+                    <!-- USER STATUS TEXT -->
+                    {% rules_in_category category as rules %}
+                    {% with rules as cached_rules %}
+                    <p class="user-status-text small-space">{{ cached_rules | length }} rule{{ cached_rules | pluralize }}</p>
+                    {% endwith %}
+                    <!-- /USER STATUS TEXT -->
+
+
+                    <!-- ACTION REQUEST LIST -->
+                    <div class="action-request-list">
+                        <!-- ACTION REQUEST -->
+                        <p class="action-request accept with-text">
+                            <a href="{% url 'sleekforum:violations:list_rules' category %}">
+                                <!-- ACTION REQUEST ICON -->
+                            <svg class="action-request-icon icon-wallet">
+                                <use xlink:href="#svg-wallet"></use>
+                            </svg>
+                            <!-- /ACTION REQUEST ICON -->
+
+                            <!-- ACTION REQUEST TEXT -->
+                            <span class="action-request-text">View</span>
+                            <!-- /ACTION REQUEST TEXT -->
+                            </a>
+                        </p>
+                        <!-- /ACTION REQUEST -->
+                    </div>
+                    <!-- ACTION REQUEST LIST -->
+                </div>
+                <!-- /USER STATUS -->
+            </div>
+            <!-- /NOTIFICATION BOX -->
+            {% endfor %}
+        </div>
+        <!-- /NOTIFICATION BOX LIST -->
+
+    </div>
+    <!-- /GRID COLUMN -->
+
+</div>
+{% endcache %}
+{% endblock %}

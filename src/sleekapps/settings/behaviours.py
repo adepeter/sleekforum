@@ -31,4 +31,4 @@ class Configuration(models.Model):
         cache.set(self.__class__.__name__, self)
 
     def __str__(self):
-        return self.title
+        return 'Site configuration menu'

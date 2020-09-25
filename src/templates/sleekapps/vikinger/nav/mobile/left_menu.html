@@ -111,13 +111,13 @@
         <!-- MENU ITEM -->
         <li class="menu-item">
             <!-- MENU ITEM LINK -->
-            <a class="menu-item-link" href="groups.html">
+            <a class="menu-item-link" href="{% url 'sleekforum:categories:index' %}">
                 <!-- MENU ITEM LINK ICON -->
-                <svg class="menu-item-link-icon icon-group">
-                    <use xlink:href="#svg-group"></use>
+                <svg class="menu-item-link-icon icon-grid">
+                    <use xlink:href="#svg-grid"></use>
                 </svg>
                 <!-- /MENU ITEM LINK ICON -->
-                Users
+                Category
             </a>
             <!-- /MENU ITEM LINK -->
         </li>
@@ -132,7 +132,7 @@
                     <use xlink:href="#svg-members"></use>
                 </svg>
                 <!-- /MENU ITEM LINK ICON -->
-                Category
+                Members
             </a>
             <!-- /MENU ITEM LINK -->
         </li>
@@ -141,10 +141,10 @@
         <!-- MENU ITEM -->
         <li class="menu-item">
             <!-- MENU ITEM LINK -->
-            <a class="menu-item-link" href="forums.html">
+            <a class="menu-item-link" href="{% url 'sleekforum:threads:newest_threads' %}">
                 <!-- MENU ITEM LINK ICON -->
-                <svg class="menu-item-link-icon icon-forums">
-                    <use xlink:href="#svg-forums"></use>
+                <svg class="menu-item-link-icon icon-events-daily">
+                    <use xlink:href="#svg-events-daily"></use>
                 </svg>
                 <!-- /MENU ITEM LINK ICON -->
                 Latest
@@ -156,10 +156,10 @@
         <!-- MENU ITEM -->
         <li class="menu-item">
             <!-- MENU ITEM LINK -->
-            <a class="menu-item-link" href="badges.html">
+            <a class="menu-item-link" href="{% url 'sleekforum:threads:trending_threads' %}">
                 <!-- MENU ITEM LINK ICON -->
-                <svg class="menu-item-link-icon icon-badges">
-                    <use xlink:href="#svg-badges"></use>
+                <svg class="menu-item-link-icon icon-poll">
+                    <use xlink:href="#svg-poll"></use>
                 </svg>
                 <!-- /MENU ITEM LINK ICON -->
                 Trending
@@ -212,27 +212,35 @@
     <!-- /NAVIGATION WIDGET SECTION TITLE -->
 
     <!-- NAVIGATION WIDGET SECTION LINK -->
-    <a class="navigation-widget-section-link" href="#">Home</a>
+    <a class="navigation-widget-section-link" href="{% url 'sleekforum:home:home' %}">Home</a>
     <!-- /NAVIGATION WIDGET SECTION LINK -->
 
     <!-- NAVIGATION WIDGET SECTION LINK -->
-    <a class="navigation-widget-section-link" href="#">Our rules</a>
+    <a class="navigation-widget-section-link" href="{% url 'sleekforum:violations:list_category' %}">Our rules</a>
     <!-- /NAVIGATION WIDGET SECTION LINK -->
 
     <!-- NAVIGATION WIDGET SECTION LINK -->
-    <a class="navigation-widget-section-link" href="#">Faqs</a>
+    <a class="navigation-widget-section-link" href="{% url 'sleekforum:pages:faq' %}">Faqs</a>
     <!-- /NAVIGATION WIDGET SECTION LINK -->
 
     <!-- NAVIGATION WIDGET SECTION LINK -->
-    <a class="navigation-widget-section-link" href="#">About Us</a>
+    <a class="navigation-widget-section-link" href="{% url 'sleekforum:pages:terms' %}">Terms</a>
     <!-- /NAVIGATION WIDGET SECTION LINK -->
 
     <!-- NAVIGATION WIDGET SECTION LINK -->
-    <a class="navigation-widget-section-link" href="#">Contact Us</a>
+    <a class="navigation-widget-section-link" href="{% url 'sleekforum:pages:disclaimer' %}">Disclaimer</a>
     <!-- /NAVIGATION WIDGET SECTION LINK -->
 
     <!-- NAVIGATION WIDGET SECTION LINK -->
-    <a class="navigation-widget-section-link" href="#">Privacy Policy</a>
+    <a class="navigation-widget-section-link" href="{% url 'sleekforum:pages:about_us' %}">About Us</a>
+    <!-- /NAVIGATION WIDGET SECTION LINK -->
+
+    <!-- NAVIGATION WIDGET SECTION LINK -->
+    <a class="navigation-widget-section-link" href="{% url 'sleekforum:pages:contact_us' %}">Contact Us</a>
+    <!-- /NAVIGATION WIDGET SECTION LINK -->
+
+    <!-- NAVIGATION WIDGET SECTION LINK -->
+    <a class="navigation-widget-section-link" href="{% url 'sleekforum:pages:privacy_policy' %}">Privacy Policy</a>
     <!-- /NAVIGATION WIDGET SECTION LINK -->
 </nav>
 <!-- /NAVIGATION WIDGET -->

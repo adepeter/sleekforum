@@ -8,9 +8,11 @@ Currently, **Sleekforum v2** ships with the following features at the moment
 - Ability to reset password via FORGOT PASSWORD link
 - Create categories together with unlimited number and depth of subcategories.
 - Ability to report a thread for violating some rules.
+- Ability to react to thread and posts just like facebook.
 - Ability to pin a thread globally, or pin it within a category.
 - Presence features let site members know when other users are online, or offline.
 - Custom theme developed over bootstrap.
+- Ability to style thread and post contents using markdown
 
 
 Development features:

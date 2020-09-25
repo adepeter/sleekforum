@@ -1,3 +1,5 @@
+{% load martortags %}
+
 {% load cores_util_tags %}
 
 {% for post in posts %}
@@ -128,7 +130,7 @@
                 <!-- /USER STATUS -->
 
                 <!-- WIDGET BOX STATUS TEXT -->
-                <p class="widget-box-status-text">{{ post.content | linebreaksbr }}</p>
+                <p class="widget-box-status-text">{{ post.content | safe_markdown | linebreaksbr }}</p>
                 <!-- /WIDGET BOX STATUS TEXT -->
 
                 <!-- CONTENT ACTIONS -->

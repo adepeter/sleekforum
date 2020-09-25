@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.db import models
+from martor.widgets import AdminMartorWidget
 
 from .models import Thread, Post
 
@@ -50,6 +52,9 @@ class ThreadAdmin(admin.ModelAdmin):
         'prefix'
     ]
     inlines = [PostStackedInline]
+    formfield_overrides = {
+        models.TextField: {'widget': AdminMartorWidget},
+    }
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
