@@ -9,3 +9,11 @@
 ########################################################################
 
 echo "Welcome to one click install script for sleekforum"
+
+optionstrings=":f"
+while ${optionstrings} OPTION; do
+  case ${OPTION} in
+  f) ;;
+  ?) ;;
+  esac
+done
