@@ -1,31 +1,44 @@
 #!/bin/bash
 
-source utils.sh
-
 redis_flush() {
   redis-cli FLUSHALL
 }
 
 run_collectstatic() {
-  python manage.py collectstatic --noinput
+  echo "python manage.py collectstatic --noinput"
 }
 
 run_makemigrations() {
   if [[ -n $1 ]]; then
-    python manage.py makemigrations $1
+    echo "python manage.py makemigrations ${1}"
   fi
-  python manage.py makemigrations
+  echo "python manage.py makemigrations"
 }
 
 run_migrate() {
-  python manage.py migrate
+  echo "python manage.py migrate"
 }
 
 setup_postgres() {
   env_file="$(get_env_dir)/postgres.env"
-  echo -e "POSTGRES_USER=postgres\nPOSTGRES_PASSWORD=postgres\nPOSTGRES_DB=postgres" > ${env_file}
+  echo -e "POSTGRES_USER=postgres\nPOSTGRES_PASSWORD=postgres\nPOSTGRES_DB=postgres" >${env_file}
 }
 
 setup_sleekforum() {
-  echo
+  docker-compose exec sleekforum $(run_migrate)
+  docker-compose exec sleekforum $(collectstatic)
+}
+
+stop_all_services() {
+  docker-compose down
+}
+
+start_all_services() {
+  docker-compose up -d
+}
+
+setup_install() {
+  setup_postgres
+  start_all_services
+  setup_sleekforum
 }

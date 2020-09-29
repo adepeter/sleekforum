@@ -8,12 +8,22 @@
 # Created: 25th September 2020
 ########################################################################
 
+source ./scripts/utils.sh
+source ./scripts/commands.sh
+
 echo "Welcome to one click install script for sleekforum"
 
+print_help() {
+  echo "Usage:"
+  echo " ./setup -f ---> Fresh install"
+}
+
 optionstrings=":f"
-while ${optionstrings} OPTION; do
-  case ${OPTION} in
-  f) ;;
-  ?) ;;
+while getopts ${optionstrings} option; do
+  case ${option} in
+  f) setup_install ;;
+  ?) print_help ;;
   esac
 done
+
+test -z $* && print_help

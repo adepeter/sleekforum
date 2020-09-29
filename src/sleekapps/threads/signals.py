@@ -12,33 +12,30 @@ from .models import Thread
 
 thread_views_creator_and_updater = Signal(providing_args=['request', 'thread'])
 
-def cache_thread_viewer(sender, thread, user):
-    cache.get('thread_%d_%s', False)
+@receiver(post_save, sender=Thread)
+def handle_thread_view_creation(sender, instance, created, **kwargs):
+    if created:
+        thread_view_key = [('thread_%d', [instance.starter] % instance.id)]
+        cache.set('thread_views', dict(thread_view_key))
 
-# @receiver(post_save, sender=Thread)
-# def handle_thread_view_creation(sender, instance, created, **kwargs):
-#     """
-#     Create new thread view and add a new counter.
-#     Although this signal has a limitation as you cant plug it in view.
-#     To fix this limitation, a custom signal was created
-#     """
-#     if created:
-#         instance.views = F('views') + 1
-#         instance.save(update_fields=['views'])
-#         instance.thread_views.create(user=instance.starter)
-#
-#
-# @receiver(thread_views_creator_and_updater)
-# def handle_thread_views(sender, request, **kwargs):
-#     """
-#     Does everything handle_thread_view_creation() signal cannot do
-#     Implement this signal in any where of your site
-#     """
-#
-#     # Yet to be implemented
-#     if request.user.is_authenticated:
-#         print(sender)
-#
+
+@receiver(thread_views_creator_and_updater)
+def handle_thread_views(sender, **kwargs):
+    request, thread = kwargs['request'], kwargs['thread']
+    if request.user.is_authenticated:
+        thread_views_cache = cache.get('thread_views')
+        thread_views_cache_key = 'thread_%d' % thread.id
+        if thread_views_cache is not None:
+            viewers = thread_views_cache.get(thread_views_cache_key)
+            if request.user not in viewers:
+                viewers.append(request.user)
+                new_viewers = [(thread_views_cache_key, viewers)]
+                cache.set('thread_views', dict(new_viewers), timeout=None)
+        else:
+            thread_view_key = [(thread_views_cache_key, [request.user])]
+            cache.set('thread_views', dict(thread_view_key))
+
+
 #
 # @receiver(post_save, sender=Action)
 # def like_and_dislike_handler(sender, instance, created, **kwargs):

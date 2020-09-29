@@ -476,3 +476,11 @@ F
 src/sleekforum/wsgi.py,a\4\a422fa0359602db9832ff16a3b3330ae1c0ae0a6
 o
 ?src/templates/sleekapps/admin/settings/add_change_settings.html,6\7\675a956f26c7f02cb0efebcf76d13a43d09ff282
+5
+setup,8\0\80437a44a661d141174209119d54125a59a64b2a
+@
+scripts/utils.sh,c\e\cee04e16666c04ae72169b41ebfad3a7eb9b0ce9
+C
+scripts/commands.sh,f\8\f894552a8e8af708d475116dd8a721402e1357b2
+Q
+!src/sleekapps/cores/exceptions.py,f\5\f5446d68f8cc97ebdee54b7bd258dbcb2c4e3b5c
