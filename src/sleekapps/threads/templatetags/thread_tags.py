@@ -1,6 +1,9 @@
 from django import template
 from django.core.cache import cache
-from ..utils.thread import get_category_threads_queryset
+from ..utils.thread import (
+    get_category_threads_queryset,
+    thread_viewers
+)
 
 register = template.Library()
 
@@ -23,3 +26,7 @@ def get_reaction_count(obj, reaction):
     reaction_count = obj.get_reaction_count(reaction)
     cache.set(f'{obj.slug}_{reaction}_count', reaction_count, 10)
     return cache.get(f'{obj.slug}_{reaction}_count', None)
+
+@register.filter(name='thread_viewers')
+def get_thread_views(thread):
+    return thread_viewers(thread)

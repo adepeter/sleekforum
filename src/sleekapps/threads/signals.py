@@ -16,7 +16,7 @@ thread_views_creator_and_updater = Signal(providing_args=['request', 'thread'])
 def handle_thread_view_creation(sender, instance, created, **kwargs):
     if created:
         thread_view_key = [('thread_%d', [instance.starter] % instance.id)]
-        cache.set('thread_views', dict(thread_view_key))
+        cache.set('thread_views', dict(thread_view_key), timeout=None)
 
 
 @receiver(thread_views_creator_and_updater)
@@ -33,7 +33,8 @@ def handle_thread_views(sender, **kwargs):
                 cache.set('thread_views', dict(new_viewers), timeout=None)
         else:
             thread_view_key = [(thread_views_cache_key, [request.user])]
-            cache.set('thread_views', dict(thread_view_key))
+            cache.set('thread_views', dict(thread_view_key), timeout=None)
+
 
 
 #
