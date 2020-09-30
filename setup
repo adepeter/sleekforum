@@ -1,0 +1,29 @@
+#!/bin/bash
+
+########################################################################
+# Author: Aderibigbe Peter Oluwaseun
+# Version: 1.0.0
+# Description: A one click install script for sleekforum on staging
+# Usage: ./setup
+# Created: 25th September 2020
+########################################################################
+
+source ./scripts/utils.sh
+source ./scripts/commands.sh
+
+echo "Welcome to one click install script for sleekforum"
+
+print_help() {
+  echo "Usage:"
+  echo " ./setup -f ---> Fresh install"
+}
+
+optionstrings=":f"
+while getopts ${optionstrings} option; do
+  case ${option} in
+  f) setup_install ;;
+  ?) print_help ;;
+  esac
+done
+
+test -z $* && print_help

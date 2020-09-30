@@ -6,7 +6,7 @@
 {% load cores_util_tags %}
 {% load post_tags %}
 
-{% block title %}{{ thread.title }}{% endblock %}
+{% block title %}{{ thread.title }} | {{ block.super }}{% endblock %}
 
 {% block content %}
 

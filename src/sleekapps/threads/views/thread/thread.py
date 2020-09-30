@@ -24,6 +24,7 @@ from ...forms.thread.thread import (
 )
 
 from ...models import Thread
+from ...signals import thread_views_creator_and_updater
 
 TEMPLATE_URL = 'threads/thread'
 
@@ -83,6 +84,11 @@ class ReadThread(MultipleObjectMixin, SuccessMessageMixin, CreateView):
             Thread.objects.filter(
                 category__slug__iexact=self.kwargs['category_slug']
             )
+        )
+        thread_views_creator_and_updater.send(
+            self.__class__,
+            request=self.request,
+            thread=thread
         )
         return thread
 

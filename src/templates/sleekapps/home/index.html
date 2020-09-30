@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load cores_util_tags %}
+{% load thread_tags %}
 {% load post_tags %}
 
 {% block title %}Homepage | {{ block.super }}{% endblock %}
@@ -113,7 +114,7 @@
             <!-- TABLE HEADER COLUMN -->
             <div class="table-header-column centered padded-medium">
                 <!-- TABLE HEADER TITLE -->
-                <p class="table-header-title">Voices</p>
+                <p class="table-header-title">Views</p>
                 <!-- /TABLE HEADER TITLE -->
             </div>
             <!-- /TABLE HEADER COLUMN -->
@@ -185,7 +186,7 @@
                 <!-- TABLE COLUMN -->
                 <div class="table-column centered padded-medium">
                     <!-- TABLE TITLE -->
-                    <p class="table-title">398</p>
+                    <p class="table-title">{{ thread | thread_viewers | length }}</p>
                     <!-- /TABLE TITLE -->
                 </div>
                 <!-- /TABLE COLUMN -->

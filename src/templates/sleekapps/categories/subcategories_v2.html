@@ -5,7 +5,7 @@
 {% load post_tags %}
 {% load thread_tags %}
 
-{% block title %}{{ parent_node.get_name }}{% endblock %}
+{% block title %}{{ parent_node.get_name }} | {{ block.super }}{% endblock %}
 
 {% comment %}
 Please note this template list both and threads on same page,
@@ -192,6 +192,32 @@ Followed by the threads
 
     {% if parent_node.has_thread %}
     {% include 'threads/_includes/thread_list.html' with threads=parent_node.threads.all %}
+    {% else %}
+<!-- GRID -->
+    <div class="grid centered">
+        <!-- ACCOUNT STAT BOX -->
+        <div class="account-stat-box account-stat-active-users">
+            <!-- ACCOUNT STAT BOX ICON WRAP -->
+            <div class="account-stat-box-icon-wrap">
+                <!-- ACCOUNT STAT BOX ICON -->
+                <svg class="account-stat-box-icon icon-return">
+                    <use xlink:href="#svg-return"></use>
+                </svg>
+                <!-- /ACCOUNT STAT BOX ICON -->
+            </div>
+            <!-- /ACCOUNT STAT BOX ICON WRAP -->
+
+            <!-- ACCOUNT STAT BOX TITLE -->
+            <p class="account-stat-box-title">Empty Thread</p>
+            <!-- /ACCOUNT STAT BOX TITLE -->
+
+            <!-- ACCOUNT STAT BOX TEXT -->
+            <p class="account-stat-box-text">There are no threads yet in {{ parent_node.get_name }}</p>
+            <!-- /ACCOUNT STAT BOX TEXT -->
+        </div>
+        <!-- /ACCOUNT STAT BOX -->
+    </div>
+    <!-- /GRID -->
     {% endif %}
 
 </div>

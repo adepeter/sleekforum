@@ -5,7 +5,7 @@
 {% load post_tags %}
 {% load thread_tags %}
 
-{% block title %}{{ parent_node.get_name }}{% endblock %}
+{% block title %}{{ parent_node.get_name }} | {{ block.super }}{% endblock %}
 
 {% block content %}
 <!-- CONTENT GRID -->
