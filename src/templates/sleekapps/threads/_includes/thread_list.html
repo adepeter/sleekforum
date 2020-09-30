@@ -1,5 +1,6 @@
 {% load cores_util_tags %}
 {% load post_tags %}
+{% load thread_tags %}
 
 {# This is an included template to parse threads #}
 
@@ -19,7 +20,7 @@
         <!-- TABLE HEADER COLUMN -->
         <div class="table-header-column centered padded-medium">
             <!-- TABLE HEADER TITLE -->
-            <p class="table-header-title">Voices</p>
+            <p class="table-header-title">Views</p>
             <!-- /TABLE HEADER TITLE -->
         </div>
         <!-- /TABLE HEADER COLUMN -->
@@ -65,7 +66,7 @@
                         <!-- /DISCUSSION PREVIEW META TEXT -->
 
                         <!-- USER AVATAR -->
-                        <a class="user-avatar micro no-border" href="profile-timeline.html">
+                        <a class="user-avatar micro no-border" href="{{ thread.starter.get_absolute_url }}">
                             <!-- USER AVATAR CONTENT -->
                             <div class="user-avatar-content">
                                 <!-- HEXAGON -->
@@ -77,7 +78,7 @@
                         <!-- /USER AVATAR -->
 
                         <!-- DISCUSSION PREVIEW META TEXT -->
-                        <p class="discussion-preview-meta-text"><a href="profile-timeline.html">{{ thread.starter.get_display_name }}</a> {{ thread.created | time_ago }}</p>
+                        <p class="discussion-preview-meta-text"><a href="{{ thread.starter.get_absolute_url }}">{{ thread.starter.get_display_name }}</a> {{ thread.created | time_ago }}</p>
                         <!-- /DISCUSSION PREVIEW META TEXT -->
                     </div>
                     <!-- /DISCUSSION PREVIEW META -->
@@ -89,7 +90,7 @@
             <!-- TABLE COLUMN -->
             <div class="table-column centered padded-medium">
                 <!-- TABLE TITLE -->
-                <p class="table-title">398</p>
+                <p class="table-title">{{ thread | thread_viewers | length }}</p>
                 <!-- /TABLE TITLE -->
             </div>
             <!-- /TABLE COLUMN -->
@@ -108,7 +109,7 @@
                 {% if post %}
                 <div class="user-status">
                     <!-- USER STATUS AVATAR -->
-                    <a class="user-status-avatar" href="profile-timeline.html">
+                    <a class="user-status-avatar" href="{{ post.user.get_absolute_url }}">
                         <!-- USER AVATAR -->
                         <div class="user-avatar small no-outline {{ post.user.online }}">
                             <!-- USER AVATAR CONTENT -->
@@ -164,7 +165,7 @@
                     <!-- /USER STATUS AVATAR -->
 
                     <!-- USER STATUS TITLE -->
-                    <p class="user-status-title"><a class="bold" href="profile-timeline.html">{{ post.user.get_display_name }}</a></p>
+                    <p class="user-status-title"><a class="bold" href="{{ post.user.get_absolute_url }}">{{ post.user.get_display_name }}</a></p>
                     <!-- /USER STATUS TITLE -->
 
                     <!-- USER STATUS TEXT -->
