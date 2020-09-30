@@ -1,4 +1,4 @@
-**SLEEKFORUM v2.0** is a django powered web project which is suited for running your own forum site. It comes with clean and modern design, implements FORUM19 bootstrap template. Mobile ready version is also included. Also its Backend API currently is on active development using **GRAPHQL**
+**SLEEKFORUM v2.0** is a django powered web project which is suited for running your own forum site. It comes with clean and modern design, implements Vikinger bootstrap template. Mobile ready version is also included. Also its Backend API currently is on active development using **GRAPHQL**
 
 In previous release of this project were some features which have been dropped. However, there are plans of future implementation a there is complete redesign in project structure.
 
