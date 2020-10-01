@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.flatpages',
     'django.contrib.postgres',
+    'django.contrib.redirects',
 
     # python libraries
     'PIL',
@@ -77,6 +78,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.redirects.middleware.RedirectFallbackMiddleware',
 
     'sleekapps.settings.middlewares.UnderMaintenanceMiddleware',
     'sleekapps.users.middlewares.FetchCountryFromAPIMiddleware',

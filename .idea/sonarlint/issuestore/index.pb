@@ -484,3 +484,5 @@ C
 scripts/commands.sh,f\8\f894552a8e8af708d475116dd8a721402e1357b2
 Q
 !src/sleekapps/cores/exceptions.py,f\5\f5446d68f8cc97ebdee54b7bd258dbcb2c4e3b5c
+E
+scripts/validators.sh,4\d\4df3adf8276d16d3f79a1137e207e27e013cad00
