@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.flatpages',
     'django.contrib.postgres',
+    'django.contrib.redirects',
 
     # python libraries
     'PIL',
@@ -77,10 +78,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.redirects.middleware.RedirectFallbackMiddleware',
 
+    # sleekforum custom middleware
     'sleekapps.settings.middlewares.UnderMaintenanceMiddleware',
     'sleekapps.users.middlewares.FetchCountryFromAPIMiddleware',
     'sleekapps.users.middlewares.OnlineStatusMiddleware',
+    'sleekapps.users.middlewares.LastVisitMiddleware',
 ]
 
 ROOT_URLCONF = 'sleekforum.urls'
@@ -99,7 +103,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
 
                 # sleekforum context_processors
-                'sleekapps.settings.context_processors.site_configuration',
+                # 'sleekapps.settings.context_processors.site_configuration',
             ],
         },
     },

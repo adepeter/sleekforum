@@ -3,6 +3,7 @@ import requests
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.cache import cache
+from django.db.models import F
 from django.utils import timezone
 
 User = get_user_model()
@@ -44,5 +45,20 @@ class FetchCountryFromAPIMiddleware:
             if api_response.status_code == 200:
                 result = api_response.json()
                 cache.set('remote_countries', result, timeout=None)
+        response = self.get_response(request)
+        return response
+
+
+class LastVisitMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        if request.user.is_authenticated:
+            if cache.get('visit_%s' % request.user.username) is None:
+                User.objects.filter(
+                    username=request.user.username
+                ).update(visits=F('visits')+1)
+                cache.set('visit_%s' % request.user.username, timezone.now(), timeout=60*60*24)
         response = self.get_response(request)
         return response

@@ -162,6 +162,7 @@ class User(PermissionsMixin, AbstractBaseUser):
         null=True,
         help_text=_('IP Address')
     )
+    visits = models.PositiveIntegerField(default=0)
 
 
     objects = UserManager()
