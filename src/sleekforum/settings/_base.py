@@ -80,9 +80,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.redirects.middleware.RedirectFallbackMiddleware',
 
-    'sleekapps.settings.middlewares.UnderMaintenanceMiddleware',
     'sleekapps.users.middlewares.FetchCountryFromAPIMiddleware',
     'sleekapps.users.middlewares.OnlineStatusMiddleware',
+    'sleekapps.settings.middlewares.UnderMaintenanceMiddleware',
 ]
 
 ROOT_URLCONF = 'sleekforum.urls'
@@ -101,7 +101,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
 
                 # sleekforum context_processors
-                'sleekapps.settings.context_processors.site_configuration',
+                # 'sleekapps.settings.context_processors.site_configuration',
             ],
         },
     },
