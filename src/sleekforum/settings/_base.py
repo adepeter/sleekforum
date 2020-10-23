@@ -80,9 +80,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.redirects.middleware.RedirectFallbackMiddleware',
 
+    # sleekforum custom middleware
+    'sleekapps.settings.middlewares.UnderMaintenanceMiddleware',
     'sleekapps.users.middlewares.FetchCountryFromAPIMiddleware',
     'sleekapps.users.middlewares.OnlineStatusMiddleware',
-    'sleekapps.settings.middlewares.UnderMaintenanceMiddleware',
+    'sleekapps.users.middlewares.LastVisitMiddleware',
 ]
 
 ROOT_URLCONF = 'sleekforum.urls'
