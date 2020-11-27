@@ -14,8 +14,11 @@ thread_views_creator_and_updater = Signal(providing_args=['request', 'thread'])
 
 @receiver(post_save, sender=Thread)
 def handle_thread_view_creation(sender, instance, created, **kwargs):
+    """
+    {'thread_views': {'thread_ID': [thread_starter, **others users that viewed]}
+    """
     if created:
-        thread_view_key = [('thread_%d', [instance.starter] % instance.id)]
+        thread_view_key = [(f'thread_{instance.id}', [instance.starter])]
         cache.set('thread_views', dict(thread_view_key), timeout=None)
 
 

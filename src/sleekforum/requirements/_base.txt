@@ -1,4 +1,5 @@
 django
+djangorestframework
 django-precise-bbcode
 django-violation
 django-graphql-jwt
