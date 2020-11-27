@@ -1,3 +1,5 @@
+{% load settings_tags %}
+
 <div class="header-actions">
     <!-- HEADER BRAND -->
     <div class="header-brand">
@@ -14,7 +16,7 @@
         <!-- /LOGO -->
 
         <!-- HEADER BRAND TEXT -->
-        <h1 class="header-brand-text">{{ settings.title }}</h1>
+        <h1 class="header-brand-text">{{ settings.title | default_if_null:'SLEEKFORUM' }}</h1>
         <!-- /HEADER BRAND TEXT -->
     </div>
     <!-- /HEADER BRAND -->

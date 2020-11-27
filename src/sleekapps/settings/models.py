@@ -8,6 +8,7 @@ class Setting(Configuration):
     title = models.CharField(
         verbose_name=_('site title'),
         max_length=20,
+        default=_('sleekforum'),
         help_text=_('Website title')
     )
     description = models.TextField(
