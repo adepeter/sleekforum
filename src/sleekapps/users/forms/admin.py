@@ -5,6 +5,7 @@ from django.utils.translation import gettext_lazy as _
 
 User = get_user_model()
 
+
 class UserCreationForm(forms.ModelForm):
     """A form for creating new users. Includes all the required
     fields, plus a repeated password."""

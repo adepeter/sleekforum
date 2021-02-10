@@ -164,7 +164,6 @@ class User(PermissionsMixin, AbstractBaseUser):
     )
     visits = models.PositiveIntegerField(default=0)
 
-
     objects = UserManager()
 
     EMAIL_FIELD = 'email'
@@ -208,8 +207,7 @@ class User(PermissionsMixin, AbstractBaseUser):
 
     @property
     def get_full_name(self):
-        fullname = ' '.join([self.firstname, self.middlename, self.lastname])
-        return fullname
+        return ' '.join([self.firstname, self.middlename, self.lastname])
 
     @property
     def get_display_name(self):
@@ -223,11 +221,8 @@ class User(PermissionsMixin, AbstractBaseUser):
     def is_online(self):
         if self.last_seen_cache():
             now = timezone.now()
-            if now > self.last_seen_cache() + \
-                    datetime.timedelta(seconds=settings.USER_LASTSEEN_TIMEOUT):
-                return False
-            else:
-                return True
+            return now <= self.last_seen_cache() + \
+                   datetime.timedelta(seconds=settings.USER_LASTSEEN_TIMEOUT)
         else:
             return False
 

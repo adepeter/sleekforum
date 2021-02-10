@@ -10,6 +10,7 @@ TEMPLATE_URL = 'users/auth/password'
 
 User = get_user_model()
 
+
 class PasswordResetForm(BasePasswordResetForm):
 
     def __init__(self, *args, **kwargs):

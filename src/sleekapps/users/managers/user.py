@@ -3,7 +3,6 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 
-
 class UserManager(BaseUserManager):
     use_in_migrations = True
 
@@ -22,6 +21,7 @@ class UserManager(BaseUserManager):
         user.avatar = 'defaults/users/avatars/none.jpg'
         now = timezone.now()
         user.date_created = now
+        user.ip_address = '127.0.0.1'
         user.last_login = now
         user.last_modified = now
         user.save(using=self._db)

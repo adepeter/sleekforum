@@ -1,10 +1,12 @@
 django
+djangorestframework
 django-precise-bbcode
 django-violation
 django-graphql-jwt
 django-mptt
 django-redis
 graphene-django
+ipython
 martor
 pillow
 psycopg2

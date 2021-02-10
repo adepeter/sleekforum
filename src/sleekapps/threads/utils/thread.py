@@ -19,5 +19,5 @@ def get_threads_in_category_by_count(category, count, include_self=True):
 
 def thread_viewers(thread):
     thread_cache = cache.get('thread_views', None)
-    viewers = thread_cache['thread_%d' % thread.id]
+    viewers = thread_cache[f'thread_{thread.id}']
     return viewers

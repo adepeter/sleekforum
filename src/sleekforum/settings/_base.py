@@ -104,7 +104,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
 
                 # sleekforum context_processors
-                # 'sleekapps.settings.context_processors.site_configuration',
+                'sleekapps.settings.context_processors.site_configuration',
             ],
         },
     },
