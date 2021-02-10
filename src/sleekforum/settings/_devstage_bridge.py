@@ -16,9 +16,9 @@ MIDDLEWARE += [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('POSTGRES_DB', 'sleekforumdb'),
+        'NAME': os.getenv('POSTGRES_DB', 'sleekforum_db'),
         'USER': os.getenv('POSTGRES_USER', 'sleekforum_user'),
-        'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'sleekforum'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'sleekforum_password'),
         'HOST': os.getenv('POSTGRES_HOST', 'localhost'),
         'PORT': 5432,
     }

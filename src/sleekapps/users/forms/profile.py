@@ -9,6 +9,7 @@ User = get_user_model()
 
 countries = fetch_country()
 
+
 class UserEmailEditForm(forms.ModelForm):
     """User email change with password for confirmation"""
     new_email = forms.EmailField(
@@ -55,6 +56,7 @@ class UserEmailEditForm(forms.ModelForm):
             user.save()
         return user
 
+
 class UserSearchForm(forms.Form):
     keyword = forms.CharField(
         label=_('E-mail or username'),
@@ -80,8 +82,6 @@ class UserProfileEditForm(forms.ModelForm):
         self.fields['country'] = forms.ChoiceField(choices=country_choices)
         self.fields['phone_number'].validators.append(validate_phone_number)
         self.fields['whatsapp'].validators.append(validate_phone_number)
-
-
 
     class Meta:
         model = User
