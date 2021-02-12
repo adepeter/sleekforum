@@ -1,11 +1,11 @@
 from django import forms
 
-from .models import Message
+from .models import PrivateMessage
 
 
 class BasePrivateMessageForm(forms.ModelForm):
     class Meta:
-        model = Message
+        model = PrivateMessage
         fields = [
             'content'
         ]

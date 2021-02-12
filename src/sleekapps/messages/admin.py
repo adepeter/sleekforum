@@ -1,9 +1,9 @@
 from django.contrib import admin
 
-from .models import Message
+from .models import PrivateMessage
 
 
-@admin.register(Message)
+@admin.register(PrivateMessage)
 class MessageAdmin(admin.ModelAdmin):
     list_display = [
         'sender',

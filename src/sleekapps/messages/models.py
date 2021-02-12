@@ -3,7 +3,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
-class Message(models.Model):
+class PrivateMessage(models.Model):
     sender = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         verbose_name=_('sender'),
@@ -33,3 +33,18 @@ class Message(models.Model):
         on_delete=models.PROTECT,
         related_name='children'
     )
+
+
+class Message(PrivateMessage):
+    class Meta:
+        proxy = True
+
+
+class Chat(PrivateMessage):
+    class Meta:
+        proxy = True
+
+
+class PrivateChat(PrivateMessage):
+    class Meta:
+        proxy = True
