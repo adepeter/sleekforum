@@ -12,7 +12,7 @@ class PrivateMessage(models.Model):
     )
     recipient = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        verbose_name=_('sender'),
+        verbose_name=_('recipient'),
         on_delete=models.DO_NOTHING,
         related_name='messages_received'
     )
@@ -31,8 +31,14 @@ class PrivateMessage(models.Model):
         'self',
         verbose_name=_('parent message'),
         on_delete=models.PROTECT,
-        related_name='children'
+        related_name='children',
+        null=True,
+        blank=True
     )
+
+    class Meta:
+        ordering = ['date_sent']
+        get_latest_by = 'date_sent'
 
 
 class Message(PrivateMessage):

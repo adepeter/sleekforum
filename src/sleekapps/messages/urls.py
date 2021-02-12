@@ -1,9 +1,12 @@
-from django.urls import path
+from django.urls import path, include
 
-from .views import ListPrivateMessage
+from .views import ListPrivateMessage, ReadReplyPrivateMessage
 
 app_name = 'messages'
 
 urlpatterns = [
-    path('', ListPrivateMessage.as_view(), name='list_private_messages')
+    path('', ListPrivateMessage.as_view(), name='list_private_messages'),
+    path('<int:id>/<slug:username>/', include([
+        path('reply/', ReadReplyPrivateMessage.as_view(), name='read_reply_private_message'),
+    ])),
 ]

@@ -1,0 +1,236 @@
+{% extends 'users/profile/profile_base.html' %}
+
+{% block title %}{{ request.user.get_display_name | add:' Private messages' }}{% endblock %}
+
+{% block profile_edit_content %}
+<!-- GRID COLUMN -->
+<div class="account-hub-content">
+    <!-- SECTION HEADER -->
+    <div class="section-header">
+        <!-- SECTION HEADER INFO -->
+        <div class="section-header-info">
+            <!-- SECTION PRETITLE -->
+            <p class="section-pretitle">My Profile</p>
+            <!-- /SECTION PRETITLE -->
+
+            <!-- SECTION TITLE -->
+            <h2 class="section-title">Private Messages</h2>
+            <!-- /SECTION TITLE -->
+        </div>
+        <!-- /SECTION HEADER INFO -->
+
+        <!-- SECTION HEADER ACTIONS -->
+        <div class="section-header-actions">
+            <!-- SECTION HEADER ACTION -->
+            <p class="section-header-action">Mark all as Read</p>
+            <!-- /SECTION HEADER ACTION -->
+
+            <!-- SECTION HEADER ACTION -->
+            <p class="section-header-action">Settings</p>
+            <!-- /SECTION HEADER ACTION -->
+        </div>
+        <!-- /SECTION HEADER ACTIONS -->
+    </div>
+    <!-- /SECTION HEADER -->
+
+    <!-- GRID COLUMN -->
+    <div class="grid-column">
+        {% include 'vikinger/messages_alert.html' %}
+        <!-- CHAT WIDGET WRAP -->
+        <div class="chat-widget-wrap">
+            <!-- CHAT WIDGET -->
+            <div class="chat-widget static">
+                <!-- CHAT WIDGET MESSAGES -->
+                <div class="chat-widget-messages" data-simplebar>
+                    <!-- CHAT WIDGET MESSAGE -->
+                    <div class="chat-widget-message">
+                        <!-- USER STATUS -->
+                        <div class="user-status">
+                            <!-- USER STATUS AVATAR -->
+                            <div class="user-status-avatar">
+                                <!-- USER AVATAR -->
+                                <div class="user-avatar small no-outline">
+                                    <!-- USER AVATAR CONTENT -->
+                                    <div class="user-avatar-content">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-image-30-32" data-src="img/avatar/04.jpg"></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR CONTENT -->
+
+                                    <!-- USER AVATAR PROGRESS -->
+                                    <div class="user-avatar-progress">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-progress-40-44"></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR PROGRESS -->
+
+                                    <!-- USER AVATAR PROGRESS BORDER -->
+                                    <div class="user-avatar-progress-border">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-border-40-44"></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR PROGRESS BORDER -->
+
+                                    <!-- USER AVATAR BADGE -->
+                                    <div class="user-avatar-badge">
+                                        <!-- USER AVATAR BADGE BORDER -->
+                                        <div class="user-avatar-badge-border">
+                                            <!-- HEXAGON -->
+                                            <div class="hexagon-22-24"></div>
+                                            <!-- /HEXAGON -->
+                                        </div>
+                                        <!-- /USER AVATAR BADGE BORDER -->
+
+                                        <!-- USER AVATAR BADGE CONTENT -->
+                                        <div class="user-avatar-badge-content">
+                                            <!-- HEXAGON -->
+                                            <div class="hexagon-dark-16-18"></div>
+                                            <!-- /HEXAGON -->
+                                        </div>
+                                        <!-- /USER AVATAR BADGE CONTENT -->
+
+                                        <!-- USER AVATAR BADGE TEXT -->
+                                        <p class="user-avatar-badge-text">6</p>
+                                        <!-- /USER AVATAR BADGE TEXT -->
+                                    </div>
+                                    <!-- /USER AVATAR BADGE -->
+                                </div>
+                                <!-- /USER AVATAR -->
+                            </div>
+                            <!-- /USER STATUS AVATAR -->
+
+                            <!-- USER STATUS TITLE -->
+                            <p class="user-status-title"><span class="bold">Bearded Wonder</span></p>
+                            <!-- /USER STATUS TITLE -->
+
+                            <!-- USER STATUS TEXT -->
+                            <p class="user-status-text">Great! Then we'll meet with them at the party...</p>
+                            <!-- /USER STATUS TEXT -->
+
+                            <!-- USER STATUS TIMESTAMP -->
+                            <p class="user-status-timestamp floaty">2 hours ago</p>
+                            <!-- /USER STATUS TIMESTAMP -->
+                        </div>
+                        <!-- /USER STATUS -->
+                    </div>
+                    <!-- /CHAT WIDGET MESSAGE -->
+
+                    <!-- CHAT WIDGET MESSAGE -->
+                    <div class="chat-widget-message">
+                        <!-- USER STATUS -->
+                        <div class="user-status">
+                            <!-- USER STATUS AVATAR -->
+                            <div class="user-status-avatar">
+                                <!-- USER AVATAR -->
+                                <div class="user-avatar small no-outline">
+                                    <!-- USER AVATAR CONTENT -->
+                                    <div class="user-avatar-content">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-image-30-32" data-src="img/avatar/05.jpg"></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR CONTENT -->
+
+                                    <!-- USER AVATAR PROGRESS -->
+                                    <div class="user-avatar-progress">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-progress-40-44"></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR PROGRESS -->
+
+                                    <!-- USER AVATAR PROGRESS BORDER -->
+                                    <div class="user-avatar-progress-border">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-border-40-44"></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR PROGRESS BORDER -->
+
+                                    <!-- USER AVATAR BADGE -->
+                                    <div class="user-avatar-badge">
+                                        <!-- USER AVATAR BADGE BORDER -->
+                                        <div class="user-avatar-badge-border">
+                                            <!-- HEXAGON -->
+                                            <div class="hexagon-22-24"></div>
+                                            <!-- /HEXAGON -->
+                                        </div>
+                                        <!-- /USER AVATAR BADGE BORDER -->
+
+                                        <!-- USER AVATAR BADGE CONTENT -->
+                                        <div class="user-avatar-badge-content">
+                                            <!-- HEXAGON -->
+                                            <div class="hexagon-dark-16-18"></div>
+                                            <!-- /HEXAGON -->
+                                        </div>
+                                        <!-- /USER AVATAR BADGE CONTENT -->
+
+                                        <!-- USER AVATAR BADGE TEXT -->
+                                        <p class="user-avatar-badge-text">12</p>
+                                        <!-- /USER AVATAR BADGE TEXT -->
+                                    </div>
+                                    <!-- /USER AVATAR BADGE -->
+                                </div>
+                                <!-- /USER AVATAR -->
+                            </div>
+                            <!-- /USER STATUS AVATAR -->
+
+                            <!-- USER STATUS TITLE -->
+                            <p class="user-status-title"><span class="bold">Neko Bebop</span></p>
+                            <!-- /USER STATUS TITLE -->
+
+                            <!-- USER STATUS TEXT -->
+                            <p class="user-status-text">Awesome! I'll see you there!</p>
+                            <!-- /USER STATUS TEXT -->
+
+                            <!-- USER STATUS TIMESTAMP -->
+                            <p class="user-status-timestamp floaty">54 mins ago</p>
+                            <!-- /USER STATUS TIMESTAMP -->
+                        </div>
+                        <!-- /USER STATUS -->
+                    </div>
+                    <!-- /CHAT WIDGET MESSAGE -->
+                </div>
+                <!-- /CHAT WIDGET MESSAGES -->
+
+                <!-- CHAT WIDGET FORM -->
+                <form class="chat-widget-form">
+                    <!-- INTERACTIVE INPUT -->
+                    <div class="interactive-input small">
+                        <input type="text" id="chat-widget-search-2" name="chat_widget_search_2"
+                               placeholder="Search Messages...">
+                        <!-- INTERACTIVE INPUT ICON WRAP -->
+                        <div class="interactive-input-icon-wrap">
+                            <!-- INTERACTIVE INPUT ICON -->
+                            <svg class="interactive-input-icon icon-magnifying-glass">
+                                <use xlink:href="#svg-magnifying-glass"></use>
+                            </svg>
+                            <!-- /INTERACTIVE INPUT ICON -->
+                        </div>
+                        <!-- /INTERACTIVE INPUT ICON WRAP -->
+
+                        <!-- INTERACTIVE INPUT ACTION -->
+                        <div class="interactive-input-action">
+                            <!-- INTERACTIVE INPUT ACTION ICON -->
+                            <svg class="interactive-input-action-icon icon-cross-thin">
+                                <use xlink:href="#svg-cross-thin"></use>
+                            </svg>
+                            <!-- /INTERACTIVE INPUT ACTION ICON -->
+                        </div>
+                        <!-- /INTERACTIVE INPUT ACTION -->
+                    </div>
+                    <!-- /INTERACTIVE INPUT -->
+                </form>
+                <!-- /CHAT WIDGET FORM -->
+            </div>
+            <!-- /CHAT WIDGET -->
+        </div>
+        <!-- /CHAT WIDGET WRAP -->
+    </div>
+    <!-- /GRID COLUMN -->
+</div>
+<!-- /GRID COLUMN -->
+{% endblock %}
