@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'sleekapps.cores.apps.CoreConfig',
     'sleekapps.home.apps.HomeConfig',
     'sleekapps.graphql.apps.GraphQLConfig',
+    'sleekapps.messages.apps.MessagesConfig',
     'sleekapps.pages.apps.PagesConfig',
     'sleekapps.settings.apps.SettingsConfig',
     'sleekapps.threads.apps.ThreadsConfig',

@@ -87,10 +87,9 @@ class UserRegistrationForm(forms.Form):
             'ip_address': self.request.META.get('REMOTE_ADDR'),
 
         }
-        user = User.objects.create_user(
+        return User.objects.create_user(
             email=email,
             username=username,
             password=password,
             **extra_fields
         )
-        return user
