@@ -1,4 +1,3 @@
-import os
 from ._base import *
 
 INSTALLED_APPS += [

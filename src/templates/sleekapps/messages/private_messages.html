@@ -1,0 +1,191 @@
+{% extends 'users/profile/profile_base.html' %}
+{% load message_tags %}
+
+{% block title %}{{ request.user.get_display_name | add:' Private messages' }}{% endblock %}
+
+{% block profile_edit_content %}
+<!-- GRID COLUMN -->
+<div class="account-hub-content">
+    <!-- SECTION HEADER -->
+    <div class="section-header">
+        <!-- SECTION HEADER INFO -->
+        <div class="section-header-info">
+            <!-- SECTION PRETITLE -->
+            <p class="section-pretitle">My Profile</p>
+            <!-- /SECTION PRETITLE -->
+
+            <!-- SECTION TITLE -->
+            <h2 class="section-title">Private Messages</h2>
+            <!-- /SECTION TITLE -->
+        </div>
+        <!-- /SECTION HEADER INFO -->
+
+        <!-- SECTION HEADER ACTIONS -->
+        <div class="section-header-actions">
+            <!-- SECTION HEADER ACTION -->
+            <p class="section-header-action">Mark all as Read</p>
+            <!-- /SECTION HEADER ACTION -->
+
+            <!-- SECTION HEADER ACTION -->
+            <p class="section-header-action">Settings</p>
+            <!-- /SECTION HEADER ACTION -->
+        </div>
+        <!-- /SECTION HEADER ACTIONS -->
+    </div>
+    <!-- /SECTION HEADER -->
+
+    <!-- GRID COLUMN -->
+    <div class="grid-column">
+        {% include 'vikinger/messages_alert.html' %}
+        <!-- CHAT WIDGET WRAP -->
+        <div class="chat-widget-wrap">
+            <!-- CHAT WIDGET -->
+            <div class="chat-widget flex-fill">
+                <!-- CHAT WIDGET MESSAGES -->
+                <div class="chat-widget-messages" data-simplebar>
+                    {% for private_message in private_messages %}
+                    {% last_message private_message as last_chat %}
+                    <a href="{{ request | redirect_url:private_message }}">
+                        <!-- CHAT WIDGET MESSAGE -->
+                        <div class="chat-widget-message">
+                            <!-- USER STATUS -->
+                            <div class="user-status">
+                                <!-- USER STATUS AVATAR -->
+                                <div class="user-status-avatar">
+                                    <!-- USER AVATAR -->
+                                    <div class="user-avatar small no-outline">
+                                        <!-- USER AVATAR CONTENT -->
+                                        <div class="user-avatar-content">
+                                            <!-- HEXAGON -->
+                                            <div class="hexagon-image-30-32"
+                                                 data-src="{{ private_message.recipient.get_avatar }}"></div>
+                                            <!-- /HEXAGON -->
+                                        </div>
+                                        <!-- /USER AVATAR CONTENT -->
+
+                                        <!-- USER AVATAR PROGRESS -->
+                                        <div class="user-avatar-progress">
+                                            <!-- HEXAGON -->
+                                            <div class="hexagon-progress-40-44"></div>
+                                            <!-- /HEXAGON -->
+                                        </div>
+                                        <!-- /USER AVATAR PROGRESS -->
+
+                                        <!-- USER AVATAR PROGRESS BORDER -->
+                                        <div class="user-avatar-progress-border">
+                                            <!-- HEXAGON -->
+                                            <div class="hexagon-border-40-44"></div>
+                                            <!-- /HEXAGON -->
+                                        </div>
+                                        <!-- /USER AVATAR PROGRESS BORDER -->
+
+                                        <!-- USER AVATAR BADGE -->
+                                        <div class="user-avatar-badge">
+                                            <!-- USER AVATAR BADGE BORDER -->
+                                            <div class="user-avatar-badge-border">
+                                                <!-- HEXAGON -->
+                                                <div class="hexagon-22-24"></div>
+                                                <!-- /HEXAGON -->
+                                            </div>
+                                            <!-- /USER AVATAR BADGE BORDER -->
+
+                                            <!-- USER AVATAR BADGE CONTENT -->
+                                            <div class="user-avatar-badge-content">
+                                                <!-- HEXAGON -->
+                                                <div class="hexagon-dark-16-18"></div>
+                                                <!-- /HEXAGON -->
+                                            </div>
+                                            <!-- /USER AVATAR BADGE CONTENT -->
+
+                                            <!-- USER AVATAR BADGE TEXT -->
+                                            <p class="user-avatar-badge-text">
+                                                {{ private_message.recipient.post_count | length }}
+                                            </p>
+                                            <!-- /USER AVATAR BADGE TEXT -->
+                                        </div>
+                                        <!-- /USER AVATAR BADGE -->
+                                    </div>
+                                    <!-- /USER AVATAR -->
+                                </div>
+                                <!-- /USER STATUS AVATAR -->
+
+                                <!-- USER STATUS TITLE -->
+                                <p class="user-status-title"><span class="bold">{{ private_message.recipient.get_display_name }}</span>
+                                </p>
+                                <!-- /USER STATUS TITLE -->
+
+                                <!-- USER STATUS TEXT -->
+                                <p class="user-status-text">{{ last_chat.content }}</p>
+                                <!-- /USER STATUS TEXT -->
+                                {% if last_chat.sender == request.user %}
+                                Outgoing
+                                {% else %}
+                                Incoming
+                                {% endif %}
+                                And
+                                {% if last_chat.is_read %}
+                                Is read
+                                {% else %}
+                                Not read
+                                {% endif %}
+                                <span>
+                                    <svg class="icon-send-message demo-box-icon">
+                                        <use xlink:href="#svg-send-message"></use>
+                                    </svg>
+                                    <svg class="icon-check demo-box-icon">
+                                        <use xlink:href="#svg-check"></use>
+                                    </svg>
+                                </span>
+
+                                <!-- USER STATUS TIMESTAMP -->
+                                <p class="user-status-timestamp floaty">{{ last_chat.date_sent }}</p>
+                                <!-- /USER STATUS TIMESTAMP -->
+                            </div>
+                            <!-- /USER STATUS -->
+                        </div>
+                        <!-- /CHAT WIDGET MESSAGE -->
+                    </a>
+                    {% empty %}
+                    <p>There are no messages yet</p>
+                    {% endfor %}
+                </div>
+                <!-- /CHAT WIDGET MESSAGES -->
+
+                <!-- CHAT WIDGET FORM -->
+                <form class="chat-widget-form">
+                    <!-- INTERACTIVE INPUT -->
+                    <div class="interactive-input small">
+                        <input type="text" id="chat-widget-search-2" name="chat_widget_search_2"
+                               placeholder="Search Messages...">
+                        <!-- INTERACTIVE INPUT ICON WRAP -->
+                        <div class="interactive-input-icon-wrap">
+                            <!-- INTERACTIVE INPUT ICON -->
+                            <svg class="interactive-input-icon icon-magnifying-glass">
+                                <use xlink:href="#svg-magnifying-glass"></use>
+                            </svg>
+                            <!-- /INTERACTIVE INPUT ICON -->
+                        </div>
+                        <!-- /INTERACTIVE INPUT ICON WRAP -->
+
+                        <!-- INTERACTIVE INPUT ACTION -->
+                        <div class="interactive-input-action">
+                            <!-- INTERACTIVE INPUT ACTION ICON -->
+                            <svg class="interactive-input-action-icon icon-cross-thin">
+                                <use xlink:href="#svg-cross-thin"></use>
+                            </svg>
+                            <!-- /INTERACTIVE INPUT ACTION ICON -->
+                        </div>
+                        <!-- /INTERACTIVE INPUT ACTION -->
+                    </div>
+                    <!-- /INTERACTIVE INPUT -->
+                </form>
+                <!-- /CHAT WIDGET FORM -->
+            </div>
+            <!-- /CHAT WIDGET -->
+        </div>
+        <!-- /CHAT WIDGET WRAP -->
+    </div>
+    <!-- /GRID COLUMN -->
+</div>
+<!-- /GRID COLUMN -->
+{% endblock %}

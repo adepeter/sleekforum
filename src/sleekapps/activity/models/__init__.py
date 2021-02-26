@@ -1,3 +1,4 @@
+from .notification import Notification
 from .reaction import Reaction
 
 # Reaction(Thread, Post)
