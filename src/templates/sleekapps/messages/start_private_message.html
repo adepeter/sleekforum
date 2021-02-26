@@ -1,6 +1,6 @@
 {% extends 'users/profile/profile_base.html' %}
 
-{% block title %}{{ request.user.get_display_name | add:' Private messages' }}{% endblock %}
+{% block title %}{{ 'Correspondence with ' | add:recipient.get_display_name }}{% endblock %}
 
 {% block profile_edit_content %}
 <!-- GRID COLUMN -->
@@ -338,6 +338,12 @@
 
                 <!-- CHAT WIDGET CONVERSATION -->
                 <div class="chat-widget-conversation" data-simplebar>
+                    {% if recipient == request.user %}
+                    <p class="text-danger">Please note that you cannot send message to yourself.</p>
+                    <p class="text-danger">And even if you do hit the submit button, it will throw error</p>
+                    {% else %}
+                    {% for private_message in private_messages %}
+                    {% if private_message.recipient != request.user %}
                     <!-- CHAT WIDGET SPEAKER -->
                     <div class="chat-widget-speaker left">
                         <!-- CHAT WIDGET SPEAKER AVATAR -->
@@ -347,7 +353,8 @@
                                 <!-- USER AVATAR CONTENT -->
                                 <div class="user-avatar-content">
                                     <!-- HEXAGON -->
-                                    <div class="hexagon-image-24-26" data-src="{{ recipient.get_avatar }}"></div>
+                                    <div class="hexagon-image-24-26"
+                                         data-src="{{ private_message.sender.get_avatar }}"></div>
                                     <!-- /HEXAGON -->
                                 </div>
                                 <!-- /USER AVATAR CONTENT -->
@@ -357,63 +364,32 @@
                         <!-- /CHAT WIDGET SPEAKER AVATAR -->
 
                         <!-- CHAT WIDGET SPEAKER MESSAGE -->
-                        <p class="chat-widget-speaker-message">Hi Marina! It's been a long time!</p>
+                        <p class="chat-widget-speaker-message">{{ private_message.content }}</p>
                         <!-- /CHAT WIDGET SPEAKER MESSAGE -->
-
+                        {% if not private_message.is_read %}
                         <!-- CHAT WIDGET SPEAKER TIMESTAMP -->
-                        <p class="chat-widget-speaker-timestamp">Yesterday at 8:36PM</p>
+                        <p class="chat-widget-speaker-timestamp">{{ private_message.date_sent }}</p>
                         <!-- /CHAT WIDGET SPEAKER TIMESTAMP -->
+                        {% endif %}
                     </div>
                     <!-- /CHAT WIDGET SPEAKER -->
+                    {% else %}
 
                     <!-- CHAT WIDGET SPEAKER -->
                     <div class="chat-widget-speaker right">
                         <!-- CHAT WIDGET SPEAKER MESSAGE -->
-                        <p class="chat-widget-speaker-message">Hey Nick!</p>
+                        <p class="chat-widget-speaker-message">{{ private_message.content }}</p>
                         <!-- /CHAT WIDGET SPEAKER MESSAGE -->
-
-                        <!-- CHAT WIDGET SPEAKER MESSAGE -->
-                        <p class="chat-widget-speaker-message">You're right, it's been a really long time! I think the
-                            last time we saw was at Neko's party</p>
-                        <!-- /CHAT WIDGET SPEAKER MESSAGE -->
-
+                        {% if not private_message.is_read %}
                         <!-- CHAT WIDGET SPEAKER TIMESTAMP -->
-                        <p class="chat-widget-speaker-timestamp">10:05AM</p>
+                        <p class="chat-widget-speaker-timestamp">{{ private_message.date_sent }}</p>
                         <!-- /CHAT WIDGET SPEAKER TIMESTAMP -->
+                        {% endif %}
                     </div>
                     <!-- /CHAT WIDGET SPEAKER -->
-
-                    <!-- CHAT WIDGET SPEAKER -->
-                    <div class="chat-widget-speaker left">
-                        <!-- CHAT WIDGET SPEAKER AVATAR -->
-                        <div class="chat-widget-speaker-avatar">
-                            <!-- USER AVATAR -->
-                            <div class="user-avatar tiny no-border">
-                                <!-- USER AVATAR CONTENT -->
-                                <div class="user-avatar-content">
-                                    <!-- HEXAGON -->
-                                    <div class="hexagon-image-24-26" data-src="img/avatar/03.jpg"></div>
-                                    <!-- /HEXAGON -->
-                                </div>
-                                <!-- /USER AVATAR CONTENT -->
-                            </div>
-                            <!-- /USER AVATAR -->
-                        </div>
-                        <!-- /CHAT WIDGET SPEAKER AVATAR -->
-
-                        <!-- CHAT WIDGET SPEAKER MESSAGE -->
-                        <p class="chat-widget-speaker-message">Yeah! I remember now! The stream launch party</p>
-                        <!-- /CHAT WIDGET SPEAKER MESSAGE -->
-
-                        <!-- CHAT WIDGET SPEAKER MESSAGE -->
-                        <p class="chat-widget-speaker-message">That reminds me that I wanted to ask you something</p>
-                        <!-- /CHAT WIDGET SPEAKER MESSAGE -->
-
-                        <!-- CHAT WIDGET SPEAKER MESSAGE -->
-                        <p class="chat-widget-speaker-message">Can you stream the new game?</p>
-                        <!-- /CHAT WIDGET SPEAKER MESSAGE -->
-                    </div>
-                    <!-- /CHAT WIDGET SPEAKER -->
+                    {% endif %}
+                    {% endfor %}
+                    {% endif %}
                 </div>
                 <!-- /CHAT WIDGET CONVERSATION -->
 

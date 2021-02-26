@@ -7,6 +7,6 @@ app_name = 'messages'
 urlpatterns = [
     path('', ListPrivateMessage.as_view(), name='list_private_messages'),
     path('<int:id>/<slug:username>/', include([
-        path('reply/', ReadReplyPrivateMessage.as_view(), name='read_reply_private_message'),
+        path('', ReadReplyPrivateMessage.as_view(), name='read_reply_private_message'),
     ])),
 ]

@@ -1,6 +1,9 @@
 from django.conf import settings
 from django.db import models
+from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
+
+from .managers import PrivateMessageManager
 
 
 class PrivateMessage(models.Model):
@@ -35,9 +38,22 @@ class PrivateMessage(models.Model):
         null=True,
         blank=True
     )
+    objects = PrivateMessageManager()
+
+    def get_absolute_url(self):
+        kwargs = {
+            'id': self.recipient.id,
+            'username': self.recipient.username
+        }
+        return reverse('sleekforum:messages:read_reply_private_message', kwargs=kwargs)
+
+    def __str__(self):
+        return f'{self.sender.username} correspondence with {self.recipient.username} - {self.content}'
 
     class Meta:
-        ordering = ['date_sent']
+        ordering = [
+            'id'
+        ]
         get_latest_by = 'date_sent'
 
 
