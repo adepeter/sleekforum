@@ -1,7 +1,156 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Create thread{% endblock %}
+{% block title %}Create thread - {{ category.get_name }}{% endblock %}
 
 {% block content %}
+<!-- CONTENT GRID -->
+<div class="content-grid">
+    <!-- SECTION BANNER -->
+    <div class="section-banner">
+        <!-- SECTION BANNER ICON -->
+        <img alt="events-icon" class="section-banner-icon" src="{% static 'img/banner/events-icon.png' %}">
+        <!-- /SECTION BANNER ICON -->
 
+        <!-- SECTION BANNER TITLE -->
+        <p class="section-banner-title">{{ category.get_name | title }}</p>
+        <!-- /SECTION BANNER TITLE -->
+
+        <!-- SECTION BANNER TEXT -->
+        <p class="section-banner-text">{{ category.get_description }}</p>
+        <!-- /SECTION BANNER TEXT -->
+    </div>
+    <!-- /SECTION BANNER -->
+
+    <!-- SECTION HEADER -->
+    <div class="section-header">
+        <!-- SECTION HEADER INFO -->
+        <div class="section-header-info">
+            <!-- SECTION PRETITLE -->
+            <p class="section-pretitle">Hey!</p>
+            <!-- /SECTION PRETITLE -->
+
+            <!-- SECTION TITLE -->
+            <h2 class="section-title">Start a discussion</h2>
+            <!-- /SECTION TITLE -->
+        </div>
+        <!-- /SECTION HEADER INFO -->
+    </div>
+    <!-- /SECTION HEADER -->
+
+    <!-- GRID COLUMN -->
+    <!-- WIDGET BOX -->
+    <div class="widget-box">
+        <!-- WIDGET BOX TITLE -->
+        <p class="widget-box-title">
+            {% include 'vikinger/messages_alert.html' %}
+        </p>
+        <!-- /WIDGET BOX TITLE -->
+
+        <!-- WIDGET BOX STATUS -->
+        <div class="widget-box-status">
+            <!-- WIDGET BOX STATUS CONTENT -->
+            <div class="widget-box-status-content">
+                <!-- FORM -->
+                <form class="form" method="POST">
+                    {% csrf_token %}
+                    <!-- FORM ROW -->
+                    <div class="form-row">
+                        <!-- FORM ITEM -->
+                        <div class="form-item">
+                            <!-- FORM INPUT -->
+                            <div class="form-input small active">
+                                <label for="title">Title</label>
+                                {{ form.title }}
+                                <small class="text-info">{{ form.title.help_text }}</small>
+                                <small class="text-danger">{{ form.title.errors }}</small>
+                            </div>
+
+                            <!-- /FORM INPUT -->
+                        </div>
+                        <!-- /FORM ITEM -->
+                    </div>
+                    <!-- /FORM ROW -->
+
+                    <!-- FORM ROW -->
+                    <div class="form-row split">
+                        <!-- FORM ITEM -->
+                        <div class="form-item">
+                            <!-- FORM SELECT -->
+                            <div class="form-select">
+                                <label for="prefix">Prefix</label>
+                                {{ form.prefix }}
+                                <!-- FORM SELECT ICON -->
+                                <svg class="form-select-icon icon-small-arrow">
+                                    <use xlink:href="#svg-small-arrow"></use>
+                                </svg>
+                                <!-- /FORM SELECT ICON -->
+                            </div>
+                            <!-- /FORM SELECT -->
+                        </div>
+                        <!-- /FORM ITEM -->
+
+                        <!-- FORM ITEM -->
+                        <div class="form-item">
+                            <!-- FORM SELECT -->
+                            <div class="form-select">
+                                <label for="tags">Tags</label>
+                                {{ form.tags }}
+                                <small class="text-info">{{ form.tags.help_text }}</small>
+                                <small class="text-danger">{{ form.tags.errors }}</small>
+                            </div>
+                            <!-- /FORM SELECT -->
+                        </div>
+                        <!-- /FORM ITEM -->
+                    </div>
+                    <!-- /FORM ROW -->
+
+                    <!-- FORM ROW -->
+                    <div class="form-row">
+                        <!-- FORM ITEM -->
+                        <div class="form-item">
+                            <!-- FORM INPUT -->
+                            <div class="form-input small mid-textarea active">
+                                <label for="content">Content</label>
+                                {{ form.content }}
+                                <small class="text-info">{{ form.content.help_text }}</small>
+                                <small class="text-danger">{{ form.content.errors }}</small>
+                            </div>
+                            <!-- /FORM INPUT -->
+                        </div>
+                        <!-- /FORM ITEM -->
+                    </div>
+                    <!-- /FORM ROW -->
+
+                    <!-- FORM ROW -->
+                    <div class="form-row split">
+
+                        <!-- FORM ITEM -->
+                        <div class="form-item">
+                            <!-- BUTTON -->
+                            <button class="button full primary" type="submit">Create thread!</button>
+                            <!-- /BUTTON -->
+                        </div>
+                        <!-- /FORM ITEM -->
+
+                        <!-- FORM ITEM -->
+                        <div class="form-item">
+                            <!-- BUTTON -->
+                            <a class="button full info small-space" href="">Discard</a>
+                            <!-- /BUTTON -->
+                        </div>
+                        <!-- /FORM ITEM -->
+                    </div>
+                    <!-- /FORM ROW -->
+                </form>
+                <!-- /FORM -->
+            </div>
+            <!-- /WIDGET BOX STATUS CONTENT -->
+        </div>
+        <!-- /WIDGET BOX STATUS -->
+    </div>
+    <!-- /WIDGET BOX -->
+    <!-- /GRID COLUMN -->
+
+</div>
 {% endblock %}

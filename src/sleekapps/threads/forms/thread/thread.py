@@ -14,7 +14,7 @@ class BaseThreadForm(forms.ModelForm):
 
     class Meta:
         model = Thread
-        fields = ['title', 'prefix', 'content']
+        fields = ['title', 'prefix', 'content', 'tags']
         widgets = {
             'title': forms.TextInput(attrs={
                 'class': 'form-control',
@@ -42,7 +42,7 @@ class QuickThreadCreationForm(ThreadCreationForm):
         super().__init__(*args, **kwargs)
 
     class Meta(ThreadCreationForm.Meta):
-        fields = ThreadCreationForm.Meta.fields + ['category', 'tags']
+        fields = ThreadCreationForm.Meta.fields + ['category']
 
     def save(self, commit=True):
         instance = super().save(commit=False)

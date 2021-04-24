@@ -1,2 +1,5 @@
-from .post.post import Post
-from .thread.thread import Thread
+from .post import Post
+from .thread import (
+    Thread,
+    ThreadView
+)

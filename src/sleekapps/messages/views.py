@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.shortcuts import render
+from django.views.decorators.http import require_POST
 from django.views.generic import ListView, CreateView
 from django.views.generic.list import MultipleObjectMixin
 
@@ -90,3 +91,8 @@ class ReadReplyPrivateMessage(LoginRequiredMixin, MultipleObjectMixin, CreateVie
             'sender': self.request.user
         })
         return kwargs
+
+
+@require_POST
+def mark_all_messages_as_read(request, *args, **kwargs):
+    update_inbox_to_all_read = request.user.messages_recieved.all().update(is_read=True)
