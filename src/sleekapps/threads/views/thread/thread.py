@@ -52,6 +52,8 @@ class ListThread(SingleObjectMixin, ListView):
 class CreateThread(CreateView):
     model = Category
     slug_url_kwarg = 'category_slug'
+    pk_url_kwarg = 'category_id'
+    query_pk_and_slug = True
     form_class = ThreadCreationForm
     template_name = f'{TEMPLATE_URL}/create_thread.html'
 

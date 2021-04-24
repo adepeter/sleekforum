@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'sleekapps.blogs.apps.BlogsConfig',
     'sleekapps.categories.apps.CategoriesConfig',
     'sleekapps.cores.apps.CoreConfig',
+    'sleekapps.friends.apps.FriendsConfig',
     'sleekapps.home.apps.HomeConfig',
     'sleekapps.graphql.apps.GraphQLConfig',
     'sleekapps.messages.apps.MessagesConfig',
