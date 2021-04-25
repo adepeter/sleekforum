@@ -106,7 +106,7 @@
             <!-- /FORM -->
 
             <!-- BUTTON -->
-            <p class="button secondary">+ Create Discussion</p>
+            <a class="button secondary" href="{% url 'sleekforum:threads:create_thread' category.slug category.id %}">+ Create Discussion</a>
             <!-- /BUTTON -->
         </div>
         <!-- /SECTION FILTERS BAR ACTIONS -->
