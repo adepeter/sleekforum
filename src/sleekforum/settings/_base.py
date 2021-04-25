@@ -85,9 +85,9 @@ MIDDLEWARE = [
 
     # sleekforum custom middleware
     'sleekapps.settings.middlewares.UnderMaintenanceMiddleware',
+    'sleekapps.activity.middlewares.LastVisitUpdaterMiddleWare',
     'sleekapps.users.middlewares.FetchCountryFromAPIMiddleware',
     'sleekapps.users.middlewares.OnlineStatusMiddleware',
-    'sleekapps.users.middlewares.LastVisitMiddleware',
 ]
 
 ROOT_URLCONF = 'sleekforum.urls'
