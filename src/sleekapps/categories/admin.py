@@ -61,7 +61,6 @@ class CategoryAdmin(DraggableMPTTAdmin):
 
     def image_preview(self, obj):
         image_url = obj.image.url
-        print(image_url)
         return mark_safe('<img src="%s" height="64" width="64" />' % image_url)
 
     image_preview.short_description = _('Folder image')
