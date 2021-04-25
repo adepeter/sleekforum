@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.contrib.postgres.fields import ArrayField
 from django.db import models
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
@@ -22,17 +23,29 @@ class Article(models.Model):
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.SET_NULL,
-        related_name='blogs',
+        related_name='blog_articles',
         null=True
     )
     title = models.CharField(
         verbose_name=_('Title'),
         max_length=255,
     )
+    cover = models.ImageField(
+        verbose_name=_('cover image'),
+        upload_to='blogs/covers',
+        blank=True
+    )
     slug = models.SlugField(
         verbose_name=_('Slug'),
         editable=False,
         blank=True
+    )
+    tags = ArrayField(
+        models.CharField(max_length=30),
+        blank=True,
+        null=True,
+        size=8,
+        help_text=_('Thread tags separated by comma')
     )
     content = models.TextField(
         verbose_name='article body',
