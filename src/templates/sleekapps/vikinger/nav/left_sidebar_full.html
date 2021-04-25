@@ -62,7 +62,7 @@
                 <!-- /USER AVATAR BADGE CONTENT -->
 
                 <!-- USER AVATAR BADGE TEXT -->
-                <p class="user-avatar-badge-text">24</p>
+                <p class="user-avatar-badge-text">{{ request.user.post_count | length }}</p>
                 <!-- /USER AVATAR BADGE TEXT -->
             </div>
             <!-- /USER AVATAR BADGE -->
@@ -98,7 +98,7 @@
         <!-- USER STAT -->
         <div class="user-stat">
             <!-- USER STAT TITLE -->
-            <p class="user-stat-title">5.7k</p>
+            <p class="user-stat-title">{{ request.user.user_visits.count }}</p>
             <!-- /USER STAT TITLE -->
 
             <!-- USER STAT TEXT -->

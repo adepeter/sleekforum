@@ -99,7 +99,7 @@
         <!-- /DROPDOWN NAVIGATION LINK -->
 
         <!-- DROPDOWN NAVIGATION LINK -->
-        <a class="dropdown-navigation-link" href="hub-profile-messages.html">Messages</a>
+        <a class="dropdown-navigation-link" href="{% url 'sleekforum:messages:list_private_messages' %}">Messages</a>
         <!-- /DROPDOWN NAVIGATION LINK -->
 
         <!-- DROPDOWN NAVIGATION CATEGORY -->
@@ -115,8 +115,7 @@
         <!-- /DROPDOWN NAVIGATION LINK -->
 
         <!-- DROPDOWN NAVIGATION LINK -->
-        <a class="dropdown-navigation-link" href="{{ request.user.get_password_change_url }}">Change
-            Password</a>
+        <a class="dropdown-navigation-link" href="{{ request.user.get_password_change_url }}">Change Password</a>
         <!-- /DROPDOWN NAVIGATION LINK -->
 
         <!-- DROPDOWN NAVIGATION LINK -->
