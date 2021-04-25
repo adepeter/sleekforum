@@ -230,6 +230,10 @@ class User(PermissionsMixin, AbstractBaseUser):
     def post_count(self):
         return self.posts.all()
 
+    @cached_property
+    def get_visits_count(self):
+        return self.user_visits.all()
+
     def get_avatar(self):
         return self.avatar
 

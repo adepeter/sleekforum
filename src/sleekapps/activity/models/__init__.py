@@ -1,5 +1,6 @@
 from .notification import Notification
 from .reaction import Reaction
+from .visit import Visit
 
 # Reaction(Thread, Post)
 # Belongs to a User
