@@ -1,0 +1,62 @@
+<!-- POPUP BOX -->
+<div class="popup-box small popup-event-creation">
+    <!-- POPUP CLOSE BUTTON -->
+    <div class="popup-close-button popup-event-creation-trigger">
+        <!-- POPUP CLOSE BUTTON ICON -->
+        <svg class="popup-close-button-icon icon-cross">
+            <use xlink:href="#svg-cross"></use>
+        </svg>
+        <!-- /POPUP CLOSE BUTTON ICON -->
+    </div>
+    <!-- /POPUP CLOSE BUTTON -->
+
+    <!-- POPUP BOX TITLE -->
+    <p class="popup-box-title">+ Edit {{ category.name }}</p>
+    <!-- /POPUP BOX TITLE -->
+
+    <!-- FORM -->
+    <form class="form" method="POST" action="">
+        {% csrf_token %}
+        <!-- FORM ROW -->
+        <div class="form-row">
+            <!-- FORM ITEM -->
+            <div class="form-item">
+                <!-- FORM INPUT -->
+                <div class="form-input small active">
+                    {{ form.name.label_tag }}
+                    {{ form.name }}
+                </div>
+                <!-- /FORM INPUT -->
+                <small class="text-info">{{ form.name.help_text }}</small>
+                <small class="text-danger">{{ form.name.errors }}</small>
+            </div>
+            <!-- /FORM ITEM -->
+        </div>
+        <!-- /FORM ROW -->
+
+        <!-- FORM ROW -->
+        <div class="form-row">
+            <!-- FORM ITEM -->
+            <div class="form-item">
+                <!-- FORM INPUT -->
+                <div class="form-input small">
+                    {{ form.description.label_tag }}
+                    {{ form.description }}
+                </div>
+                <!-- /FORM INPUT -->
+            </div>
+            <!-- /FORM ITEM -->
+        </div>
+        <!-- /FORM ROW -->
+
+        <!-- POPUP BOX ACTIONS -->
+        <div class="popup-box-actions medium void">
+            <!-- POPUP BOX ACTION -->
+            <button class="popup-box-action full button secondary">Create!</button>
+            <!-- /POPUP BOX ACTION -->
+        </div>
+        <!-- /POPUP BOX ACTIONS -->
+    </form>
+    <!-- /FORM -->
+</div>
+<!-- /POPUP BOX -->

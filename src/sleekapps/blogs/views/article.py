@@ -1,6 +1,8 @@
 from django.contrib.auth import get_user_model
-from django.views.generic import ListView
+from django.contrib.messages.views import SuccessMessageMixin
+from django.views.generic import ListView, DetailView, CreateView
 from django.views.generic.detail import SingleObjectMixin
+from django.views.generic.list import MultipleObjectMixin
 
 from ..models import Article
 
@@ -27,3 +29,23 @@ class ArticlesByUserListView(SingleObjectMixin, ListView):
         if obj == self.request.user:
             return obj.blog_articles.all()
         return qs.filter(is_hidden=False)
+
+
+class ArticleByUserReadView(MultipleObjectMixin, SuccessMessageMixin, CreateView):
+    model = Article
+    template_name = f'{TEMPLATE_URL}/read_article.html'
+
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        return super().post(request, *args, **kwargs)
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.filter(is_hidden=False)
+
+
+class ArticleDetailView(DetailView):
+    model = Article
+    template_name = f'{TEMPLATE_URL}/read_article.html'

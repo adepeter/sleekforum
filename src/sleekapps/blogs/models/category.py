@@ -1,9 +1,16 @@
+from django.conf import settings
 from django.db import models
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
 
 class Category(models.Model):
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        verbose_name=_('owner'),
+        on_delete=models.DO_NOTHING,
+        related_name='owned_blog_categories'
+    )
     name = models.CharField(
         verbose_name=_('name'),
         max_length=255,
@@ -12,6 +19,16 @@ class Category(models.Model):
     slug = models.SlugField(
         verbose_name=_('slug'),
         editable=False,
+        blank=True
+    )
+    icon = models.ImageField(
+        verbose_name='image',
+        upload_to='blogs/categories/icons',
+        blank=True
+    )
+    cover = models.ImageField(
+        verbose_name='cover',
+        upload_to='blogs/categories/covers',
         blank=True
     )
     description = models.TextField(
@@ -32,11 +49,14 @@ class Category(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.title)
+            self.slug = slugify(self.name)
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.name
+        return f'{self.name} by {self.owner.get_display_name}'
     
     class Meta:
         verbose_name_plural = _('categories')
+        ordering = [
+            'name'
+        ]

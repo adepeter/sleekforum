@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
+from django.urls import reverse
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
@@ -76,6 +77,12 @@ class Article(models.Model):
         verbose_name=_('Date modified'),
         auto_now=True
     )
+
+    def get_absolute_url(self):
+        kwargs = {
+            'slug': self.slug
+        }
+        return reverse('sleekforum:blogs:articles:read_article', kwargs=kwargs)
 
     def save(self, *args, **kwargs):
         if not self.slug:
