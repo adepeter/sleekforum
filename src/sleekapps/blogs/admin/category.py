@@ -1,7 +1,7 @@
 from django.contrib import admin
-from django.db.models import Count
+from django.db.models import Count, Sum
 
-from ..models import Category
+from ..models import Category, Comment
 
 
 @admin.register(Category)
@@ -14,7 +14,8 @@ class CategoryAdmin(admin.ModelAdmin):
         'icon',
         'name',
         'owner',
-        'slug',
+        'num_of_articles',
+        'num_of_comments',
         'description',
         'is_locked',
         'is_hidden'
@@ -23,15 +24,26 @@ class CategoryAdmin(admin.ModelAdmin):
         'is_hidden',
         'is_locked'
     ]
+    ordering = [
+        'name',
+        'is_hidden',
+        'is_locked',
+        'owner'
+    ]
 
-    @admin.display(description='')
-    def get_articles(self, category):
+    @admin.display(description='Num of articles')
+    def num_of_articles(self, category):
         return category.articles_count
 
+    @admin.display(description='Num of comments')
+    def num_of_comments(self, category):
+        return category.sum_comments
+        # return Comment.objects.filter(article__category=category).count()
+
     def get_queryset(self, request):
-        return super().get_queryset().annotate(
-            articles_count=Count('article'),
-            comments_count=Count('comments')
+        return super().get_queryset(request).annotate(
+            articles_count=Count('articles'),
+            sum_comments=Count('articles__blog_comments')
         )
 
 
