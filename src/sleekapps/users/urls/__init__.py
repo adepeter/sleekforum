@@ -1,5 +1,10 @@
 from django.urls import include, path
-from ..views.profile import UserProfile, UserProfileStatistics
+from ..views.profile import (
+UserContentCategoryList,
+    UserProfile,
+    UserProfileStatistics,
+    ListUserThreads
+)
 
 app_name = 'users'
 
@@ -12,6 +17,8 @@ urlpatterns = [
 urlpatterns += [
     path('<username>/', include([
         path('', UserProfile.as_view(), name='kwarg_home_profile'),
+        path('categories/', UserContentCategoryList.as_view(), name='user_categories_list'),
+        path('threads/', ListUserThreads.as_view(), name='user_threads_list'),
         path('statistics/', UserProfileStatistics.as_view(), name='user_profile_statistics'),
     ])),
 ]

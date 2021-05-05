@@ -2,19 +2,19 @@ import datetime
 
 from django.contrib import messages
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Count
 from django.shortcuts import redirect
 from django.urls import reverse
+from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 from django.views.decorators.http import require_http_methods
 from django.views.generic import ListView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import SingleObjectMixin
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import MultipleObjectMixin
-from django.utils.translation import gettext_lazy as _
-from django.utils import timezone
-
-from ....categories.models import Category
 
 from ...forms.post.post import PostForm
 from ...forms.thread.thread import (
@@ -22,9 +22,9 @@ from ...forms.thread.thread import (
     ThreadEditForm,
     QuickThreadCreationForm,
 )
-
 from ...models import Thread
 from ...signals import thread_views_creator_and_updater
+from ....categories.models import Category
 
 TEMPLATE_URL = 'threads/thread'
 
@@ -49,7 +49,7 @@ class ListThread(SingleObjectMixin, ListView):
         return context
 
 
-class CreateThread(CreateView):
+class CreateThread(LoginRequiredMixin, CreateView):
     model = Category
     slug_url_kwarg = 'category_slug'
     pk_url_kwarg = 'category_id'
@@ -216,13 +216,14 @@ class ListTrendingThread(ListView):
 
 
 @require_http_methods(['GET', 'POST'])
+@login_required
 def create_quick_thread(request):
     if request.method == 'POST':
         form = QuickThreadCreationForm(data=request.POST, user=request.user)
         if form.is_valid():
             instance = form.save()
             messages.success(request, _('%s was successfully created' % \
-                                    form.cleaned_data['title']))
+                                        form.cleaned_data['title']))
             return redirect(instance.get_absolute_url())
     else:
         form = QuickThreadCreationForm(user=request.user)

@@ -51,13 +51,12 @@
         <div class="table-row mid">
             <!-- TABLE COLUMN -->
             <div class="table-column">
+                {% include 'cores/_pagination/floaty_pagination.html' with page_obj=page_obj %}
                 <!-- DISCUSSION PREVIEW -->
                 <div class="discussion-preview {% if thread.pin %}pinned{% endif %}">
                     <!-- DISCUSSION PREVIEW TITLE -->
                     <a class="discussion-preview-title" href="{{ thread.get_absolute_url }}">{{ thread.title }}</a>
                     <!-- /DISCUSSION PREVIEW TITLE -->
-
-                    {% include 'cores/_pagination/floaty_pagination.html' with page_obj=page_obj %}
 
                     <!-- DISCUSSION PREVIEW META -->
                     <div class="discussion-preview-meta">

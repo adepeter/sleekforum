@@ -3,6 +3,7 @@ from ._base import *
 INSTALLED_APPS += [
     'debug_toolbar',
     'django_extensions',
+    'drf_yasg',
 ]
 
 MIDDLEWARE += [

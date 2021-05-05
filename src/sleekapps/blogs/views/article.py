@@ -49,3 +49,18 @@ class ArticleByUserReadView(MultipleObjectMixin, SuccessMessageMixin, CreateView
 class ArticleDetailView(DetailView):
     model = Article
     template_name = f'{TEMPLATE_URL}/read_article.html'
+
+
+class UserArticlesByCategoryView(SingleObjectMixin, ListView):
+    template_name = f'{TEMPLATE_URL}/user_articles_by_category.html'
+    paginate_by = 10
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super().get(request, *args, **kwargs)
+
+    def get_object(self, queryset=None):
+        return super().get_object(queryset=queryset)
+
+    def get_queryset(self):
+        return self.object.articles.all()

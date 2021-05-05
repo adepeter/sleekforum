@@ -303,7 +303,7 @@
             <!-- /SECTION MENU ITEM -->
 
             <!-- SECTION MENU ITEM -->
-            <a class="section-menu-item" href="profile-forum.html">
+            <a class="section-menu-item" href="{% url 'sleekforum:users:user_threads_list' user.username %}">
                 <!-- SECTION MENU ITEM ICON -->
                 <svg class="section-menu-item-icon icon-forum">
                     <use xlink:href="#svg-forum"></use>
@@ -331,7 +331,7 @@
             <!-- /SECTION MENU ITEM -->
 
             <!-- SECTION MENU ITEM -->
-            <a class="section-menu-item" href="profile-photos.html">
+            <a class="section-menu-item" href="{% url 'sleekforum:users:user_categories_list' user.username %}">
                 <!-- SECTION MENU ITEM ICON -->
                 <svg class="section-menu-item-icon icon-list-grid-view">
                     <use xlink:href="#svg-list-grid-view"></use>

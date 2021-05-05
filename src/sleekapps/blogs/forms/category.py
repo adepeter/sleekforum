@@ -26,12 +26,17 @@ class BaseCategoryForm(forms.ModelForm):
 
     def clean_name(self):
         cleaned_name = self.cleaned_data['name']
-        if self.request.user.owned_blog_categories.filter(name__iexact=cleaned_name).exists():
-            raise forms.ValidationError(
-                _('%(name)s already exist'),
-                code='user_category_name_exists',
-                params={'name': cleaned_name}
-            )
+        existing_category_name = self.request.user.owned_blog_categories.filter(
+            name__iexact=cleaned_name
+        )
+        name_exists_error_message = forms.ValidationError(
+            _('%(name)s already exist'),
+            code='user_category_name_exists',
+            params={'name': cleaned_name}
+        )
+        if ((self.instance is None and existing_category_name) or \
+                (self.instance is not None and self.instance.name != cleaned_name and existing_category_name)):
+            raise name_exists_error_message
         return cleaned_name
 
     def save(self, commit=True):
@@ -63,5 +68,5 @@ class CategoryEditForm(BaseCategoryForm):
         widgets = {
             'name': forms.TextInput(attrs={
                 'placeholder': _('Enter a category name')
-            })
+            }),
         }
