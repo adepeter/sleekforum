@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.db.models import Count
 from django.utils.translation import gettext_lazy as _
 
 from ..models import Article
@@ -21,7 +22,8 @@ class ArticleAdmin(admin.ModelAdmin):
         'is_locked',
         'is_hidden',
         'date_created',
-        'date_modified'
+        'date_modified',
+        'get_comments_count'
     ]
     search_fields = [
         'title',
@@ -56,6 +58,13 @@ class ArticleAdmin(admin.ModelAdmin):
         })
     ]
     date_hierarchy = 'date_created'
+
+    @admin.display(description=_('Num of comments'))
+    def get_comments_count(self, obj):
+        return obj.num_of_comments
+
+    def get_queryset(self, request):
+        return super().get_queryset(request).annotate(num_of_comments=Count('blog_comments'))
 
 
 __all__ = [

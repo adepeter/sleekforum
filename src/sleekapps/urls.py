@@ -12,4 +12,5 @@ urlpatterns = [
     path('users/', include('sleekapps.users.urls', namespace='users')),
     path('blogs/', include('sleekapps.blogs.urls', namespace='blogs')),
     path('chats/', include('sleekapps.messages.urls', namespace='messages')),
+    # path('admin/', include('sleekapps.admin.urls', namespace='admin'))
 ]

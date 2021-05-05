@@ -1,0 +1,442 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}Edit {{ category.name }} | Blog Category | {{ block.super | title }}{% endblock %}
+
+{% block content %}
+
+<!-- CONTENT GRID -->
+<div class="content-grid">
+    <!-- SECTION BANNER -->
+    <div class="section-banner">
+        <!-- SECTION BANNER ICON -->
+        <img alt="overview-icon" class="section-banner-icon" src="{% static 'img/banner/overview-icon.png' %}">
+        <!-- /SECTION BANNER ICON -->
+
+        <!-- SECTION BANNER TITLE -->
+        <p class="section-banner-title">{{ category.name }}</p>
+        <!-- /SECTION BANNER TITLE -->
+
+        <!-- SECTION BANNER TEXT -->
+        <p class="section-banner-text">Edit or delete blog category!</p>
+        <!-- /SECTION BANNER TEXT -->
+    </div>
+    <!-- /SECTION BANNER -->
+
+    <!-- SECTION HEADER -->
+    <div class="section-header">
+        <!-- SECTION HEADER INFO -->
+        <div class="section-header-info">
+            <!-- SECTION PRETITLE -->
+            <p class="section-pretitle">Update</p>
+            <!-- /SECTION PRETITLE -->
+
+            <!-- SECTION TITLE -->
+            <h2 class="section-title">{{ category.name }}</h2>
+            <!-- /SECTION TITLE -->
+        </div>
+        <!-- /SECTION HEADER INFO -->
+    </div>
+    <!-- /SECTION HEADER -->
+
+    <!-- GRID -->
+    <div class="grid">
+
+        <!-- GRID -->
+        <div class="grid">
+
+            <!-- GRID -->
+            <div class="grid grid-3-9">
+                <!-- GRID COLUMN -->
+                <div class="grid-column">
+                    <!-- WIDGET BOX -->
+                    <div class="widget-box">
+                        <!-- PROGRESS ARC SUMMARY -->
+                        <div class="progress-arc-summary">
+                            <!-- PROGRESS ARC WRAP -->
+                            <div class="progress-arc-wrap">
+                                <!-- PROGRESS ARC -->
+                                <div class="progress-arc">
+                                    <canvas id="profile-completion-chart"></canvas>
+                                </div>
+                                <!-- PROGRESS ARC -->
+
+                                <!-- PROGRESS ARC INFO -->
+                                <div class="progress-arc-info">
+                                    <!-- PROGRESS ARC TITLE -->
+                                    <p class="progress-arc-title">59%</p>
+                                    <!-- /PROGRESS ARC TITLE -->
+                                </div>
+                                <!-- /PROGRESS ARC INFO -->
+                            </div>
+                            <!-- /PROGRESS ARC WRAP -->
+
+                            <!-- PROGRESS ARC SUMMARY INFO -->
+                            <div class="progress-arc-summary-info">
+                                <!-- PROGRESS ARC SUMMARY TITLE -->
+                                <p class="progress-arc-summary-title">Profile Completion</p>
+                                <!-- /PROGRESS ARC SUMMARY TITLE -->
+
+                                <!-- PROGRESS ARC SUMMARY TITLE -->
+                                <p class="progress-arc-summary-subtitle">Marina Valentine</p>
+                                <!-- /PROGRESS ARC SUMMARY TITLE -->
+
+                                <!-- PROGRESS ARC SUMMARY TITLE -->
+                                <p class="progress-arc-summary-text">Complete your profile by filling profile info
+                                    fields, completing quests &amp; unlocking badges</p>
+                                <!-- /PROGRESS ARC SUMMARY TITLE -->
+                            </div>
+                            <!-- /PROGRESS ARC SUMMARY INFO -->
+                        </div>
+                        <!-- /PROGRESS ARC SUMMARY -->
+
+                        <!-- ACHIEVEMENT STATUS LIST -->
+                        <div class="achievement-status-list">
+                            <!-- ACHIEVEMENT STATUS -->
+                            <div class="achievement-status">
+                                <!-- ACHIEVEMENT STATUS PROGRESS -->
+                                <p class="achievement-status-progress">11/30</p>
+                                <!-- /ACHIEVEMENT STATUS PROGRESS -->
+
+                                <!-- ACHIEVEMENT STATUS INFO -->
+                                <div class="achievement-status-info">
+                                    <!-- ACHIEVEMENT STATUS TITLE -->
+                                    <p class="achievement-status-title">Quests</p>
+                                    <!-- /ACHIEVEMENT STATUS TITLE -->
+
+                                    <!-- ACHIEVEMENT STATUS TEXT -->
+                                    <p class="achievement-status-text">Completed</p>
+                                    <!-- /ACHIEVEMENT STATUS TEXT -->
+                                </div>
+                                <!-- /ACHIEVEMENT STATUS INFO -->
+
+                                <!-- ACHIEVEMENT STATUS IMAGE -->
+                                <img alt="bdage-completedq-s" class="achievement-status-image"
+                                     src="img/badge/completedq-s.png">
+                                <!-- /ACHIEVEMENT STATUS IMAGE -->
+                            </div>
+                            <!-- /ACHIEVEMENT STATUS -->
+
+                            <!-- ACHIEVEMENT STATUS -->
+                            <div class="achievement-status">
+                                <!-- ACHIEVEMENT STATUS PROGRESS -->
+                                <p class="achievement-status-progress">22/46</p>
+                                <!-- /ACHIEVEMENT STATUS PROGRESS -->
+
+                                <!-- ACHIEVEMENT STATUS INFO -->
+                                <div class="achievement-status-info">
+                                    <!-- ACHIEVEMENT STATUS TITLE -->
+                                    <p class="achievement-status-title">Badges</p>
+                                    <!-- /ACHIEVEMENT STATUS TITLE -->
+
+                                    <!-- ACHIEVEMENT STATUS TEXT -->
+                                    <p class="achievement-status-text">Unlocked</p>
+                                    <!-- /ACHIEVEMENT STATUS TEXT -->
+                                </div>
+                                <!-- /ACHIEVEMENT STATUS INFO -->
+
+                                <!-- ACHIEVEMENT STATUS IMAGE -->
+                                <img alt="bdage-unlocked-badge" class="achievement-status-image"
+                                     src="{% static 'img/badge/unlocked-badge.png' %}">
+                                <!-- /ACHIEVEMENT STATUS IMAGE -->
+                            </div>
+                            <!-- /ACHIEVEMENT STATUS -->
+                        </div>
+                        <!-- /ACHIEVEMENT STATUS LIST -->
+                    </div>
+                    <!-- /WIDGET BOX -->
+                </div>
+                <!-- /GRID COLUMN -->
+
+                <!-- GRID COLUMN -->
+                <div class="grid-column">
+
+                    {% comment %}
+
+                    <!-- GRID -->
+                    <div class="grid grid-3-3-3 centered">
+                        <!-- USER PREVIEW -->
+                        <div class="user-preview small fixed-height">
+                            <!-- USER PREVIEW COVER -->
+                            <figure class="user-preview-cover liquid">
+                                <img alt="cover-01" src="img/cover/01.jpg">
+                            </figure>
+                            <!-- /USER PREVIEW COVER -->
+
+                            <!-- USER PREVIEW INFO -->
+                            <div class="user-preview-info">
+                                <!-- USER SHORT DESCRIPTION -->
+                                <div class="user-short-description small">
+                                    <!-- USER SHORT DESCRIPTION AVATAR -->
+                                    <div class="user-short-description-avatar user-avatar">
+                                        <!-- USER AVATAR BORDER -->
+                                        <div class="user-avatar-border">
+                                            <!-- HEXAGON -->
+                                            <div class="hexagon-100-110"></div>
+                                            <!-- /HEXAGON -->
+                                        </div>
+                                        <!-- /USER AVATAR BORDER -->
+
+                                        <!-- USER AVATAR CONTENT -->
+                                        <div class="user-avatar-content">
+                                            <!-- HEXAGON -->
+                                            <div class="hexagon-image-68-74" data-src="img/avatar/01.jpg"></div>
+                                            <!-- /HEXAGON -->
+                                        </div>
+                                        <!-- /USER AVATAR CONTENT -->
+
+                                        <!-- USER AVATAR PROGRESS -->
+                                        <div class="user-avatar-progress">
+                                            <!-- HEXAGON -->
+                                            <div class="hexagon-progress-84-92"></div>
+                                            <!-- /HEXAGON -->
+                                        </div>
+                                        <!-- /USER AVATAR PROGRESS -->
+
+                                        <!-- USER AVATAR PROGRESS BORDER -->
+                                        <div class="user-avatar-progress-border">
+                                            <!-- HEXAGON -->
+                                            <div class="hexagon-border-84-92"></div>
+                                            <!-- /HEXAGON -->
+                                        </div>
+                                        <!-- /USER AVATAR PROGRESS BORDER -->
+
+                                        <!-- USER AVATAR BADGE -->
+                                        <div class="user-avatar-badge">
+                                            <!-- USER AVATAR BADGE BORDER -->
+                                            <div class="user-avatar-badge-border">
+                                                <!-- HEXAGON -->
+                                                <div class="hexagon-28-32"></div>
+                                                <!-- /HEXAGON -->
+                                            </div>
+                                            <!-- /USER AVATAR BADGE BORDER -->
+
+                                            <!-- USER AVATAR BADGE CONTENT -->
+                                            <div class="user-avatar-badge-content">
+                                                <!-- HEXAGON -->
+                                                <div class="hexagon-dark-22-24"></div>
+                                                <!-- /HEXAGON -->
+                                            </div>
+                                            <!-- /USER AVATAR BADGE CONTENT -->
+
+                                            <!-- USER AVATAR BADGE TEXT -->
+                                            <p class="user-avatar-badge-text">24</p>
+                                            <!-- /USER AVATAR BADGE TEXT -->
+                                        </div>
+                                        <!-- /USER AVATAR BADGE -->
+                                    </div>
+                                    <!-- /USER SHORT DESCRIPTION AVATAR -->
+                                </div>
+                                <!-- /USER SHORT DESCRIPTION -->
+                            </div>
+                            <!-- /USER PREVIEW INFO -->
+                        </div>
+                        <!-- /USER PREVIEW -->
+
+                        <!-- UPLOAD BOX -->
+                        <div class="upload-box">
+                            <!-- UPLOAD BOX ICON -->
+                            <svg class="upload-box-icon icon-members">
+                                <use xlink:href="#svg-members"></use>
+                            </svg>
+                            <!-- /UPLOAD BOX ICON -->
+
+                            <!-- UPLOAD BOX TITLE -->
+                            <p class="upload-box-title">Change Avatar</p>
+                            <!-- /UPLOAD BOX TITLE -->
+
+                            <!-- UPLOAD BOX TEXT -->
+                            <p class="upload-box-text">110x110px size minimum</p>
+                            <!-- /UPLOAD BOX TEXT -->
+                        </div>
+                        <!-- /UPLOAD BOX -->
+
+                        <!-- UPLOAD BOX -->
+                        <div class="upload-box">
+                            <!-- UPLOAD BOX ICON -->
+                            <svg class="upload-box-icon icon-photos">
+                                <use xlink:href="#svg-photos"></use>
+                            </svg>
+                            <!-- /UPLOAD BOX ICON -->
+
+                            <!-- UPLOAD BOX TITLE -->
+                            <p class="upload-box-title">Change Cover</p>
+                            <!-- /UPLOAD BOX TITLE -->
+
+                            <!-- UPLOAD BOX TEXT -->
+                            <p class="upload-box-text">1184x300px size minimum</p>
+                            <!-- /UPLOAD BOX TEXT -->
+                        </div>
+                        <!-- /UPLOAD BOX -->
+                    </div>
+                    <!-- /GRID -->
+
+                    {% endcomment %}
+
+
+                    <!-- ACHIEVEMENT BOX -->
+                    <div class="achievement-box secondary">
+                        <!-- ACHIEVEMENT BOX INFO WRAP -->
+                        <div class="achievement-box-info-wrap">
+                            <!-- ACHIEVEMENT BOX IMAGE -->
+                            <img alt="badge-caffeinated-b" class="achievement-box-image"
+                                 src="{% static 'img/badge/caffeinated-b.png' %}">
+                            <!-- /ACHIEVEMENT BOX IMAGE -->
+
+                            <!-- ACHIEVEMENT BOX INFO -->
+                            <div class="achievement-box-info">
+                                <!-- ACHIEVEMENT BOX TITLE -->
+                                <p class="achievement-box-title">Will you like to remove this category?</p>
+                                <!-- /ACHIEVEMENT BOX TITLE -->
+
+                                <!-- ACHIEVEMENT BOX TEXT -->
+                                <p class="achievement-box-text"><span class="bold">Important:&nbsp;</span>action cannot
+                                    be undone</p>
+                                <!-- /ACHIEVEMENT BOX TEXT -->
+                            </div>
+                            <!-- /ACHIEVEMENT BOX INFO -->
+                        </div>
+                        <!-- /ACHIEVEMENT BOX INFO WRAP -->
+
+                        <!-- BUTTON -->
+                        <a class="button white-solid" href="badges.html">Delete</a>
+                        <!-- /BUTTON -->
+                    </div>
+                    <!-- /ACHIEVEMENT BOX -->
+
+                    <!-- WIDGET BOX -->
+                    <div class="widget-box">
+                        <!-- WIDGET BOX TITLE -->
+                        <p class="widget-box-title">Edit {{ category.name }}</p>
+                        <!-- /WIDGET BOX TITLE -->
+
+                        <!-- WIDGET BOX CONTENT -->
+                        <div class="widget-box-content">
+
+                            <!-- WIDGET BOX CONTENT -->
+                            <div class="widget-box-content">
+                                <!-- FORM -->
+                                <form action="" class="form" enctype="multipart/form" method="POST">
+                                    {% csrf_token %}
+                                    <!-- FORM ROW -->
+                                    <div class="form-row">
+                                        <!-- FORM ITEM -->
+                                        <div class="form-item">
+                                            <!-- FORM INPUT -->
+                                            <div class="form-input small active">
+                                                {{ form.name.label_tag }}
+                                                {{ form.name }}
+                                                <small class="text-info">{{ form.name.help_text }}</small>
+                                                <small class="text-danger">{{ form.name.errors }}</small>
+                                            </div>
+                                            <!-- /FORM INPUT -->
+                                        </div>
+                                        <!-- /FORM ITEM -->
+                                    </div>
+                                    <!-- /FORM ROW -->
+
+                                    <!-- FORM ROW -->
+                                    <div class="form-row split">
+                                        <!-- FORM ITEM -->
+                                        <div class="form-item">
+                                            <!-- CHECKBOX WRAP -->
+                                            <div class="checkbox-wrap">
+                                                {{ form.is_locked }}
+                                                <!-- CHECKBOX BOX -->
+                                                <div class="checkbox-box">
+                                                    <!-- ICON CROSS -->
+                                                    <svg class="icon-cross">
+                                                        <use xlink:href="#svg-cross"></use>
+                                                    </svg>
+                                                    <!-- /ICON CROSS -->
+                                                </div>
+                                                <!-- /CHECKBOX BOX -->
+                                                {{ form.is_locked.label_tag }}
+                                            </div>
+                                            <small class="text-info">{{ form.is_locked.help_text }}</small>
+                                            <!-- /CHECKBOX WRAP -->
+                                        </div>
+                                        <!-- /FORM ITEM -->
+
+                                        <!-- FORM ITEM -->
+                                        <div class="form-item">
+                                            <!-- CHECKBOX WRAP -->
+                                            <div class="checkbox-wrap">
+                                                {{ form.is_hidden }}
+                                                <!-- CHECKBOX BOX -->
+                                                <div class="checkbox-box">
+                                                    <!-- ICON CROSS -->
+                                                    <svg class="icon-cross">
+                                                        <use xlink:href="#svg-cross"></use>
+                                                    </svg>
+                                                    <!-- /ICON CROSS -->
+                                                </div>
+                                                <!-- /CHECKBOX BOX -->
+                                                {{ form.is_hidden.label_tag }}
+                                            </div>
+                                            <small class="text-info">{{ form.is_locked.help_text }}</small>
+                                            <!-- /CHECKBOX WRAP -->
+                                        </div>
+                                        <!-- /FORM ITEM -->
+                                    </div>
+                                    <!-- /FORM ROW -->
+
+                                    <!-- FORM ROW -->
+                                    <div class="form-row">
+                                        <!-- FORM ITEM -->
+                                        <div class="form-item">
+                                            <!-- FORM INPUT -->
+                                            <div class="form-input small mid-textarea active">
+                                                {{ form.description.label_tag }}
+                                                {{ form.description }}
+                                                <small class="text-info">{{ form.description.help_text }}</small>
+                                                <small class="text-danger">{{ form.description.errors }}</small>
+                                            </div>
+                                            <!-- /FORM INPUT -->
+                                        </div>
+                                        <!-- /FORM ITEM -->
+                                    </div>
+                                    <!-- /FORM ROW -->
+                                    <!-- FORM ROW -->
+                                    <div class="form-row split">
+
+                                        <!-- FORM ITEM -->
+                                        <div class="form-item">
+                                            <!-- BUTTON -->
+                                            <button class="button full primary" type="submit">Save changes!</button>
+                                            <!-- /BUTTON -->
+                                        </div>
+                                        <!-- /FORM ITEM -->
+
+                                        <!-- FORM ITEM -->
+                                        <div class="form-item">
+                                            <!-- BUTTON -->
+                                            <a class="button full info small-space" href="">Discard</a>
+                                            <!-- /BUTTON -->
+                                        </div>
+                                        <!-- /FORM ITEM -->
+                                    </div>
+                                    <!-- /FORM ROW -->
+                                </form>
+                                <!-- /FORM -->
+                            </div>
+                            <!-- WIDGET BOX CONTENT -->
+
+
+                        </div>
+                        <!-- WIDGET BOX CONTENT -->
+                    </div>
+                    <!-- /WIDGET BOX -->
+                </div>
+                <!-- /GRID COLUMN -->
+            </div>
+            <!-- /GRID -->
+        </div>
+        <!-- /GRID -->
+    </div>
+    <!-- /GRID -->
+</div>
+<!-- /CONTENT GRID -->
+
+{% endblock %}

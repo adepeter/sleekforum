@@ -4,5 +4,6 @@ coverage
 django-debug-toolbar
 django-extensions
 drf-yasg
+pyyaml
 selenium
 werkzeug

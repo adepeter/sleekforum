@@ -1,12 +1,16 @@
 from django.contrib import messages
 from django.contrib.auth import get_user_model
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from django.db.models import Count
 from django.shortcuts import redirect
-from django.views.generic import CreateView
-from django.views.generic.list import MultipleObjectMixin
 from django.utils.translation import gettext_lazy as _
+from django.views.decorators.http import require_POST
+from django.views.generic import CreateView, UpdateView
+from django.views.generic.list import MultipleObjectMixin
+from rest_framework.reverse import reverse
 
-from ..forms.category import CategoryCreateForm
+from ..forms.category import CategoryCreateForm, CategoryEditForm
 from ..models import Category
 
 TEMPLATE_URL = 'blogs/category'
@@ -14,11 +18,28 @@ TEMPLATE_URL = 'blogs/category'
 User = get_user_model()
 
 
-class CategoryCreateView(CreateView):
+class CategoryEditDeleteView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Category
-    slug_field = 'username__iexact'
-    slug_url_kwarg = 'username'
-    template_name = f'{TEMPLATE_URL}/create_category.html'
+    form_class = CategoryEditForm
+    slug_field = 'slug__iexact'
+    slug_url_kwarg = 'slug'
+    template_name = f'{TEMPLATE_URL}/edit_delete_category.html'
+    success_message = '%(name)s was successfully modified'
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.filter(owner__username__iexact=self.request.user.username)
+
+    def get_success_url(self):
+        kwargs = {
+            'username': self.object.owner.username
+        }
+        return reverse('sleekforum:blogs:categories:categories_list_create', kwargs=kwargs)
 
 
 class CategoryListCreateView(MultipleObjectMixin, SuccessMessageMixin, CreateView):
@@ -60,10 +81,25 @@ class CategoryListCreateView(MultipleObjectMixin, SuccessMessageMixin, CreateVie
         kwargs = {
             'username': obj.owner.username
         }
-        return redirect('sleekforum:blogs:categories:categories_list', kwargs=kwargs)
+        return redirect('sleekforum:blogs:categories:categories_list_create', kwargs=kwargs)
 
     def get_queryset(self):
-        qs = super().get_queryset()
+        qs = super().get_queryset().annotate(
+            num_of_articles=Count('articles'),
+            num_of_comments=Count('articles__blog_comments')
+        )
         if self.request.user == self.object:
-            return qs.filter(owner=self.request.user, is_hidden=False)
-        return qs.filter(is_hidden=True, owner=self.object)
+            return qs.filter(owner=self.object)
+        return qs.filter(is_hidden=False, owner=self.object)
+
+
+@require_POST
+def delete_category(request, username, category):
+    category = Category.objects.filter(owner__username__iexact=username, name=category.name)
+    is_deleted = category.delete()
+    if is_deleted:
+        messages.success(request, _('%s was successfully deleted' % category.name))
+    else:
+        messages.info(request, _('%s could not be deleted.\
+        Probably doesn\'t exist or don\'t possess delete permissions' % category.name))
+    return reverse()

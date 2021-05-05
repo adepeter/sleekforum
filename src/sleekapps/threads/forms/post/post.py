@@ -16,11 +16,11 @@ class BasePostForm(forms.ModelForm):
         login_placeholder = _(f'Hi {user.username} share your post here let\'s get started')
         guest_placeholder = _('Dear guest, login to post a reply')
         self.fields['content'].widget.attrs.update({
-            'id': 'form-post-text',
-            'rows': '5',
-            'placeholder': login_placeholder if user.is_authenticated else guest_placeholder,
-            'disabled': True if not user.is_authenticated else False
-        })
+                'id': 'form-post-text',
+                'rows': '5',
+                'placeholder': login_placeholder if user.is_authenticated else guest_placeholder,
+                'disabled': not user.is_authenticated,
+            })
 
     def is_valid(self):
         invalid_form = super().is_valid()

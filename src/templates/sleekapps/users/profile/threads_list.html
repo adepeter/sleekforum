@@ -1,0 +1,348 @@
+{% extends 'users/profile/_includes/profile_base.html' %}
+{% load static %}
+{% load cores_util_tags %}
+{% load post_tags %}
+
+
+{% block title %}{{ object.get_display_name | add:' Threads' }}{% endblock %}
+
+{% block profile_body %}
+
+<!-- SECTION -->
+<section class="section">
+    <!-- SECTION HEADER -->
+    <div class="section-header">
+        <!-- SECTION HEADER INFO -->
+        <div class="section-header-info">
+            <!-- SECTION PRETITLE -->
+            <p class="section-pretitle">Browse {{ object.get_display_name }}'s</p>
+            <!-- /SECTION PRETITLE -->
+
+            <!-- SECTION TITLE -->
+            <h2 class="section-title">Forum Discussions</h2>
+            <!-- /SECTION TITLE -->
+        </div>
+        <!-- /SECTION HEADER INFO -->
+    </div>
+    <!-- /SECTION HEADER -->
+
+    {% if not page_obj %}
+
+    <!-- GRID -->
+    <div class="grid centered">
+        <!-- ACCOUNT STAT BOX -->
+        <div class="account-stat-box account-stat-active-users">
+            <!-- ACCOUNT STAT BOX ICON WRAP -->
+            <div class="account-stat-box-icon-wrap">
+                <!-- ACCOUNT STAT BOX ICON -->
+                <svg class="account-stat-box-icon icon-return">
+                    <use xlink:href="#svg-return"></use>
+                </svg>
+                <!-- /ACCOUNT STAT BOX ICON -->
+            </div>
+            <!-- /ACCOUNT STAT BOX ICON WRAP -->
+
+            <!-- ACCOUNT STAT BOX TITLE -->
+            <p class="account-stat-box-title">OOOPs</p>
+            <!-- /ACCOUNT STAT BOX TITLE -->
+
+            <!-- ACCOUNT STAT BOX TEXT -->
+            <p class="account-stat-box-text">There are no threads belonging to {{ object.get_display_name }} at the moment</p>
+            <!-- /ACCOUNT STAT BOX TEXT -->
+        </div>
+        <!-- /ACCOUNT STAT BOX -->
+    </div>
+
+    {% else %}}
+    <!-- SECTION FILTERS BAR -->
+    <div class="section-filters-bar v5">
+        <!-- SECTION FILTERS BAR ACTIONS -->
+        <div class="section-filters-bar-actions">
+            <!-- FILTER TABS -->
+            <div class="filter-tabs">
+                <!-- FILTER TAB -->
+                <div class="filter-tab active">
+                    <!-- FILTER TAB TEXT -->
+                    <p class="filter-tab-text">Topics Started</p>
+                    <!-- /FILTER TAB TEXT -->
+                </div>
+                <!-- /FILTER TAB -->
+
+                <!-- FILTER TAB -->
+                <div class="filter-tab">
+                    <!-- FILTER TAB TEXT -->
+                    <p class="filter-tab-text">My Replies</p>
+                    <!-- /FILTER TAB TEXT -->
+                </div>
+                <!-- /FILTER TAB -->
+
+                <!-- FILTER TAB -->
+                <div class="filter-tab">
+                    <!-- FILTER TAB TEXT -->
+                    <p class="filter-tab-text">Liked Topics</p>
+                    <!-- /FILTER TAB TEXT -->
+                </div>
+                <!-- /FILTER TAB -->
+            </div>
+            <!-- /FILTER TABS -->
+
+            <!-- FORM -->
+            <form class="form">
+                <!-- FORM SELECT -->
+                <div class="form-select">
+                    <label for="forum-filter-category">Filter By</label>
+                    <select id="forum-filter-category" name="forum_filter_category">
+                        <option value="0">Topics Started</option>
+                        <option value="1">My Replies</option>
+                        <option value="2">Liked Topics</option>
+                    </select>
+                    <!-- FORM SELECT ICON -->
+                    <svg class="form-select-icon icon-small-arrow">
+                        <use xlink:href="#svg-small-arrow"></use>
+                    </svg>
+                    <!-- /FORM SELECT ICON -->
+                </div>
+                <!-- /FORM SELECT -->
+            </form>
+            <!-- /FORM -->
+        </div>
+        <!-- /SECTION FILTERS BAR ACTIONS -->
+
+        <!-- SECTION FILTERS BAR ACTIONS -->
+        <div class="section-filters-bar-actions">
+            <!-- FORM -->
+            <form class="form">
+                <!-- FORM ITEM -->
+                <div class="form-item split medium">
+                    <!-- FORM SELECT -->
+                    <div class="form-select small">
+                        <label for="forum-filter-order">Order By</label>
+                        <select id="forum-filter-order" name="forum_filter_order">
+                            <option value="0">Newest First</option>
+                            <option value="1">Oldest First</option>
+                        </select>
+                        <!-- FORM SELECT ICON -->
+                        <svg class="form-select-icon icon-small-arrow">
+                            <use xlink:href="#svg-small-arrow"></use>
+                        </svg>
+                        <!-- /FORM SELECT ICON -->
+                    </div>
+                    <!-- /FORM SELECT -->
+
+                    <!-- BUTTON -->
+                    <button class="button primary">Apply Filter</button>
+                    <!-- /BUTTON -->
+                </div>
+                <!-- /FORM ITEM -->
+            </form>
+            <!-- /FORM -->
+        </div>
+        <!-- /SECTION FILTERS BAR ACTIONS -->
+    </div>
+    <!-- /SECTION FILTERS BAR -->
+
+    <!-- TABLE -->
+    <div class="table table-forum-discussion">
+        <!-- TABLE HEADER -->
+        <div class="table-header">
+            <!-- TABLE HEADER COLUMN -->
+            <div class="table-header-column">
+                <!-- TABLE HEADER TITLE -->
+                <p class="table-header-title">Discussion</p>
+                <!-- /TABLE HEADER TITLE -->
+            </div>
+            <!-- /TABLE HEADER COLUMN -->
+
+            <!-- TABLE HEADER COLUMN -->
+            <div class="table-header-column centered padded-medium">
+                <!-- TABLE HEADER TITLE -->
+                <p class="table-header-title">Voices</p>
+                <!-- /TABLE HEADER TITLE -->
+            </div>
+            <!-- /TABLE HEADER COLUMN -->
+
+            <!-- TABLE HEADER COLUMN -->
+            <div class="table-header-column centered padded-medium">
+                <!-- TABLE HEADER TITLE -->
+                <p class="table-header-title">Replies</p>
+                <!-- /TABLE HEADER TITLE -->
+            </div>
+            <!-- /TABLE HEADER COLUMN -->
+
+            <!-- TABLE HEADER COLUMN -->
+            <div class="table-header-column centered padded-medium">
+                <!-- TABLE HEADER TITLE -->
+                <p class="table-header-title">Visits</p>
+                <!-- /TABLE HEADER TITLE -->
+            </div>
+            <!-- /TABLE HEADER COLUMN -->
+
+            <!-- TABLE HEADER COLUMN -->
+            <div class="table-header-column padded-big-left">
+                <!-- TABLE HEADER TITLE -->
+                <p class="table-header-title">Activity</p>
+                <!-- /TABLE HEADER TITLE -->
+            </div>
+            <!-- /TABLE HEADER COLUMN -->
+        </div>
+        <!-- /TABLE HEADER -->
+
+        <!-- TABLE BODY -->
+        <div class="table-body">
+            {% for thread in page_obj %}
+            {% last_post thread as post %}
+            <!-- TABLE ROW -->
+            <div class="table-row medium">
+                <!-- TABLE COLUMN -->
+                <div class="table-column">
+                    <!-- DISCUSSION PREVIEW -->
+                    <div class="discussion-preview {% if thread.pin %}pinned{% endif %}">
+                        <!-- DISCUSSION PREVIEW TITLE -->
+                        <a class="discussion-preview-title" href="{{ thread.get_absolute_url }}">{{ thread.title }}</a>
+                        <!-- /DISCUSSION PREVIEW TITLE -->
+
+                        <!-- DISCUSSION PREVIEW META -->
+                        <div class="discussion-preview-meta">
+                            <!-- DISCUSSION PREVIEW META TEXT -->
+                            <p class="discussion-preview-meta-text">Started by</p>
+                            <!-- /DISCUSSION PREVIEW META TEXT -->
+
+                            <!-- USER AVATAR -->
+                            <a class="user-avatar micro no-border" href="{{ thread.starter.get_absolute_url }}">
+                                <!-- USER AVATAR CONTENT -->
+                                <div class="user-avatar-content">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-image-18-20" data-src="{{ thread.starter.avatar }}"></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR CONTENT -->
+                            </a>
+                            <!-- /USER AVATAR -->
+
+                            <!-- DISCUSSION PREVIEW META TEXT -->
+                            <p class="discussion-preview-meta-text">
+                                <a href="profile-timeline.html">{{ thread.starter.get_display_name }}</a>
+                                {{ thread.created | time_ago }}<span class="separator">-</span>
+                                <a class="highlighted" href="{% url 'sleekforum:threads:list_threads' thread.category.slug thread.category.id %}">{{ thread.category.get_name }}</a>
+                            </p>
+                            <!-- /DISCUSSION PREVIEW META TEXT -->
+                        </div>
+                        <!-- /DISCUSSION PREVIEW META -->
+                    </div>
+                    <!-- /DISCUSSION PREVIEW -->
+                </div>
+                <!-- /TABLE COLUMN -->
+
+                <!-- TABLE COLUMN -->
+                <div class="table-column centered padded-medium">
+                    <!-- TABLE TITLE -->
+                    <p class="table-title">{{ thread.unique_posters_count | pretty_count }}</p>
+                    <!-- /TABLE TITLE -->
+                </div>
+                <!-- /TABLE COLUMN -->
+
+                <!-- TABLE COLUMN -->
+                <div class="table-column centered padded-medium">
+                    <!-- TABLE TITLE -->
+                    <p class="table-title">{{ thread.posts.count | pretty_count }}</p>
+                    <!-- /TABLE TITLE -->
+                </div>
+                <!-- /TABLE COLUMN -->
+
+                <!-- TABLE COLUMN -->
+                <div class="table-column centered padded-medium">
+                    <!-- TABLE TITLE -->
+                    <p class="table-title">{{ thread.thread_views.count | pretty_count }}</p>
+                    <!-- /TABLE TITLE -->
+                </div>
+                <!-- /TABLE COLUMN -->
+
+                <!-- TABLE COLUMN -->
+                <div class="table-column padded-big-left">
+                    <!-- USER STATUS -->
+                {% if post %}
+                <div class="user-status">
+                    <!-- USER STATUS AVATAR -->
+                    <a class="user-status-avatar" href="{{ post.user.get_absolute_url }}">
+                        <!-- USER AVATAR -->
+                        <div class="user-avatar small no-outline {{ post.user.online }}">
+                            <!-- USER AVATAR CONTENT -->
+                            <div class="user-avatar-content">
+                                <!-- HEXAGON -->
+                                <div class="hexagon-image-30-32" data-src="{{ post.user.avatar }}"></div>
+                                <!-- /HEXAGON -->
+                            </div>
+                            <!-- /USER AVATAR CONTENT -->
+
+                            <!-- USER AVATAR PROGRESS -->
+                            <div class="user-avatar-progress">
+                                <!-- HEXAGON -->
+                                <div class="hexagon-progress-40-44"></div>
+                                <!-- /HEXAGON -->
+                            </div>
+                            <!-- /USER AVATAR PROGRESS -->
+
+                            <!-- USER AVATAR PROGRESS BORDER -->
+                            <div class="user-avatar-progress-border">
+                                <!-- HEXAGON -->
+                                <div class="hexagon-border-40-44"></div>
+                                <!-- /HEXAGON -->
+                            </div>
+                            <!-- /USER AVATAR PROGRESS BORDER -->
+
+                            <!-- USER AVATAR BADGE -->
+                            <div class="user-avatar-badge">
+                                <!-- USER AVATAR BADGE BORDER -->
+                                <div class="user-avatar-badge-border">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-22-24"></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR BADGE BORDER -->
+
+                                <!-- USER AVATAR BADGE CONTENT -->
+                                <div class="user-avatar-badge-content">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-dark-16-18"></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR BADGE CONTENT -->
+
+                                <!-- USER AVATAR BADGE TEXT -->
+                                <p class="user-avatar-badge-text">{{ post.user.post_count | length }}</p>
+                                <!-- /USER AVATAR BADGE TEXT -->
+                            </div>
+                            <!-- /USER AVATAR BADGE -->
+                        </div>
+                        <!-- /USER AVATAR -->
+                    </a>
+                    <!-- /USER STATUS AVATAR -->
+
+                    <!-- USER STATUS TITLE -->
+                    <p class="user-status-title"><a class="bold" href="{{ post.user.get_absolute_url }}">{{ post.user.get_display_name }}</a></p>
+                    <!-- /USER STATUS TITLE -->
+
+                    <!-- USER STATUS TEXT -->
+                    <p class="user-status-text small">{{ post.created | time_ago }}</p>
+                    <!-- /USER STATUS TEXT -->
+
+                </div>
+                <!-- /USER STATUS -->
+                {% else %}
+                <p class="user-status-text small">No posts yet</p>
+                {% endif %}
+                </div>
+                <!-- /TABLE COLUMN -->
+            </div>
+            <!-- /TABLE ROW -->
+            {% endfor %}
+        </div>
+        <!-- /TABLE BODY -->
+    </div>
+    <!-- /TABLE -->
+    {% include 'cores/_pagination/pagination_v1.html' with page_obj=page_obj items='threads' %}
+    {% endif %}
+</section>
+<!-- /SECTION -->
+
+{% endblock %}
