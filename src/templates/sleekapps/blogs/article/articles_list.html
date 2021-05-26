@@ -1,12 +1,12 @@
 {% extends 'users/profile/_includes/profile_base.html' %}
 {% load static %}
-<!--{% load cores_util_tags %}-->
+{% load cores_util_tags %}
 <!--{% load post_tags %}-->
 <!--{% load reaction_tags %}-->
 <!--{% load user_tags %}-->
 
 
-{% block title %}{{ object.get_display_name | add:' Blogposts' }}{% endblock %}
+{% block title %}{{ object.get_display_name | add:'\'s Blogposts' }}{% endblock %}
 
 {% block profile_body %}
 
@@ -21,7 +21,7 @@
             <!-- /SECTION PRETITLE -->
 
             <!-- SECTION TITLE -->
-            <h2 class="section-title">Blog Posts <span class="highlighted">{{ page_obj | length }}</span></h2>
+            <h2 class="section-title">Blog Posts <span class="highlighted">{{ page_obj.paginator.count }}</span></h2>
             <!-- /SECTION TITLE -->
         </div>
         <!-- /SECTION HEADER INFO -->
@@ -106,7 +106,7 @@
                 <!-- POST PREVIEW INFO TOP -->
                 <div class="post-preview-info-top">
                     <!-- POST PREVIEW TIMESTAMP -->
-                    <p class="post-preview-timestamp">2 days ago</p>
+                    <p class="post-preview-timestamp">{{ article.date_created }} ({{ article.date_created | time_ago }})</p>
                     <!-- /POST PREVIEW TIMESTAMP -->
 
                     <!-- POST PREVIEW TITLE -->
@@ -118,13 +118,11 @@
                 <!-- POST PREVIEW INFO BOTTOM -->
                 <div class="post-preview-info-bottom">
                     <!-- POST PREVIEW TEXT -->
-                    <p class="post-preview-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                        exercitation ullamco laboris nisi ut...</p>
+                    <p class="post-preview-text">{{ article.content | truncatewords:"25" }}</p>
                     <!-- /POST PREVIEW TEXT -->
 
                     <!-- POST PREVIEW LINK -->
-                    <a class="post-preview-link" href="profile-post.html">Read more...</a>
+                    <a class="post-preview-link" href="{{ article.get_absolute_url }}">Read more...</a>
                     <!-- /POST PREVIEW LINK -->
                 </div>
                 <!-- /POST PREVIEW INFO BOTTOM -->

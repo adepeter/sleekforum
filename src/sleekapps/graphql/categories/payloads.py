@@ -85,7 +85,11 @@ class CategoryEditPayload(graphene.Mutation):
 
     def mutate(self, info, input):
         user = info.context.user
-        if not user.is_authenticated and not (user.is_staff or user.is_superuser):
+        if (
+            not user.is_authenticated
+            and not user.is_staff
+            and not user.is_superuser
+        ):
             raise PermissionDenied('You do not have the permission\
              to perform this operation')
         parent = None
@@ -132,7 +136,11 @@ class CategoryDeletePayload(graphene.Mutation):
 
     def mutate(self, info, input):
         user = info.context.user
-        if not user.is_authenticated and not (user.is_staff or user.is_superuser):
+        if (
+            not user.is_authenticated
+            and not user.is_staff
+            and not user.is_superuser
+        ):
             raise PermissionDenied('You do not have the permission \
             to perform this operation')
         fields = dictify_inputs(input, CategoryDeleteInput)
