@@ -1,5 +1,5 @@
-# from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views import View
 from django.views.generic import ListView
 
 from .models import Notification
@@ -15,3 +15,11 @@ class NotificationListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         qs = super().get_queryset()
         return qs.filter(user=self.request.user)
+
+
+class MarkAllAsRead(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        Notification.objects.filter(user=request.user)
+        print(self.request.user)
+        from django.http import HttpResponse
+        return HttpResponse('<b>Hello!</b>')
