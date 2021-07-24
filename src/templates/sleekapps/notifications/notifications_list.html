@@ -23,7 +23,7 @@
         <!-- SECTION HEADER ACTIONS -->
         <div class="section-header-actions">
             <!-- SECTION HEADER ACTION -->
-            <p class="section-header-action">Mark all as Read</p>
+            <a class="section-header-action" href="{% url 'sleekforum:notifications:mark_all_read' %}">Mark all as Read</a>
             <!-- /SECTION HEADER ACTION -->
 
             <!-- SECTION HEADER ACTION -->
@@ -36,6 +36,7 @@
 
     <!-- NOTIFICATION BOX LIST -->
     <div class="notification-box-list">
+        {% include 'vikinger/widgets/messages_alert.html' %}
         <!-- NOTIFICATION BOX -->
         <div class="notification-box">
             <!-- USER STATUS -->
