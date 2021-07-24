@@ -13,3 +13,7 @@ urlpatterns = [
         path('edit/', CategoryEditDeleteView.as_view(), name='category_edit_delete'),
     ]))
 ]
+
+# path('<slug:category_slug>/', include([
+#         path('articles/', UserArticlesByCategoryView.as_view(), name='user_category_articles'),
+#     ]))

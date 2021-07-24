@@ -1,3 +1,4 @@
+import readtime
 from django.conf import settings
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
@@ -78,11 +79,16 @@ class Article(models.Model):
         auto_now=True
     )
 
+    def get_read_time(self):
+        return readtime.of_text(self.content)
+
     def get_absolute_url(self):
         kwargs = {
-            'slug': self.slug
+            'id': self.id,
+            'slug': self.slug,
+            'username': self.author.username
         }
-        return reverse('sleekforum:blogs:articles:read_article', kwargs=kwargs)
+        return reverse('sleekforum:blogs:articles:user_read_article', kwargs=kwargs)
 
     def save(self, *args, **kwargs):
         if not self.slug:

@@ -33,10 +33,9 @@ class ThreadSingleActionMiscView(
                 '\'redirect_to_threads\' class attr cannot be set to None. '
                 'Attribute must be set to a boolean'
             )
-        else:
-            if self.redirect_to_threads is True:
-                return redirect(self.get_redirect_url())
-            return redirect(self.object.get_absolute_url())
+        if self.redirect_to_threads is True:
+            return redirect(self.get_redirect_url())
+        return redirect(self.object.get_absolute_url())
 
     def get_redirect_url(self):
         return reverse('sleekforum:threads:list_threads', args=[

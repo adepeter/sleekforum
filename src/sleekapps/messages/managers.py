@@ -9,5 +9,7 @@ class PrivateMessageManager(models.Manager):
             Q(recipient=sender, sender=recipient)
         )
 
-    def inbox(self, user):
-        return self.filter(recipient=user)
+    def inbox(self, user, read_status=None):
+        return self.filter(
+            recipient=user, is_read=read_status is not None and not False
+        )

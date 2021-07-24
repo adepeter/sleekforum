@@ -4,6 +4,11 @@ from django.utils.translation import gettext_lazy as _
 from ..models import Comment
 
 
+class CommentStackedInline(admin.StackedInline):
+    model = Comment
+    extra = 5
+
+
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
     list_display = [

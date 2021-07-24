@@ -1,0 +1,1093 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load cores_util_tags %}
+
+{% block title %}{{ article.title }} | {{ block.super }}{% endblock %}
+
+{% block content %}
+
+<!-- CONTENT GRID -->
+<div class="content-grid full">
+    <!-- POST OPEN -->
+    <article class="post-open">
+        <!-- POST OPEN COVER -->
+        <figure class="post-open-cover liquid">
+            <img alt="cover-19" src="{% static 'img/cover/19.jpg' %}">
+        </figure>
+        <!-- /POST OPEN COVER -->
+
+        <!-- POST OPEN BODY -->
+        <div class="post-open-body">
+            <!-- POST OPEN HEADING -->
+            <div class="post-open-heading">
+                <!-- POST OPEN TIMESTAMP -->
+                <p class="post-open-timestamp"><span class="highlighted">{{ article.date_created | time_ago }}</span>
+                    {{ article.get_read_time }}</p>
+                <!-- /POST OPEN TIMESTAMP -->
+
+                <!-- POST OPEN TITLE -->
+                <h2 class="post-open-title">{{ article.title }}</h2>
+                <!-- /POST OPEN TITLE -->
+            </div>
+            <!-- /POST OPEN HEADING -->
+
+            <!-- POST OPEN CONTENT -->
+            <div class="post-open-content">
+                <!-- POST OPEN CONTENT SIDEBAR -->
+                <div class="post-open-content-sidebar">
+                    <!-- USER AVATAR -->
+                    <div class="user-avatar small no-outline">
+                        <!-- USER AVATAR CONTENT -->
+                        <div class="user-avatar-content">
+                            <!-- HEXAGON -->
+                            <div class="hexagon-image-30-32" data-src="{{ article.author.get_avatar }}"></div>
+                            <!-- /HEXAGON -->
+                        </div>
+                        <!-- /USER AVATAR CONTENT -->
+
+                        <!-- USER AVATAR PROGRESS -->
+                        <div class="user-avatar-progress">
+                            <!-- HEXAGON -->
+                            <div class="hexagon-progress-40-44"></div>
+                            <!-- /HEXAGON -->
+                        </div>
+                        <!-- /USER AVATAR PROGRESS -->
+
+                        <!-- USER AVATAR PROGRESS BORDER -->
+                        <div class="user-avatar-progress-border">
+                            <!-- HEXAGON -->
+                            <div class="hexagon-border-40-44"></div>
+                            <!-- /HEXAGON -->
+                        </div>
+                        <!-- /USER AVATAR PROGRESS BORDER -->
+
+                        <!-- USER AVATAR BADGE -->
+                        <div class="user-avatar-badge">
+                            <!-- USER AVATAR BADGE BORDER -->
+                            <div class="user-avatar-badge-border">
+                                <!-- HEXAGON -->
+                                <div class="hexagon-22-24"></div>
+                                <!-- /HEXAGON -->
+                            </div>
+                            <!-- /USER AVATAR BADGE BORDER -->
+
+                            <!-- USER AVATAR BADGE CONTENT -->
+                            <div class="user-avatar-badge-content">
+                                <!-- HEXAGON -->
+                                <div class="hexagon-dark-16-18"></div>
+                                <!-- /HEXAGON -->
+                            </div>
+                            <!-- /USER AVATAR BADGE CONTENT -->
+
+                            <!-- USER AVATAR BADGE TEXT -->
+                            <p class="user-avatar-badge-text">{{ article.author.post_count | length }}</p>
+                            <!-- /USER AVATAR BADGE TEXT -->
+                        </div>
+                        <!-- /USER AVATAR BADGE -->
+                    </div>
+                    <!-- /USER AVATAR -->
+
+                    <!-- POST OPEN SIDEBAR TITLE -->
+                    <p class="post-open-sidebar-title">Share!</p>
+                    <!-- /POST OPEN SIDEBAR TITLE -->
+
+                    <!-- SOCIAL LINKS -->
+                    <div class="social-links vertical">
+                        <!-- SOCIAL LINK -->
+                        <a class="social-link void facebook" href="#">
+                            <!-- ICON FACEBOOK -->
+                            <svg class="icon-facebook">
+                                <use xlink:href="#svg-facebook"></use>
+                            </svg>
+                            <!-- /ICON FACEBOOK -->
+                        </a>
+                        <!-- /SOCIAL LINK -->
+
+                        <!-- SOCIAL LINK -->
+                        <a class="social-link void twitter" href="#">
+                            <!-- ICON TWITTER -->
+                            <svg class="icon-twitter">
+                                <use xlink:href="#svg-twitter"></use>
+                            </svg>
+                            <!-- /ICON TWITTER -->
+                        </a>
+                        <!-- /SOCIAL LINK -->
+                    </div>
+                    <!-- /SOCIAL LINKS -->
+                </div>
+                <!-- /POST OPEN CONTENT SIDEBAR -->
+
+                <!-- POST OPEN CONTENT BODY -->
+                <div class="post-open-content-body">
+                    <!-- POST OPEN PARAGRAPH -->
+                    <p class="post-open-paragraph">{{ article.content }}</p>
+                    <!-- /POST OPEN PARAGRAPH -->
+
+                    {% if article.tags %}
+                    <!-- TAG LIST -->
+                    <div class="tag-list">
+                        {% for tag in article.tags %}
+                        <!-- TAG ITEM -->
+                        <a class="tag-item secondary" href="newsfeed.html">{{ tag }}</a>
+                        <!-- /TAG ITEM -->
+                        {% endfor %}
+                    </div>
+                    <!-- /TAG LIST -->
+                    {% endif %}
+                </div>
+                <!-- /POST OPEN CONTENT BODY -->
+            </div>
+            <!-- /POST OPEN CONTENT -->
+
+            <!-- CONTENT ACTIONS -->
+            <div class="content-actions">
+                <!-- CONTENT ACTION -->
+                <div class="content-action">
+                    <!-- META LINE -->
+                    <div class="meta-line">
+                        <!-- META LINE LIST -->
+                        <div class="meta-line-list reaction-item-list">
+                            <!-- REACTION ITEM -->
+                            <div class="reaction-item">
+                                <!-- REACTION IMAGE -->
+                                <img alt="reaction-happy" class="reaction-image reaction-item-dropdown-trigger"
+                                     src="{% static 'img/reaction/happy.png' %}">
+                                <!-- /REACTION IMAGE -->
+
+                                <!-- SIMPLE DROPDOWN -->
+                                <div class="simple-dropdown padded reaction-item-dropdown">
+                                    <!-- SIMPLE DROPDOWN TEXT -->
+                                    <p class="simple-dropdown-text"><img alt="reaction-happy" class="reaction"
+                                                                         src="{% static 'img/reaction/happy.png' %}">
+                                        <span
+                                                class="bold">Happy</span></p>
+                                    <!-- /SIMPLE DROPDOWN TEXT -->
+
+                                    <!-- SIMPLE DROPDOWN TEXT -->
+                                    <p class="simple-dropdown-text">Matt Parker</p>
+                                    <!-- /SIMPLE DROPDOWN TEXT -->
+
+                                    <!-- SIMPLE DROPDOWN TEXT -->
+                                    <p class="simple-dropdown-text">Destroy Dex</p>
+                                    <!-- /SIMPLE DROPDOWN TEXT -->
+
+                                    <!-- SIMPLE DROPDOWN TEXT -->
+                                    <p class="simple-dropdown-text">The Green Goo</p>
+                                    <!-- /SIMPLE DROPDOWN TEXT -->
+                                </div>
+                                <!-- /SIMPLE DROPDOWN -->
+                            </div>
+                            <!-- /REACTION ITEM -->
+
+                            <!-- REACTION ITEM -->
+                            <div class="reaction-item">
+                                <!-- REACTION IMAGE -->
+                                <img alt="reaction-love" class="reaction-image reaction-item-dropdown-trigger"
+                                     src="{% static 'img/reaction/love.png' %}">
+                                <!-- /REACTION IMAGE -->
+
+                                <!-- SIMPLE DROPDOWN -->
+                                <div class="simple-dropdown padded reaction-item-dropdown">
+                                    <!-- SIMPLE DROPDOWN TEXT -->
+                                    <p class="simple-dropdown-text"><img alt="reaction-love" class="reaction"
+                                                                         src="{% static 'img/reaction/love.png' %}">
+                                        <span
+                                                class="bold">Love</span></p>
+                                    <!-- /SIMPLE DROPDOWN TEXT -->
+
+                                    <!-- SIMPLE DROPDOWN TEXT -->
+                                    <p class="simple-dropdown-text">Sandra Strange</p>
+                                    <!-- /SIMPLE DROPDOWN TEXT -->
+                                </div>
+                                <!-- /SIMPLE DROPDOWN -->
+                            </div>
+                            <!-- /REACTION ITEM -->
+
+                            <!-- REACTION ITEM -->
+                            <div class="reaction-item">
+                                <!-- REACTION IMAGE -->
+                                <img alt="reaction-like" class="reaction-image reaction-item-dropdown-trigger"
+                                     src="{% static 'img/reaction/like.png' %}">
+                                <!-- /REACTION IMAGE -->
+
+                                <!-- SIMPLE DROPDOWN -->
+                                <div class="simple-dropdown padded reaction-item-dropdown">
+                                    <!-- SIMPLE DROPDOWN TEXT -->
+                                    <p class="simple-dropdown-text"><img alt="reaction-like" class="reaction"
+                                                                         src="{% static 'img/reaction/like.png' %}">
+                                        <span
+                                                class="bold">Like</span></p>
+                                    <!-- /SIMPLE DROPDOWN TEXT -->
+
+                                    <!-- SIMPLE DROPDOWN TEXT -->
+                                    <p class="simple-dropdown-text">Neko Bebop</p>
+                                    <!-- /SIMPLE DROPDOWN TEXT -->
+
+                                    <!-- SIMPLE DROPDOWN TEXT -->
+                                    <p class="simple-dropdown-text">Nick Grissom</p>
+                                    <!-- /SIMPLE DROPDOWN TEXT -->
+
+                                    <!-- SIMPLE DROPDOWN TEXT -->
+                                    <p class="simple-dropdown-text">Sarah Diamond</p>
+                                    <!-- /SIMPLE DROPDOWN TEXT -->
+
+                                    <!-- SIMPLE DROPDOWN TEXT -->
+                                    <p class="simple-dropdown-text">Jett Spiegel</p>
+                                    <!-- /SIMPLE DROPDOWN TEXT -->
+
+                                    <!-- SIMPLE DROPDOWN TEXT -->
+                                    <p class="simple-dropdown-text">Marcus Jhonson</p>
+                                    <!-- /SIMPLE DROPDOWN TEXT -->
+
+                                    <!-- SIMPLE DROPDOWN TEXT -->
+                                    <p class="simple-dropdown-text">Jane Rodgers</p>
+                                    <!-- /SIMPLE DROPDOWN TEXT -->
+
+                                    <!-- SIMPLE DROPDOWN TEXT -->
+                                    <p class="simple-dropdown-text"><span class="bold">and 2 more...</span></p>
+                                    <!-- /SIMPLE DROPDOWN TEXT -->
+                                </div>
+                                <!-- /SIMPLE DROPDOWN -->
+                            </div>
+                            <!-- /REACTION ITEM -->
+                        </div>
+                        <!-- /META LINE LIST -->
+
+                        <!-- META LINE TEXT -->
+                        <p class="meta-line-text">12</p>
+                        <!-- /META LINE TEXT -->
+                    </div>
+                    <!-- /META LINE -->
+
+                    {% if participants %}
+                    <!-- META LINE -->
+                    <div class="meta-line">
+                        <!-- META LINE LIST -->
+                        <div class="meta-line-list user-avatar-list">
+                            {% for participant in participants %}
+                            <!-- USER AVATAR -->
+                            <div class="user-avatar micro no-stats">
+                                <!-- USER AVATAR BORDER -->
+                                <div class="user-avatar-border">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-22-24"></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR BORDER -->
+
+                                <!-- USER AVATAR CONTENT -->
+                                <div class="user-avatar-content">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-image-18-20" data-src="{{ user.get_avatar }}"></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR CONTENT -->
+                            </div>
+                            <!-- /USER AVATAR -->
+                            {% endfor %}
+                        </div>
+                        <!-- /META LINE LIST -->
+
+                        <!-- META LINE TEXT -->
+                        <p class="meta-line-text">{{ participants.count }} Participants</p>
+                        <!-- /META LINE TEXT -->
+                    </div>
+                    <!-- /META LINE -->
+                    {% endif %}
+                </div>
+                <!-- /CONTENT ACTION -->
+
+                <!-- CONTENT ACTION -->
+                <div class="content-action">
+                    <!-- META LINE -->
+                    <div class="meta-line">
+                        <!-- META LINE LINK -->
+                        <p class="meta-line-link">{{ object_list.count }} Comment{{ object_list.count | pluralize }}</p>
+                        <!-- /META LINE LINK -->
+                    </div>
+                    <!-- /META LINE -->
+
+                    {% comment %}
+                    <!-- META LINE -->
+                    <div class="meta-line">
+                        <!-- META LINE TEXT -->
+                        <p class="meta-line-text">0 Shares</p>
+                        <!-- /META LINE TEXT -->
+                    </div>
+                    <!-- /META LINE -->
+                    {% endcomment %}
+                </div>
+                <!-- /CONTENT ACTION -->
+            </div>
+            <!-- /CONTENT ACTIONS -->
+
+            <!-- POST OPTIONS -->
+            <div class="post-options">
+                <!-- POST OPTION WRAP -->
+                <div class="post-option-wrap">
+                    <!-- POST OPTION -->
+                    <div class="post-option reaction-options-dropdown-trigger">
+                        <!-- POST OPTION ICON -->
+                        <svg class="post-option-icon icon-thumbs-up">
+                            <use xlink:href="#svg-thumbs-up"></use>
+                        </svg>
+                        <!-- /POST OPTION ICON -->
+
+                        <!-- POST OPTION TEXT -->
+                        <p class="post-option-text">React!</p>
+                        <!-- /POST OPTION TEXT -->
+                    </div>
+                    <!-- /POST OPTION -->
+
+                    <!-- REACTION OPTIONS -->
+                    <div class="reaction-options reaction-options-dropdown">
+                        <!-- REACTION OPTION -->
+                        <div class="reaction-option text-tooltip-tft" data-title="Like">
+                            <!-- REACTION OPTION IMAGE -->
+                            <img alt="reaction-like" class="reaction-option-image"
+                                 src="{% static 'img/reaction/like.png' %}">
+                            <!-- /REACTION OPTION IMAGE -->
+                        </div>
+                        <!-- /REACTION OPTION -->
+
+                        <!-- REACTION OPTION -->
+                        <div class="reaction-option text-tooltip-tft" data-title="Love">
+                            <!-- REACTION OPTION IMAGE -->
+                            <img alt="reaction-love" class="reaction-option-image"
+                                 src="{% static 'img/reaction/love.png' %}">
+                            <!-- /REACTION OPTION IMAGE -->
+                        </div>
+                        <!-- /REACTION OPTION -->
+
+                        <!-- REACTION OPTION -->
+                        <div class="reaction-option text-tooltip-tft" data-title="Dislike">
+                            <!-- REACTION OPTION IMAGE -->
+                            <img alt="reaction-dislike" class="reaction-option-image"
+                                 src="{% static 'img/reaction/dislike.png' %}">
+                            <!-- /REACTION OPTION IMAGE -->
+                        </div>
+                        <!-- /REACTION OPTION -->
+
+                        <!-- REACTION OPTION -->
+                        <div class="reaction-option text-tooltip-tft" data-title="Happy">
+                            <!-- REACTION OPTION IMAGE -->
+                            <img alt="reaction-happy" class="reaction-option-image"
+                                 src="{% static 'img/reaction/happy.png' %}">
+                            <!-- /REACTION OPTION IMAGE -->
+                        </div>
+                        <!-- /REACTION OPTION -->
+
+                        <!-- REACTION OPTION -->
+                        <div class="reaction-option text-tooltip-tft" data-title="Funny">
+                            <!-- REACTION OPTION IMAGE -->
+                            <img alt="reaction-funny" class="reaction-option-image"
+                                 src="{% static 'img/reaction/funny.png' %}">
+                            <!-- /REACTION OPTION IMAGE -->
+                        </div>
+                        <!-- /REACTION OPTION -->
+
+                        <!-- REACTION OPTION -->
+                        <div class="reaction-option text-tooltip-tft" data-title="Wow">
+                            <!-- REACTION OPTION IMAGE -->
+                            <img alt="reaction-wow" class="reaction-option-image"
+                                 src="{% static 'img/reaction/wow.png' %}">
+                            <!-- /REACTION OPTION IMAGE -->
+                        </div>
+                        <!-- /REACTION OPTION -->
+
+                        <!-- REACTION OPTION -->
+                        <div class="reaction-option text-tooltip-tft" data-title="Angry">
+                            <!-- REACTION OPTION IMAGE -->
+                            <img alt="reaction-angry" class="reaction-option-image"
+                                 src="{% static 'img/reaction/angry.png' %}">
+                            <!-- /REACTION OPTION IMAGE -->
+                        </div>
+                        <!-- /REACTION OPTION -->
+
+                        <!-- REACTION OPTION -->
+                        <div class="reaction-option text-tooltip-tft" data-title="Sad">
+                            <!-- REACTION OPTION IMAGE -->
+                            <img alt="reaction-sad" class="reaction-option-image"
+                                 src="{% static 'img/reaction/sad.png' %}">
+                            <!-- /REACTION OPTION IMAGE -->
+                        </div>
+                        <!-- /REACTION OPTION -->
+                    </div>
+                    <!-- /REACTION OPTIONS -->
+                </div>
+                <!-- /POST OPTION WRAP -->
+
+                <!-- POST OPTION -->
+                <div class="post-option active">
+                    <!-- POST OPTION ICON -->
+                    <svg class="post-option-icon icon-comment">
+                        <use xlink:href="#svg-comment"></use>
+                    </svg>
+                    <!-- /POST OPTION ICON -->
+
+                    <!-- POST OPTION TEXT -->
+                    <p class="post-option-text">Comment</p>
+                    <!-- /POST OPTION TEXT -->
+                </div>
+                <!-- /POST OPTION -->
+
+                <!-- POST OPTION -->
+                <div class="post-option">
+                    <!-- POST OPTION ICON -->
+                    <svg class="post-option-icon icon-share">
+                        <use xlink:href="#svg-share"></use>
+                    </svg>
+                    <!-- /POST OPTION ICON -->
+
+                    <!-- POST OPTION TEXT -->
+                    <p class="post-option-text">Share</p>
+                    <!-- /POST OPTION TEXT -->
+                </div>
+                <!-- /POST OPTION -->
+            </div>
+            <!-- /POST OPTIONS -->
+
+            <!-- POST COMMENT LIST -->
+            <div class="post-comment-list" id="comments">
+                <!-- POST COMMENT -->
+                <div class="post-comment">
+                    <!-- USER AVATAR -->
+                    <a class="user-avatar small no-outline" href="profile-timeline.html">
+                        <!-- USER AVATAR CONTENT -->
+                        <div class="user-avatar-content">
+                            <!-- HEXAGON -->
+                            <div class="hexagon-image-30-32" data-src="{% static 'img/avatar/04.jpg' %}"></div>
+                            <!-- /HEXAGON -->
+                        </div>
+                        <!-- /USER AVATAR CONTENT -->
+
+                        <!-- USER AVATAR PROGRESS -->
+                        <div class="user-avatar-progress">
+                            <!-- HEXAGON -->
+                            <div class="hexagon-progress-40-44"></div>
+                            <!-- /HEXAGON -->
+                        </div>
+                        <!-- /USER AVATAR PROGRESS -->
+
+                        <!-- USER AVATAR PROGRESS BORDER -->
+                        <div class="user-avatar-progress-border">
+                            <!-- HEXAGON -->
+                            <div class="hexagon-border-40-44"></div>
+                            <!-- /HEXAGON -->
+                        </div>
+                        <!-- /USER AVATAR PROGRESS BORDER -->
+
+                        <!-- USER AVATAR BADGE -->
+                        <div class="user-avatar-badge">
+                            <!-- USER AVATAR BADGE BORDER -->
+                            <div class="user-avatar-badge-border">
+                                <!-- HEXAGON -->
+                                <div class="hexagon-22-24"></div>
+                                <!-- /HEXAGON -->
+                            </div>
+                            <!-- /USER AVATAR BADGE BORDER -->
+
+                            <!-- USER AVATAR BADGE CONTENT -->
+                            <div class="user-avatar-badge-content">
+                                <!-- HEXAGON -->
+                                <div class="hexagon-dark-16-18"></div>
+                                <!-- /HEXAGON -->
+                            </div>
+                            <!-- /USER AVATAR BADGE CONTENT -->
+
+                            <!-- USER AVATAR BADGE TEXT -->
+                            <p class="user-avatar-badge-text">6</p>
+                            <!-- /USER AVATAR BADGE TEXT -->
+                        </div>
+                        <!-- /USER AVATAR BADGE -->
+                    </a>
+                    <!-- /USER AVATAR -->
+
+                    <!-- POST COMMENT TEXT -->
+                    <p class="post-comment-text"><a class="post-comment-text-author" href="profile-timeline.html">Bearded
+                        Wonder</a>It's really inspiring to read about this and how you managed to get all up and
+                        running! Super awesome! Congratz <a href="profile-timeline.html">@MarinaValentine</a>!</p>
+                    <!-- /POST COMMENT TEXT -->
+
+                    <!-- CONTENT ACTIONS -->
+                    <div class="content-actions">
+                        <!-- CONTENT ACTION -->
+                        <div class="content-action">
+                            <!-- META LINE -->
+                            <div class="meta-line">
+                                <!-- META LINE LIST -->
+                                <div class="meta-line-list reaction-item-list small">
+                                    <!-- REACTION ITEM -->
+                                    <div class="reaction-item">
+                                        <!-- REACTION IMAGE -->
+                                        <img alt="reaction-happy"
+                                             class="reaction-image reaction-item-dropdown-trigger"
+                                             src="img/reaction/happy.png">
+                                        <!-- /REACTION IMAGE -->
+
+                                        <!-- SIMPLE DROPDOWN -->
+                                        <div class="simple-dropdown padded reaction-item-dropdown">
+                                            <!-- SIMPLE DROPDOWN TEXT -->
+                                            <p class="simple-dropdown-text"><img alt="reaction-happy"
+                                                                                 class="reaction"
+                                                                                 src="img/reaction/happy.png"> <span
+                                                    class="bold">Happy</span></p>
+                                            <!-- /SIMPLE DROPDOWN TEXT -->
+
+                                            <!-- SIMPLE DROPDOWN TEXT -->
+                                            <p class="simple-dropdown-text">Marcus Jhonson</p>
+                                            <!-- /SIMPLE DROPDOWN TEXT -->
+                                        </div>
+                                        <!-- /SIMPLE DROPDOWN -->
+                                    </div>
+                                    <!-- /REACTION ITEM -->
+
+                                    <!-- REACTION ITEM -->
+                                    <div class="reaction-item">
+                                        <!-- REACTION IMAGE -->
+                                        <img alt="reaction-like"
+                                             class="reaction-image reaction-item-dropdown-trigger"
+                                             src="img/reaction/like.png">
+                                        <!-- /REACTION IMAGE -->
+
+                                        <!-- SIMPLE DROPDOWN -->
+                                        <div class="simple-dropdown padded reaction-item-dropdown">
+                                            <!-- SIMPLE DROPDOWN TEXT -->
+                                            <p class="simple-dropdown-text"><img alt="reaction-like"
+                                                                                 class="reaction"
+                                                                                 src="img/reaction/like.png"> <span
+                                                    class="bold">Like</span></p>
+                                            <!-- /SIMPLE DROPDOWN TEXT -->
+
+                                            <!-- SIMPLE DROPDOWN TEXT -->
+                                            <p class="simple-dropdown-text">Neko Bebop</p>
+                                            <!-- /SIMPLE DROPDOWN TEXT -->
+
+                                            <!-- SIMPLE DROPDOWN TEXT -->
+                                            <p class="simple-dropdown-text">Nick Grissom</p>
+                                            <!-- /SIMPLE DROPDOWN TEXT -->
+
+                                            <!-- SIMPLE DROPDOWN TEXT -->
+                                            <p class="simple-dropdown-text">Sarah Diamond</p>
+                                            <!-- /SIMPLE DROPDOWN TEXT -->
+                                        </div>
+                                        <!-- /SIMPLE DROPDOWN -->
+                                    </div>
+                                    <!-- /REACTION ITEM -->
+                                </div>
+                                <!-- /META LINE LIST -->
+
+                                <!-- META LINE TEXT -->
+                                <p class="meta-line-text">4</p>
+                                <!-- /META LINE TEXT -->
+                            </div>
+                            <!-- /META LINE -->
+
+                            <!-- META LINE -->
+                            <div class="meta-line">
+                                <!-- META LINE LINK -->
+                                <p class="meta-line-link light reaction-options-small-dropdown-trigger">React!</p>
+                                <!-- /META LINE LINK -->
+
+                                <!-- REACTION OPTIONS -->
+                                <div class="reaction-options small reaction-options-small-dropdown">
+                                    <!-- REACTION OPTION -->
+                                    <div class="reaction-option text-tooltip-tft" data-title="Like">
+                                        <!-- REACTION OPTION IMAGE -->
+                                        <img alt="reaction-like" class="reaction-option-image"
+                                             src="img/reaction/like.png">
+                                        <!-- /REACTION OPTION IMAGE -->
+                                    </div>
+                                    <!-- /REACTION OPTION -->
+
+                                    <!-- REACTION OPTION -->
+                                    <div class="reaction-option text-tooltip-tft" data-title="Love">
+                                        <!-- REACTION OPTION IMAGE -->
+                                        <img alt="reaction-love" class="reaction-option-image"
+                                             src="img/reaction/love.png">
+                                        <!-- /REACTION OPTION IMAGE -->
+                                    </div>
+                                    <!-- /REACTION OPTION -->
+
+                                    <!-- REACTION OPTION -->
+                                    <div class="reaction-option text-tooltip-tft" data-title="Dislike">
+                                        <!-- REACTION OPTION IMAGE -->
+                                        <img alt="reaction-dislike" class="reaction-option-image"
+                                             src="img/reaction/dislike.png">
+                                        <!-- /REACTION OPTION IMAGE -->
+                                    </div>
+                                    <!-- /REACTION OPTION -->
+
+                                    <!-- REACTION OPTION -->
+                                    <div class="reaction-option text-tooltip-tft" data-title="Happy">
+                                        <!-- REACTION OPTION IMAGE -->
+                                        <img alt="reaction-happy" class="reaction-option-image"
+                                             src="img/reaction/happy.png">
+                                        <!-- /REACTION OPTION IMAGE -->
+                                    </div>
+                                    <!-- /REACTION OPTION -->
+
+                                    <!-- REACTION OPTION -->
+                                    <div class="reaction-option text-tooltip-tft" data-title="Funny">
+                                        <!-- REACTION OPTION IMAGE -->
+                                        <img alt="reaction-funny" class="reaction-option-image"
+                                             src="img/reaction/funny.png">
+                                        <!-- /REACTION OPTION IMAGE -->
+                                    </div>
+                                    <!-- /REACTION OPTION -->
+
+                                    <!-- REACTION OPTION -->
+                                    <div class="reaction-option text-tooltip-tft" data-title="Wow">
+                                        <!-- REACTION OPTION IMAGE -->
+                                        <img alt="reaction-wow" class="reaction-option-image"
+                                             src="img/reaction/wow.png">
+                                        <!-- /REACTION OPTION IMAGE -->
+                                    </div>
+                                    <!-- /REACTION OPTION -->
+
+                                    <!-- REACTION OPTION -->
+                                    <div class="reaction-option text-tooltip-tft" data-title="Angry">
+                                        <!-- REACTION OPTION IMAGE -->
+                                        <img alt="reaction-angry" class="reaction-option-image"
+                                             src="img/reaction/angry.png">
+                                        <!-- /REACTION OPTION IMAGE -->
+                                    </div>
+                                    <!-- /REACTION OPTION -->
+
+                                    <!-- REACTION OPTION -->
+                                    <div class="reaction-option text-tooltip-tft" data-title="Sad">
+                                        <!-- REACTION OPTION IMAGE -->
+                                        <img alt="reaction-sad" class="reaction-option-image"
+                                             src="img/reaction/sad.png">
+                                        <!-- /REACTION OPTION IMAGE -->
+                                    </div>
+                                    <!-- /REACTION OPTION -->
+                                </div>
+                                <!-- /REACTION OPTIONS -->
+                            </div>
+                            <!-- /META LINE -->
+
+                            <!-- META LINE -->
+                            <div class="meta-line">
+                                <!-- META LINE LINK -->
+                                <p class="meta-line-link light">Reply</p>
+                                <!-- /META LINE LINK -->
+                            </div>
+                            <!-- /META LINE -->
+
+                            <!-- META LINE -->
+                            <div class="meta-line">
+                                <!-- META LINE TIMESTAMP -->
+                                <p class="meta-line-timestamp">15 minutes ago</p>
+                                <!-- /META LINE TIMESTAMP -->
+                            </div>
+                            <!-- /META LINE -->
+
+                            <!-- META LINE -->
+                            <div class="meta-line settings">
+                                <!-- POST SETTINGS WRAP -->
+                                <div class="post-settings-wrap">
+                                    <!-- POST SETTINGS -->
+                                    <div class="post-settings post-settings-dropdown-trigger">
+                                        <!-- POST SETTINGS ICON -->
+                                        <svg class="post-settings-icon icon-more-dots">
+                                            <use xlink:href="#svg-more-dots"></use>
+                                        </svg>
+                                        <!-- /POST SETTINGS ICON -->
+                                    </div>
+                                    <!-- /POST SETTINGS -->
+
+                                    <!-- SIMPLE DROPDOWN -->
+                                    <div class="simple-dropdown post-settings-dropdown">
+                                        <!-- SIMPLE DROPDOWN LINK -->
+                                        <p class="simple-dropdown-link">Report Post</p>
+                                        <!-- /SIMPLE DROPDOWN LINK -->
+                                    </div>
+                                    <!-- /SIMPLE DROPDOWN -->
+                                </div>
+                                <!-- /POST SETTINGS WRAP -->
+                            </div>
+                            <!-- /META LINE -->
+                        </div>
+                        <!-- /CONTENT ACTION -->
+                    </div>
+                    <!-- /CONTENT ACTIONS -->
+                </div>
+                <!-- /POST COMMENT -->
+
+                <!-- POST COMMENT -->
+                <div class="post-comment unread reply-2">
+                    <!-- USER AVATAR -->
+                    <a class="user-avatar small no-outline" href="profile-timeline.html">
+                        <!-- USER AVATAR CONTENT -->
+                        <div class="user-avatar-content">
+                            <!-- HEXAGON -->
+                            <div class="hexagon-image-30-32" data-src="img/avatar/10.jpg"></div>
+                            <!-- /HEXAGON -->
+                        </div>
+                        <!-- /USER AVATAR CONTENT -->
+
+                        <!-- USER AVATAR PROGRESS -->
+                        <div class="user-avatar-progress">
+                            <!-- HEXAGON -->
+                            <div class="hexagon-progress-40-44"></div>
+                            <!-- /HEXAGON -->
+                        </div>
+                        <!-- /USER AVATAR PROGRESS -->
+
+                        <!-- USER AVATAR PROGRESS BORDER -->
+                        <div class="user-avatar-progress-border">
+                            <!-- HEXAGON -->
+                            <div class="hexagon-border-40-44"></div>
+                            <!-- /HEXAGON -->
+                        </div>
+                        <!-- /USER AVATAR PROGRESS BORDER -->
+
+                        <!-- USER AVATAR BADGE -->
+                        <div class="user-avatar-badge">
+                            <!-- USER AVATAR BADGE BORDER -->
+                            <div class="user-avatar-badge-border">
+                                <!-- HEXAGON -->
+                                <div class="hexagon-22-24"></div>
+                                <!-- /HEXAGON -->
+                            </div>
+                            <!-- /USER AVATAR BADGE BORDER -->
+
+                            <!-- USER AVATAR BADGE CONTENT -->
+                            <div class="user-avatar-badge-content">
+                                <!-- HEXAGON -->
+                                <div class="hexagon-dark-16-18"></div>
+                                <!-- /HEXAGON -->
+                            </div>
+                            <!-- /USER AVATAR BADGE CONTENT -->
+
+                            <!-- USER AVATAR BADGE TEXT -->
+                            <p class="user-avatar-badge-text">5</p>
+                            <!-- /USER AVATAR BADGE TEXT -->
+                        </div>
+                        <!-- /USER AVATAR BADGE -->
+                    </a>
+                    <!-- /USER AVATAR -->
+
+                    <!-- POST COMMENT TEXT -->
+                    <p class="post-comment-text"><a class="post-comment-text-author" href="profile-timeline.html">The
+                        Green Goo</a>Yeah!! Totally agree!</p>
+                    <!-- /POST COMMENT TEXT -->
+
+                    <!-- CONTENT ACTIONS -->
+                    <div class="content-actions">
+                        <!-- CONTENT ACTION -->
+                        <div class="content-action">
+                            <!-- META LINE -->
+                            <div class="meta-line">
+                                <!-- META LINE LIST -->
+                                <div class="meta-line-list reaction-item-list small">
+                                    <!-- REACTION ITEM -->
+                                    <div class="reaction-item">
+                                        <!-- REACTION IMAGE -->
+                                        <img alt="reaction-like"
+                                             class="reaction-image reaction-item-dropdown-trigger"
+                                             src="img/reaction/like.png">
+                                        <!-- /REACTION IMAGE -->
+
+                                        <!-- SIMPLE DROPDOWN -->
+                                        <div class="simple-dropdown padded reaction-item-dropdown">
+                                            <!-- SIMPLE DROPDOWN TEXT -->
+                                            <p class="simple-dropdown-text"><img alt="reaction-like"
+                                                                                 class="reaction"
+                                                                                 src="img/reaction/like.png"> <span
+                                                    class="bold">Like</span></p>
+                                            <!-- /SIMPLE DROPDOWN TEXT -->
+
+                                            <!-- SIMPLE DROPDOWN TEXT -->
+                                            <p class="simple-dropdown-text">Neko Bebop</p>
+                                            <!-- /SIMPLE DROPDOWN TEXT -->
+                                        </div>
+                                        <!-- /SIMPLE DROPDOWN -->
+                                    </div>
+                                    <!-- /REACTION ITEM -->
+                                </div>
+                                <!-- /META LINE LIST -->
+
+                                <!-- META LINE TEXT -->
+                                <p class="meta-line-text">1</p>
+                                <!-- /META LINE TEXT -->
+                            </div>
+                            <!-- /META LINE -->
+
+                            <!-- META LINE -->
+                            <div class="meta-line">
+                                <!-- META LINE LINK -->
+                                <p class="meta-line-link light reaction-options-small-dropdown-trigger">React!</p>
+                                <!-- /META LINE LINK -->
+
+                                <!-- REACTION OPTIONS -->
+                                <div class="reaction-options small reaction-options-small-dropdown">
+                                    <!-- REACTION OPTION -->
+                                    <div class="reaction-option text-tooltip-tft" data-title="Like">
+                                        <!-- REACTION OPTION IMAGE -->
+                                        <img alt="reaction-like" class="reaction-option-image"
+                                             src="img/reaction/like.png">
+                                        <!-- /REACTION OPTION IMAGE -->
+                                    </div>
+                                    <!-- /REACTION OPTION -->
+
+                                    <!-- REACTION OPTION -->
+                                    <div class="reaction-option text-tooltip-tft" data-title="Love">
+                                        <!-- REACTION OPTION IMAGE -->
+                                        <img alt="reaction-love" class="reaction-option-image"
+                                             src="img/reaction/love.png">
+                                        <!-- /REACTION OPTION IMAGE -->
+                                    </div>
+                                    <!-- /REACTION OPTION -->
+
+                                    <!-- REACTION OPTION -->
+                                    <div class="reaction-option text-tooltip-tft" data-title="Dislike">
+                                        <!-- REACTION OPTION IMAGE -->
+                                        <img alt="reaction-dislike" class="reaction-option-image"
+                                             src="img/reaction/dislike.png">
+                                        <!-- /REACTION OPTION IMAGE -->
+                                    </div>
+                                    <!-- /REACTION OPTION -->
+
+                                    <!-- REACTION OPTION -->
+                                    <div class="reaction-option text-tooltip-tft" data-title="Happy">
+                                        <!-- REACTION OPTION IMAGE -->
+                                        <img alt="reaction-happy" class="reaction-option-image"
+                                             src="img/reaction/happy.png">
+                                        <!-- /REACTION OPTION IMAGE -->
+                                    </div>
+                                    <!-- /REACTION OPTION -->
+
+                                    <!-- REACTION OPTION -->
+                                    <div class="reaction-option text-tooltip-tft" data-title="Funny">
+                                        <!-- REACTION OPTION IMAGE -->
+                                        <img alt="reaction-funny" class="reaction-option-image"
+                                             src="img/reaction/funny.png">
+                                        <!-- /REACTION OPTION IMAGE -->
+                                    </div>
+                                    <!-- /REACTION OPTION -->
+
+                                    <!-- REACTION OPTION -->
+                                    <div class="reaction-option text-tooltip-tft" data-title="Wow">
+                                        <!-- REACTION OPTION IMAGE -->
+                                        <img alt="reaction-wow" class="reaction-option-image"
+                                             src="img/reaction/wow.png">
+                                        <!-- /REACTION OPTION IMAGE -->
+                                    </div>
+                                    <!-- /REACTION OPTION -->
+
+                                    <!-- REACTION OPTION -->
+                                    <div class="reaction-option text-tooltip-tft" data-title="Angry">
+                                        <!-- REACTION OPTION IMAGE -->
+                                        <img alt="reaction-angry" class="reaction-option-image"
+                                             src="img/reaction/angry.png">
+                                        <!-- /REACTION OPTION IMAGE -->
+                                    </div>
+                                    <!-- /REACTION OPTION -->
+
+                                    <!-- REACTION OPTION -->
+                                    <div class="reaction-option text-tooltip-tft" data-title="Sad">
+                                        <!-- REACTION OPTION IMAGE -->
+                                        <img alt="reaction-sad" class="reaction-option-image"
+                                             src="img/reaction/sad.png">
+                                        <!-- /REACTION OPTION IMAGE -->
+                                    </div>
+                                    <!-- /REACTION OPTION -->
+                                </div>
+                                <!-- /REACTION OPTIONS -->
+                            </div>
+                            <!-- /META LINE -->
+
+                            <!-- META LINE -->
+                            <div class="meta-line">
+                                <!-- META LINE LINK -->
+                                <p class="meta-line-link light">Reply</p>
+                                <!-- /META LINE LINK -->
+                            </div>
+                            <!-- /META LINE -->
+
+                            <!-- META LINE -->
+                            <div class="meta-line">
+                                <!-- META LINE TIMESTAMP -->
+                                <p class="meta-line-timestamp">2 minutes ago</p>
+                                <!-- /META LINE TIMESTAMP -->
+                            </div>
+                            <!-- /META LINE -->
+
+                            <!-- META LINE -->
+                            <div class="meta-line settings">
+                                <!-- POST SETTINGS WRAP -->
+                                <div class="post-settings-wrap">
+                                    <!-- POST SETTINGS -->
+                                    <div class="post-settings post-settings-dropdown-trigger">
+                                        <!-- POST SETTINGS ICON -->
+                                        <svg class="post-settings-icon icon-more-dots">
+                                            <use xlink:href="#svg-more-dots"></use>
+                                        </svg>
+                                        <!-- /POST SETTINGS ICON -->
+                                    </div>
+                                    <!-- /POST SETTINGS -->
+
+                                    <!-- SIMPLE DROPDOWN -->
+                                    <div class="simple-dropdown post-settings-dropdown">
+                                        <!-- SIMPLE DROPDOWN LINK -->
+                                        <p class="simple-dropdown-link">Report Post</p>
+                                        <!-- /SIMPLE DROPDOWN LINK -->
+                                    </div>
+                                    <!-- /SIMPLE DROPDOWN -->
+                                </div>
+                                <!-- /POST SETTINGS WRAP -->
+                            </div>
+                            <!-- /META LINE -->
+                        </div>
+                        <!-- /CONTENT ACTION -->
+                    </div>
+                    <!-- /CONTENT ACTIONS -->
+                </div>
+                <!-- /POST COMMENT -->
+
+                <!-- POST COMMENT HEADING -->
+                <p class="post-comment-heading">Load More Comments <span class="highlighted">1+</span></p>
+                <!-- /POST COMMENT HEADING -->
+
+                <!-- POST COMMENT FORM -->
+                <div class="post-comment-form">
+                    <!-- USER AVATAR -->
+                    <div class="user-avatar small no-outline">
+                        <!-- USER AVATAR CONTENT -->
+                        <div class="user-avatar-content">
+                            <!-- HEXAGON -->
+                            <div class="hexagon-image-30-32" data-src="{{ request.user.get_avatar }}"></div>
+                            <!-- /HEXAGON -->
+                        </div>
+                        <!-- /USER AVATAR CONTENT -->
+
+                        <!-- USER AVATAR PROGRESS -->
+                        <div class="user-avatar-progress">
+                            <!-- HEXAGON -->
+                            <div class="hexagon-progress-40-44"></div>
+                            <!-- /HEXAGON -->
+                        </div>
+                        <!-- /USER AVATAR PROGRESS -->
+
+                        <!-- USER AVATAR PROGRESS BORDER -->
+                        <div class="user-avatar-progress-border">
+                            <!-- HEXAGON -->
+                            <div class="hexagon-border-40-44"></div>
+                            <!-- /HEXAGON -->
+                        </div>
+                        <!-- /USER AVATAR PROGRESS BORDER -->
+
+                        <!-- USER AVATAR BADGE -->
+                        <div class="user-avatar-badge">
+                            <!-- USER AVATAR BADGE BORDER -->
+                            <div class="user-avatar-badge-border">
+                                <!-- HEXAGON -->
+                                <div class="hexagon-22-24"></div>
+                                <!-- /HEXAGON -->
+                            </div>
+                            <!-- /USER AVATAR BADGE BORDER -->
+
+                            <!-- USER AVATAR BADGE CONTENT -->
+                            <div class="user-avatar-badge-content">
+                                <!-- HEXAGON -->
+                                <div class="hexagon-dark-16-18"></div>
+                                <!-- /HEXAGON -->
+                            </div>
+                            <!-- /USER AVATAR BADGE CONTENT -->
+
+                            <!-- USER AVATAR BADGE TEXT -->
+                            <p class="user-avatar-badge-text">{{ request.user.post_count | length }}</p>
+                            <!-- /USER AVATAR BADGE TEXT -->
+                        </div>
+                        <!-- /USER AVATAR BADGE -->
+                    </div>
+                    <!-- /USER AVATAR -->
+
+                    <!-- QUICK POST -->
+                    <div class="quick-post">
+
+                        <!-- QUICK POST BODY -->
+                        <div class="quick-post-body">
+                            <!-- FORM -->
+                            <form class="form" method="POST">
+                                {% csrf_token %}
+                                <!-- FORM ROW -->
+                                <div class="form-row">
+                                    <!-- FORM ITEM -->
+                                    {{ form.errors }}
+                                    <div class="form-item">
+                                        <!-- FORM TEXTAREA -->
+                                        <div class="form-textarea">
+                                            {{ form.content }}
+                                            <!-- FORM TEXTAREA LIMIT TEXT -->
+                                            <p class="form-textarea-limit-text">998/1000</p>
+                                            <!-- /FORM TEXTAREA LIMIT TEXT -->
+                                        </div>
+                                        <!-- /FORM TEXTAREA -->
+                                    </div>
+                                    <!-- /FORM ITEM -->
+                                </div>
+                                <!-- /FORM ROW -->
+                                <!-- QUICK POST FOOTER -->
+                                <div class="quick-post-footer">
+                                    <!-- QUICK POST FOOTER ACTIONS -->
+                                    <div class="quick-post-footer-actions">
+
+                                        <!-- QUICK POST FOOTER ACTION -->
+                                        <div class="quick-post-footer-action text-tooltip-tft-medium"
+                                             data-title="Insert GIF">
+                                            <!-- QUICK POST FOOTER ACTION ICON -->
+                                            <svg class="quick-post-footer-action-icon icon-gif">
+                                                <use xlink:href="#svg-gif"></use>
+                                            </svg>
+                                            <!-- /QUICK POST FOOTER ACTION ICON -->
+                                        </div>
+                                        <!-- /QUICK POST FOOTER ACTION -->
+
+                                        <!-- QUICK POST FOOTER ACTION -->
+                                        <div class="quick-post-footer-action text-tooltip-tft-medium"
+                                             data-title="Insert Tag">
+                                            <!-- QUICK POST FOOTER ACTION ICON -->
+                                            <svg class="quick-post-footer-action-icon icon-tags">
+                                                <use xlink:href="#svg-tags"></use>
+                                            </svg>
+                                            <!-- /QUICK POST FOOTER ACTION ICON -->
+                                        </div>
+                                        <!-- /QUICK POST FOOTER ACTION -->
+                                    </div>
+                                    <!-- /QUICK POST FOOTER ACTIONS -->
+
+                                    <!-- QUICK POST FOOTER ACTIONS -->
+                                    <div class="quick-post-footer-actions">
+                                        <!-- BUTTON -->
+                                        <button class="button small void" type="reset">Discard</button>
+                                        <!-- /BUTTON -->
+
+                                        <!-- BUTTON -->
+                                        <button class="button small secondary" type="submit">Post</button>
+                                        <!-- /BUTTON -->
+                                    </div>
+                                    <!-- /QUICK POST FOOTER ACTIONS -->
+                                </div>
+                                <!-- /QUICK POST FOOTER -->
+                            </form>
+                            <!-- /FORM -->
+                        </div>
+                        <!-- /QUICK POST BODY -->
+
+                    </div>
+                    <!-- /QUICK POST -->
+                </div>
+                <!-- /POST COMMENT FORM -->
+            </div>
+            <!-- /POST COMMENT LIST -->
+        </div>
+        <!-- /POST OPEN BODY -->
+    </article>
+    <!-- /POST OPEN -->
+</div>
+<!-- /CONTENT GRID -->
+
+{% endblock %}

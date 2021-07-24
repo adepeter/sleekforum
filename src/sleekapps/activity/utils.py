@@ -4,12 +4,13 @@ from ..cores.helper import get_static
 
 img_class = 'reaction-image reaction-item-dropdown-trigger'
 
+
 class ReactionIcon:
     def __init__(self, reaction_name, *, path_to_file=None, alt_text=None, klass=None):
         self.name = reaction_name
         icon_name = reaction_name if path_to_file is None else path_to_file
         self.src = self.get_reaction_icon(icon_name)
-        self.alt = alt_text if alt_text else self.name
+        self.alt = alt_text or self.name
         self.klass = img_class if klass is None else klass
 
     def get_icon(self):

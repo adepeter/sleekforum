@@ -4,9 +4,12 @@ from django.utils.translation import gettext_lazy as _
 
 from ..models import Article
 
+from .comment import CommentStackedInline
+
 
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
+    inlines = [CommentStackedInline]
     readonly_fields = [
         'slug', 'completion_status', 'date_created', 'date_modified'
     ]
@@ -18,7 +21,6 @@ class ArticleAdmin(admin.ModelAdmin):
         'slug',
         'tags',
         'cover',
-        'content',
         'is_locked',
         'is_hidden',
         'date_created',
@@ -42,7 +44,7 @@ class ArticleAdmin(admin.ModelAdmin):
     fieldsets = [
         (_('Basics'), {
             'description': 'Compulsory article data',
-            'fields': (['author', 'title', 'category', 'slug', 'tags', 'completion_status']),
+            'fields': (['author', 'title', 'category', 'slug', 'tags', 'content', 'completion_status']),
         }),
         (_('Cover'), {
             'description': 'Cover photo for blog',

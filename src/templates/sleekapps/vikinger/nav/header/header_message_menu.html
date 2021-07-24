@@ -1,4 +1,8 @@
+{% comment %}
+
 {% load static %}
+
+{% load message_tags %}
 
 <!-- ACTION LIST ITEM WRAP -->
 <div class="action-list-item-wrap">
@@ -14,18 +18,20 @@
 
     <!-- DROPDOWN BOX -->
     <div class="dropdown-box header-dropdown">
+        {% get_inbox request.user as inboxes %}
         <!-- DROPDOWN BOX HEADER -->
         <div class="dropdown-box-header">
             <!-- DROPDOWN BOX HEADER TITLE -->
-            <p class="dropdown-box-header-title">Messages</p>
+            <p class="dropdown-box-header-title">Message{{ inboxes.count | pluralize }}</p>
             <!-- /DROPDOWN BOX HEADER TITLE -->
 
             <!-- DROPDOWN BOX HEADER ACTIONS -->
             <div class="dropdown-box-header-actions">
+                {% if inboxes.count > 0 %}
                 <!-- DROPDOWN BOX HEADER ACTION -->
                 <p class="dropdown-box-header-action">Mark all as Read</p>
                 <!-- /DROPDOWN BOX HEADER ACTION -->
-
+                {% endif %}
                 <!-- DROPDOWN BOX HEADER ACTION -->
                 <p class="dropdown-box-header-action">Settings</p>
                 <!-- /DROPDOWN BOX HEADER ACTION -->
@@ -36,8 +42,9 @@
 
         <!-- DROPDOWN BOX LIST -->
         <div class="dropdown-box-list medium" data-simplebar>
+            {% for message in inboxes %}
             <!-- DROPDOWN BOX LIST ITEM -->
-            <a class="dropdown-box-list-item" href="hub-profile-messages.html">
+            <a class="dropdown-box-list-item" href="{{ request | redirect_url:message }}">
                 <!-- USER STATUS -->
                 <div class="user-status">
                     <!-- USER STATUS AVATAR -->
@@ -47,7 +54,7 @@
                             <!-- USER AVATAR CONTENT -->
                             <div class="user-avatar-content">
                                 <!-- HEXAGON -->
-                                <div class="hexagon-image-30-32" data-src="{% static 'img/avatar/04.jpg' %}"></div>
+                                <div class="hexagon-image-30-32" data-src="{{ message.sender.get_avatar }}"></div>
                                 <!-- /HEXAGON -->
                             </div>
                             <!-- /USER AVATAR CONTENT -->
@@ -97,11 +104,11 @@
                     <!-- /USER STATUS AVATAR -->
 
                     <!-- USER STATUS TITLE -->
-                    <p class="user-status-title"><span class="bold">Bearded Wonder</span></p>
+                    <p class="user-status-title"><span class="bold">{{ message.sender.get_display_name }}</span></p>
                     <!-- /USER STATUS TITLE -->
 
                     <!-- USER STATUS TEXT -->
-                    <p class="user-status-text">Great! Then will meet with them at the party...</p>
+                    <p class="user-status-text">{{ message.content | truncatewords:10 }}</p>
                     <!-- /USER STATUS TEXT -->
 
                     <!-- USER STATUS TIMESTAMP -->
@@ -111,14 +118,19 @@
                 <!-- /USER STATUS -->
             </a>
             <!-- /DROPDOWN BOX LIST ITEM -->
+            {% empty %}
+            <p>There are no inbox yet</p>
+            {% endfor %}
 
         </div>
         <!-- /DROPDOWN BOX LIST -->
 
         <!-- DROPDOWN BOX BUTTON -->
-        <a class="dropdown-box-button primary" href="hub-profile-messages.html">View all Messages</a>
+        <a class="dropdown-box-button primary" href="{% url 'sleekforum:messages:list_private_messages' %}">View all Messages</a>
         <!-- /DROPDOWN BOX BUTTON -->
     </div>
     <!-- /DROPDOWN BOX -->
 </div>
 <!-- /ACTION LIST ITEM WRAP -->
+
+{% endcomment %}

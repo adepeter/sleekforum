@@ -71,13 +71,12 @@ def pretty_count(value, decimal_place=1):
         views = str(value)
         if 3 <= len(views) <= 6:
             views = round(int(views) / 1000, decimal_place)
-            result = '%(views)sk' % {'views': views}
+            return '%(views)sk' % {'views': views}
         elif 6 <= len(views) <= 9:
             views = round(int(views) / 1000000, decimal_place)
-            result = '%(views)sM' % {'views': views}
+            return '%(views)sM' % {'views': views}
         else:
-            result = views
-        return result
+            return views
 
 
 @register.filter

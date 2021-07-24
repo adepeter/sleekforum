@@ -1,6 +1,7 @@
 from django.utils.translation import gettext_lazy as _
 
 NOTIFICATION_CHOICES = (
+('THREAD_VIEW', _('Thread view'))
 )
 
 REACTION_CHOICES = (
