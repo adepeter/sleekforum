@@ -98,7 +98,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            BASE_DIR / 'sleekapps' / 'templates'
+            BASE_DIR / 'templates' / 'sleekapps'
         ],
         'APP_DIRS': True,
         'OPTIONS': {
