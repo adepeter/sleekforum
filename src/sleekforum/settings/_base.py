@@ -97,7 +97,9 @@ ROOT_URLCONF = 'sleekforum.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [PurePath(BASE_DIR).joinpath('templates', 'sleekapps')],
+        'DIRS': [
+            BASE_DIR / 'sleekapps' / 'templates'
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'string_if_invalid': '%s is not a valid template variable',
