@@ -14,7 +14,7 @@ class Setting(Configuration):
     description = models.TextField(
         verbose_name=_('site description'),
         blank=True,
-        help_text=_('Website metatag description contents')
+        help_text=_('Website meta-tag description contents')
     )
     email = models.EmailField(
         verbose_name=_('e-mail'),
@@ -27,7 +27,7 @@ class Setting(Configuration):
     )
     is_under_maintenance = models.BooleanField(
         verbose_name=_('maintenance status'),
-        default=False,
+        null=True,
         help_text=_('Determine if site is under maintenance')
     )
     send_welcome_mail = models.BooleanField(
@@ -51,3 +51,7 @@ class Setting(Configuration):
         default=10,
         help_text=_('Number of posts to display per thread')
     )
+
+    @property
+    def is_under_construction(self):
+        return self.is_under_maintenance
