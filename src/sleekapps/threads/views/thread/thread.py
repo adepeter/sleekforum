@@ -31,6 +31,12 @@ TEMPLATE_URL = 'threads/thread'
 User = get_user_model()
 
 
+class BaseListThread(ListView):
+    queryset = Thread.objects.unhidden_threads()
+    template_name = 'home/index.html'
+    paginate_by = 1
+
+
 class ListThread(SingleObjectMixin, ListView):
     slug_url_kwarg = 'category_slug'
     template_name = f'{TEMPLATE_URL}/index.html'
