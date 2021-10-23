@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'PIL',
 
     # django 3rd party apps
+    'django_social_share',
     'graphene_django',
     'graphql_jwt.refresh_token.apps.RefreshTokenConfig',
     'martor',
@@ -97,7 +98,9 @@ ROOT_URLCONF = 'sleekforum.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [PurePath(BASE_DIR).joinpath('templates', 'sleekapps')],
+        'DIRS': [
+            BASE_DIR / 'templates' / 'sleekapps'
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'string_if_invalid': '%s is not a valid template variable',

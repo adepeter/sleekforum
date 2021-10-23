@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from ..cores.utils.choice import Choicify
@@ -28,10 +29,18 @@ class FriendRequest(models.Model):
         choices=friend_request_choices.get_choices,
         default='PENDING'
     )
+    date_sent = models.DateTimeField(
+        verbose_name=_('date sent'),
+        default=timezone.now,
+        help_text=_('Date friend request was sent')
+    )
     
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['request_from', 'request_to'], name='unique_friend_request')
+            models.UniqueConstraint(
+                fields=['request_from', 'request_to'],
+                name='unique_friend_request'
+            )
         ]
         indexes = [
             models.Index(fields=['id'])
@@ -66,4 +75,8 @@ class Friendship(models.Model):
         'friends.Friend',
         on_delete=models.CASCADE,
     )
-    date_added = models.DateTimeField(auto_now_add=True)
+    date_added = models.DateTimeField(
+        verbose_name=_('Date accepted'),
+        auto_now_add=True,
+        help_text=_('Date became friends / Date request was accepted')
+    )
