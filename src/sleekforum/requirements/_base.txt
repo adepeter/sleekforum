@@ -5,6 +5,7 @@ django-violation
 django-graphql-jwt
 django-mptt
 django-redis
+django-social-share
 graphene-django
 ipython
 martor
