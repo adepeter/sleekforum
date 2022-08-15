@@ -46,6 +46,9 @@ INSTALLED_APPS = [
     'PIL',
 
     # django 3rd party apps
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     'django_social_share',
     'graphene_django',
     'graphql_jwt.refresh_token.apps.RefreshTokenConfig',
