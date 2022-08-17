@@ -3,9 +3,31 @@ import requests
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.cache import cache
+from django.shortcuts import redirect
+from django.urls import reverse, resolve
 from django.utils import timezone
+from requests import ConnectTimeout
 
 User = get_user_model()
+
+class RedirectSocialAuthPage:
+    """This middleware redirects users to sleekforum auth page instead of django_all_auth page"""
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        login_url = reverse('sleekforum:users:auth:login')
+        signup_url = reverse('sleekforum:users:auth:register')
+        all_auth_register = reverse('account_signup')
+        all_auth_login = reverse('account_login')
+        current_url_path = request.path
+        response = self.get_response(request)
+        if current_url_path == all_auth_register:
+            return redirect(signup_url)
+        elif current_url_path == all_auth_login:
+            return redirect(login_url)
+        else:
+            return response
 
 
 class OnlineStatusMiddleware:
@@ -39,9 +61,14 @@ class FetchCountryFromAPIMiddleware:
 
     def __call__(self, request):
         if cache.get('remote_countries') is None:
-            api_url = 'https://restcountries.eu/rest/v2/all'
-            api_response = requests.get(api_url)
-            if api_response.status_code == 200:
-                result = api_response.json()
-                cache.set('remote_countries', result, timeout=None)
+            api_url = 'https://countrylayer.com/rest/v2/all'
+            result = []
+            try:
+                api_response = requests.get(api_url, params={'access_key': settings.COUNTRYLAYER_X_API_KEY})
+                if api_response.status_code == 200:
+                    result = api_response.json()
+            except ConnectTimeout:
+                pass
+            print('Result is: ', result)
+            cache.set('remote_countries', result, timeout=None)
         return self.get_response(request)

@@ -23,6 +23,7 @@ from rest_framework import permissions
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('martor/', include('martor.urls')),
+    path('accounts/', include('sleekapps.allauth.urls')),
     path('', include('sleekapps.urls', namespace='sleekforum')),
 
 ]

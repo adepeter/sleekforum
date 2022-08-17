@@ -1,0 +1,49 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- bootstrap 4.4.1 -->
+    <link rel="stylesheet" href="{% static 'css/vendor/bootstrap.min.css' %}">
+    <!-- styles -->
+    <link rel="stylesheet" href="{% static 'css/styles.min.css' %}">
+    <!-- favicon -->
+    <link rel="icon" href="{% static 'img/favicon.ico' %}">
+    <title>Sleekforum | {% if process == 'connect' %}Link{% else %}Login{% endif %} with {{ provider.name }}</title>
+</head>
+<body>
+{% with provider_name=provider.name %}
+<!-- ERROR SECTION -->
+<div class="error-section">
+    <!-- ERROR SECTION TITLE -->
+    <p class="error-section-title text-sm-left">Hi</p>
+    <!-- /ERROR SECTION TITLE -->
+
+    <!-- ERROR SECTION INFO -->
+    <div class="error-section-info">
+        <!-- ERROR SECTION SUBTITLE -->
+        <p class="error-section-subtitle">{{ provider_name }}...</p>
+        <!-- /ERROR SECTION SUBTITLE -->
+
+        <!-- ERROR SECTION TEXT -->
+        <p class="error-section-text">You are about to get access into our platform using {{ provider_name }}.</p>
+        <!-- /ERROR SECTION TEXT -->
+
+        <!-- BUTTON -->
+        <form class="" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="button medium secondary">Proceed</button>
+            <a class="button medium primary" href="{% url 'sleekforum:home:home' %}">Go Back Homepage</a>
+        </form>
+        <!-- /BUTTON -->
+    </div>
+    <!-- /ERROR SECTION INFO -->
+</div>
+<!-- /ERROR SECTION -->
+{% endwith %}
+<!-- app -->
+<script src="{% static 'js/app.bundle.min.js' %}"></script>
+</body>
+</html>

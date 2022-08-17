@@ -1,4 +1,5 @@
 {% load static %}
+{% load socialaccount %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -155,7 +156,7 @@
             <small class="text-danger">{{ form.non_field_errors }}</small>
             {% endif %}
 
-            {% comment %}
+
             <!-- LINED TEXT -->
             <p class="lined-text">Login with your Social Account</p>
             <!-- /LINED TEXT -->
@@ -163,7 +164,7 @@
             <!-- SOCIAL LINKS -->
             <div class="social-links">
                 <!-- SOCIAL LINK -->
-                <a class="social-link facebook" href="#">
+                <a class="social-link facebook" href="{% provider_login_url 'facebook' method='oauth2' %}">
                     <!-- ICON FACEBOOK -->
                     <svg class="icon-facebook">
                         <use xlink:href="#svg-facebook"></use>
@@ -173,7 +174,7 @@
                 <!-- /SOCIAL LINK -->
 
                 <!-- SOCIAL LINK -->
-                <a class="social-link twitter" href="#">
+                <a class="social-link twitter" href="{% provider_login_url 'twitter' %}">
                     <!-- ICON TWITTER -->
                     <svg class="icon-twitter">
                         <use xlink:href="#svg-twitter"></use>
@@ -183,27 +184,27 @@
                 <!-- /SOCIAL LINK -->
 
                 <!-- SOCIAL LINK -->
-                <a class="social-link twitch" href="#">
-                    <!-- ICON TWITCH -->
-                    <svg class="icon-twitch">
-                        <use xlink:href="#svg-twitch"></use>
+                <a class="social-link google" href="{% provider_login_url 'google' method='oauth2' process='login' %}">
+                    <!-- ICON GOOGLE -->
+                    <svg class="icon-google">
+                        <use xlink:href="#svg-google"></use>
                     </svg>
-                    <!-- /ICON TWITCH -->
+                    <!-- /ICON GOOGLE -->
                 </a>
                 <!-- /SOCIAL LINK -->
 
                 <!-- SOCIAL LINK -->
-                <a class="social-link youtube" href="#">
-                    <!-- ICON YOUTUBE -->
-                    <svg class="icon-youtube">
-                        <use xlink:href="#svg-youtube"></use>
+                <a class="social-link forums" href="{% provider_login_url 'github' %}">
+                    <!-- ICON GITHUB -->
+                    <svg class="icon-forums">
+                        <use xlink:href="#svg-forums"></use>
                     </svg>
-                    <!-- /ICON YOUTUBE -->
+                    <!-- /ICON GITHUB -->
                 </a>
                 <!-- /SOCIAL LINK -->
             </div>
             <!-- /SOCIAL LINKS -->
-            {% endcomment %}
+
         </div>
         <!-- /FORM BOX -->
     </div>

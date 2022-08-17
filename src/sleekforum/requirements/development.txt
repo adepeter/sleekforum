@@ -1,7 +1,6 @@
 -r _base.txt
 
 coverage
-django-allauth
 django-debug-toolbar
 django-extensions
 drf-yasg

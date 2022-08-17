@@ -8,8 +8,7 @@ User = get_user_model()
 
 
 def validate_unique_user(error_message, **criteria):
-    existent_user = User.objects.filter(**criteria).exists()
-    if existent_user:
+    if existent_user := User.objects.filter(**criteria).exists():
         raise ValidationError(error_message)
 
 
@@ -28,3 +27,6 @@ def validate_phone_number(phone_number):
             _('Invalid phone number'),
             code='invalid_phone_number',
         )
+
+def validate_username(username):
+    validate_username_chars(username)

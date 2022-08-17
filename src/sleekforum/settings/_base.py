@@ -49,6 +49,10 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.github',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.twitter',
     'django_social_share',
     'graphene_django',
     'graphql_jwt.refresh_token.apps.RefreshTokenConfig',
@@ -61,6 +65,7 @@ INSTALLED_APPS = [
     'sleekapps.admin.apps.AdminConfig',
     'sleekapps.ads.apps.AdsConfig',
     'sleekapps.activity.apps.ActivityConfig',
+    'sleekapps.allauth.apps.AllAuthConfig',
     'sleekapps.blogs.apps.BlogsConfig',
     'sleekapps.categories.apps.CategoriesConfig',
     'sleekapps.cores.apps.CoreConfig',
@@ -90,6 +95,7 @@ MIDDLEWARE = [
     'django.contrib.redirects.middleware.RedirectFallbackMiddleware',
 
     # sleekforum custom middleware
+    #'sleekapps.users.middlewares.RedirectSocialAuthPage',
     'sleekapps.settings.middlewares.UnderMaintenanceMiddleware',
     'sleekapps.activity.middlewares.LastVisitUpdaterMiddleWare',
     'sleekapps.users.middlewares.FetchCountryFromAPIMiddleware',
@@ -102,7 +108,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            BASE_DIR / 'templates' / 'sleekapps'
+            BASE_DIR / 'templates' / 'sleekapps',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -184,6 +190,7 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'graphql_jwt.backends.JSONWebTokenBackend',
     'sleekapps.users.authentication_backend.AuthenticationBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 AUTH_USER_MODEL = 'users.User'
@@ -224,3 +231,5 @@ MARTOR_TOOLBAR_BUTTONS = [
     'link', 'image-link', 'image-upload', 'emoji',
     'direct-mention', 'toggle-maximize', 'help'
 ]
+
+COUNTRYLAYER_X_API_KEY = 'countrylayer.com'
