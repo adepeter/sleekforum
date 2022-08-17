@@ -4,7 +4,7 @@ from django.dispatch import receiver, Signal
 
 from ...models import Thread, ThreadView
 
-thread_views_creator_and_updater = Signal(providing_args=['request', 'thread'])
+thread_views_creator_and_updater = Signal()
 
 
 @receiver(post_save, sender=Thread)

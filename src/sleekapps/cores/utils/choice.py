@@ -1,5 +1,4 @@
-from collections import ValuesView
-from typing import Tuple, List, Dict
+from typing import Tuple, List, Dict, ValuesView
 
 
 class Choicify:
@@ -13,7 +12,7 @@ class Choicify:
     def __dictify_choices(self, choices: Tuple) -> ValuesView:
         "Return length of dict_value for each choices"
         choices_to_dict = dict(choices) # convert tuple to dictionary
-        count = {k: len(k) for k, v in choices_to_dict.items()}
+        count = {k: len(k) for k in choices_to_dict}
         return count.values()
 
     def to_dict(self):
@@ -28,4 +27,4 @@ class Choicify:
 
     def __len__(self) -> int:
         """Returns length of longest choice tuple"""
-        return max(self.__dictify_choices(self.__choices))
+        return int(max(self.__dictify_choices(self.__choices)))
